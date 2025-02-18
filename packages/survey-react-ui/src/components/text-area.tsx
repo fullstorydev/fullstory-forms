@@ -38,6 +38,20 @@ export class TextAreaComponent extends SurveyElementBase<ITextAreaProps, any> {
   protected renderElement(): React.JSX.Element {
     return (
       <textarea
+        data-fs-element="form-text-area"
+        data-text-area-value={this.viewModel.getTextValue() || ""}
+        data-text-area-name={this.viewModel.question.title}
+        data-fs-properties-schema='{
+          "id": "str",
+          "data-text-area-value": {
+            "type": "str",
+            "name": "textAreaValue"
+          },
+          "data-text-area-name": {
+            "type": "str",
+            "name": "textAreaName"
+          }
+        }'
         id={this.viewModel.id}
         className={this.viewModel.className}
         ref={this.textareaRef}
@@ -48,10 +62,18 @@ export class TextAreaComponent extends SurveyElementBase<ITextAreaProps, any> {
         placeholder={this.viewModel.placeholder}
         maxLength={this.viewModel.maxLength}
         defaultValue={this.initialValue}
-        onChange={(event: any) => { this.viewModel.onTextAreaInput(event); }}
-        onFocus={(event: any) => { this.viewModel.onTextAreaFocus(event); }}
-        onBlur={(event: any) => { this.viewModel.onTextAreaBlur(event); }}
-        onKeyDown={(event: any) => { this.viewModel.onTextAreaKeyDown(event); }}
+        onChange={(event: any) => {
+          this.viewModel.onTextAreaInput(event);
+        }}
+        onFocus={(event: any) => {
+          this.viewModel.onTextAreaFocus(event);
+        }}
+        onBlur={(event: any) => {
+          this.viewModel.onTextAreaBlur(event);
+        }}
+        onKeyDown={(event: any) => {
+          this.viewModel.onTextAreaKeyDown(event);
+        }}
         aria-required={this.viewModel.ariaRequired}
         aria-label={this.viewModel.ariaLabel}
         aria-labelledby={this.viewModel.ariaLabelledBy}
