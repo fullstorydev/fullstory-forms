@@ -1,12 +1,20 @@
 import * as React from "react";
-import { Helpers, Question, DropdownListModel, settings, QuestionDropdownModel } from "survey-core";
+import {
+  Helpers,
+  Question,
+  DropdownListModel,
+  settings,
+  QuestionDropdownModel,
+} from "survey-core";
 import { Popup } from "./components/popup/popup";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyQuestionOtherValueItem } from "./reactquestion_comment";
 import { SurveyQuestionUncontrolledElement } from "./reactquestion_element";
 
-export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuestionUncontrolledElement<T> {
+export class SurveyQuestionDropdownBase<
+  T extends Question
+> extends SurveyQuestionUncontrolledElement<T> {
   inputElement: HTMLInputElement | null;
 
   click = (event: any) => {
@@ -43,24 +51,32 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
   protected renderSelect(cssClasses: any): React.JSX.Element {
     let selectElement: React.JSX.Element | null = null;
     if (this.question.isReadOnly) {
-      const text = (this.question.selectedItemLocText) ? this.renderLocString(this.question.selectedItemLocText) : "";
+      const text = this.question.selectedItemLocText
+        ? this.renderLocString(this.question.selectedItemLocText)
+        : "";
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      selectElement = <div id={this.question.inputId}
-        aria-label={this.question.a11y_input_ariaLabel}
-        aria-labelledby={this.question.a11y_input_ariaLabelledBy}
-        aria-describedby={this.question.a11y_input_ariaDescribedBy}
-        tabIndex={this.question.isDisabledAttr ? undefined : 0}
-        className={this.question.getControlClass()}
-        ref={(div) => (this.setControl(div))}>
-        {text}
-        {this.renderReadOnlyElement()}
-      </div>;
+      selectElement = (
+        <div
+          id={this.question.inputId}
+          aria-label={this.question.a11y_input_ariaLabel}
+          aria-labelledby={this.question.a11y_input_ariaLabelledBy}
+          aria-describedby={this.question.a11y_input_ariaDescribedBy}
+          tabIndex={this.question.isDisabledAttr ? undefined : 0}
+          className={this.question.getControlClass()}
+          ref={(div) => this.setControl(div)}
+        >
+          {text}
+          {this.renderReadOnlyElement()}
+        </div>
+      );
     } else {
-      selectElement = <>
-        {this.renderInput(this.question["dropdownListModel"])}
-        <Popup model={this.question?.dropdownListModel?.popupModel}></Popup>
-      </>;
+      selectElement = (
+        <>
+          {this.renderInput(this.question["dropdownListModel"])}
+          <Popup model={this.question?.dropdownListModel?.popupModel}></Popup>
+        </>
+      );
     }
 
     return (
@@ -71,17 +87,25 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
     );
   }
 
-  renderValueElement(dropdownListModel: DropdownListModel): React.JSX.Element | null {
+  renderValueElement(
+    dropdownListModel: DropdownListModel
+  ): React.JSX.Element | null {
     if (this.question.showInputFieldComponent) {
-      return ReactElementFactory.Instance.createElement(this.question.inputFieldComponentName, { item: dropdownListModel.getSelectedAction(), question: this.question });
+      return ReactElementFactory.Instance.createElement(
+        this.question.inputFieldComponentName,
+        { item: dropdownListModel.getSelectedAction(), question: this.question }
+      );
     } else if (this.question.showSelectedItemLocText) {
       return this.renderLocString(this.question.selectedItemLocText);
     }
     return null;
   }
 
-  protected renderInput(dropdownListModel: DropdownListModel): React.JSX.Element {
-    let valueElement: React.JSX.Element | null = this.renderValueElement(dropdownListModel);
+  protected renderInput(
+    dropdownListModel: DropdownListModel
+  ): React.JSX.Element {
+    let valueElement: React.JSX.Element | null =
+      this.renderValueElement(dropdownListModel);
     const { root } = settings.environment;
 
     const onInputChange = (e: any) => {
@@ -89,65 +113,99 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
         dropdownListModel.inputStringRendered = e.target.value;
       }
     };
-    return (<div
-      id={this.question.inputId}
-      className={this.question.getControlClass()}
-      tabIndex={dropdownListModel.noTabIndex ? undefined : 0}
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      disabled={this.question.isDisabledAttr}
-      required={this.question.isRequired}
-      onKeyDown={this.keyhandler}
-      onBlur={this.blur}
-      onFocus={this.focus}
-      role={this.question.ariaRole}
-      aria-required={this.question.ariaRequired}
-      aria-label={this.question.ariaLabel}
-      aria-invalid={this.question.ariaInvalid}
-      aria-errormessage={this.question.ariaErrormessage}
-      aria-expanded={this.question.ariaExpanded}
-      aria-controls={dropdownListModel.listElementId}
-      aria-activedescendant={dropdownListModel.ariaActivedescendant}
-      ref={(div) => (this.setControl(div))}
-    >
-      {dropdownListModel.showHintPrefix ?
-        (<div className={this.question.cssClasses.hintPrefix}>
-          <span>{dropdownListModel.hintStringPrefix}</span>
-        </div>) : null}
-      <div className={this.question.cssClasses.controlValue}>
-        {dropdownListModel.showHintString ?
-          (<div className={this.question.cssClasses.hintSuffix}>
-            <span style={{ visibility: "hidden" }} data-bind="text: model.filterString">{dropdownListModel.inputStringRendered}</span>
-            <span>{dropdownListModel.hintStringSuffix}</span>
-          </div>) : null}
-        {valueElement}
-        <input type="text" autoComplete="off"
-          id={this.question.getInputId()}
-          ref={(element) => (this.inputElement = element)}
-          className={this.question.cssClasses.filterStringInput}
-          role={dropdownListModel.filterStringEnabled ? this.question.ariaRole : undefined}
-          aria-expanded={this.question.ariaExpanded}
-          aria-label={this.question.a11y_input_ariaLabel}
-          aria-labelledby={this.question.a11y_input_ariaLabelledBy}
-          aria-describedby={this.question.a11y_input_ariaDescribedBy}
-          aria-controls={dropdownListModel.listElementId}
-          aria-activedescendant={dropdownListModel.ariaActivedescendant}
-          placeholder={dropdownListModel.placeholderRendered}
-          readOnly={dropdownListModel.filterReadOnly ? true : undefined}
-          tabIndex={dropdownListModel.noTabIndex ? undefined : -1}
-          disabled={this.question.isDisabledAttr}
-          inputMode={dropdownListModel.inputMode}
-          onChange={(e) => { onInputChange(e); }}
-          onBlur={this.blur}
-          onFocus={this.focus}
-        ></input>
+    return (
+      <div
+        data-fs-element="form-drop-down"
+        data-drop-down-name={this.question.title}
+        data-drop-down-value={this.question.value || ""}
+        data-fs-properties-schema='{
+          "data-drop-down-name": {
+          "type": "str",
+          "name": "dropdownName"
+        },
+          "data-drop-down-value": {
+          "type": "str",
+          "name": "dropDownValue"
+        }
+      }'
+        id={this.question.inputId}
+        className={this.question.getControlClass()}
+        tabIndex={dropdownListModel.noTabIndex ? undefined : 0}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        disabled={this.question.isDisabledAttr}
+        required={this.question.isRequired}
+        onKeyDown={this.keyhandler}
+        onBlur={this.blur}
+        onFocus={this.focus}
+        role={this.question.ariaRole}
+        aria-required={this.question.ariaRequired}
+        aria-label={this.question.ariaLabel}
+        aria-invalid={this.question.ariaInvalid}
+        aria-errormessage={this.question.ariaErrormessage}
+        aria-expanded={this.question.ariaExpanded}
+        aria-controls={dropdownListModel.listElementId}
+        aria-activedescendant={dropdownListModel.ariaActivedescendant}
+        ref={(div) => this.setControl(div)}
+      >
+        {dropdownListModel.showHintPrefix ? (
+          <div className={this.question.cssClasses.hintPrefix}>
+            <span>{dropdownListModel.hintStringPrefix}</span>
+          </div>
+        ) : null}
+        <div className={this.question.cssClasses.controlValue}>
+          {dropdownListModel.showHintString ? (
+            <div className={this.question.cssClasses.hintSuffix}>
+              <span
+                style={{ visibility: "hidden" }}
+                data-bind="text: model.filterString"
+              >
+                {dropdownListModel.inputStringRendered}
+              </span>
+              <span>{dropdownListModel.hintStringSuffix}</span>
+            </div>
+          ) : null}
+          {valueElement}
+          <input
+            type="text"
+            autoComplete="off"
+            id={this.question.getInputId()}
+            ref={(element) => (this.inputElement = element)}
+            className={this.question.cssClasses.filterStringInput}
+            role={
+              dropdownListModel.filterStringEnabled
+                ? this.question.ariaRole
+                : undefined
+            }
+            aria-expanded={this.question.ariaExpanded}
+            aria-label={this.question.a11y_input_ariaLabel}
+            aria-labelledby={this.question.a11y_input_ariaLabelledBy}
+            aria-describedby={this.question.a11y_input_ariaDescribedBy}
+            aria-controls={dropdownListModel.listElementId}
+            aria-activedescendant={dropdownListModel.ariaActivedescendant}
+            placeholder={dropdownListModel.placeholderRendered}
+            readOnly={dropdownListModel.filterReadOnly ? true : undefined}
+            tabIndex={dropdownListModel.noTabIndex ? undefined : -1}
+            disabled={this.question.isDisabledAttr}
+            inputMode={dropdownListModel.inputMode}
+            onChange={(e) => {
+              onInputChange(e);
+            }}
+            onBlur={this.blur}
+            onFocus={this.focus}
+          ></input>
+        </div>
+        {this.createClearButton()}
       </div>
-      {this.createClearButton()}
-    </div>);
+    );
   }
 
   createClearButton(): React.JSX.Element | null {
-    if (!this.question.allowClear || !this.question.cssClasses.cleanButtonIconId) return null;
+    if (
+      !this.question.allowClear ||
+      !this.question.cssClasses.cleanButtonIconId
+    )
+      return null;
 
     const style = { display: !this.question.showClearButton ? "none" : "" };
     return (
@@ -171,9 +229,11 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
     if (!this.question.cssClasses.chevronButtonIconId) return null;
 
     return (
-      <div className={this.question.cssClasses.chevronButton}
+      <div
+        className={this.question.cssClasses.chevronButton}
         aria-hidden="true"
-        onPointerDown={this.chevronPointerDown}>
+        onPointerDown={this.chevronPointerDown}
+      >
         <SvgIcon
           className={this.question.cssClasses.chevronButtonSvg}
           iconName={this.question.cssClasses.chevronButtonIconId}
@@ -207,13 +267,16 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
   }
   componentWillUnmount(): void {
     super.componentWillUnmount();
-    if (this.question.dropdownListModel) this.question.dropdownListModel.focused = false;
+    if (this.question.dropdownListModel)
+      this.question.dropdownListModel.focused = false;
   }
   updateInputDomElement() {
     if (!!this.inputElement) {
       const control: any = this.inputElement;
       const newValue = this.question.dropdownListModel.inputStringRendered;
-      if (!Helpers.isTwoValueEquals(newValue, control.value, false, true, false)) {
+      if (
+        !Helpers.isTwoValueEquals(newValue, control.value, false, true, false)
+      ) {
         control.value = this.question.dropdownListModel.inputStringRendered;
       }
     }
