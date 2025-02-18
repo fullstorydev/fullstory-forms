@@ -23,10 +23,17 @@ export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {
   }
   protected renderElement(): React.JSX.Element {
     var cssClasses = this.question.cssClasses;
-    console.log("rendering checkbox");
+
     return (
       <fieldset
         data-fs-element="form-checkbox"
+        data-checkbox-name={this.question.title}
+        data-fs-properties-schema='{
+          "data-checkbox-name": {
+            "type": "str",
+            "name": "checkboxName"
+          },
+        }'
         className={this.question.getSelectBaseRootCss()}
         ref={(fieldset) => this.setControl(fieldset)}
         role={this.question.a11y_input_ariaRole}
@@ -229,7 +236,7 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
         {this.renderLocString(this.item.locText, this.textStyle)}
       </span>
     ) : null;
-    console.log("id", this.item.value);
+
     return (
       <div
         className={itemClass}
