@@ -5,7 +5,7 @@ import {
   SurveyError,
   Question,
   QuestionMatrixDropdownRenderedCell,
-  SurveyModel
+  SurveyModel,
 } from "survey-core";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
 import { ReactElementFactory } from "./element-factory";
@@ -16,7 +16,12 @@ import { SurveyElementHeader } from "./element-header";
 
 export interface ISurveyCreator {
   createQuestionElement(question: Question): React.JSX.Element | null;
-  renderError(key: string, error: SurveyError, cssClasses: any, element?: any): React.JSX.Element;
+  renderError(
+    key: string,
+    error: SurveyError,
+    cssClasses: any,
+    element?: any
+  ): React.JSX.Element;
   questionTitleLocation(): string;
   questionErrorLocation(): string;
 }
@@ -47,6 +52,24 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
   }
   private get creator(): ISurveyCreator {
     return this.props.creator;
+  }
+  private get masked(): "fs-mask" | "fs-exclude" | "fs-unmask" {
+    // if(this.props.element)
+    const { type } = this.props.element.jsonObj;
+    let defaultMask: "fs-mask" | "fs-exclude" | "fs-unmask" = "fs-mask";
+
+    if (type.includes("checkbox") || type.includes("radio")) {
+      defaultMask = "fs-exclude";
+    }
+
+    if (
+      !!this.props.element.jsonObj.capture &&
+      this.props.element.jsonObj.capturee === "unmask"
+    ) {
+      defaultMask = "fs-unmask";
+    }
+
+    return defaultMask;
   }
   componentDidMount() {
     super.componentDidMount();
@@ -88,11 +111,7 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
     }
   }
   protected canRender(): boolean {
-    return (
-      super.canRender() &&
-      !!this.question &&
-      !!this.creator
-    );
+    return super.canRender() && !!this.question && !!this.creator;
   }
 
   protected renderQuestionContent(): React.JSX.Element {
@@ -101,6 +120,8 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
       display: this.question.renderedIsExpanded ? "" : "none",
     };
     var cssClasses = question.cssClasses;
+    var css = `${question.cssContent} ${this.masked}`;
+
     var questionRender = this.renderQuestion();
     var errorsTop = this.question.showErrorOnTop
       ? this.renderErrors(cssClasses, "top")
@@ -113,9 +134,10 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
     var descriptionUnderInput = question.hasDescriptionUnderInput
       ? this.renderDescription()
       : null;
+
     return (
       <div
-        className={question.cssContent || undefined}
+        className={css || undefined}
         style={contentStyle}
         role="presentation"
       >
@@ -143,7 +165,9 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
       : null;
 
     let rootStyle = question.getRootStyle();
-    let questionContent = this.wrapQuestionContent(this.renderQuestionContent());
+    let questionContent = this.wrapQuestionContent(
+      this.renderQuestionContent()
+    );
 
     return (
       <>
@@ -172,7 +196,11 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
     const survey: SurveyModel = this.question.survey as SurveyModel;
     let wrapper: React.JSX.Element | null = null;
     if (survey) {
-      wrapper = ReactSurveyElementsWrapper.wrapElement(survey, element, this.question);
+      wrapper = ReactSurveyElementsWrapper.wrapElement(
+        survey,
+        element,
+        this.question
+      );
     }
     return wrapper ?? element;
   }
@@ -180,7 +208,11 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
     const survey: SurveyModel = this.question.survey as SurveyModel;
     let wrapper: React.JSX.Element | null = null;
     if (survey) {
-      wrapper = ReactSurveyElementsWrapper.wrapQuestionContent(survey, element, this.question);
+      wrapper = ReactSurveyElementsWrapper.wrapQuestionContent(
+        survey,
+        element,
+        this.question
+      );
     }
     return wrapper ?? element;
   }
@@ -229,6 +261,7 @@ ReactElementFactory.Instance.registerElement("question", (props) => {
 export class SurveyElementErrors extends ReactSurveyElement {
   constructor(props: any) {
     super(props);
+
     this.state = this.getState();
   }
   protected get id(): string {
@@ -249,14 +282,18 @@ export class SurveyElementErrors extends ReactSurveyElement {
   protected canRender(): boolean {
     return !!this.element && this.element.hasVisibleErrors;
   }
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
   protected renderElement(): React.JSX.Element {
     const errors: Array<React.JSX.Element> = [];
     for (let i = 0; i < this.element.errors.length; i++) {
       const key: string = "error" + i;
       errors.push(
-        this.creator.renderError(key, this.element.errors[i], this.cssClasses, this.element)
+        this.creator.renderError(
+          key,
+          this.element.errors[i],
+          this.cssClasses,
+          this.element
+        )
       );
     }
 
@@ -301,17 +338,13 @@ export abstract class SurveyQuestionAndErrorsWrapped extends ReactSurveyElement 
     super.componentDidUpdate(prevProps, prevState);
     this.doAfterRender();
   }
-  protected doAfterRender() { }
+  protected doAfterRender() {}
   protected canRender(): boolean {
     return !!this.question;
   }
   protected renderContent(): React.JSX.Element {
     var renderedQuestion = this.renderQuestion();
-    return (
-      <>
-        {renderedQuestion}
-      </>
-    );
+    return <>{renderedQuestion}</>;
   }
   protected abstract renderElement(): React.JSX.Element;
   protected getShowErrors(): boolean {
@@ -348,7 +381,9 @@ export class SurveyQuestionAndErrorsCell extends SurveyQuestionAndErrorsWrapped 
   protected renderElement(): React.JSX.Element {
     var style = this.getCellStyle();
     const cell = this.props.cell;
-    const focusIn = () => { cell.focusIn(); };
+    const focusIn = () => {
+      cell.focusIn();
+    };
     return (
       <td
         ref={this.cellRef}
@@ -378,7 +413,12 @@ export class SurveyQuestionAndErrorsCell extends SurveyQuestionAndErrorsWrapped 
     const survey: SurveyModel = this.question.survey as SurveyModel;
     let wrapper: React.JSX.Element | null = null;
     if (survey) {
-      wrapper = ReactSurveyElementsWrapper.wrapMatrixCell(survey, element, cell, this.props.reason);
+      wrapper = ReactSurveyElementsWrapper.wrapMatrixCell(
+        survey,
+        element,
+        cell,
+        this.props.reason
+      );
     }
     return wrapper ?? element;
   }
@@ -388,7 +428,7 @@ export class SurveyQuestionErrorCell extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      changed: 0
+      changed: 0,
     };
     if (this.question) {
       this.registerCallback(this.question);
@@ -404,12 +444,19 @@ export class SurveyQuestionErrorCell extends React.Component<any, any> {
     return ["errors"];
   }
   private registerCallback(question: Question) {
-    question.registerFunctionOnPropertiesValueChanged(this.getQuestionPropertiesToTrack(), () => {
-      this.update();
-    }, "__reactSubscription");
+    question.registerFunctionOnPropertiesValueChanged(
+      this.getQuestionPropertiesToTrack(),
+      () => {
+        this.update();
+      },
+      "__reactSubscription"
+    );
   }
   private unRegisterCallback(question: Question) {
-    question.unRegisterFunctionOnPropertiesValueChanged(this.getQuestionPropertiesToTrack(), "__reactSubscription");
+    question.unRegisterFunctionOnPropertiesValueChanged(
+      this.getQuestionPropertiesToTrack(),
+      "__reactSubscription"
+    );
   }
   componentDidUpdate(prevProps: Readonly<any>): void {
     if (prevProps.question && prevProps.question !== this.question) {
@@ -425,6 +472,12 @@ export class SurveyQuestionErrorCell extends React.Component<any, any> {
     }
   }
   render(): React.JSX.Element {
-    return <SurveyElementErrors element={this.question} creator={this.props.creator} cssClasses={this.question.cssClasses}></SurveyElementErrors>;
+    return (
+      <SurveyElementErrors
+        element={this.question}
+        creator={this.props.creator}
+        cssClasses={this.question.cssClasses}
+      ></SurveyElementErrors>
+    );
   }
 }
