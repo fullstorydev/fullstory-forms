@@ -15,7 +15,7 @@ export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {
     }
     protected renderElement(): React.JSX.Element {
         var cssClasses = this.question.cssClasses;
-        const elementData = this.getDataElement("form-checkbox");
+        const elementData = this.getDataElement("fs-checkbox");
         return (
             <fieldset
                 {...elementData}
@@ -194,7 +194,7 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
             </span>
         ) : null;
 
-        const elementData = this.getDataElementItem("form-checkbox-item", this.item.value, isChecked);
+        const elementData = this.getDataElementItem("fs-checkbox-item", this.item.value, isChecked);
         return (
             <div className={itemClass} role="presentation" ref={this.rootRef} {...elementData}>
                 <label className={labelClass}>

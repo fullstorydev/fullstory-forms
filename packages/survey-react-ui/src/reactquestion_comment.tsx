@@ -28,7 +28,7 @@ export class SurveyQuestionComment extends SurveyQuestionUncontrolledElement<Que
 
         const counter = this.renderCharacterCounter();
         const textAreaModel: TextAreaModel = this.props.question.textAreaModel;
-        const elementData = this.getDataElement("form-text-area");
+        const elementData = this.getDataElement("fs-text-area");
 
         return (
             <div {...elementData} className={this.masked}>

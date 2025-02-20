@@ -100,7 +100,7 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
                 dropdownListModel.inputStringRendered = e.target.value;
             }
         };
-        const dataElement = this.getDataElement("form-drop-down", this.question.value);
+        const dataElement = this.getDataElement("fs-drop-down", this.question.value);
         return (
             <div
                 {...dataElement}

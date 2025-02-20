@@ -26,7 +26,7 @@ export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<Questi
             ></CharacterCounterComponent>
         ) : null;
 
-        const elementData = this.getDataElement("form-input", this.question.inputValue);
+        const elementData = this.getDataElement("fs-input", this.question.inputValue);
 
         return (
             <>

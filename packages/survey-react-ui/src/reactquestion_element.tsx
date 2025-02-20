@@ -333,14 +333,13 @@ export class SurveyElementBase<P, S> extends React.Component<P, S> {
             // create the data element with the data-fs-element name
             const data = {};
 
-            // if value is present and the value is unmasked we add value to the component
-            if (value && this.masked === "fs-unmask") {
-                const dataValue = `${elementName}-value`;
-                data[dataValue] = value;
-            }
-            if (selected && this.masked === "fs-unmask") {
+            // if unmasked we can set the selected and value attribute
+            if (this.masked === "fs-unmask") {
                 const dataSelected = `${elementName}-selected`;
                 data[dataSelected] = selected;
+
+                const dataValue = `${elementName}-value`;
+                data[dataValue] = value;
             }
 
             const schema = this.createElementData(data, elementName);
