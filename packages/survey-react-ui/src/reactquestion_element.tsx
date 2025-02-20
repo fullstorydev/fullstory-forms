@@ -296,8 +296,6 @@ export class SurveyElementBase<P, S> extends React.Component<P, S> {
         let defaultMask: "fs-mask" | "fs-exclude" | "fs-unmask" = "fs-mask";
 
         if (!!this.props["question"]) {
-            console.log(this.props["question"].jsonObj);
-
             const { type } = this.props["question"].jsonObj;
             if (type.includes("checkbox") || type.includes("radio")) {
                 defaultMask = "fs-exclude";
@@ -311,7 +309,7 @@ export class SurveyElementBase<P, S> extends React.Component<P, S> {
         return defaultMask;
     }
     getDataElement(elementName: string, value?: any): any {
-        if (!!this.props["question"].title) {
+        if (!!this.props["question"]) {
             // create the data element with the data-fs-element name
             const data = {};
 
