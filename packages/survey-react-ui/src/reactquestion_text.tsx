@@ -4,25 +4,41 @@ import { QuestionTextModel } from "survey-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { CharacterCounterComponent } from "./components/character-counter";
 
-export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<
-  QuestionTextModel
-> {
+export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<QuestionTextModel> {
   //controlRef: React.RefObject<HTMLInputElement>;
   constructor(props: any) {
     super(props);
+
     //this.controlRef = React.createRef();
   }
+
   protected renderInput() {
-    const inputClass = (this.question as QuestionTextModel).getControlClass();
+    const inputClass = `${(
+      this.question as QuestionTextModel
+    ).getControlClass()} ${this.masked}`;
 
     const placeholder = this.question.renderedPlaceholder;
     if (this.question.isReadOnlyRenderDiv()) {
       return <div>{this.question.inputValue}</div>;
     }
-    const counter = !!this.question.getMaxLength() ? (<CharacterCounterComponent counter={this.question.characterCounter} remainingCharacterCounter={this.question.cssClasses.remainingCharacterCounter}></CharacterCounterComponent>) : null;
+    const counter = !!this.question.getMaxLength() ? (
+      <CharacterCounterComponent
+        counter={this.question.characterCounter}
+        remainingCharacterCounter={
+          this.question.cssClasses.remainingCharacterCounter
+        }
+      ></CharacterCounterComponent>
+    ) : null;
+
+    const elementData = this.getDataElement(
+      "form-input",
+      this.question.inputValue
+    );
+
     return (
       <>
         <input
+          {...elementData}
           id={this.question.inputId}
           // disabled={this.isDisplayMode}
           disabled={this.question.isDisabledAttr}
@@ -30,7 +46,7 @@ export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<
           className={inputClass}
           type={this.question.inputType}
           //ref={this.controlRef}
-          ref={(input) => (this.setControl(input))}
+          ref={(input) => this.setControl(input)}
           style={this.question.inputStyle}
           maxLength={this.question.getMaxLength()}
           min={this.question.renderedMin}
@@ -40,12 +56,18 @@ export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<
           placeholder={placeholder}
           list={this.question.dataListId}
           autoComplete={this.question.autocomplete}
-          onBlur={(event) => { this.question.onBlur(event); }}
-          onFocus={(event) => { this.question.onFocus(event); }}
+          onBlur={(event) => {
+            this.question.onBlur(event);
+          }}
+          onFocus={(event) => {
+            this.question.onFocus(event);
+          }}
           onChange={this.question.onChange}
           onKeyUp={this.question.onKeyUp}
           onKeyDown={this.question.onKeyDown}
-          onCompositionUpdate={(event) => this.question.onCompositionUpdate(event.nativeEvent)}
+          onCompositionUpdate={(event) =>
+            this.question.onCompositionUpdate(event.nativeEvent)
+          }
           aria-required={this.question.a11y_input_ariaRequired}
           aria-label={this.question.a11y_input_ariaLabel}
           aria-labelledby={this.question.a11y_input_ariaLabelledBy}
@@ -58,13 +80,13 @@ export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<
     );
   }
   protected renderElement(): React.JSX.Element {
-    return (
-      this.question.dataListId ?
-        <div>
-          {this.renderInput()}
-          {this.renderDataList()}
-        </div> :
-        this.renderInput()
+    return this.question.dataListId ? (
+      <div>
+        {this.renderInput()}
+        {this.renderDataList()}
+      </div>
+    ) : (
+      this.renderInput()
     );
   }
   protected setValueCore(newValue: any) {

@@ -53,24 +53,7 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
   private get creator(): ISurveyCreator {
     return this.props.creator;
   }
-  private get masked(): "fs-mask" | "fs-exclude" | "fs-unmask" {
-    // if(this.props.element)
-    const { type } = this.props.element.jsonObj;
-    let defaultMask: "fs-mask" | "fs-exclude" | "fs-unmask" = "fs-mask";
 
-    if (type.includes("checkbox") || type.includes("radio")) {
-      defaultMask = "fs-exclude";
-    }
-
-    if (
-      !!this.props.element.jsonObj.capture &&
-      this.props.element.jsonObj.capturee === "unmask"
-    ) {
-      defaultMask = "fs-unmask";
-    }
-
-    return defaultMask;
-  }
   componentDidMount() {
     super.componentDidMount();
     if (!!this.question) {
@@ -120,7 +103,7 @@ export class SurveyQuestion extends SurveyElementBase<any, any> {
       display: this.question.renderedIsExpanded ? "" : "none",
     };
     var cssClasses = question.cssClasses;
-    var css = `${question.cssContent} ${this.masked}`;
+    var css = question.cssContent;
 
     var questionRender = this.renderQuestion();
     var errorsTop = this.question.showErrorOnTop
