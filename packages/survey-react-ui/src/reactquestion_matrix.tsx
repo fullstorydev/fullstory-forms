@@ -153,7 +153,9 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
             const column = this.question.visibleColumns[i];
             const key = "value" + i;
 
-            elementDataStore["fs-matrix-column"] = column.jsonObj.text.toLowerCase().split(" ").join("-");
+            elementDataStore["fs-matrix-column"] = !!column.jsonObj.text
+                ? column.jsonObj.text.toLowerCase().split(" ").join("-")
+                : column.jsonObj;
             if (this.masked === "fs-unmask") {
                 elementDataStore["fs-matrix-selected"] = false;
                 if (!!this.state) {
