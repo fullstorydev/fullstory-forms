@@ -294,19 +294,31 @@ export class SurveyElementBase<P, S> extends React.Component<P, S> {
     }
     protected get masked(): "fs-mask" | "fs-exclude" | "fs-unmask" {
         let defaultMask: "fs-mask" | "fs-exclude" | "fs-unmask" = "fs-mask";
+        let question;
 
         if (!!this.props["question"]) {
-            const { type } = this.props["question"].jsonObj;
+            question = this.props["question"];
+        }
+
+        if (!!this.props["question"].loadingOwner) {
+            question = this.props["question"].loadingOwner;
+        }
+
+        if (!!question) {
+            const type = !!question.jsonObj.type
+                ? question.jsonObj.type
+                : !!question.jsonObj.cellType
+                ? question.jsonObj.cellType
+                : "none";
             if (type.includes("checkbox") || type.includes("radio")) {
                 defaultMask = "fs-exclude";
             }
 
-            if (!!this.props["question"].jsonObj.capture && this.props["question"].jsonObj.capture === "unmask") {
+            if (!!question.jsonObj.capture && question.jsonObj.capture === "unmask") {
                 defaultMask = "fs-unmask";
             }
+            return defaultMask;
         }
-
-        return defaultMask;
     }
     getDataElement(elementName: string, value?: any): any {
         if (!!this.props["question"]) {

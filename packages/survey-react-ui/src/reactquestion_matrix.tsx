@@ -159,10 +159,10 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
             if (this.masked === "fs-unmask") {
                 elementDataStore["fs-matrix-selected"] = false;
                 if (!!this.state) {
-                    elementDataStore["fs-matrix-item-selected"] = this.state.value === i + 1;
+                    elementDataStore["fs-matrix-cell-selected"] = this.state.value === i + 1;
                 }
             }
-            const elementData = this.createElementData(elementDataStore, "fs-matrix-item");
+            const elementData = this.createElementData(elementDataStore, "fs-matrix-cell");
 
             let itemClass = `${this.question.getItemClass(row, column)} ${this.masked}`;
             if (this.question.hasCellText) {
