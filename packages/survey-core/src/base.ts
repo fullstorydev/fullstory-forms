@@ -469,23 +469,16 @@ export class Base {
   }
 
   public getDataElement(title?: string, value?: any) {
-    const namemap = {
-      text: "input",
-      matrix: "table",
-    };
-
     const data = {};
-    const inputType = this.getType();
-    const elementName = namemap[inputType] ? namemap[inputType] : inputType;
 
-    data[`${elementName}-name`] = `fs-${title}`;
+    data[`${title}-name`] = `fs-${title}`;
     if (!!this.jsonObj["capture"]) {
       if (this.jsonObj["capture"] === "unmask" && !!value) {
-        data[`${elementName}-value`] = value;
+        data[`${title}-value`] = value;
       }
     }
 
-    const element = this.createElementData(data, elementName);
+    const element = this.createElementData(data, title);
 
     return element;
   }

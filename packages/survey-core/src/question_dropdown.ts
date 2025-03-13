@@ -321,7 +321,7 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     return !!item ? item.text : "";
   }
   public get elementData(): any {
-    const data = this.getDataElement(this.inputValue);
+    const data = this.getDataElement("dropdown", this.inputValue);
 
     return data;
   }
