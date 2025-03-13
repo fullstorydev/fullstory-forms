@@ -200,7 +200,8 @@ export class SurveyQuestionRadioItem extends ReactSurveyElement {
       <span className={controlLabelClass}>{this.renderLocString(this.item.locText, this.textStyle)}</span>
     ) : null;
 
-    const elementData = this.getDataElementItem("fs-radio-item", this.item.value, this.isChecked);
+    const elementData = this.item.elementData("fs-radio-item");
+
     return (
       <div className={itemClass} role="presentation" ref={this.rootRef} {...elementData}>
         <label onMouseDown={this.handleOnMouseDown} className={labelClass}>
