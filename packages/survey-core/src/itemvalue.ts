@@ -19,11 +19,16 @@ import { Question } from "./question";
  * It has two main properties: value and text. If text is empty, value is used for displaying.
  * The text property is localizable and support markdown.
  */
-export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcutText {
+export class ItemValue
+  extends BaseAction
+  implements ILocalizableOwner, IShortcutText
+{
   [index: string]: any;
 
   public getMarkdownHtml(text: string, name: string): string {
-    return !!this.locOwner ? this.locOwner.getMarkdownHtml(text, name) : undefined;
+    return !!this.locOwner
+      ? this.locOwner.getMarkdownHtml(text, name)
+      : undefined;
   }
   public getRenderer(name: string): string {
     return !!this.locOwner ? this.locOwner.getRenderer(name) : null;
@@ -44,11 +49,18 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
   /**
    * Resets the input array and fills it with values from the values array
    */
-  public static setData(items: Array<ItemValue>, values: Array<any>, type?: string): void {
+  public static setData(
+    items: Array<ItemValue>,
+    values: Array<any>,
+    type?: string
+  ): void {
     items.length = 0;
     for (let i = 0; i < values.length; i++) {
       const value = values[i];
-      const itemType = !!value && typeof value.getType === "function" ? value.getType() : (type ?? "itemvalue");
+      const itemType =
+        !!value && typeof value.getType === "function"
+          ? value.getType()
+          : type ?? "itemvalue";
       const item = Serializer.createClass(itemType);
       item.setData(value);
       if (!!value.originalItem) {
@@ -69,7 +81,8 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     const valIsEmpty = Helpers.isValueEmpty(val);
     for (var i = 0; i < items.length; i++) {
       if (valIsEmpty && Helpers.isValueEmpty(items[i].value)) return items[i];
-      if (Helpers.isTwoValueEquals(items[i].value, val, false, true, false)) return items[i];
+      if (Helpers.isTwoValueEquals(items[i].value, val, false, true, false))
+        return items[i];
     }
     return null;
   }
@@ -187,7 +200,11 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
   private visibleConditionRunner: ConditionRunner;
   private enableConditionRunner: ConditionRunner;
 
-  constructor(value: any, text: string = null, protected typeName = "itemvalue") {
+  constructor(
+    value: any,
+    text: string = null,
+    protected typeName = "itemvalue"
+  ) {
     super();
     if (text) this.locText.text = text;
     if (!!value && typeof value === "object") {
@@ -202,7 +219,7 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     this.onCreating();
   }
 
-  public onCreating(): any { }
+  public onCreating(): any {}
   public getType(): string {
     return !!this.typeName ? this.typeName : "itemvalue";
   }
@@ -212,7 +229,9 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
       : null;
   }
   public getLocale(): string {
-    return !!this.locOwner && this.locOwner.getLocale ? this.locOwner.getLocale() : "";
+    return !!this.locOwner && this.locOwner.getLocale
+      ? this.locOwner.getLocale()
+      : "";
   }
   public isGhost: boolean;
   protected get isInternal(): boolean {
@@ -233,7 +252,7 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     return !Helpers.isValueEmpty(val) ? val.toString() : null;
   }
   public get locText(): LocalizableString {
-    if(!this.locTextValue) {
+    if (!this.locTextValue) {
       this.locTextValue = this.createLocText();
     }
     return this.locTextValue;
@@ -250,9 +269,16 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     this._locOwner = value;
   }
 
+  public elementData(type: string): any {
+    const data = this.getDataElementItem(type, this.text, this.selected);
+
+    return data;
+  }
+
   public get value(): any {
     return this.getPropertyValue("value");
   }
+
   public set value(newValue: any) {
     this.setValue(newValue, false);
   }
@@ -266,10 +292,9 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
         text = str.slice(index + 1);
       }
     }
-    if(newItem) {
+    if (newItem) {
       this.setPropertyValueDirectly("value", newValue);
-    }
-    else {
+    } else {
       this.setPropertyValue("value", newValue);
     }
     if (!!text) {
@@ -293,11 +318,11 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     this.locText.text = newText;
   }
   public get textOrHtml(): string {
-    if(this.locTextValue) return this.locText.textOrHtml;
+    if (this.locTextValue) return this.locText.textOrHtml;
     return this.getValueText();
   }
   public get calculatedText(): string {
-    if(this.locTextValue) return this.locText.calculatedText;
+    if (this.locTextValue) return this.locText.calculatedText;
     return this.getValueText();
   }
   public get shortcutText(): string {
@@ -305,7 +330,7 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
   }
   private canSerializeValue(): boolean {
     const val = this.value;
-    if(val === undefined || val === null) return false;
+    if (val === undefined || val === null) return false;
     return !Array.isArray(val) && typeof val !== "object";
   }
   public getData(): any {
@@ -315,10 +340,17 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     }
     if (Helpers.isValueEmpty(json.value)) return json;
     const canSerializeVal = this.canSerializeValue();
-    const canSerializeAsContant = !canSerializeVal || !settings.serialization.itemValueSerializeAsObject && !settings.serialization.itemValueSerializeDisplayText;
+    const canSerializeAsContant =
+      !canSerializeVal ||
+      (!settings.serialization.itemValueSerializeAsObject &&
+        !settings.serialization.itemValueSerializeDisplayText);
     if (canSerializeAsContant && Object.keys(json).length == 1)
       return this.value;
-    if (settings.serialization.itemValueSerializeDisplayText && json.text === undefined && canSerializeVal) {
+    if (
+      settings.serialization.itemValueSerializeDisplayText &&
+      json.text === undefined &&
+      canSerializeVal
+    ) {
       json.text = this.value.toString();
     }
     return json;
@@ -332,15 +364,30 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     var jsoObj = new JsonObject();
     for (var i = 0; i < properties.length; i++) {
       const prop = properties[i];
-      if (prop.name === "text" && (!this.locTextValue || !this.locText.hasNonDefaultText() &&
-        Helpers.isTwoValueEquals(this.value, this.text, false, true, false))) continue;
+      if (
+        prop.name === "text" &&
+        (!this.locTextValue ||
+          (!this.locText.hasNonDefaultText() &&
+            Helpers.isTwoValueEquals(
+              this.value,
+              this.text,
+              false,
+              true,
+              false
+            )))
+      )
+        continue;
       jsoObj.valueToJson(this, res, prop);
     }
     return res;
   }
   public setData(value: any, isNewItem?: boolean): void {
     if (Helpers.isValueEmpty(value)) return;
-    if(typeof value.value === "undefined" && typeof value.text !== "undefined" && Object.keys(value).length === 1) {
+    if (
+      typeof value.value === "undefined" &&
+      typeof value.text !== "undefined" &&
+      Object.keys(value).length === 1
+    ) {
       value.value = value.text;
     }
     if (typeof value.value !== "undefined") {
@@ -354,7 +401,7 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     } else {
       this.setValue(value, isNewItem);
     }
-    if(!isNewItem) {
+    if (!isNewItem) {
       this.locTextValue?.strChanged();
     }
   }
@@ -385,7 +432,7 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     this.setPropertyValue("isEnabled", val);
   }
   public addUsedLocales(locales: Array<string>): void {
-    if(this.locTextValue) {
+    if (this.locTextValue) {
       this.AddLocStringToUsedLocales(this.locTextValue, locales);
     }
   }
@@ -393,7 +440,11 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     super.locStrsChanged();
     this.locTextValue?.strChanged();
   }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+  protected onPropertyValueChanged(
+    name: string,
+    oldValue: any,
+    newValue: any
+  ): void {
     if (name === "value" && !this.hasText) {
       this.locTextValue?.strChanged();
     }
@@ -425,14 +476,22 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
   @property() selectedValue: boolean;
   public get selected(): boolean {
     const locOwner = this._locOwner;
-    if(locOwner instanceof Question && locOwner.isItemSelected && this.selectedValue === undefined) {
-      this.selectedValue = <boolean><unknown>(new ComputedUpdater<boolean>(() => locOwner.isItemSelected(this)));
+    if (
+      locOwner instanceof Question &&
+      locOwner.isItemSelected &&
+      this.selectedValue === undefined
+    ) {
+      this.selectedValue = <boolean>(
+        (<unknown>(
+          new ComputedUpdater<boolean>(() => locOwner.isItemSelected(this))
+        ))
+      );
     }
     return this.selectedValue;
   }
   private componentValue: string;
   public getComponent(): string {
-    if(this._locOwner instanceof Question) {
+    if (this._locOwner instanceof Question) {
       return this.componentValue || this._locOwner.itemComponent;
     }
     return this.componentValue;
@@ -460,12 +519,16 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
     return isVisible && visible;
   }
   protected setVisible(val: boolean): void {
-    if(this.visible !== val) {
+    if (this.visible !== val) {
       this._visible = val;
     }
   }
-  private get _visible(): boolean { return this.getPropertyValue("visible", true); }
-  private set _visible(val: boolean) { this.setPropertyValue("visible", val); }
+  private get _visible(): boolean {
+    return this.getPropertyValue("visible", true);
+  }
+  private set _visible(val: boolean) {
+    this.setPropertyValue("visible", val);
+  }
 
   protected getLocTitle(): LocalizableString {
     return this.locText;
@@ -475,8 +538,12 @@ export class ItemValue extends BaseAction implements ILocalizableOwner, IShortcu
   }
   protected setLocTitle(val: LocalizableString): void {}
   protected setTitle(val: string): void {}
-  public get icon(): string { return this.getPropertyValue("icon", ""); }
-  public set icon(val: string) { this.setPropertyValue("icon", val); }
+  public get icon(): string {
+    return this.getPropertyValue("icon", "");
+  }
+  public set icon(val: string) {
+    this.setPropertyValue("icon", val);
+  }
 }
 
 Base.createItemValue = function (source: any, type?: string): any {
@@ -495,7 +562,10 @@ Base.itemValueLocStrChanged = function (arr: Array<any>): void {
   ItemValue.locStrsChanged(arr);
 };
 
-JsonObjectProperty.getItemValuesDefaultValue = (val: any, type: string): Array<ItemValue> => {
+JsonObjectProperty.getItemValuesDefaultValue = (
+  val: any,
+  type: string
+): Array<ItemValue> => {
   const res = new Array<ItemValue>();
   ItemValue.setData(res, Array.isArray(val) ? val : [], type);
   return res;
@@ -511,11 +581,12 @@ Serializer.addClass(
     },
     { name: "visibleIf:condition", locationInTable: "detail" },
     {
-      name: "enableIf:condition", locationInTable: "detail",
+      name: "enableIf:condition",
+      locationInTable: "detail",
       visibleIf: (obj: ItemValue): boolean => {
         return !obj || obj.ownerPropertyName !== "rateValues";
       },
-    }
+    },
   ],
   (value: any) => new ItemValue(value)
 );

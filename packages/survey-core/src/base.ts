@@ -457,8 +457,6 @@ export class Base {
     // create the data element with the data-fs-element name
     const data = {};
 
-    // if unmasked we can set the selected and value attribute
-
     const dataSelected = `${elementName}-selected`;
     data[dataSelected] = selected;
 
@@ -470,7 +468,7 @@ export class Base {
     return schema;
   }
 
-  public getDataElement(title: string, value?: any) {
+  public getDataElement(title?: string, value?: any) {
     const namemap = {
       text: "input",
       matrix: "table",

@@ -109,7 +109,7 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
   }
 
   public get elementData(): any {
-    const data = this.getDataElement(this.inputValue);
+    const data = this.getDataElement("checkbox");
 
     return data;
   }
