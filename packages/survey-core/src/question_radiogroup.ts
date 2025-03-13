@@ -27,7 +27,9 @@ export class QuestionRadiogroupModel extends QuestionCheckboxBase {
   /**
    * Returns the selected choice item. If no item is selected, returns `null`.
    */
-  public get selectedItem(): ItemValue { return this.getSingleSelectedItem(); }
+  public get selectedItem(): ItemValue {
+    return this.getSingleSelectedItem();
+  }
   /**
    * Specifies whether to display a button that clears the question value.
    *
@@ -54,6 +56,11 @@ export class QuestionRadiogroupModel extends QuestionCheckboxBase {
   public get clearButtonCaption() {
     return this.getLocalizationString("clearCaption");
   }
+  public get elementData(): any {
+    const data = this.getDataElement(this.inputValue);
+
+    return data;
+  }
   supportAutoAdvance(): boolean {
     return this.isMouseDown === true && !this.isOtherSelected;
   }
@@ -78,16 +85,16 @@ export class QuestionRadiogroupModel extends QuestionCheckboxBase {
 
   protected getDefaultTitleActions(): Array<Action> {
     const actions = [];
-    if(this.isDefaultV2Theme && !this.isDesignMode) {
-      const clearAction = new Action(
-        {
-          locTitleName: "clearCaption",
-          id: `sv-clr-btn-${this.id}`,
-          action: () => { this.clearValue(true); },
-          innerCss: this.cssClasses.clearButton,
-          visible: <any>new ComputedUpdater(() => this.canShowClearButton)
-        }
-      );
+    if (this.isDefaultV2Theme && !this.isDesignMode) {
+      const clearAction = new Action({
+        locTitleName: "clearCaption",
+        id: `sv-clr-btn-${this.id}`,
+        action: () => {
+          this.clearValue(true);
+        },
+        innerCss: this.cssClasses.clearButton,
+        visible: <any>new ComputedUpdater(() => this.canShowClearButton),
+      });
       actions.push(clearAction);
     }
     return actions;
@@ -108,7 +115,11 @@ Serializer.addClass(
   [
     { name: "allowClear:boolean", alternativeName: "showClearButton" },
     { name: "separateSpecialChoices", visible: true },
-    { name: "itemComponent", visible: false, default: "survey-radiogroup-item" }
+    {
+      name: "itemComponent",
+      visible: false,
+      default: "survey-radiogroup-item",
+    },
   ],
   function () {
     return new QuestionRadiogroupModel("");

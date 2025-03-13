@@ -5,7 +5,11 @@ import { CssClassBuilder } from "./utils/cssClassBuilder";
 import { SurveyModel } from "./survey";
 import { ConsoleWarnings } from "./console-warnings";
 import { ITheme } from "./themes";
-import { dataUrl2File, FileLoader, QuestionFileModelBase } from "./question_file";
+import {
+  dataUrl2File,
+  FileLoader,
+  QuestionFileModelBase,
+} from "./question_file";
 import { isBase64URL } from "./utils/utils";
 import { DomDocumentHelper } from "./global_variables_utils";
 
@@ -23,17 +27,33 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
 
   private getPenColorFromTheme(): string {
     const _survey = this.survey as SurveyModel;
-    return !!_survey && !!_survey.themeVariables && _survey.themeVariables["--sjs-primary-backcolor"];
+    return (
+      !!_survey &&
+      !!_survey.themeVariables &&
+      _survey.themeVariables["--sjs-primary-backcolor"]
+    );
   }
   private updateColors(signaturePad: SignaturePad) {
     const penColorFromTheme = this.getPenColorFromTheme();
     const penColorProperty = this.getPropertyByName("penColor");
-    signaturePad.penColor = this.penColor || penColorFromTheme || penColorProperty.defaultValue || "#1ab394";
+    signaturePad.penColor =
+      this.penColor ||
+      penColorFromTheme ||
+      penColorProperty.defaultValue ||
+      "#1ab394";
 
     const backgroundColorProperty = this.getPropertyByName("backgroundColor");
-    const backgroundColorFromTheme = penColorFromTheme ? "transparent" : undefined;
-    const background = !!this.backgroundImage ? "transparent" : this.backgroundColor;
-    signaturePad.backgroundColor = background || backgroundColorFromTheme || backgroundColorProperty.defaultValue || "#ffffff";
+    const backgroundColorFromTheme = penColorFromTheme
+      ? "transparent"
+      : undefined;
+    const background = !!this.backgroundImage
+      ? "transparent"
+      : this.backgroundColor;
+    signaturePad.backgroundColor =
+      background ||
+      backgroundColorFromTheme ||
+      backgroundColorProperty.defaultValue ||
+      "#ffffff";
   }
 
   protected getCssRoot(cssClasses: any): string {
@@ -44,12 +64,14 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   }
 
   protected getFormat() {
-    return this.dataFormat === "jpeg" ? "image/jpeg" :
-      (this.dataFormat === "svg" ? "image/svg+xml" : "");
+    return this.dataFormat === "jpeg"
+      ? "image/jpeg"
+      : this.dataFormat === "svg"
+      ? "image/svg+xml"
+      : "";
   }
   protected updateValue() {
     if (this.signaturePad) {
-
       var data = this.signaturePad.toDataURL(this.getFormat());
       this.valueIsUpdatingInternally = true;
       this.value = data;
@@ -119,7 +141,9 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
       img.src = url;
       img.onload = () => {
         if (!!this.canvas) {
-          const canvas = DomDocumentHelper.createElement("canvas") as HTMLCanvasElement;
+          const canvas = DomDocumentHelper.createElement(
+            "canvas"
+          ) as HTMLCanvasElement;
           canvas.width = this.containerWidth;
           canvas.height = this.containerHeight;
           const ctx = canvas.getContext("2d");
@@ -137,7 +161,10 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   private fromDataUrl(data: string) {
     this._loadedData = data;
     if (this.signaturePad) {
-      this.signaturePad.fromDataURL(data, { width: this.canvas.width * this.scale, height: this.canvas.height * this.scale });
+      this.signaturePad.fromDataURL(data, {
+        width: this.canvas.width * this.scale,
+        height: this.canvas.height * this.scale,
+      });
     }
   }
   private _loadedData: string = undefined;
@@ -147,7 +174,14 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   protected loadPreview(newValue: any): void {
     if (!newValue) {
       if (this.signaturePad && this.canvas) {
-        this.canvas.getContext("2d").clearRect(0, 0, this.canvas.width * this.scale, this.canvas.height * this.scale);
+        this.canvas
+          .getContext("2d")
+          .clearRect(
+            0,
+            0,
+            this.canvas.width * this.scale,
+            this.canvas.height * this.scale
+          );
         this.signaturePad.clear();
       }
       this.valueWasChangedFromLastUpload = false;
@@ -165,7 +199,12 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
         }
         this.isFileLoading = true;
         this._previewLoader = new FileLoader(this, (status, loaded) => {
-          if (status === "success" && loaded && loaded.length > 0 && loaded[0].content) {
+          if (
+            status === "success" &&
+            loaded &&
+            loaded.length > 0 &&
+            loaded[0].content
+          ) {
             this.fromDataUrl(loaded[0].content);
             this.isFileLoading = false;
           } else if (status === "skipped") {
@@ -218,25 +257,36 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
 
     this.updateColors(signaturePad);
 
-    (signaturePad as any).addEventListener("beginStroke", () => {
-      this.scaleCanvas();
-      this.isDrawingValue = true;
-      canvas.focus();
-    }, { once: false });
+    (signaturePad as any).addEventListener(
+      "beginStroke",
+      () => {
+        this.scaleCanvas();
+        this.isDrawingValue = true;
+        canvas.focus();
+      },
+      { once: false }
+    );
 
-    (signaturePad as any).addEventListener("endStroke", () => {
-      this.isDrawingValue = false;
-      if (this.storeDataAsText) {
-        this.updateValue();
-      } else {
-        this.valueWasChangedFromLastUpload = true;
-      }
-    }, { once: false });
+    (signaturePad as any).addEventListener(
+      "endStroke",
+      () => {
+        this.isDrawingValue = false;
+        if (this.storeDataAsText) {
+          this.updateValue();
+        } else {
+          this.valueWasChangedFromLastUpload = true;
+        }
+      },
+      { once: false }
+    );
 
     this.updateValueHandler();
     this.readOnlyChangedCallback();
     var propertyChangedHandler = (sender: any, options: any) => {
-      if (options.name === "signatureWidth" || options.name === "signatureHeight") {
+      if (
+        options.name === "signatureWidth" ||
+        options.name === "signatureHeight"
+      ) {
         if (!this.valueIsUpdatingInternally) this.updateValueHandler();
       }
     };
@@ -252,6 +302,11 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     this.signaturePad = null;
   }
 
+  public get elementData(): any {
+    const data = this.getDataElement(this.inputValue);
+
+    return data;
+  }
   /**
    * Specifies the format in which to store the signature image.
    *
@@ -342,7 +397,9 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   public get canShowClearButton(): boolean {
     const hasSignature = !this.nothingIsDrawn();
     const isUploading = this.isUploading;
-    return !this.isInputReadOnly && this.allowClear && hasSignature && !isUploading;
+    return (
+      !this.isInputReadOnly && this.allowClear && hasSignature && !isUploading
+    );
   }
   /**
    * Specifies a color for the pen.
@@ -410,7 +467,9 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     const isEmpty = this.isEmpty();
     const isUploading = this.isUploading;
     const valueWasChangedFromLastUpload = this.valueWasChangedFromLastUpload;
-    return !isDrawing && isEmpty && !isUploading && !valueWasChangedFromLastUpload;
+    return (
+      !isDrawing && isEmpty && !isUploading && !valueWasChangedFromLastUpload
+    );
   }
 
   public needShowPlaceholder(): boolean {
@@ -419,18 +478,26 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   /**
    * A placeholder text for the signature area. Applies when the [`showPlaceholder`](#showPlaceholder) property is `true`.
    */
-  @property({ localizable: { defaultStr: "signaturePlaceHolder" } }) placeholder: string;
+  @property({ localizable: { defaultStr: "signaturePlaceHolder" } })
+  placeholder: string;
 
   /**
    * A placeholder text for the signature area in read-only or preview mode. Applies when the [`showPlaceholder`](#showPlaceholder) property is `true`.
    */
-  @property({ localizable: { defaultStr: "signaturePlaceHolderReadOnly" } }) placeholderReadOnly: string;
+  @property({ localizable: { defaultStr: "signaturePlaceHolderReadOnly" } })
+  placeholderReadOnly: string;
   protected onBlurCore(event: any): void {
     super.onBlurCore(event);
     if (!this.storeDataAsText) {
       if (!this.element.contains(event.relatedTarget)) {
         if (!this.valueWasChangedFromLastUpload) return;
-        this.uploadFiles([dataUrl2File(this.signaturePad.toDataURL(this.getFormat()), this.name + "." + correctFormatData(this.dataFormat), this.getFormat())]);
+        this.uploadFiles([
+          dataUrl2File(
+            this.signaturePad.toDataURL(this.getFormat()),
+            this.name + "." + correctFormatData(this.dataFormat),
+            this.getFormat()
+          ),
+        ]);
         this.valueWasChangedFromLastUpload = false;
       }
     }
@@ -452,13 +519,22 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   endLoadingFromJson(): void {
     super.endLoadingFromJson();
     //todo: need to remove this code
-    if (this.signatureWidth === 300 && !!this.width && typeof this.width === "number" && this.width) {
-      ConsoleWarnings.warn("Use signatureWidth property to set width for the signature pad");
+    if (
+      this.signatureWidth === 300 &&
+      !!this.width &&
+      typeof this.width === "number" &&
+      this.width
+    ) {
+      ConsoleWarnings.warn(
+        "Use signatureWidth property to set width for the signature pad"
+      );
       this.signatureWidth = this.width;
       this.width = undefined;
     }
     if (this.signatureHeight === 200 && !!this.height) {
-      ConsoleWarnings.warn("Use signatureHeight property to set width for the signature pad");
+      ConsoleWarnings.warn(
+        "Use signatureHeight property to set width for the signature pad"
+      );
       this.signatureHeight = this.height;
       this.height = undefined;
     }
@@ -504,7 +580,7 @@ Serializer.addClass(
     {
       name: "height:number",
       category: "general",
-      visible: false
+      visible: false,
     },
     {
       name: "allowClear:boolean",
@@ -517,14 +593,14 @@ Serializer.addClass(
       serializationProperty: "locPlaceholder",
       category: "general",
       dependsOn: "showPlaceholder",
-      visibleIf: (obj: QuestionSignaturePadModel) => obj.showPlaceholder
+      visibleIf: (obj: QuestionSignaturePadModel) => obj.showPlaceholder,
     },
     {
       name: "placeholderReadOnly:text",
       serializationProperty: "locPlaceholderReadOnly",
       category: "general",
       dependsOn: "showPlaceholder",
-      visibleIf: (obj: QuestionSignaturePadModel) => obj.showPlaceholder
+      visibleIf: (obj: QuestionSignaturePadModel) => obj.showPlaceholder,
     },
     {
       name: "backgroundImage:file",
@@ -549,13 +625,12 @@ Serializer.addClass(
       ],
       onSettingValue: (obj: any, val: any): any => {
         return correctFormatData(val);
-      }
+      },
     },
     { name: "defaultValue", visible: false },
     { name: "correctAnswer", visible: false },
     { name: "storeDataAsText:boolean", default: true },
     { name: "waitForUpload:boolean", default: false },
-
   ],
   function () {
     return new QuestionSignaturePadModel("");

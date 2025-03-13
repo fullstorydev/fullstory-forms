@@ -9,10 +9,18 @@ import {
 } from "./jsonobject";
 import { settings } from "./settings";
 import { ItemValue } from "./itemvalue";
-import { IElement, IFindElement, IProgressInfo, ISurvey, ILoadFromJSONOptions, ISaveToJSONOptions } from "./base-interfaces";
+import {
+  IElement,
+  IFindElement,
+  IProgressInfo,
+  ISurvey,
+  ILoadFromJSONOptions,
+  ISaveToJSONOptions,
+} from "./base-interfaces";
 import { ExpressionRunner } from "./conditions";
 import { getLocaleString } from "./surveyStrings";
 import { ConsoleWarnings } from "./console-warnings";
+import { isDate } from "date-fns";
 
 interface IExpressionRunnerInfo {
   onExecute: (obj: Base, res: any) => void;
@@ -22,11 +30,13 @@ interface IExpressionRunnerInfo {
 export class Bindings {
   private properties: Array<JsonObjectProperty> = null;
   private values: any = null;
-  constructor(private obj: Base) { }
+  constructor(private obj: Base) {}
   public getType(): string {
     return "bindings";
   }
-  public get isSurveyObj(): boolean { return true; }
+  public get isSurveyObj(): boolean {
+    return true;
+  }
   public getNames(): Array<string> {
     var res: Array<string> = [];
     this.fillProperties();
@@ -121,27 +131,40 @@ export class Bindings {
 
 export class Dependencies {
   private static DependenciesCount = 0;
-  constructor(public currentDependency: () => void, public target: Base, public property: string) {
-  }
-  dependencies: Array<{ obj: Base, prop: string, id: string }> = [];
-  id: string = "" + (++Dependencies.DependenciesCount);
+  constructor(
+    public currentDependency: () => void,
+    public target: Base,
+    public property: string
+  ) {}
+  dependencies: Array<{ obj: Base; prop: string; id: string }> = [];
+  id: string = "" + ++Dependencies.DependenciesCount;
   addDependency(target: Base, property: string): void {
-    if (this.target === target && this.property === property)
-      return;
-    if (this.dependencies.some(dependency => dependency.obj === target && dependency.prop === property))
+    if (this.target === target && this.property === property) return;
+    if (
+      this.dependencies.some(
+        (dependency) =>
+          dependency.obj === target && dependency.prop === property
+      )
+    )
       return;
 
     this.dependencies.push({
       obj: target,
       prop: property,
-      id: this.id
+      id: this.id,
     });
-    target.registerPropertyChangedHandlers([property], this.currentDependency, this.id);
-
+    target.registerPropertyChangedHandlers(
+      [property],
+      this.currentDependency,
+      this.id
+    );
   }
   public dispose(): void {
-    this.dependencies.forEach(dependency => {
-      dependency.obj.unregisterPropertyChangedHandlers([dependency.prop], dependency.id);
+    this.dependencies.forEach((dependency) => {
+      dependency.obj.unregisterPropertyChangedHandlers(
+        [dependency.prop],
+        dependency.id
+      );
     });
     // this.currentDependency = undefined;
   }
@@ -150,8 +173,7 @@ export class Dependencies {
 export class ComputedUpdater<T = any> {
   public static readonly ComputedUpdaterType = "__dependency_computed";
   private dependencies: Dependencies = undefined;
-  constructor(private _updater: () => T) {
-  }
+  constructor(private _updater: () => T) {}
   readonly type = ComputedUpdater.ComputedUpdaterType;
   public get updater(): () => T {
     return this._updater;
@@ -185,9 +207,15 @@ export class Base {
     Base.currentDependencis = undefined;
     return deps;
   }
-  public static startCollectDependencies(updater: () => void, target: Base, property: string): void {
+  public static startCollectDependencies(
+    updater: () => void,
+    target: Base,
+    property: string
+  ): void {
     if (Base.currentDependencis !== undefined) {
-      throw new Error("Attempt to collect nested dependencies. Nested dependencies are not supported.");
+      throw new Error(
+        "Attempt to collect nested dependencies. Nested dependencies are not supported."
+      );
     }
     Base.currentDependencis = new Dependencies(updater, target, property);
   }
@@ -230,7 +258,13 @@ export class Base {
   }
   protected equalsCore(obj: Base): boolean {
     if ((<any>this).name !== (<any>obj).name) return false;
-    return Helpers.isTwoValueEquals(this.toJSON(), obj.toJSON(), false, true, false);
+    return Helpers.isTwoValueEquals(
+      this.toJSON(),
+      obj.toJSON(),
+      false,
+      true,
+      false
+    );
   }
   protected trimValue(value: any): any {
     if (!!value && (typeof value === "string" || value instanceof String))
@@ -252,9 +286,9 @@ export class Base {
   private isDisposedValue: boolean;
   private classMetaData: JsonMetadataClass;
   private onPropChangeFunctions: Array<{
-    name: string,
-    func: (...args: any[]) => void,
-    key: string,
+    name: string;
+    func: (...args: any[]) => void;
+    key: string;
   }>;
   protected isLoadingFromJsonValue: boolean = false;
   public loadingOwner: Base = null;
@@ -299,6 +333,165 @@ export class Base {
     any
   > = this.addEvent<Base>();
 
+  private getTypeOfObject(data: any) {
+    // create many type map
+    const typeMap = {
+      string: "strs",
+      number: "reals",
+      bigint: "ints",
+      int: "ints",
+      boolean: "bools",
+    };
+
+    // if data is an array proceed or else throw error
+    if (Array.isArray(data)) {
+      const type = typeof data[0];
+
+      // if Date return date
+      if (isDate(data[0])) {
+        return "dates";
+      } else if (
+        type === "undefined" ||
+        type === "symbol" ||
+        type === "function" ||
+        type === "object"
+      ) {
+        // if not fullstory type, throw error
+        throw Error(`Data type of ${type} is not allowed`);
+      } else {
+        // return type from the map
+        return typeMap[type];
+      }
+    } else {
+      throw Error(`Data type of object is not allowed`);
+    }
+  }
+
+  private getDataType(data: any) {
+    // if string is date return date
+    if (isDate(data)) {
+      return "date";
+    } else {
+      // create a map that matches js types to fullstory types
+      const typeMap = {
+        string: "str",
+        number: "real",
+        bigint: "int",
+        int: "int",
+        boolean: "bool",
+      };
+
+      // grab data type
+      const dataType = typeof data;
+
+      // if these data types throw error
+      if (
+        dataType === "undefined" ||
+        dataType === "symbol" ||
+        dataType === "function"
+      ) {
+        throw Error(`Data type of ${dataType} is not allowed`);
+      } else {
+        // create type
+        let type;
+
+        // if type is object dig deeper
+        if (dataType === "object") {
+          type = this.getTypeOfObject(data);
+        } else {
+          // grab type from map
+          type = typeMap[dataType];
+        }
+
+        // return data type
+        return type;
+      }
+    }
+  }
+
+  public createElementData(
+    obj: any,
+    name: string = ""
+  ): { "data-fs-properties-schema": string; [v: string]: string } {
+    // Find all keys
+    const keys = Object.keys(obj);
+
+    // create store for schema
+    const schema = {};
+
+    // create store for element data
+    const elementData: { [v: string]: string } = name
+      ? { "data-fs-element": name }
+      : {};
+
+    // loop over all keys
+    for (const key of keys) {
+      // find the data type of the keys vaue
+      const type = this.getDataType(obj[key]);
+
+      // create a fs approved schema name
+      let k = `data-${key}`;
+
+      // insert data into schema
+      schema[k] = {
+        name: key,
+        type: type,
+      };
+
+      // add to data element store
+      elementData[k] = Array.isArray(obj[key]) ? obj[key] : obj[key].toString();
+    }
+
+    // return schema and element data
+    return {
+      ...elementData,
+      "data-fs-properties-schema": JSON.stringify(schema),
+    };
+  }
+
+  public getDataElementItem(
+    elementName: string,
+    value?: any,
+    selected?: boolean
+  ) {
+    // create the data element with the data-fs-element name
+    const data = {};
+
+    // if unmasked we can set the selected and value attribute
+
+    const dataSelected = `${elementName}-selected`;
+    data[dataSelected] = selected;
+
+    const dataValue = `${elementName}-value`;
+    data[dataValue] = value;
+
+    const schema = this.createElementData(data, elementName);
+
+    return schema;
+  }
+
+  public getDataElement(title: string, value?: any) {
+    const namemap = {
+      text: "input",
+      matrix: "table",
+    };
+
+    const data = {};
+    const inputType = this.getType();
+    const elementName = namemap[inputType] ? namemap[inputType] : inputType;
+
+    data[`${elementName}-name`] = `fs-${title}`;
+    if (!!this.jsonObj["capture"]) {
+      if (this.jsonObj["capture"] === "unmask" && !!value) {
+        data[`${elementName}-value`] = value;
+      }
+    }
+
+    const element = this.createElementData(data, elementName);
+
+    return element;
+  }
+
   getPropertyValueCoreHandler: (propertiesHash: any, name: string) => any;
 
   setPropertyValueCoreHandler: (
@@ -322,9 +515,11 @@ export class Base {
     }
     this.onPropertyValueChangedCallback = undefined;
     this.isDisposedValue = true;
-    Object.keys(this.dependencies).forEach(key => this.dependencies[key].dispose());
+    Object.keys(this.dependencies).forEach((key) =>
+      this.dependencies[key].dispose()
+    );
     // this.dependencies = {};
-    Object.keys(this.propertyHash).forEach(key => {
+    Object.keys(this.propertyHash).forEach((key) => {
       const propVal = this.getPropertyValueCore(this.propertyHash, key);
       if (!!propVal && propVal.type == ComputedUpdater.ComputedUpdaterType) {
         (propVal as ComputedUpdater).dispose();
@@ -334,13 +529,15 @@ export class Base {
   public get isDisposed(): boolean {
     return this.isDisposedValue === true;
   }
-  public get isSurveyObj(): boolean { return true; }
+  public get isSurveyObj(): boolean {
+    return true;
+  }
   protected addEvent<T, Options = any>(): EventBase<T, Options> {
     const res = new EventBase<T, Options>();
     this.eventList.push(res);
     return res;
   }
-  protected onBaseCreating(): void { }
+  protected onBaseCreating(): void {}
   /**
    * Returns the object type as it is used in the JSON schema.
    */
@@ -377,7 +574,7 @@ export class Base {
   }
   private bindingsValue: Bindings;
   public get bindings(): Bindings {
-    if(!this.bindingsValue) {
+    if (!this.bindingsValue) {
       this.bindingsValue = new Bindings(this);
     }
     return this.bindingsValue;
@@ -385,15 +582,15 @@ export class Base {
   protected isBindingEmpty(): boolean {
     return !this.bindingsValue || this.bindingsValue.isEmpty();
   }
-  checkBindings(valueName: string, value: any): void { }
+  checkBindings(valueName: string, value: any): void {}
   protected updateBindings(propertyName: string, value: any): void {
-    if(!this.bindingsValue) return;
+    if (!this.bindingsValue) return;
     var valueName = this.bindings.getValueNameByPropertyName(propertyName);
     if (!!valueName) {
       this.updateBindingValue(valueName, value);
     }
   }
-  protected updateBindingValue(valueName: string, value: any) { }
+  protected updateBindingValue(valueName: string, value: any) {}
   public getTemplate(): string {
     return this.getType();
   }
@@ -436,7 +633,7 @@ export class Base {
     new JsonObject().toObject(json, this, options);
     this.onSurveyLoad();
   }
-  public onSurveyLoad() { }
+  public onSurveyLoad() {}
   /**
    * Creates a new object that has the same type and properties as the current SurveyJS object.
    */
@@ -456,7 +653,9 @@ export class Base {
     if (!this.classMetaData || this.classMetaData.name !== type) {
       this.classMetaData = Serializer.findClass(type);
     }
-    return !!this.classMetaData ? this.classMetaData.findProperty(propName) : null;
+    return !!this.classMetaData
+      ? this.classMetaData.findProperty(propName)
+      : null;
   }
   public isPropertyVisible(propName: string): boolean {
     const prop = this.getPropertyByName(propName);
@@ -473,7 +672,7 @@ export class Base {
   public getProgressInfo(): IProgressInfo {
     return Base.createProgressInfo();
   }
-  public localeChanged(): void { }
+  public localeChanged(): void {}
   public locStrsChanged(): void {
     if (!!this.arraysInfo) {
       for (let key in this.arraysInfo) {
@@ -500,16 +699,23 @@ export class Base {
    * @param name A property name.
    * @param defaultValue *(Optional)* A value to return if the property is not found or does not have a value.
    */
-  public getPropertyValue(name: string, defaultValue?: any, calcFunc?: ()=> any): any {
+  public getPropertyValue(
+    name: string,
+    defaultValue?: any,
+    calcFunc?: () => any
+  ): any {
     const res = this.getPropertyValueWithoutDefault(name);
     if (this.isPropertyEmpty(res)) {
-      const locStr = this.localizableStrings ? this.localizableStrings[name] : undefined;
+      const locStr = this.localizableStrings
+        ? this.localizableStrings[name]
+        : undefined;
       if (locStr) return locStr.text;
-      if (defaultValue !== null && defaultValue !== undefined) return defaultValue;
-      if(!!calcFunc) {
+      if (defaultValue !== null && defaultValue !== undefined)
+        return defaultValue;
+      if (!!calcFunc) {
         const newVal = calcFunc();
-        if(newVal !== undefined) {
-          if(Array.isArray(newVal)) {
+        if (newVal !== undefined) {
+          if (Array.isArray(newVal)) {
             const array = this.createNewArray(name);
             array.splice(0, 0, ...newVal);
             return array;
@@ -526,12 +732,15 @@ export class Base {
   }
   public getDefaultPropertyValue(name: string): any {
     const prop = this.getPropertyByName(name);
-    if (!prop || prop.isCustom && this.isCreating) return undefined;
+    if (!prop || (prop.isCustom && this.isCreating)) return undefined;
     if (!!prop.defaultValueFunc) return prop.defaultValueFunc(this);
     const dValue = prop.getDefaultValue(this);
     if (!this.isPropertyEmpty(dValue) && !Array.isArray(dValue)) return dValue;
-    const locStr = this.localizableStrings ? this.localizableStrings[name] : undefined;
-    if (locStr && locStr.localizationName) return this.getLocalizationString(locStr.localizationName);
+    const locStr = this.localizableStrings
+      ? this.localizableStrings[name]
+      : undefined;
+    if (locStr && locStr.localizationName)
+      return this.getLocalizationString(locStr.localizationName);
     if (prop.type == "boolean" || prop.type == "switch") return false;
     if (prop.isCustom && !!prop.onGetValue) return prop.onGetValue(this);
     return undefined;
@@ -540,12 +749,13 @@ export class Base {
     return this.getDefaultPropertyValue(name) !== undefined;
   }
   public resetPropertyValue(name: string): void {
-    const locStr = this.localizableStrings ? this.localizableStrings[name] : undefined;
+    const locStr = this.localizableStrings
+      ? this.localizableStrings[name]
+      : undefined;
     if (locStr) {
       this.setLocalizableStringText(name, undefined);
       locStr.clear();
-    }
-    else {
+    } else {
       this.setPropertyValue(name, undefined);
     }
   }
@@ -563,15 +773,18 @@ export class Base {
   public geValueFromHash(): any {
     return this.propertyHash["value"];
   }
-  protected setPropertyValueCore(propertiesHash: any, name: string, val: any): void {
+  protected setPropertyValueCore(
+    propertiesHash: any,
+    name: string,
+    val: any
+  ): void {
     if (this.setPropertyValueCoreHandler) {
       if (!this.isDisposedValue) {
         this.setPropertyValueCoreHandler(propertiesHash, name, val);
       } else {
         ConsoleWarnings.disposedObjectChangedProperty(name, this.getType());
       }
-    }
-    else propertiesHash[name] = val;
+    } else propertiesHash[name] = val;
   }
   public get isEditingSurveyElement(): boolean {
     var survey = this.getSurvey();
@@ -623,7 +836,11 @@ export class Base {
       }
     }
   }
-  protected setArrayPropertyDirectly(name: string, val: any, sendNotification: boolean = true): void {
+  protected setArrayPropertyDirectly(
+    name: string,
+    val: any,
+    sendNotification: boolean = true
+  ): void {
     var arrayInfo = this.arraysInfo[name];
     this.setArray(
       name,
@@ -646,7 +863,7 @@ export class Base {
     newValue: any,
     sender: Base,
     arrayChanges: ArrayChanges
-  ) { }
+  ) {}
   public itemValuePropertyChanged(
     item: ItemValue,
     name: string,
@@ -661,8 +878,18 @@ export class Base {
       propertyName: item.ownerPropertyName,
     });
   }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void { }
-  protected propertyValueChanged(name: string, oldValue: any, newValue: any, arrayChanges?: ArrayChanges, target?: Base): void {
+  protected onPropertyValueChanged(
+    name: string,
+    oldValue: any,
+    newValue: any
+  ): void {}
+  protected propertyValueChanged(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    arrayChanges?: ArrayChanges,
+    target?: Base
+  ): void {
     if (this.isLoadingFromJson) return;
     this.updateBindings(name, newValue);
     this.onPropertyValueChanged(name, oldValue, newValue);
@@ -671,7 +898,7 @@ export class Base {
       oldValue: oldValue,
       newValue: newValue,
       arrayChanges: arrayChanges,
-      target: target
+      target: target,
     });
     this.doPropertyValueChangedCallback(
       name,
@@ -703,7 +930,13 @@ export class Base {
   ) {
     const fireCallback = (obj: Base): void => {
       if (!!obj && !!obj.onPropertyValueChangedCallback) {
-        obj.onPropertyValueChangedCallback(name, oldValue, newValue, target, arrayChanges);
+        obj.onPropertyValueChangedCallback(
+          name,
+          oldValue,
+          newValue,
+          target,
+          arrayChanges
+        );
       }
     };
     if (this.isInternal) {
@@ -718,7 +951,11 @@ export class Base {
       fireCallback(this);
     }
   }
-  public addExpressionProperty(name: string, onExecute: (obj: Base, res: any) => void, canRun?: (obj: Base) => boolean): void {
+  public addExpressionProperty(
+    name: string,
+    onExecute: (obj: Base, res: any) => void,
+    canRun?: (obj: Base) => boolean
+  ): void {
     if (!this.expressionInfo) {
       this.expressionInfo = {};
     }
@@ -730,7 +967,10 @@ export class Base {
   public getDataFilteredProperties(): any {
     return {};
   }
-  protected runConditionCore(values: HashTable<any>, properties: HashTable<any>): void {
+  protected runConditionCore(
+    values: HashTable<any>,
+    properties: HashTable<any>
+  ): void {
     if (!this.expressionInfo) return;
     for (var key in this.expressionInfo) {
       this.runConditionItemCore(key, values, properties);
@@ -742,9 +982,17 @@ export class Base {
   private checkConditionPropertyChanged(propName: string): void {
     if (!this.expressionInfo || !this.expressionInfo[propName]) return;
     if (!this.canRunConditions()) return;
-    this.runConditionItemCore(propName, this.getDataFilteredValues(), this.getDataFilteredProperties());
+    this.runConditionItemCore(
+      propName,
+      this.getDataFilteredValues(),
+      this.getDataFilteredProperties()
+    );
   }
-  private runConditionItemCore(propName: string, values: HashTable<any>, properties: HashTable<any>): void {
+  private runConditionItemCore(
+    propName: string,
+    values: HashTable<any>,
+    properties: HashTable<any>
+  ): void {
     const info = this.expressionInfo[propName];
     const expression = this.getPropertyValue(propName);
     if (!expression) return;
@@ -775,14 +1023,21 @@ export class Base {
       }
     }
   }
-  protected onAsyncRunningChanged(): void { }
+  protected onAsyncRunningChanged(): void {}
   public get isAsyncExpressionRunning(): boolean {
-    return !!this.asynExpressionHash && Object.keys(this.asynExpressionHash).length > 0;
+    return (
+      !!this.asynExpressionHash &&
+      Object.keys(this.asynExpressionHash).length > 0
+    );
   }
   protected createExpressionRunner(expression: string): ExpressionRunner {
     const res = new ExpressionRunner(expression);
-    res.onBeforeAsyncRun = (id: number): void => { this.doBeforeAsynRun(id); };
-    res.onAfterAsyncRun = (id: number): void => { this.doAfterAsynRun(id); };
+    res.onBeforeAsyncRun = (id: number): void => {
+      this.doBeforeAsynRun(id);
+    };
+    res.onAfterAsyncRun = (id: number): void => {
+      this.doAfterAsynRun(id);
+    };
     return res;
   }
   /**
@@ -794,9 +1049,17 @@ export class Base {
    * @param key *(Optional)* A key that identifies the current registration. If a function for one of the properties is already registered with the same key, the function will be overwritten. You can also use the key to subsequently unregister handlers.
    * @see unregisterPropertyChangedHandlers
    */
-  public registerPropertyChangedHandlers(propertyNames: Array<string>, handler: any, key: string = null): void {
+  public registerPropertyChangedHandlers(
+    propertyNames: Array<string>,
+    handler: any,
+    key: string = null
+  ): void {
     for (var i = 0; i < propertyNames.length; i++) {
-      this.registerFunctionOnPropertyValueChanged(propertyNames[i], handler, key);
+      this.registerFunctionOnPropertyValueChanged(
+        propertyNames[i],
+        handler,
+        key
+      );
     }
   }
   /**
@@ -805,12 +1068,19 @@ export class Base {
    * @param key *(Optional)* A key of the registration that you want to cancel.
    * @see registerPropertyChangedHandlers
    */
-  public unregisterPropertyChangedHandlers(propertyNames: Array<string>, key: string = null): void {
+  public unregisterPropertyChangedHandlers(
+    propertyNames: Array<string>,
+    key: string = null
+  ): void {
     for (var i = 0; i < propertyNames.length; i++) {
       this.unRegisterFunctionOnPropertyValueChanged(propertyNames[i], key);
     }
   }
-  public registerFunctionOnPropertyValueChanged(name: string, func: any, key: string = null): void {
+  public registerFunctionOnPropertyValueChanged(
+    name: string,
+    func: any,
+    key: string = null
+  ): void {
     if (!this.onPropChangeFunctions) {
       this.onPropChangeFunctions = [];
     }
@@ -825,10 +1095,17 @@ export class Base {
     }
     this.onPropChangeFunctions.push({ name: name, func: func, key: key });
   }
-  public registerFunctionOnPropertiesValueChanged(names: Array<string>, func: any, key: string = null): void {
+  public registerFunctionOnPropertiesValueChanged(
+    names: Array<string>,
+    func: any,
+    key: string = null
+  ): void {
     this.registerPropertyChangedHandlers(names, func, key);
   }
-  public unRegisterFunctionOnPropertyValueChanged(name: string, key: string = null): void {
+  public unRegisterFunctionOnPropertyValueChanged(
+    name: string,
+    key: string = null
+  ): void {
     if (!this.onPropChangeFunctions) return;
     for (var i = 0; i < this.onPropChangeFunctions.length; i++) {
       var item = this.onPropChangeFunctions[i];
@@ -838,13 +1115,21 @@ export class Base {
       }
     }
   }
-  public unRegisterFunctionOnPropertiesValueChanged(names: Array<string>, key: string = null): void {
+  public unRegisterFunctionOnPropertiesValueChanged(
+    names: Array<string>,
+    key: string = null
+  ): void {
     this.unregisterPropertyChangedHandlers(names, key);
   }
   public createCustomLocalizableObj(name: string): LocalizableString {
     const locStr = this.getLocalizableString(name);
     if (locStr) return locStr;
-    return this.createLocalizableString(name, <ILocalizableOwner>(<any>this), false, true);
+    return this.createLocalizableString(
+      name,
+      <ILocalizableOwner>(<any>this),
+      false,
+      true
+    );
   }
   public getLocale(): string {
     const locOwner = this.getSurvey();
@@ -881,7 +1166,7 @@ export class Base {
     return locStr;
   }
   protected removeLocalizableString(name: string): void {
-    if(this.localizableStrings) {
+    if (this.localizableStrings) {
       delete this.localizableStrings[name];
     }
   }
@@ -958,8 +1243,8 @@ export class Base {
       }
     }
   }
-  protected getSearchableLocKeys(keys: Array<string>) { }
-  protected getSearchableItemValueKeys(keys: Array<string>) { }
+  protected getSearchableLocKeys(keys: Array<string>) {}
+  protected getSearchableItemValueKeys(keys: Array<string>) {}
   protected AddLocStringToUsedLocales(
     locStr: LocalizableString,
     locales: Array<string>
@@ -1180,7 +1465,13 @@ export class Base {
     return this.getIsAnimationAllowed();
   }
   protected getIsAnimationAllowed(): boolean {
-    return settings.animationEnabled && this.animationAllowedLock >= 0 && !this.isLoadingFromJson && !this.isDisposed && (!!this.onElementRerendered || !this.supportOnElementRerenderedEvent);
+    return (
+      settings.animationEnabled &&
+      this.animationAllowedLock >= 0 &&
+      !this.isLoadingFromJson &&
+      !this.isDisposed &&
+      (!!this.onElementRerendered || !this.supportOnElementRerenderedEvent)
+    );
   }
   private animationAllowedLock: number = 0;
   public blockAnimations(): void {
@@ -1201,7 +1492,10 @@ export class Base {
   }
   protected _onElementRerendered: EventBase<Base> = new EventBase();
   public get onElementRerendered(): EventBase<Base> {
-    return this.supportOnElementRerenderedEvent && this.onElementRerenderedEventEnabled ? this._onElementRerendered : undefined;
+    return this.supportOnElementRerenderedEvent &&
+      this.onElementRerenderedEventEnabled
+      ? this._onElementRerendered
+      : undefined;
   }
   public afterRerender(): void {
     this.onElementRerendered?.fire(this, { isCancel: false });
@@ -1214,7 +1508,7 @@ export class ArrayChanges<T = any> {
     public deleteCount: number,
     public itemsToAdd: T[],
     public deletedItems: T[]
-  ) { }
+  ) {}
 }
 
 export class Event<CallbackFunction extends Function, Sender, Options> {
@@ -1226,7 +1520,10 @@ export class Event<CallbackFunction extends Function, Sender, Options> {
   public get length(): number {
     return !!this.callbacks ? this.callbacks.length : 0;
   }
-  public fireByCreatingOptions(sender: any, createOptions: () => Options): void {
+  public fireByCreatingOptions(
+    sender: any,
+    createOptions: () => Options
+  ): void {
     if (!this.callbacks) return;
     for (var i = 0; i < this.callbacks.length; i++) {
       this.callbacks[i](sender, createOptions());
@@ -1274,4 +1571,4 @@ export class EventBase<Sender, Options = any> extends Event<
   (sender: Sender, options: Options) => any,
   Sender,
   Options
-> { }
+> {}

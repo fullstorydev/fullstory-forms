@@ -1,6 +1,6 @@
 import { JsonObjectProperty, Serializer, property } from "./jsonobject";
 import { Base, EventBase } from "./base";
-import { Action, IAction } from "./actions/action";
+import { IAction } from "./actions/action";
 import { AdaptiveActionContainer } from "./actions/adaptive-container";
 import {
   ISurveyElement,
@@ -12,7 +12,7 @@ import {
   ISurveyData,
   ISurveyImpl,
   ITextProcessor,
-  ITitleOwner
+  ITitleOwner,
 } from "./base-interfaces";
 import { SurveyError } from "./survey-error";
 import { Helpers } from "./helpers";
@@ -21,14 +21,23 @@ import { ILocalizableOwner, LocalizableString } from "./localizablestring";
 import { ActionContainer, defaultActionBarCss } from "./actions/container";
 import { CssClassBuilder } from "./utils/cssClassBuilder";
 import { SurveyModel } from "./survey";
-import { IAnimationConsumer, AnimationBoolean, AnimationProperty } from "./utils/animation";
-import { classesToSelector, cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "./utils/utils";
+import { IAnimationConsumer, AnimationBoolean } from "./utils/animation";
+import {
+  classesToSelector,
+  cleanHtmlElementAfterAnimation,
+  prepareElementForVerticalAnimation,
+} from "./utils/utils";
 import { DomDocumentHelper, DomWindowHelper } from "./global_variables_utils";
 import { PanelModel } from "./panel";
+import { isDate } from "date-fns";
+
 /**
  * A base class for the [`SurveyElement`](https://surveyjs.io/form-library/documentation/surveyelement) and [`SurveyModel`](https://surveyjs.io/form-library/documentation/surveymodel) classes.
  */
-export abstract class SurveyElementCore extends Base implements ILocalizableOwner {
+export abstract class SurveyElementCore
+  extends Base
+  implements ILocalizableOwner
+{
   constructor() {
     super();
     this.createLocTitleProperty();
@@ -36,6 +45,7 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
   protected createLocTitleProperty(): LocalizableString {
     return this.createLocalizableString("title", this, true);
   }
+
   /**
    * Returns `true` if the survey element is a page.
    *
@@ -46,7 +56,9 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
    *
    * In those cases, the survey creates an internal `PageModel` object to show all questions on one page, and all regular pages become panels.
    */
-  public get isPage(): boolean { return false; }
+  public get isPage(): boolean {
+    return false;
+  }
   /**
    * Returns `true` if the survey element is a panel or acts as one.
    *
@@ -57,22 +69,28 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
    *
    * In those cases, the survey creates an internal `PageModel` object to show all questions on one page, and all regular pages become panels.
    */
-  public get isPanel(): boolean { return false; }
+  public get isPanel(): boolean {
+    return false;
+  }
   /**
    * Returns `true` if the survey element is a question.
    */
-  public get isQuestion(): boolean { return false; }
+  public get isQuestion(): boolean {
+    return false;
+  }
   /**
    * Returns `true` if the element is a survey.
    */
-  public get isSurvey(): boolean { return false; }
+  public get isSurvey(): boolean {
+    return false;
+  }
   /**
    * A title for the survey element. If `title` is undefined, the `name` property value is displayed instead.
    *
    * Empty pages and panels do not display their titles or names.
    *
    * @see [Configure Question Titles](https://surveyjs.io/form-library/documentation/design-survey-question-titles)
-  */
+   */
   public get title(): string {
     return this.getLocalizableStringText("title", this.getDefaultTitleValue());
   }
@@ -82,16 +100,20 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
   get locTitle(): LocalizableString {
     return this.getLocalizableString("title");
   }
-  protected getDefaultTitleValue(): string { return undefined; }
+  protected getDefaultTitleValue(): string {
+    return undefined;
+  }
   protected setTitleValue(val: string): void {
     this.setLocalizableStringText("title", val);
   }
   /**
    * Returns `true` if the survey element has a description.
    * @see description
-  */
+   */
   public get hasDescription(): boolean {
-    return this.getPropertyValue("hasDescription", undefined, () => this.calcDescriptionVisibility());
+    return this.getPropertyValue("hasDescription", undefined, () =>
+      this.calcDescriptionVisibility()
+    );
   }
   public set hasDescription(val: boolean) {
     this.setPropertyValue("hasDescription", val);
@@ -100,8 +122,11 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
     const newDescription = this.description;
     let showPlaceholder = false;
     if (this.isDesignMode) {
-      const property: JsonObjectProperty = Serializer.findProperty(this.getType(), "description");
-      showPlaceholder = !!(property?.placeholder);
+      const property: JsonObjectProperty = Serializer.findProperty(
+        this.getType(),
+        "description"
+      );
+      showPlaceholder = !!property?.placeholder;
     }
     return !!newDescription || (showPlaceholder && this.isDesignMode);
   }
@@ -113,45 +138,79 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
    * @see hasDescription
    */
   @property({
-    localizable: true, onSet: (newDescription, self) => {
+    localizable: true,
+    onSet: (newDescription, self) => {
       self.resetDescriptionVisibility();
-    }
-  }) description: string;
+    },
+  })
+  description: string;
   get locDescription(): LocalizableString {
     return this.getLocalizableString("description");
   }
   public get titleTagName(): string {
     let titleTagName = this.getDefaultTitleTagName();
     const survey = this.getSurvey();
-    return !!survey ? survey.getElementTitleTagName(this, titleTagName) : titleTagName;
+    return !!survey
+      ? survey.getElementTitleTagName(this, titleTagName)
+      : titleTagName;
   }
   protected getDefaultTitleTagName(): string {
     return (<any>settings.titleTags)[this.getType()];
   }
-  public get hasTitle(): boolean { return this.title.length > 0; }
-  public get hasTitleActions(): boolean { return false; }
+  public get hasTitle(): boolean {
+    return this.title.length > 0;
+  }
+  public get hasTitleActions(): boolean {
+    return false;
+  }
   public get hasTitleEvents(): boolean {
     return this.hasTitleActions;
   }
-  public getTitleToolbar(): AdaptiveActionContainer { return null; }
-  public getTitleOwner(): ITitleOwner { return undefined; }
-  public get isTitleOwner(): boolean { return !!this.getTitleOwner(); }
-  public get isTitleRenderedAsString(): boolean { return this.getIsTitleRenderedAsString(); }
-  public toggleState(): boolean { return undefined; }
-  public get cssClasses(): any { return {}; }
-  public get cssTitle(): string { return ""; }
-  public get ariaTitleId(): string { return undefined; }
-  public get ariaDescriptionId(): string { return undefined; }
-  public get titleTabIndex(): number { return undefined; }
-  public get titleAriaExpanded(): any { return undefined; }
-  public get titleAriaRole(): any { return undefined; }
+  public getTitleToolbar(): AdaptiveActionContainer {
+    return null;
+  }
+  public getTitleOwner(): ITitleOwner {
+    return undefined;
+  }
+  public get isTitleOwner(): boolean {
+    return !!this.getTitleOwner();
+  }
+  public get isTitleRenderedAsString(): boolean {
+    return this.getIsTitleRenderedAsString();
+  }
+  public toggleState(): boolean {
+    return undefined;
+  }
+  public get cssClasses(): any {
+    return {};
+  }
+  public get cssTitle(): string {
+    return "";
+  }
+  public get ariaTitleId(): string {
+    return undefined;
+  }
+  public get ariaDescriptionId(): string {
+    return undefined;
+  }
+  public get titleTabIndex(): number {
+    return undefined;
+  }
+  public get titleAriaExpanded(): any {
+    return undefined;
+  }
+  public get titleAriaRole(): any {
+    return undefined;
+  }
   public get ariaLabel(): string {
     return this.locTitle.renderedHtml;
   }
   public get titleAriaLabel(): string | null {
     return this.ariaLabel;
   }
-  protected getIsTitleRenderedAsString(): boolean { return !this.isTitleOwner; }
+  protected getIsTitleRenderedAsString(): boolean {
+    return !this.isTitleOwner;
+  }
   //ILocalizableOwner
   public abstract getLocale(): string;
   public abstract getMarkdownHtml(text: string, name: string): string;
@@ -165,13 +224,19 @@ export enum DragTypeOverMeEnum {
   InsideEmptyPanel = 1,
   MultilineRight,
   MultilineLeft,
-  Top, Right, Bottom, Left
+  Top,
+  Right,
+  Bottom,
+  Left,
 }
 
 /**
  * A base class for all survey elements.
  */
-export class SurveyElement<E = any> extends SurveyElementCore implements ISurveyElement {
+export class SurveyElement<E = any>
+  extends SurveyElementCore
+  implements ISurveyElement
+{
   stateChangedCallback: () => void;
 
   public static getProgressInfoByElements(
@@ -206,7 +271,11 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
 
   public readOnlyChangedCallback: () => void;
 
-  private static IsNeedScrollIntoView(el: HTMLElement, checkLeft: boolean, scrollIfVisible?: boolean) {
+  private static IsNeedScrollIntoView(
+    el: HTMLElement,
+    checkLeft: boolean,
+    scrollIfVisible?: boolean
+  ) {
     const elTop: number = scrollIfVisible ? -1 : el.getBoundingClientRect().top;
     let needScroll = elTop < 0;
     let elLeft: number = -1;
@@ -224,7 +293,11 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     }
     return needScroll;
   }
-  public static ScrollIntoView(el: HTMLElement, scrollIntoViewOptions?: ScrollIntoViewOptions, doneCallback?: () => void): void {
+  public static ScrollIntoView(
+    el: HTMLElement,
+    scrollIntoViewOptions?: ScrollIntoViewOptions,
+    doneCallback?: () => void
+  ): void {
     el.scrollIntoView(scrollIntoViewOptions);
     if (typeof doneCallback === "function") {
       let lastPos: number = null;
@@ -245,18 +318,39 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
       DomWindowHelper.requestAnimationFrame(checkPos);
     }
   }
-  public static ScrollElementToTop(elementId: string, scrollIfVisible?: boolean, scrollIntoViewOptions?: ScrollIntoViewOptions, doneCallback?: () => void): boolean {
+  public static ScrollElementToTop(
+    elementId: string,
+    scrollIfVisible?: boolean,
+    scrollIntoViewOptions?: ScrollIntoViewOptions,
+    doneCallback?: () => void
+  ): boolean {
     const { root } = settings.environment;
     if (!elementId || typeof root === "undefined") return false;
     const el = root.getElementById(elementId);
-    return SurveyElement.ScrollElementToViewCore(el, false, scrollIfVisible, scrollIntoViewOptions, doneCallback);
+    return SurveyElement.ScrollElementToViewCore(
+      el,
+      false,
+      scrollIfVisible,
+      scrollIntoViewOptions,
+      doneCallback
+    );
   }
-  public static ScrollElementToViewCore(el: HTMLElement, checkLeft: boolean, scrollIfVisible?: boolean, scrollIntoViewOptions?: ScrollIntoViewOptions, doneCallback?: () => void): boolean {
+  public static ScrollElementToViewCore(
+    el: HTMLElement,
+    checkLeft: boolean,
+    scrollIfVisible?: boolean,
+    scrollIntoViewOptions?: ScrollIntoViewOptions,
+    doneCallback?: () => void
+  ): boolean {
     if (!el || !el.scrollIntoView) {
       doneCallback && doneCallback();
       return false;
     }
-    const needScroll = SurveyElement.IsNeedScrollIntoView(el, checkLeft, scrollIfVisible);
+    const needScroll = SurveyElement.IsNeedScrollIntoView(
+      el,
+      checkLeft,
+      scrollIfVisible
+    );
     if (needScroll) {
       SurveyElement.ScrollIntoView(el, scrollIntoViewOptions, doneCallback);
     } else {
@@ -264,7 +358,10 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     }
     return needScroll;
   }
-  public static GetFirstNonTextElement(elements: any, removeSpaces: boolean = false): any {
+  public static GetFirstNonTextElement(
+    elements: any,
+    removeSpaces: boolean = false
+  ): any {
     if (!elements || !elements.length || elements.length == 0) return null;
     if (removeSpaces) {
       let tEl = elements[0];
@@ -278,22 +375,41 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     }
     return null;
   }
-  public static FocusElement(elementId: string, isTimeOut?: boolean, containerEl?: HTMLElement): boolean {
+  public static FocusElement(
+    elementId: string,
+    isTimeOut?: boolean,
+    containerEl?: HTMLElement
+  ): boolean {
     if (!elementId || !DomDocumentHelper.isAvailable()) return false;
-    const res: boolean = !isTimeOut ? SurveyElement.focusElementCore(elementId, containerEl) : false;
+    const res: boolean = !isTimeOut
+      ? SurveyElement.focusElementCore(elementId, containerEl)
+      : false;
     if (!res) {
-      setTimeout(() => {
-        SurveyElement.focusElementCore(elementId, containerEl);
-      }, isTimeOut ? 100 : 10);
+      setTimeout(
+        () => {
+          SurveyElement.focusElementCore(elementId, containerEl);
+        },
+        isTimeOut ? 100 : 10
+      );
     }
     return res;
   }
-  private static focusElementCore(elementId: string, containerEl?: HTMLElement): boolean {
+  private static focusElementCore(
+    elementId: string,
+    containerEl?: HTMLElement
+  ): boolean {
     const { root } = settings.environment;
     if (!root && !containerEl) return false;
-    const el: HTMLElement = containerEl ? containerEl.querySelector(`#${CSS.escape(elementId)}`) : root.getElementById(elementId);
+    const el: HTMLElement = containerEl
+      ? containerEl.querySelector(`#${CSS.escape(elementId)}`)
+      : root.getElementById(elementId);
     // https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
-    if (el && !(<any>el)["disabled"] && el.style.display !== "none" && el.offsetParent !== null) {
+    if (
+      el &&
+      !(<any>el)["disabled"] &&
+      el.style.display !== "none" &&
+      el.offsetParent !== null
+    ) {
       SurveyElement.ScrollElementToViewCore(el, true, false);
       el.focus();
       return true;
@@ -308,8 +424,9 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   @property({
     onSet: (newValue, target) => {
       target.colSpan = newValue;
-    }
-  }) effectiveColSpan: number;
+    },
+  })
+  effectiveColSpan: number;
 
   /**
    * Specifies how many columns this survey element spans in the grid layout. Applies only if you set the `SurveyModel`'s [`gridLayoutEnabled`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#gridLayoutEnabled) property to `true` and define the [`gridLayoutColumns`](https://surveyjs.io/form-library/documentation/api-reference/page-model#gridLayoutColumns) array for the parent page or panel.
@@ -328,10 +445,21 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     this.setPropertyValueDirectly("name", this.getValidName(name));
     this.createNewArray("errors");
     this.createNewArray("titleActions");
-    this.registerPropertyChangedHandlers(["isReadOnly"], () => { this.onReadOnlyChanged(); });
-    this.registerPropertyChangedHandlers(["errors"], () => { this.updateVisibleErrors(); });
-    this.registerPropertyChangedHandlers(["isSingleInRow"], () => { this.updateElementCss(false); });
-    this.registerPropertyChangedHandlers(["minWidth", "maxWidth", "renderWidth", "allowRootStyle", "parent"], () => { this.updateRootStyle(); });
+    this.registerPropertyChangedHandlers(["isReadOnly"], () => {
+      this.onReadOnlyChanged();
+    });
+    this.registerPropertyChangedHandlers(["errors"], () => {
+      this.updateVisibleErrors();
+    });
+    this.registerPropertyChangedHandlers(["isSingleInRow"], () => {
+      this.updateElementCss(false);
+    });
+    this.registerPropertyChangedHandlers(
+      ["minWidth", "maxWidth", "renderWidth", "allowRootStyle", "parent"],
+      () => {
+        this.updateRootStyle();
+      }
+    );
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -361,7 +489,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     this.parentQuestionValue = val;
     this.onParentQuestionChanged();
   }
-  protected onParentQuestionChanged(): void { }
+  protected onParentQuestionChanged(): void {}
   public updateElementVisibility(): void {
     this.setPropertyValue("isVisible", this.isVisible);
   }
@@ -389,7 +517,9 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
   public set state(val: string) {
     this.setPropertyValue("state", val);
-    this.renderedIsExpanded = !(this.state === "collapsed" && !this.isDesignMode);
+    this.renderedIsExpanded = !(
+      this.state === "collapsed" && !this.isDesignMode
+    );
   }
   protected notifyStateChanged(prevState: string): void {
     if (this.survey) {
@@ -473,15 +603,24 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   private titleToolbarValue: AdaptiveActionContainer;
   public getTitleToolbar(): AdaptiveActionContainer {
     if (!this.titleToolbarValue) {
-      this.titleToolbarValue = <AdaptiveActionContainer>this.createActionContainer(true);
+      this.titleToolbarValue = <AdaptiveActionContainer>(
+        this.createActionContainer(true)
+      );
       this.titleToolbarValue.locOwner = this;
-      this.titleToolbarValue.containerCss = (this.isPanel ? this.cssClasses.panel.titleBar : this.cssClasses.titleBar) || "sv-action-title-bar";
+      this.titleToolbarValue.containerCss =
+        (this.isPanel
+          ? this.cssClasses.panel.titleBar
+          : this.cssClasses.titleBar) || "sv-action-title-bar";
       this.titleToolbarValue.setItems(this.getTitleActions());
     }
     return this.titleToolbarValue;
   }
-  protected createActionContainer(allowAdaptiveActions?: boolean): ActionContainer {
-    const actionContainer = allowAdaptiveActions ? new AdaptiveActionContainer() : new ActionContainer();
+  protected createActionContainer(
+    allowAdaptiveActions?: boolean
+  ): ActionContainer {
+    const actionContainer = allowAdaptiveActions
+      ? new AdaptiveActionContainer()
+      : new ActionContainer();
     if (this.survey && !!this.survey.getCss().actionBar) {
       actionContainer.cssClasses = this.survey.getCss().actionBar;
     }
@@ -511,7 +650,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
   public locStrsChanged(): void {
     super.locStrsChanged();
-    if(!!this.titleToolbarValue) {
+    if (!!this.titleToolbarValue) {
       this.titleToolbarValue.locStrsChanged();
     }
   }
@@ -649,7 +788,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   private isCssValueCalculating: boolean;
   public get cssClassesValue(): any {
     let res = this.getPropertyValueWithoutDefault("cssClassesValue");
-    if(!res && !this.isCssValueCalculating) {
+    if (!res && !this.isCssValueCalculating) {
       this.isCssValueCalculating = true;
       res = this.createCssClassesValue();
       this.isCssValueCalculating = false;
@@ -698,9 +837,13 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     if (this.state === "default") return null;
     return this.cssClasses.titleExpandableSvg;
   }
-  protected calcCssClasses(css: any): any { return undefined; }
-  protected updateElementCssCore(cssClasses: any): void { }
-  public get cssError(): string { return ""; }
+  protected calcCssClasses(css: any): any {
+    return undefined;
+  }
+  protected updateElementCssCore(cssClasses: any): void {}
+  public get cssError(): string {
+    return "";
+  }
   public updateElementCss(reNew?: boolean): void {
     this.clearCssClasses();
   }
@@ -729,7 +872,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   protected getValidName(name: string): string {
     return name;
   }
-  protected onNameChanged(oldValue: string) { }
+  protected onNameChanged(oldValue: string) {}
   protected updateBindingValue(valueName: string, value: any) {
     if (
       !!this.data &&
@@ -777,13 +920,15 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   public set selectedElementInDesign(val: SurveyElement) {
     this.selectedElementInDesignValue = val;
   }
-  public updateCustomWidgets(): void { }
+  public updateCustomWidgets(): void {}
 
-  public onSurveyLoad(): void { }
+  public onSurveyLoad(): void {}
   private wasRenderedValue: boolean;
-  public get wasRendered(): boolean { return !!this.wasRenderedValue; }
+  public get wasRendered(): boolean {
+    return !!this.wasRenderedValue;
+  }
   public onFirstRendering(): void {
-    if(!this.wasRendered) {
+    if (!this.wasRendered) {
       this.wasRenderedValue = true;
       this.onFirstRenderingCore();
     }
@@ -800,7 +945,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   public setVisibleIndex(index: number): number {
     return 0;
   }
-  public delete(doDispose: boolean): void { }
+  public delete(doDispose: boolean): void {}
   //ILocalizableOwner
   locOwner: ILocalizableOwner;
   /**
@@ -819,38 +964,44 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return this.survey
       ? (<ILocalizableOwner>(<any>this.survey)).getLocale()
       : this.locOwner
-        ? this.locOwner.getLocale()
-        : "";
+      ? this.locOwner.getLocale()
+      : "";
   }
   public getMarkdownHtml(text: string, name: string): string {
     return this.survey
       ? this.survey.getSurveyMarkdownHtml(this, text, name)
       : this.locOwner
-        ? this.locOwner.getMarkdownHtml(text, name)
-        : undefined;
+      ? this.locOwner.getMarkdownHtml(text, name)
+      : undefined;
   }
   public getRenderer(name: string): string {
     return this.survey && typeof this.survey.getRendererForString === "function"
       ? this.survey.getRendererForString(this, name)
       : this.locOwner && typeof this.locOwner.getRenderer === "function"
-        ? this.locOwner.getRenderer(name)
-        : null;
+      ? this.locOwner.getRenderer(name)
+      : null;
   }
   public getRendererContext(locStr: LocalizableString): any {
-    return this.survey && typeof this.survey.getRendererContextForString === "function"
+    return this.survey &&
+      typeof this.survey.getRendererContextForString === "function"
       ? this.survey.getRendererContextForString(this, locStr)
       : this.locOwner && typeof this.locOwner.getRendererContext === "function"
-        ? this.locOwner.getRendererContext(locStr)
-        : locStr;
+      ? this.locOwner.getRendererContext(locStr)
+      : locStr;
   }
   public getProcessedText(text: string): string {
     if (this.isLoadingFromJson) return text;
     if (this.textProcessor)
-      return this.textProcessor.processText(text, this.getUseDisplayValuesInDynamicTexts());
+      return this.textProcessor.processText(
+        text,
+        this.getUseDisplayValuesInDynamicTexts()
+      );
     if (this.locOwner) return this.locOwner.getProcessedText(text);
     return text;
   }
-  protected getUseDisplayValuesInDynamicTexts(): boolean { return true; }
+  protected getUseDisplayValuesInDynamicTexts(): boolean {
+    return true;
+  }
   protected removeSelfFromList(list: Array<any>) {
     if (!list || !Array.isArray(list)) return;
     const index: number = list.indexOf(this);
@@ -865,7 +1016,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     if (!html || !this.textProcessor) return html;
     return this.textProcessor.processText(html, true);
   }
-  protected onSetData(): void { }
+  protected onSetData(): void {}
   public get parent(): IPanel {
     return this.getPropertyValue("parent", null);
   }
@@ -921,11 +1072,13 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
 
   public get isDefaultV2Theme() {
-    return this.survey && this.survey.getCss().root.indexOf("sd-root-modern") !== -1;
+    return (
+      this.survey && this.survey.getCss().root.indexOf("sd-root-modern") !== -1
+    );
   }
 
   public get hasParent() {
-    return (this.parent && !this.parent.isPage) || (this.parent === undefined);
+    return (this.parent && !this.parent.isPage) || this.parent === undefined;
   }
   @property({ defaultValue: true }) isSingleInRow: boolean = true;
 
@@ -938,7 +1091,11 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
 
   private canHaveFrameStyles() {
-    return (this.parent !== undefined && (!this.hasParent || this.parent && (this.parent as PanelModel).showPanelAsPage));
+    return (
+      this.parent !== undefined &&
+      (!this.hasParent ||
+        (this.parent && (this.parent as PanelModel).showPanelAsPage))
+    );
   }
 
   protected getHasFrameV2(): boolean {
@@ -953,7 +1110,10 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
       .append(cssClasses.withFrame, this.getHasFrameV2() && !this.isCompact)
       .append(cssClasses.compact, this.isCompact && this.getHasFrameV2())
       .append(cssClasses.collapsed, !!this.isCollapsed)
-      .append(cssClasses.expandableAnimating, isExpanadable && this.isAnimatingCollapseExpand)
+      .append(
+        cssClasses.expandableAnimating,
+        isExpanadable && this.isAnimatingCollapseExpand
+      )
       .append(cssClasses.expanded, !!this.isExpanded && this.renderedIsExpanded)
       .append(cssClasses.expandable, isExpanadable)
       .append(cssClasses.nested, this.getIsNested())
@@ -966,7 +1126,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
    * Default value: ""
    * @see minWidth
    * @see maxWidth
-  */
+   */
   public get width(): string {
     return this.getPropertyValue("width", "");
   }
@@ -1037,18 +1197,26 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
   public getRootStyle(): object {
     const style: any = {};
-    if (!!this.paddingLeft) { style["--sv-element-add-padding-left"] = this.paddingLeft; }
-    if (!!this.paddingRight) { style["--sv-element-add-padding-right"] = this.paddingRight; }
+    if (!!this.paddingLeft) {
+      style["--sv-element-add-padding-left"] = this.paddingLeft;
+    }
+    if (!!this.paddingRight) {
+      style["--sv-element-add-padding-right"] = this.paddingRight;
+    }
     return style;
   }
   get paddingLeft(): string {
-    return this.getPropertyValue("paddingLeft", undefined, () => this.calcPaddingLeft());
+    return this.getPropertyValue("paddingLeft", undefined, () =>
+      this.calcPaddingLeft()
+    );
   }
   protected calcPaddingLeft(): string {
     return "";
   }
   get paddingRight(): string {
-    return this.getPropertyValue("paddingRight", undefined, () => this.calcPaddingRight());
+    return this.getPropertyValue("paddingRight", undefined, () =>
+      this.calcPaddingRight()
+    );
   }
   set paddingRight(val: string) {
     this.setPropertyValue("paddingRight", val);
@@ -1085,7 +1253,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
           minWidth = minWidth.replace("px", "");
           let minWidthNum = parseFloat(minWidth);
           if (!isNaN(minWidthNum)) {
-            minWidth = minWidthNum * (this.survey as any).widthScale / 100;
+            minWidth = (minWidthNum * (this.survey as any).widthScale) / 100;
             minWidth = "" + minWidth + "px";
           }
         }
@@ -1105,10 +1273,15 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   private isContainsSelection(el: any) {
     let elementWithSelection: any = undefined;
     const _document = DomDocumentHelper.getDocument();
-    if (DomDocumentHelper.isAvailable() && !!_document && (_document as any)["selection"]) {
-      elementWithSelection = (_document as any)["selection"].createRange().parentElement();
-    }
-    else {
+    if (
+      DomDocumentHelper.isAvailable() &&
+      !!_document &&
+      (_document as any)["selection"]
+    ) {
+      elementWithSelection = (_document as any)["selection"]
+        .createRange()
+        .parentElement();
+    } else {
       var selection = DomWindowHelper.getSelection();
       if (!!selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
@@ -1148,18 +1321,22 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return null;
   }
   protected getCssTitle(cssClasses: any): string {
-    if(!cssClasses) return "";
+    if (!cssClasses) return "";
     const isExpandable = this.state !== "default";
     const numInlineLimit = 4;
     return new CssClassBuilder()
       .append(cssClasses.title)
-      .append(cssClasses.titleNumInline, ((<any>this).no || "").length > numInlineLimit || isExpandable)
+      .append(
+        cssClasses.titleNumInline,
+        ((<any>this).no || "").length > numInlineLimit || isExpandable
+      )
       .append(cssClasses.titleExpandable, isExpandable)
       .append(cssClasses.titleExpanded, this.isExpanded)
       .append(cssClasses.titleCollapsed, this.isCollapsed)
       .append(cssClasses.titleDisabled, this.isDisabledStyle)
       .append(cssClasses.titleReadOnly, this.isReadOnly)
-      .append(cssClasses.titleOnError, this.containsErrors).toString();
+      .append(cssClasses.titleOnError, this.containsErrors)
+      .toString();
   }
   public get isDisabledStyle(): boolean {
     return this.getIsDisableAndReadOnlyStyles(false)[1];
@@ -1167,7 +1344,9 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   public get isReadOnlyStyle(): boolean {
     return this.getIsDisableAndReadOnlyStyles(false)[0];
   }
-  protected getIsDisableAndReadOnlyStyles(itemReadOnly: boolean): Array<boolean> {
+  protected getIsDisableAndReadOnlyStyles(
+    itemReadOnly: boolean
+  ): Array<boolean> {
     const isPreview = this.isPreviewStyle;
     const isReadOnly = itemReadOnly || this.isReadOnly;
     const isReadOnlyStyle = isReadOnly && !isPreview;
@@ -1181,7 +1360,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     super.localeChanged();
     this.resetDescriptionVisibility();
     if (this.errors.length > 0) {
-      this.errors.forEach(err => {
+      this.errors.forEach((err) => {
         err.updateText();
       });
     }
@@ -1204,10 +1383,12 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     }
   }
   private get isAnimatingCollapseExpand() {
-    return this._isAnimatingCollapseExpand || this._renderedIsExpanded != this.isExpanded;
+    return (
+      this._isAnimatingCollapseExpand ||
+      this._renderedIsExpanded != this.isExpanded
+    );
   }
-  protected onElementExpanded(elementIsRendered: boolean) {
-  }
+  protected onElementExpanded(elementIsRendered: boolean) {}
   private getExpandCollapseAnimationOptions(): IAnimationConsumer {
     const beforeRunAnimation = (el: HTMLElement) => {
       this.isAnimatingCollapseExpand = true;
@@ -1220,7 +1401,9 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return {
       getRerenderEvent: () => this.onElementRerendered,
       getEnterOptions: () => {
-        const cssClasses = this.isPanel ? this.cssClasses.panel : this.cssClasses;
+        const cssClasses = this.isPanel
+          ? this.cssClasses.panel
+          : this.cssClasses;
         return {
           cssClass: cssClasses.contentEnter,
           onBeforeRunAnimation: beforeRunAnimation,
@@ -1231,24 +1414,30 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
         };
       },
       getLeaveOptions: () => {
-        const cssClasses = this.isPanel ? this.cssClasses.panel : this.cssClasses;
+        const cssClasses = this.isPanel
+          ? this.cssClasses.panel
+          : this.cssClasses;
         return {
           cssClass: cssClasses.contentLeave,
           onBeforeRunAnimation: beforeRunAnimation,
-          onAfterRunAnimation: afterRunAnimation
+          onAfterRunAnimation: afterRunAnimation,
         };
       },
       getAnimatedElement: () => {
-        const cssClasses = this.isPanel ? this.cssClasses.panel : this.cssClasses;
+        const cssClasses = this.isPanel
+          ? this.cssClasses.panel
+          : this.cssClasses;
         if (cssClasses.content) {
           const selector = classesToSelector(cssClasses.content);
           if (selector) {
-            return this.getWrapperElement()?.querySelector(`:scope ${selector}`);
+            return this.getWrapperElement()?.querySelector(
+              `:scope ${selector}`
+            );
           }
         }
         return undefined;
       },
-      isAnimationEnabled: () => this.isExpandCollapseAnimationEnabled
+      isAnimationEnabled: () => this.isExpandCollapseAnimationEnabled,
     };
   }
 
@@ -1256,20 +1445,28 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return this.animationAllowed && !this.isDesignMode;
   }
 
-  private animationCollapsed = new AnimationBoolean(this.getExpandCollapseAnimationOptions(), (val) => {
-    this._renderedIsExpanded = val;
-    if (this.animationAllowed) {
-      if (val) {
-        this.isAnimatingCollapseExpand = true;
-      } else {
-        this.updateElementCss(false);
+  private animationCollapsed = new AnimationBoolean(
+    this.getExpandCollapseAnimationOptions(),
+    (val) => {
+      this._renderedIsExpanded = val;
+      if (this.animationAllowed) {
+        if (val) {
+          this.isAnimatingCollapseExpand = true;
+        } else {
+          this.updateElementCss(false);
+        }
       }
-    }
-  }, () => this.renderedIsExpanded);
+    },
+    () => this.renderedIsExpanded
+  );
   public set renderedIsExpanded(val: boolean) {
     const oldValue = this._renderedIsExpanded;
     this.animationCollapsed.sync(val);
-    if (!this.isExpandCollapseAnimationEnabled && !oldValue && this.renderedIsExpanded) {
+    if (
+      !this.isExpandCollapseAnimationEnabled &&
+      !oldValue &&
+      this.renderedIsExpanded
+    ) {
       this.onElementExpanded(false);
     }
   }
@@ -1278,10 +1475,17 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return !!this._renderedIsExpanded;
   }
   protected getIsAnimationAllowed(): boolean {
-    return super.getIsAnimationAllowed() && !!this.survey && !(this.survey as SurveyModel)["isEndLoadingFromJson"];
+    return (
+      super.getIsAnimationAllowed() &&
+      !!this.survey &&
+      !(this.survey as SurveyModel)["isEndLoadingFromJson"]
+    );
   }
 
-  public onAfterRenderElement: EventBase<SurveyElement<E>, any> = this.addEvent<SurveyElement<E>, any>();
+  public onAfterRenderElement: EventBase<SurveyElement<E>, any> = this.addEvent<
+    SurveyElement<E>,
+    any
+  >();
   public afterRenderCore(element: HTMLElement): void {
     this.onAfterRenderElement.fire(this, { htmlElement: element });
   }
@@ -1295,8 +1499,12 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
 }
 
 export class RenderingCompletedAwaiter {
-  constructor(private _elements: Array<SurveyElement>, private _renderedHandler: () => void, waitingTimeout = 100) {
-    this._elements.forEach(element => {
+  constructor(
+    private _elements: Array<SurveyElement>,
+    private _renderedHandler: () => void,
+    waitingTimeout = 100
+  ) {
+    this._elements.forEach((element) => {
       if (element.onAfterRenderElement) {
         element.onAfterRenderElement.add(this._elementRenderedHandler);
         this._elementsToRenderCount++;
@@ -1320,13 +1528,13 @@ export class RenderingCompletedAwaiter {
     if (this._elementsToRenderCount <= 0) {
       this.visibleElementsRendered();
     }
-  }
+  };
   private stopWaitingForElementsRendering() {
     if (this._elementsToRenderTimer) {
       clearTimeout(this._elementsToRenderTimer);
       this._elementsToRenderTimer = undefined;
     }
-    this._elements.forEach(element => {
+    this._elements.forEach((element) => {
       element.onAfterRenderElement?.remove(this._elementRenderedHandler);
     });
     this._elementsToRenderCount = 0;

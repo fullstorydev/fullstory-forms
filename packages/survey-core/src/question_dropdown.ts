@@ -24,13 +24,27 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     this.ariaExpanded = "false";
     this.createLocalizableString("placeholder", this, false, true);
     this.createLocalizableString("clearCaption", this, false, true);
-    this.registerPropertyChangedHandlers(["choicesMin", "choicesMax", "choicesStep"], () => {
-      this.onVisibleChoicesChanged();
-    });
-    this.registerPropertyChangedHandlers(["value", "renderAs", "showOtherItem", "otherText", "placeholder", "choices", "visibleChoices"], () => {
-      this.getSingleSelectedItem();
-      this.resetReadOnlyText();
-    });
+    this.registerPropertyChangedHandlers(
+      ["choicesMin", "choicesMax", "choicesStep"],
+      () => {
+        this.onVisibleChoicesChanged();
+      }
+    );
+    this.registerPropertyChangedHandlers(
+      [
+        "value",
+        "renderAs",
+        "showOtherItem",
+        "otherText",
+        "placeholder",
+        "choices",
+        "visibleChoices",
+      ],
+      () => {
+        this.getSingleSelectedItem();
+        this.resetReadOnlyText();
+      }
+    );
   }
   public locStrsChanged(): void {
     super.locStrsChanged();
@@ -80,9 +94,11 @@ export class QuestionDropdownModel extends QuestionSelectBase {
   public get ariaRole(): string {
     return "combobox";
   }
-  public get selectedItem(): ItemValue { return this.getSingleSelectedItem(); }
+  public get selectedItem(): ItemValue {
+    return this.getSingleSelectedItem();
+  }
   protected onGetSingleSelectedItem(selectedItemByValue: ItemValue): void {
-    if(!!selectedItemByValue) {
+    if (!!selectedItemByValue) {
       this.lastSelectedItemValue = selectedItemByValue;
     }
   }
@@ -100,7 +116,7 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     if (
       this.minMaxChoices.length === 0 ||
       this.minMaxChoices.length !==
-      (this.choicesMax - this.choicesMin) / this.choicesStep + 1
+        (this.choicesMax - this.choicesMin) / this.choicesStep + 1
     ) {
       this.minMaxChoices = [];
       for (
@@ -192,8 +208,9 @@ export class QuestionDropdownModel extends QuestionSelectBase {
       if (!!target.dropdownListModelValue) {
         target.dropdownListModel.setSearchEnabled(newValue);
       }
-    }
-  }) searchEnabled: boolean;
+    },
+  })
+  searchEnabled: boolean;
 
   /**
    * Specifies a comparison operation used to filter the drop-down list. Applies only if [`searchEnabled`](#searchEnabled) is `true`.
@@ -216,10 +233,12 @@ export class QuestionDropdownModel extends QuestionSelectBase {
   @property() textWrapEnabled: boolean;
   @property({ defaultValue: false }) inputHasValue: boolean;
   public get readOnlyText(): string {
-    return this.getPropertyValue("readOnlyText", undefined, () => this.calculateReadOnlyText());
+    return this.getPropertyValue("readOnlyText", undefined, () =>
+      this.calculateReadOnlyText()
+    );
   }
   protected calculateReadOnlyText(): string {
-    if(this.renderAs == "select") {
+    if (this.renderAs == "select") {
       if (this.isOtherSelected) return this.otherText;
       if (this.isNoneSelected) return this.noneText;
       if (!!this.selectedItem) return this.selectedItemText;
@@ -239,8 +258,9 @@ export class QuestionDropdownModel extends QuestionSelectBase {
       if (!!target.dropdownListModelValue) {
         target.dropdownListModel.setChoicesLazyLoadEnabled(newValue);
       }
-    }
-  }) choicesLazyLoadEnabled: boolean;
+    },
+  })
+  choicesLazyLoadEnabled: boolean;
   /**
    * Specifies the number of choice items to load at a time when choices are loaded on demand.
    * @see choicesLazyLoadEnabled
@@ -255,7 +275,10 @@ export class QuestionDropdownModel extends QuestionSelectBase {
       .append(this.cssClasses.controlDisabled, this.isDisabledStyle)
       .append(this.cssClasses.controlReadOnly, this.isReadOnlyStyle)
       .append(this.cssClasses.controlPreview, this.isPreviewStyle)
-      .append(this.cssClasses.controlInputFieldComponent, !!this.inputFieldComponentName)
+      .append(
+        this.cssClasses.controlInputFieldComponent,
+        !!this.inputFieldComponentName
+      )
       .toString();
   }
   protected updateCssClasses(res: any, css: any): void {
@@ -281,16 +304,30 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     return this.inputFieldComponent || this.itemComponent;
   }
   public get showSelectedItemLocText(): boolean {
-    return !this.inputHasValue && !this.inputFieldComponentName && !!this.selectedItemLocText && this.dropdownListModel.canShowSelectedItem;
+    return (
+      !this.inputHasValue &&
+      !this.inputFieldComponentName &&
+      !!this.selectedItemLocText &&
+      this.dropdownListModel.canShowSelectedItem
+    );
   }
   public get showInputFieldComponent(): boolean {
-    return !this.inputHasValue && !!this.inputFieldComponentName && !this.isEmpty();
+    return (
+      !this.inputHasValue && !!this.inputFieldComponentName && !this.isEmpty()
+    );
   }
   private get selectedItemText(): string {
     const item = this.selectedItem;
     return !!item ? item.text : "";
   }
-  private get useDropdownList(): boolean { return this.renderAs !== "select"; }
+  public get elementData(): any {
+    const data = this.getDataElement(this.inputValue);
+
+    return data;
+  }
+  private get useDropdownList(): boolean {
+    return this.renderAs !== "select";
+  }
   public get dropdownListModel(): DropdownListModel {
     if (this.useDropdownList && !this.dropdownListModelValue) {
       this.dropdownListModelValue = new DropdownListModel(this);
@@ -304,7 +341,8 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     return this.dropdownListModel.popupModel;
   }
 
-  public onOpened: EventBase<QuestionDropdownModel> = this.addEvent<QuestionDropdownModel>();
+  public onOpened: EventBase<QuestionDropdownModel> =
+    this.addEvent<QuestionDropdownModel>();
   public onOpenedCallBack(): void {
     this.onOpened.fire(this, { question: this, choices: this.choices });
   }
@@ -318,15 +356,25 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     isFilteredChoices: boolean,
     checkEmptyValue: boolean
   ): boolean {
-    if(this.choicesLazyLoadEnabled) { return false; }
-    return super.hasUnknownValue(val, includeOther, isFilteredChoices, checkEmptyValue);
+    if (this.choicesLazyLoadEnabled) {
+      return false;
+    }
+    return super.hasUnknownValue(
+      val,
+      includeOther,
+      isFilteredChoices,
+      checkEmptyValue
+    );
   }
   protected needConvertRenderedOtherToDataValue(): boolean {
     const val = this.otherValue?.trim();
-    if(!val) return false;
+    if (!val) return false;
     return super.hasUnknownValue(val, true, false);
   }
-  protected getItemIfChoicesNotContainThisValue(value: any, text?: string): any {
+  protected getItemIfChoicesNotContainThisValue(
+    value: any,
+    text?: string
+  ): any {
     if (this.choicesLazyLoadEnabled) {
       return this.createItemValue(value, text);
     } else {
@@ -372,7 +420,9 @@ export class QuestionDropdownModel extends QuestionSelectBase {
       event.stopPropagation();
     }
   }
-  protected supportEmptyValidation(): boolean { return true; }
+  protected supportEmptyValidation(): boolean {
+    return true;
+  }
   protected onBlurCore(event: any): void {
     this.dropdownListModel.onBlur(event);
     super.onBlurCore(event);
@@ -384,7 +434,7 @@ export class QuestionDropdownModel extends QuestionSelectBase {
 
   public dispose(): void {
     super.dispose();
-    if(!!this.dropdownListModelValue) {
+    if (!!this.dropdownListModelValue) {
       this.dropdownListModelValue.dispose();
       this.dropdownListModelValue = undefined;
     }
@@ -393,20 +443,36 @@ export class QuestionDropdownModel extends QuestionSelectBase {
 Serializer.addClass(
   "dropdown",
   [
-    { name: "placeholder", alternativeName: "optionsCaption", serializationProperty: "locPlaceholder" },
-    { name: "allowClear:boolean", alternativeName: "showOptionsCaption", default: true },
+    {
+      name: "placeholder",
+      alternativeName: "optionsCaption",
+      serializationProperty: "locPlaceholder",
+    },
+    {
+      name: "allowClear:boolean",
+      alternativeName: "showOptionsCaption",
+      default: true,
+    },
     { name: "choicesMin:number", default: 0 },
     { name: "choicesMax:number", default: 0 },
     { name: "choicesStep:number", default: 1, minValue: 1 },
-    { name: "autocomplete", alternativeName: "autoComplete", choices: settings.questions.dataList, },
+    {
+      name: "autocomplete",
+      alternativeName: "autoComplete",
+      choices: settings.questions.dataList,
+    },
     { name: "textWrapEnabled:boolean", default: true },
     { name: "renderAs", default: "default", visible: false },
     { name: "searchEnabled:boolean", default: true, visible: false },
-    { name: "searchMode", default: "contains", choices: ["contains", "startsWith"], },
+    {
+      name: "searchMode",
+      default: "contains",
+      choices: ["contains", "startsWith"],
+    },
     { name: "choicesLazyLoadEnabled:boolean", default: false, visible: false },
     { name: "choicesLazyLoadPageSize:number", default: 25, visible: false },
     { name: "inputFieldComponent", visible: false },
-    { name: "itemComponent", visible: false, default: "" }
+    { name: "itemComponent", visible: false, default: "" },
   ],
   function () {
     return new QuestionDropdownModel("");

@@ -17,7 +17,7 @@ import { updateListCssValues } from "./utils/utils";
  */
 export class QuestionTagboxModel extends QuestionCheckboxModel {
   private dropdownListModelValue: DropdownMultiSelectListModel;
-  private itemDisplayNameMap: { [key: string]: string} = {};
+  private itemDisplayNameMap: { [key: string]: string } = {};
   private deselectAllItemText: LocalizableString;
 
   constructor(name: string) {
@@ -26,10 +26,26 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
     this.createLocalizableString("placeholder", this, false, true);
     this.createLocalizableString("clearCaption", this, false, true);
     this.createLocalizableString("readOnlyText", this, true);
-    this.deselectAllItemText = this.createLocalizableString("deselectAllText", this.selectAllItem, true, "deselectAllItemText");
-    this.registerPropertyChangedHandlers(["value", "renderAs", "showOtherItem", "otherText", "placeholder", "choices", "visibleChoices"], () => {
-      this.updateReadOnlyText();
-    });
+    this.deselectAllItemText = this.createLocalizableString(
+      "deselectAllText",
+      this.selectAllItem,
+      true,
+      "deselectAllItemText"
+    );
+    this.registerPropertyChangedHandlers(
+      [
+        "value",
+        "renderAs",
+        "showOtherItem",
+        "otherText",
+        "placeholder",
+        "choices",
+        "visibleChoices",
+      ],
+      () => {
+        this.updateReadOnlyText();
+      }
+    );
     this.updateReadOnlyText();
   }
   public locStrsChanged(): void {
@@ -75,8 +91,9 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
       if (!!target.dropdownListModelValue) {
         target.dropdownListModel.setSearchEnabled(newValue);
       }
-    }
-  }) searchEnabled: boolean;
+    },
+  })
+  searchEnabled: boolean;
 
   /**
    * Specifies whether to remove selected items from the drop-down list.
@@ -86,7 +103,7 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
       if (!!target.dropdownListModelValue) {
         target.dropdownListModel.setHideSelectedItems(newValue);
       }
-    }
+    },
   })
   hideSelectedItems: boolean;
   /**
@@ -99,8 +116,9 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
       if (!!target.dropdownListModelValue) {
         target.dropdownListModel.setChoicesLazyLoadEnabled(newValue);
       }
-    }
-  }) choicesLazyLoadEnabled: boolean;
+    },
+  })
+  choicesLazyLoadEnabled: boolean;
   /**
    * Specifies the number of choice items to load at a time when choices are loaded on demand.
    * @see choicesLazyLoadEnabled
@@ -110,10 +128,20 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   /**
    * Specifies whether to close the drop-down menu after a user selects a value.
    */
-  @property({ getDefaultValue: () => { return settings.tagboxCloseOnSelect; } }) closeOnSelect: number;
+  @property({
+    getDefaultValue: () => {
+      return settings.tagboxCloseOnSelect;
+    },
+  })
+  closeOnSelect: number;
 
   @property() textWrapEnabled: boolean;
 
+  public get elementData(): any {
+    const data = this.getDataElement(this.inputValue);
+
+    return data;
+  }
   /**
    * A text displayed in the input field when it doesn't have a value.
    */
@@ -162,7 +190,10 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
       .append(this.cssClasses.control)
       .append(this.cssClasses.controlEmpty, this.isEmpty())
       .append(this.cssClasses.onError, this.hasCssError())
-      .append(this.cssClasses.controlEditable, !this.isDisabledStyle && !this.isReadOnlyStyle && !this.isPreviewStyle)
+      .append(
+        this.cssClasses.controlEditable,
+        !this.isDisabledStyle && !this.isReadOnlyStyle && !this.isPreviewStyle
+      )
       .append(this.cssClasses.controlDisabled, this.isDisabledStyle)
       .append(this.cssClasses.controlReadOnly, this.isReadOnlyStyle)
       .append(this.cssClasses.controlPreview, this.isPreviewStyle)
@@ -179,19 +210,29 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
     }
     return classes;
   }
-  public onOpened: EventBase<QuestionTagboxModel> = this.addEvent<QuestionTagboxModel>();
+  public onOpened: EventBase<QuestionTagboxModel> =
+    this.addEvent<QuestionTagboxModel>();
   public onOpenedCallBack(): void {
     this.onOpened.fire(this, { question: this, choices: this.choices });
   }
 
-  protected hasUnknownValue(val: any, includeOther: boolean = false,
-    isFilteredChoices: boolean = true, checkEmptyValue: boolean = false): boolean {
-    if(this.choicesLazyLoadEnabled) return false;
-    return super.hasUnknownValue(val, includeOther, isFilteredChoices, checkEmptyValue);
+  protected hasUnknownValue(
+    val: any,
+    includeOther: boolean = false,
+    isFilteredChoices: boolean = true,
+    checkEmptyValue: boolean = false
+  ): boolean {
+    if (this.choicesLazyLoadEnabled) return false;
+    return super.hasUnknownValue(
+      val,
+      includeOther,
+      isFilteredChoices,
+      checkEmptyValue
+    );
   }
   protected needConvertRenderedOtherToDataValue(): boolean {
     const val = this.otherValue?.trim();
-    if(!val) return false;
+    if (!val) return false;
     return super.hasUnknownValue(val, true, false);
   }
   protected onVisibleChoicesChanged(): void {
@@ -201,7 +242,10 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
       this.dropdownListModel.updateItems();
     }
   }
-  protected getItemIfChoicesNotContainThisValue(value: any, text?: string): any {
+  protected getItemIfChoicesNotContainThisValue(
+    value: any,
+    text?: string
+  ): any {
     if (this.choicesLazyLoadEnabled) {
       return this.createItemValue(value, text);
     } else {
@@ -211,29 +255,45 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   protected validateItemValues(itemValues: Array<ItemValue>): Array<ItemValue> {
     this.updateItemDisplayNameMap();
     const val = this.renderedValue as Array<any>;
-    if(!!itemValues.length && itemValues.length === val.length) return itemValues;
+    if (!!itemValues.length && itemValues.length === val.length)
+      return itemValues;
 
     const selectedItemValues = this.selectedItemValues;
-    if(!itemValues.length && !!selectedItemValues && !!selectedItemValues.length) {
+    if (
+      !itemValues.length &&
+      !!selectedItemValues &&
+      !!selectedItemValues.length
+    ) {
       this.defaultSelectedItemValues = [].concat(selectedItemValues);
       return selectedItemValues;
     }
 
-    const itemValueValues = itemValues.map(iV => iV.value);
-    val.filter(item => { return itemValueValues.indexOf(item) === -1; }).forEach(item => {
-      const newItem = this.getItemIfChoicesNotContainThisValue(item, this.itemDisplayNameMap[item]);
-      if(newItem) {
-        itemValues.push(newItem);
-      }
+    const itemValueValues = itemValues.map((iV) => iV.value);
+    val
+      .filter((item) => {
+        return itemValueValues.indexOf(item) === -1;
+      })
+      .forEach((item) => {
+        const newItem = this.getItemIfChoicesNotContainThisValue(
+          item,
+          this.itemDisplayNameMap[item]
+        );
+        if (newItem) {
+          itemValues.push(newItem);
+        }
+      });
+    itemValues.sort((a, b) => {
+      return val.indexOf(a.value) - val.indexOf(b.value);
     });
-    itemValues.sort((a, b) => { return val.indexOf(a.value) - val.indexOf(b.value); });
     return itemValues;
   }
 
   updateItemDisplayNameMap(): void {
-    const func = (item: ItemValue) => { this.itemDisplayNameMap[item.value] = item.text; };
+    const func = (item: ItemValue) => {
+      this.itemDisplayNameMap[item.value] = item.text;
+    };
     (this.defaultSelectedItemValues || []).forEach(func);
-    (this.selectedItemValues as Array<ItemValue> || []).forEach(func);
+    ((this.selectedItemValues as Array<ItemValue>) || []).forEach(func);
     this.visibleChoices.forEach(func);
   }
 
@@ -243,7 +303,9 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   public getInputId(): string {
     return this.inputId + "_0";
   }
-  protected supportEmptyValidation(): boolean { return true; }
+  protected supportEmptyValidation(): boolean {
+    return true;
+  }
   protected onBlurCore(event: any): void {
     this.dropdownListModel.onBlur(event);
     super.onBlurCore(event);
@@ -259,12 +321,14 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   }
 
   public updateSelectAllItemText(isAllSelected: boolean): void {
-    this.selectAllItem.setLocText(isAllSelected ? this.deselectAllItemText : this.selectAllItemText);
+    this.selectAllItem.setLocText(
+      isAllSelected ? this.deselectAllItemText : this.selectAllItemText
+    );
   }
 
   public dispose(): void {
     super.dispose();
-    if(!!this.dropdownListModelValue) {
+    if (!!this.dropdownListModelValue) {
       this.dropdownListModelValue.dispose();
       this.dropdownListModelValue = undefined;
     }
@@ -295,7 +359,11 @@ Serializer.addClass(
     { name: "hideSelectedItems:boolean", default: false },
     { name: "closeOnSelect:boolean" },
     { name: "itemComponent", visible: false, default: "" },
-    { name: "searchMode", default: "contains", choices: ["contains", "startsWith"] }
+    {
+      name: "searchMode",
+      default: "contains",
+      choices: ["contains", "startsWith"],
+    },
   ],
   function () {
     return new QuestionTagboxModel("");
