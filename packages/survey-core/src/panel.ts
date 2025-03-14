@@ -13,21 +13,37 @@ import {
   ITitleOwner,
   IProgressInfo,
   ISurvey,
-  IFindElement
+  IFindElement,
 } from "./base-interfaces";
-import { DragTypeOverMeEnum, SurveyElement, RenderingCompletedAwaiter } from "./survey-element";
+import {
+  DragTypeOverMeEnum,
+  SurveyElement,
+  RenderingCompletedAwaiter,
+} from "./survey-element";
 import { Question } from "./question";
 import { ElementFactory, QuestionFactory } from "./questionfactory";
 import { LocalizableString } from "./localizablestring";
 import { OneAnswerRequiredError } from "./error";
 import { settings } from "./settings";
-import { cleanHtmlElementAfterAnimation, findScrollableParent, getElementWidth, isElementVisible, floorTo2Decimals, prepareElementForVerticalAnimation, setPropertiesOnElementForAnimation } from "./utils/utils";
+import {
+  cleanHtmlElementAfterAnimation,
+  findScrollableParent,
+  getElementWidth,
+  isElementVisible,
+  floorTo2Decimals,
+  prepareElementForVerticalAnimation,
+  setPropertiesOnElementForAnimation,
+} from "./utils/utils";
 import { SurveyError } from "./survey-error";
 import { CssClassBuilder } from "./utils/cssClassBuilder";
 import { IAction } from "./actions/action";
 import { ActionContainer } from "./actions/container";
 import { SurveyModel } from "./survey";
-import { AnimationGroup, IAnimationConsumer, IAnimationGroupConsumer } from "./utils/animation";
+import {
+  AnimationGroup,
+  IAnimationConsumer,
+  IAnimationGroupConsumer,
+} from "./utils/animation";
 import { DomDocumentHelper, DomWindowHelper } from "./global_variables_utils";
 import { PageModel } from "./page";
 import { PanelLayoutColumnModel } from "./panel-layout-column";
@@ -40,16 +56,24 @@ export class QuestionRowModel extends Base {
   protected _scrollableParent: any = undefined;
   protected _updateVisibility: any = undefined;
   private get allowRendering(): boolean {
-    return !this.panel || !this.panel.survey || !(this.panel.survey as any)["isLazyRenderingSuspended"];
+    return (
+      !this.panel ||
+      !this.panel.survey ||
+      !(this.panel.survey as any)["isLazyRenderingSuspended"]
+    );
   }
-  public startLazyRendering(rowContainerDiv: HTMLElement, findScrollableContainer = findScrollableParent): void {
+  public startLazyRendering(
+    rowContainerDiv: HTMLElement,
+    findScrollableContainer = findScrollableParent
+  ): void {
     if (!DomDocumentHelper.isAvailable()) return;
     this._scrollableParent = findScrollableContainer(rowContainerDiv);
     // if  this._scrollableParent is html the scroll event isn't fired, so we should use window
     if (this._scrollableParent === DomDocumentHelper.getDocumentElement()) {
       this._scrollableParent = DomWindowHelper.getWindow();
     }
-    const hasScroll = this._scrollableParent.scrollHeight > this._scrollableParent.clientHeight;
+    const hasScroll =
+      this._scrollableParent.scrollHeight > this._scrollableParent.clientHeight;
     this.isNeedRender = !hasScroll;
     if (hasScroll) {
       this._updateVisibility = () => {
@@ -121,44 +145,60 @@ export class QuestionRowModel extends Base {
     return this.getPropertyValue("elements");
   }
   protected getIsAnimationAllowed(): boolean {
-    return super.getIsAnimationAllowed() && this.visible && this.panel?.animationAllowed;
+    return (
+      super.getIsAnimationAllowed() &&
+      this.visible &&
+      this.panel?.animationAllowed
+    );
   }
   private getVisibleElementsAnimationOptions(): IAnimationGroupConsumer<IElement> {
     const beforeRunAnimation = (el: HTMLElement) => {
       prepareElementForVerticalAnimation(el);
-      setPropertiesOnElementForAnimation(el, { width: getElementWidth(el) + "px" });
+      setPropertiesOnElementForAnimation(el, {
+        width: getElementWidth(el) + "px",
+      });
     };
     return {
       getRerenderEvent: () => this.onElementRerendered,
       isAnimationEnabled: () => this.animationAllowed,
       allowSyncRemovalAddition: false,
-      getAnimatedElement: (element: IElement) => (element as any as SurveyElement).getWrapperElement(),
+      getAnimatedElement: (element: IElement) =>
+        (element as any as SurveyElement).getWrapperElement(),
       getLeaveOptions: (element: IElement) => {
         const surveyElement = element as unknown as SurveyElement;
-        const cssClasses = element.isPanel ? surveyElement.cssClasses.panel : surveyElement.cssClasses;
+        const cssClasses = element.isPanel
+          ? surveyElement.cssClasses.panel
+          : surveyElement.cssClasses;
         return {
           cssClass: cssClasses.leave,
           onBeforeRunAnimation: beforeRunAnimation,
-          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation,
         };
       },
       getEnterOptions: (element: IElement) => {
         const surveyElement = element as unknown as SurveyElement;
-        const cssClasses = element.isPanel ? surveyElement.cssClasses.panel : surveyElement.cssClasses;
+        const cssClasses = element.isPanel
+          ? surveyElement.cssClasses.panel
+          : surveyElement.cssClasses;
         return {
           cssClass: cssClasses.enter,
           onBeforeRunAnimation: beforeRunAnimation,
-          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation,
         };
-      }
+      },
     };
   }
-  public visibleElementsAnimation: AnimationGroup<IElement> = new AnimationGroup(this.getVisibleElementsAnimationOptions(), (value) => {
-    this.setWidth(value);
-    this.setPropertyValue("visibleElements", value);
-  }, () => this.visibleElements);
+  public visibleElementsAnimation: AnimationGroup<IElement> =
+    new AnimationGroup(
+      this.getVisibleElementsAnimationOptions(),
+      (value) => {
+        this.setWidth(value);
+        this.setPropertyValue("visibleElements", value);
+      },
+      () => this.visibleElements
+    );
   public set visibleElements(val: Array<IElement>) {
-    if(!val.length) {
+    if (!val.length) {
       this.visible = false;
       this.visibleElementsAnimation.cancel();
       return;
@@ -192,7 +232,10 @@ export class QuestionRowModel extends Base {
       if (this.elements[i].isVisible) {
         visElements.push(this.elements[i]);
       }
-      if (this.elements[i].isPanel || this.elements[i].getType() === "paneldynamic") {
+      if (
+        this.elements[i].isPanel ||
+        this.elements[i].getType() === "paneldynamic"
+      ) {
         this.setIsLazyRendering(false);
         this.stopLazyRendering();
       }
@@ -223,7 +266,13 @@ export class QuestionRowModel extends Base {
           el.renderWidth = this.getRenderedWidthFromWidth(width);
           preSetWidthElements.push(el);
         }
-        if(counter < visCount - 1 && !(this.panel.isDefaultV2Theme || this.panel.parentQuestion?.isDefaultV2Theme)) {
+        if (
+          counter < visCount - 1 &&
+          !(
+            this.panel.isDefaultV2Theme ||
+            this.panel.parentQuestion?.isDefaultV2Theme
+          )
+        ) {
           el.rightIndent = 1;
         } else {
           el.rightIndent = 0;
@@ -280,8 +329,14 @@ export class QuestionRowModel extends Base {
     return new CssClassBuilder()
       .append(this.panel.cssClasses.row)
       .append(this.panel.cssClasses.rowCompact, this.panel["isCompact"])
-      .append(this.panel.cssClasses.pageRow, this.panel.isPage || (this.panel as PanelModel).showPanelAsPage)
-      .append(this.panel.cssClasses.rowMultiple, this.visibleElements.length > 1)
+      .append(
+        this.panel.cssClasses.pageRow,
+        this.panel.isPage || (this.panel as PanelModel).showPanelAsPage
+      )
+      .append(
+        this.panel.cssClasses.rowMultiple,
+        this.visibleElements.length > 1
+      )
       .toString();
   }
   private rootElement?: HTMLElement;
@@ -296,8 +351,10 @@ export class QuestionRowModel extends Base {
 /**
  * A base class for the [`PanelModel`](https://surveyjs.io/form-library/documentation/panelmodel) and [`PageModel`](https://surveyjs.io/form-library/documentation/pagemodel) classes.
  */
-export class PanelModelBase extends SurveyElement<Question>
-  implements IPanel, IConditionRunner, ISurveyErrorOwner, ITitleOwner {
+export class PanelModelBase
+  extends SurveyElement<Question>
+  implements IPanel, IConditionRunner, ISurveyErrorOwner, ITitleOwner
+{
   private static panelCounter = 100;
   private static getPanelId(): string {
     return "sp_" + PanelModelBase.panelCounter++;
@@ -342,22 +399,28 @@ export class PanelModelBase extends SurveyElement<Question>
           cssClass: this.cssClasses.rowLeave,
           onBeforeRunAnimation: prepareElementForVerticalAnimation,
           onAfterRunAnimation: cleanHtmlElementAfterAnimation,
-
         };
       },
       getEnterOptions: (_: QuestionRowModel, animationInfo) => {
         const cssClasses = this.cssClasses;
         return {
-          cssClass: new CssClassBuilder().append(cssClasses.rowEnter).append(cssClasses.rowDelayedEnter, animationInfo.isDeletingRunning).toString(),
+          cssClass: new CssClassBuilder()
+            .append(cssClasses.rowEnter)
+            .append(cssClasses.rowDelayedEnter, animationInfo.isDeletingRunning)
+            .toString(),
           onBeforeRunAnimation: prepareElementForVerticalAnimation,
-          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation,
         };
-      }
+      },
     };
   }
-  private rowsAnimation: AnimationGroup<QuestionRowModel> = new AnimationGroup(this.getRowsAnimationOptions(), (value) => {
-    this.setPropertyValue("visibleRows", value);
-  }, () => this.visibleRows)
+  private rowsAnimation: AnimationGroup<QuestionRowModel> = new AnimationGroup(
+    this.getRowsAnimationOptions(),
+    (value) => {
+      this.setPropertyValue("visibleRows", value);
+    },
+    () => this.visibleRows
+  );
   get visibleRows(): Array<QuestionRowModel> {
     return this.getPropertyValue("visibleRows");
   }
@@ -367,15 +430,23 @@ export class PanelModelBase extends SurveyElement<Question>
 
   public onRemoveRow(row: QuestionRowModel): void {
     row.visibleElementsAnimation.cancel();
-    this.visibleRows = this.rows.filter(row => row.visible);
+    this.visibleRows = this.rows.filter((row) => row.visible);
     row.onVisibleChangedCallback = undefined;
   }
   onRowVisibleChanged() {
-    this.visibleRows = this.rows.filter(row => row.visible);
+    this.visibleRows = this.rows.filter((row) => row.visible);
   }
   constructor(name: string = "") {
     super(name);
-    this.createNewArray("rows", (el: QuestionRowModel, index: number) => { this.onAddRow(el); }, (el: QuestionRowModel) => { this.onRemoveRow(el); });
+    this.createNewArray(
+      "rows",
+      (el: QuestionRowModel, index: number) => {
+        this.onAddRow(el);
+      },
+      (el: QuestionRowModel) => {
+        this.onRemoveRow(el);
+      }
+    );
     this.createNewArray("visibleRows");
 
     this.elementsValue = this.createNewArray(
@@ -385,14 +456,28 @@ export class PanelModelBase extends SurveyElement<Question>
     );
     this.setPropertyValueDirectly("id", PanelModelBase.getPanelId());
 
-    this.addExpressionProperty("visibleIf",
-      (obj: Base, res: any) => { this.visible = res === true; },
-      (obj: Base) => { return !this.areInvisibleElementsShowing; });
-    this.addExpressionProperty("enableIf", (obj: Base, res: any) => { this.readOnly = res === false; });
-    this.addExpressionProperty("requiredIf", (obj: Base, res: any) => { this.isRequired = res === true; });
+    this.addExpressionProperty(
+      "visibleIf",
+      (obj: Base, res: any) => {
+        this.visible = res === true;
+      },
+      (obj: Base) => {
+        return !this.areInvisibleElementsShowing;
+      }
+    );
+    this.addExpressionProperty("enableIf", (obj: Base, res: any) => {
+      this.readOnly = res === false;
+    });
+    this.addExpressionProperty("requiredIf", (obj: Base, res: any) => {
+      this.isRequired = res === true;
+    });
 
     this.createLocalizableString("requiredErrorText", this);
-    this.createLocalizableString("navigationTitle", this, true).onGetTextCallback = (text: string) => {
+    this.createLocalizableString(
+      "navigationTitle",
+      this,
+      true
+    ).onGetTextCallback = (text: string) => {
       return text || this.title || this.name;
     };
     this.registerPropertyChangedHandlers(["questionTitleLocation"], () => {
@@ -426,50 +511,66 @@ export class PanelModelBase extends SurveyElement<Question>
     super.endLoadingFromJson();
     this.markQuestionListDirty();
     this.onRowsChanged();
-    this.gridLayoutColumns.forEach(col => {
-      col.onPropertyValueChangedCallback = this.onColumnPropertyValueChangedCallback;
+    this.gridLayoutColumns.forEach((col) => {
+      col.onPropertyValueChangedCallback =
+        this.onColumnPropertyValueChangedCallback;
     });
   }
 
   @property({ defaultValue: true }) showTitle: boolean;
 
   public get hasTextInTitle(): boolean {
-    return this.getPropertyValue("hasTextInTitle", undefined, (): boolean => !!this.title);
+    return this.getPropertyValue(
+      "hasTextInTitle",
+      undefined,
+      (): boolean => !!this.title
+    );
   }
   private resetHasTextInTitle(): void {
     this.resetPropertyValue("hasTextInTitle");
   }
   get hasTitle(): boolean {
     return (
-      (this.canShowTitle(this.survey) && (this.hasTextInTitle || this.locTitle.textOrHtml.length > 0)) ||
-      (this.isDesignMode && !this.isPanel && this.showTitle && settings.designMode.showEmptyTitles)
+      (this.canShowTitle(this.survey) &&
+        (this.hasTextInTitle || this.locTitle.textOrHtml.length > 0)) ||
+      (this.isDesignMode &&
+        !this.isPanel &&
+        this.showTitle &&
+        settings.designMode.showEmptyTitles)
     );
   }
   public delete(doDispose: boolean = true): void {
     this.deletePanel();
     this.removeFromParent();
-    if(doDispose) {
+    if (doDispose) {
       this.dispose();
     }
   }
   private deletePanel(): void {
     const els = this.elements;
-    for(let i = 0; i < els.length; i ++) {
+    for (let i = 0; i < els.length; i++) {
       const el = els[i];
-      if(el.isPanel) {
-        (<PanelModelBase><any>el).deletePanel();
+      if (el.isPanel) {
+        (<PanelModelBase>(<any>el)).deletePanel();
       }
       this.onRemoveElementNotifySurvey(el);
     }
   }
   protected removeFromParent(): void {}
-  protected canShowTitle(survey: ISurvey): boolean { return true; }
+  protected canShowTitle(survey: ISurvey): boolean {
+    return true;
+  }
   @property({ defaultValue: true }) showDescription: boolean;
   get _showDescription(): boolean {
-    if(!this.hasTitle && this.isDesignMode) return false;
-    return this.survey && (<any>this.survey).showPageTitles && this.hasDescription ||
-      (this.showDescription && this.isDesignMode &&
-        settings.designMode.showEmptyDescriptions);
+    if (!this.hasTitle && this.isDesignMode) return false;
+    return (
+      (this.survey &&
+        (<any>this.survey).showPageTitles &&
+        this.hasDescription) ||
+      (this.showDescription &&
+        this.isDesignMode &&
+        settings.designMode.showEmptyDescriptions)
+    );
   }
   public localeChanged(): void {
     super.localeChanged();
@@ -484,7 +585,7 @@ export class PanelModelBase extends SurveyElement<Question>
     }
   }
   getMarkdownHtml(text: string, name: string): string {
-    if(name === "navigationTitle" && this.locNavigationTitle.isEmpty) {
+    if (name === "navigationTitle" && this.locNavigationTitle.isEmpty) {
       return this.locTitle.renderedHtml || this.name;
     }
     return super.getMarkdownHtml(text, name);
@@ -501,9 +602,7 @@ export class PanelModelBase extends SurveyElement<Question>
    * @see isRequired
    */
   public get requiredMark(): string {
-    return !!this.survey && this.isRequired
-      ? this.survey.requiredMark
-      : "";
+    return !!this.survey && this.isRequired ? this.survey.requiredMark : "";
   }
   /**
    * @deprecated Use the [`requiredMark`](https://surveyjs.io/form-library/documentation/api-reference/panel-model#requiredMark) property instead.
@@ -563,7 +662,10 @@ export class PanelModelBase extends SurveyElement<Question>
     this.questionOrder = val;
   }
   private canRandomize(isRandom: boolean): boolean {
-    return isRandom && (this.questionOrder !== "initial") || this.questionOrder === "random";
+    return (
+      (isRandom && this.questionOrder !== "initial") ||
+      this.questionOrder === "random"
+    );
   }
   protected isRandomizing = false;
   randomizeElements(isRandom: boolean): boolean {
@@ -628,7 +730,17 @@ export class PanelModelBase extends SurveyElement<Question>
     this.setPropertyValue("visibleIf", val);
   }
   protected calcCssClasses(css: any): any {
-    var classes = { panel: {}, error: {}, row: "", rowEnter: "", rowLeave: "", rowDelayedEnter: "", rowMultiple: "", pageRow: "", rowCompact: "" };
+    var classes = {
+      panel: {},
+      error: {},
+      row: "",
+      rowEnter: "",
+      rowLeave: "",
+      rowDelayedEnter: "",
+      rowMultiple: "",
+      pageRow: "",
+      rowCompact: "",
+    };
     this.copyCssClasses(classes.panel, css.panel);
     this.copyCssClasses(classes.error, css.error);
     if (!!css.pageRow) {
@@ -703,11 +815,11 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   public getQuestions(includeNested: boolean): Array<Question> {
     const res = this.questions;
-    if(!includeNested) return res;
+    if (!includeNested) return res;
     const res2: Array<Question> = [];
-    res.forEach(q => {
+    res.forEach((q) => {
       res2.push(q);
-      q.getNestedQuestions().forEach(nQ => res2.push(nQ));
+      q.getNestedQuestions().forEach((nQ) => res2.push(nQ));
     });
     return res2;
   }
@@ -766,15 +878,15 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   collectValues(data: any, level: number): boolean {
     let elements = this.elements;
-    if(level === 0) {
+    if (level === 0) {
       elements = this.questions;
     }
     let hasValue = false;
     for (var i = 0; i < elements.length; i++) {
       const el = elements[i];
-      if(el.isPanel || el.isPage) {
+      if (el.isPanel || el.isPage) {
         const panelData = {};
-        if((<PanelModelBase><any>el).collectValues(panelData, level - 1)) {
+        if ((<PanelModelBase>(<any>el)).collectValues(panelData, level - 1)) {
           data[el.name] = panelData;
           hasValue = true;
         }
@@ -913,7 +1025,11 @@ export class PanelModelBase extends SurveyElement<Question>
       (<Base>(<any>this.elements[i])).searchText(text, founded);
     }
   }
-  public hasErrors(fireCallback: boolean = true, focusOnFirstError: boolean = false, rec: any = null): boolean {
+  public hasErrors(
+    fireCallback: boolean = true,
+    focusOnFirstError: boolean = false,
+    rec: any = null
+  ): boolean {
     return !this.validate(fireCallback, focusOnFirstError, rec);
   }
   /**
@@ -922,36 +1038,40 @@ export class PanelModelBase extends SurveyElement<Question>
    * @param focusFirstError *(Optional)* Pass `true` if you want to focus the first question with a validation error.
    * @see [Data Validation](https://surveyjs.io/form-library/documentation/data-validation)
    */
-  public validate(fireCallback: boolean = true, focusFirstError: boolean = false, rec: any = null): boolean {
+  public validate(
+    fireCallback: boolean = true,
+    focusFirstError: boolean = false,
+    rec: any = null
+  ): boolean {
     rec = !!rec
       ? rec
       : {
-        fireCallback: fireCallback,
-        focusOnFirstError: focusFirstError,
-        firstErrorQuestion: <any>null,
-        result: false,
-      };
-    if(rec.result !== true) rec.result = false;
+          fireCallback: fireCallback,
+          focusOnFirstError: focusFirstError,
+          firstErrorQuestion: <any>null,
+          result: false,
+        };
+    if (rec.result !== true) rec.result = false;
     this.hasErrorsCore(rec);
     return !rec.result;
   }
   public validateContainerOnly(): void {
     this.hasErrorsInPanels({ fireCallback: true });
-    if(!!this.parent) {
+    if (!!this.parent) {
       this.parent.validateContainerOnly();
     }
   }
   onQuestionValueChanged(el: IElement): void {
     const index = this.questions.indexOf(<any>el);
-    if(index < 0) return;
+    if (index < 0) return;
     const dif = 5;
     const max = this.questions.length - 1;
     const start = index - dif > 0 ? index - dif : 0;
     const end = index + dif < max ? index + dif : max;
-    for(let i = start; i <= end; i ++) {
-      if(i === index) continue;
+    for (let i = start; i <= end; i++) {
+      if (i === index) continue;
       const q = this.questions[i];
-      if(q.errors.length > 0 && q.validate(false)) {
+      if (q.errors.length > 0 && q.validate(false)) {
         q.validate(true);
       }
     }
@@ -961,7 +1081,7 @@ export class PanelModelBase extends SurveyElement<Question>
     this.hasRequiredError(rec, errors);
     if (this.survey) {
       this.survey.validatePanel(this, errors, rec.fireCallback);
-      if(errors.length > 0) {
+      if (errors.length > 0) {
         rec.result = true;
       }
     }
@@ -971,7 +1091,8 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   //ISurveyErrorOwner
   getErrorCustomText(text: string, error: SurveyError): string {
-    if (!!this.survey) return this.survey.getSurveyErrorCustomText(this, text, error);
+    if (!!this.survey)
+      return this.survey.getSurveyErrorCustomText(this, text, error);
     return text;
   }
 
@@ -1003,7 +1124,7 @@ export class PanelModelBase extends SurveyElement<Question>
       } else {
         var question = <Question>element;
         if (!question.validate(rec.fireCallback, rec)) {
-          if(!firstErroredEl) {
+          if (!firstErroredEl) {
             firstErroredEl = question;
           }
           if (!rec.firstErrorQuestion) {
@@ -1015,14 +1136,14 @@ export class PanelModelBase extends SurveyElement<Question>
     }
     this.hasErrorsInPanels(rec);
     this.updateContainsErrors();
-    if(!firstErroredEl && this.errors.length > 0) {
+    if (!firstErroredEl && this.errors.length > 0) {
       firstErroredEl = this.getFirstQuestionToFocus(false, true);
-      if(!rec.firstErrorQuestion) {
+      if (!rec.firstErrorQuestion) {
         rec.firstErrorQuestion = firstErroredEl;
       }
     }
-    if(rec.fireCallback && firstErroredEl) {
-      if(firstErroredEl === rec.firstErrorQuestion && rec.focusOnFirstError) {
+    if (rec.fireCallback && firstErroredEl) {
+      if (firstErroredEl === rec.firstErrorQuestion && rec.focusOnFirstError) {
         firstErroredEl.focus(true);
       } else {
         firstErroredEl.expandAllParents();
@@ -1044,14 +1165,20 @@ export class PanelModelBase extends SurveyElement<Question>
     }
     super.updateElementVisibility();
   }
-  getFirstQuestionToFocus(withError: boolean = false, ignoreCollapseState: boolean = false): Question {
+  getFirstQuestionToFocus(
+    withError: boolean = false,
+    ignoreCollapseState: boolean = false
+  ): Question {
     if (!withError && !ignoreCollapseState && this.isCollapsed) return null;
     var elements = this.elements;
     for (var i = 0; i < elements.length; i++) {
       var el = elements[i];
-      if (!el.isVisible || !ignoreCollapseState && el.isCollapsed) continue;
+      if (!el.isVisible || (!ignoreCollapseState && el.isCollapsed)) continue;
       if (el.isPanel) {
-        var res = (<PanelModelBase>(<any>el)).getFirstQuestionToFocus(withError, ignoreCollapseState);
+        var res = (<PanelModelBase>(<any>el)).getFirstQuestionToFocus(
+          withError,
+          ignoreCollapseState
+        );
         if (!!res) return res;
       } else {
         const q = (<Question>el).getFirstQuestionToFocus(withError);
@@ -1158,22 +1285,24 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   private calcMaxRowColSpan(): number {
     let maxRowColSpan = 0;
-    this.rows.forEach(row => {
+    this.rows.forEach((row) => {
       let curRowSpan = 0;
       let userDefinedRow = false;
-      row.elements.forEach(el => {
+      row.elements.forEach((el) => {
         if (!!el.width) {
           userDefinedRow = true;
         }
-        curRowSpan += (el.colSpan || 1);
+        curRowSpan += el.colSpan || 1;
       });
-      if (!userDefinedRow && curRowSpan > maxRowColSpan) maxRowColSpan = curRowSpan;
+      if (!userDefinedRow && curRowSpan > maxRowColSpan)
+        maxRowColSpan = curRowSpan;
     });
     return maxRowColSpan;
   }
   private updateColumnWidth(columns: Array<PanelLayoutColumnModel>): void {
-    let remainingSpace = 0, remainingColCount = 0;
-    columns.forEach(col => {
+    let remainingSpace = 0,
+      remainingColCount = 0;
+    columns.forEach((col) => {
       if (!col.width) {
         remainingColCount++;
       } else {
@@ -1182,7 +1311,9 @@ export class PanelModelBase extends SurveyElement<Question>
       }
     });
     if (!!remainingColCount) {
-      const oneColumnWidth = floorTo2Decimals((100 - remainingSpace) / remainingColCount);
+      const oneColumnWidth = floorTo2Decimals(
+        (100 - remainingSpace) / remainingColCount
+      );
       for (let index = 0; index < columns.length; index++) {
         if (!columns[index].width) {
           columns[index].setPropertyValue("effectiveWidth", oneColumnWidth);
@@ -1201,14 +1332,14 @@ export class PanelModelBase extends SurveyElement<Question>
       this.updateColumnWidth(this.gridLayoutColumns);
       this.updateRootStyle();
     }
-  }
+  };
   public updateColumns() {
     this._columns = undefined;
     this.updateRootStyle();
   }
   public updateRootStyle() {
     super.updateRootStyle();
-    this.elements?.forEach(el => el.updateRootStyle());
+    this.elements?.forEach((el) => el.updateRootStyle());
   }
   public updateCustomWidgets() {
     for (var i = 0; i < this.elements.length; i++) {
@@ -1250,7 +1381,7 @@ export class PanelModelBase extends SurveyElement<Question>
     return this.hasElementWithTitleLocationLeft();
   }
   hasElementWithTitleLocationLeft(): boolean {
-    const result = this.elements.some(el => {
+    const result = this.elements.some((el) => {
       if (el instanceof PanelModelBase) {
         return el.hasElementWithTitleLocationLeft();
       } else if (el instanceof Question) {
@@ -1266,7 +1397,10 @@ export class PanelModelBase extends SurveyElement<Question>
    */
   @property() questionTitleWidth: string;
   getQuestionTitleWidth(): string {
-    return this.questionTitleWidth || this.parent && this.parent.getQuestionTitleWidth();
+    return (
+      this.questionTitleWidth ||
+      (this.parent && this.parent.getQuestionTitleWidth())
+    );
   }
   public get columns(): Array<PanelLayoutColumnModel> {
     if (!this._columns) {
@@ -1280,9 +1414,14 @@ export class PanelModelBase extends SurveyElement<Question>
     if (maxRowColSpan <= this.gridLayoutColumns.length) {
       columns = this.gridLayoutColumns.slice(0, maxRowColSpan);
     } else {
-      for (let index = this.gridLayoutColumns.length; index < maxRowColSpan; index++) {
+      for (
+        let index = this.gridLayoutColumns.length;
+        index < maxRowColSpan;
+        index++
+      ) {
         const newCol = new PanelLayoutColumnModel();
-        newCol.onPropertyValueChangedCallback = this.onColumnPropertyValueChangedCallback;
+        newCol.onPropertyValueChangedCallback =
+          this.onColumnPropertyValueChangedCallback;
         columns.push(newCol);
       }
     }
@@ -1290,16 +1429,15 @@ export class PanelModelBase extends SurveyElement<Question>
     try {
       this._columnsReady = false;
       this.updateColumnWidth(columns);
-    }
-    finally {
+    } finally {
       this._columnsReady = true;
     }
     this.gridLayoutColumns = columns;
   }
   public updateGridColumns(): void {
     this.updateColumns();
-    this.elements.forEach(el => {
-      el.isPanel && (<any>el as PanelModelBase).updateGridColumns();
+    this.elements.forEach((el) => {
+      el.isPanel && ((<any>el) as PanelModelBase).updateGridColumns();
     });
   }
   public getColumsForElement(el: IElement): Array<PanelLayoutColumnModel> {
@@ -1308,7 +1446,11 @@ export class PanelModelBase extends SurveyElement<Question>
 
     let lastExpandableElementIndex = row.elements.length - 1;
     while (lastExpandableElementIndex >= 0) {
-      if (!(row.elements[lastExpandableElementIndex] as any).getPropertyValueWithoutDefault("colSpan")) {
+      if (
+        !(
+          row.elements[lastExpandableElementIndex] as any
+        ).getPropertyValueWithoutDefault("colSpan")
+      ) {
         break;
       }
       lastExpandableElementIndex--;
@@ -1329,7 +1471,10 @@ export class PanelModelBase extends SurveyElement<Question>
       }
       currentColSpan = this.columns.length - usedSpans;
     }
-    const result = this.columns.slice(startIndex, startIndex + (currentColSpan || 1));
+    const result = this.columns.slice(
+      startIndex,
+      startIndex + (currentColSpan || 1)
+    );
     (el as any).setPropertyValue("effectiveColSpan", result.length);
     return result;
   }
@@ -1392,12 +1537,12 @@ export class PanelModelBase extends SurveyElement<Question>
   protected onFirstRenderingCore(): void {
     super.onFirstRenderingCore();
     this.onRowsChanged();
-    this.elements.forEach(el => el.onFirstRendering());
+    this.elements.forEach((el) => el.onFirstRendering());
   }
   public updateRows(): void {
     if (this.isLoadingFromJson) return;
-    this.getElementsForRows().forEach(el => {
-      if(el.isPanel) {
+    this.getElementsForRows().forEach((el) => {
+      if (el.isPanel) {
         (<PanelModel>el).updateRows();
       }
     });
@@ -1433,13 +1578,17 @@ export class PanelModelBase extends SurveyElement<Question>
     const elementRowIndex = this.rows.indexOf(elementRow);
     const elementIndexInRow = elementRow.elements.indexOf(element);
     elementRow.elements.splice(elementIndexInRow, 1);
-    if(elementRow.elements.length == 0) {
+    if (elementRow.elements.length == 0) {
       this.rows.splice(elementRowIndex, 1);
-    } else if(!elementRow.elements[0].startWithNewLine && this.rows[elementRowIndex - 1]) {
-      elementRow.elements.forEach(el => this.rows[elementRowIndex - 1].addElement(el));
+    } else if (
+      !elementRow.elements[0].startWithNewLine &&
+      this.rows[elementRowIndex - 1]
+    ) {
+      elementRow.elements.forEach((el) =>
+        this.rows[elementRowIndex - 1].addElement(el)
+      );
       this.rows.splice(elementRowIndex, 1);
-    }
-    else {
+    } else {
       elementRow.updateVisible();
     }
   }
@@ -1454,13 +1603,22 @@ export class PanelModelBase extends SurveyElement<Question>
       this.rows.splice(index, 0, row);
       return row;
     };
-    const updateRow = (row: QuestionRowModel, start: number, deleteCount: number, ...elements: IElement[]) => {
-      const removedElements = row.elements.splice(start, deleteCount, ...elements);
+    const updateRow = (
+      row: QuestionRowModel,
+      start: number,
+      deleteCount: number,
+      ...elements: IElement[]
+    ) => {
+      const removedElements = row.elements.splice(
+        start,
+        deleteCount,
+        ...elements
+      );
       row.updateVisible();
       return removedElements;
     };
-    if(!targetElement) {
-      if(index == 0 || element.startWithNewLine) {
+    if (!targetElement) {
+      if (index == 0 || element.startWithNewLine) {
         updateRow(createRowAtIndex(this.rows.length), 0, 0, element);
       } else {
         this.rows[this.rows.length - 1].addElement(element);
@@ -1468,21 +1626,31 @@ export class PanelModelBase extends SurveyElement<Question>
       return;
     }
     const targetRow = this.findRowByElement(targetElement);
-    if(!targetRow) return;
+    if (!targetRow) return;
     const targetRowIndex = this.rows.indexOf(targetRow);
     const targetElementIndexInRow = targetRow.elements.indexOf(targetElement);
-    if(targetElementIndexInRow == 0) {
-      if(!targetElement.startWithNewLine) {
+    if (targetElementIndexInRow == 0) {
+      if (!targetElement.startWithNewLine) {
         updateRow(targetRow, 0, 0, element);
-      }
-      else if(element.startWithNewLine || targetRowIndex < 1) {
+      } else if (element.startWithNewLine || targetRowIndex < 1) {
         createRowAtIndex(targetRowIndex).addElement(element);
       } else {
         this.rows[targetRowIndex - 1].addElement(element);
       }
     } else {
-      if(element.startWithNewLine) {
-        updateRow(createRowAtIndex(targetRowIndex + 1), 0, 0, ...[element].concat(updateRow(targetRow, targetElementIndexInRow, targetRow.elements.length)));
+      if (element.startWithNewLine) {
+        updateRow(
+          createRowAtIndex(targetRowIndex + 1),
+          0,
+          0,
+          ...[element].concat(
+            updateRow(
+              targetRow,
+              targetElementIndexInRow,
+              targetRow.elements.length
+            )
+          )
+        );
       } else {
         updateRow(targetRow, targetElementIndexInRow, 0, element);
       }
@@ -1494,7 +1662,7 @@ export class PanelModelBase extends SurveyElement<Question>
   protected onAddElement(element: IElement, index: number): void {
     const survey = this.survey;
     const fireNotification = this.canFireAddRemoveNotifications(element);
-    if(!!this.surveyImpl) {
+    if (!!this.surveyImpl) {
       element.setSurveyImpl(this.surveyImpl);
     }
     element.parent = this;
@@ -1502,7 +1670,7 @@ export class PanelModelBase extends SurveyElement<Question>
     if (this.canBuildRows()) {
       this.updateRowsOnElementAdded(element);
     }
-    if(fireNotification) {
+    if (fireNotification) {
       if (element.isPanel) {
         survey.panelAdded(<PanelModel>element, index, this, this.root);
       } else {
@@ -1511,14 +1679,19 @@ export class PanelModelBase extends SurveyElement<Question>
     }
     if (!!this.addElementCallback) this.addElementCallback(element);
     (<Base>(<any>element)).registerPropertyChangedHandlers(
-      ["visible", "isVisible"], () => {
+      ["visible", "isVisible"],
+      () => {
         this.onElementVisibilityChanged(element);
       },
       this.id
     );
-    (<Base>(<any>element)).registerPropertyChangedHandlers(["startWithNewLine"], () => {
-      this.onElementStartWithNewLineChanged(element);
-    }, this.id);
+    (<Base>(<any>element)).registerPropertyChangedHandlers(
+      ["startWithNewLine"],
+      () => {
+        this.onElementStartWithNewLineChanged(element);
+      },
+      this.id
+    );
     this.onElementVisibilityChanged(this);
   }
   protected onRemoveElement(element: IElement): void {
@@ -1532,10 +1705,13 @@ export class PanelModelBase extends SurveyElement<Question>
     this.onElementVisibilityChanged(this);
   }
   protected unregisterElementPropertiesChanged(element: IElement): void {
-    (<Base>(<any>element)).unregisterPropertyChangedHandlers(["visible", "isVisible", "startWithNewLine"], this.id);
+    (<Base>(<any>element)).unregisterPropertyChangedHandlers(
+      ["visible", "isVisible", "startWithNewLine"],
+      this.id
+    );
   }
   private onRemoveElementNotifySurvey(element: IElement): void {
-    if(!this.canFireAddRemoveNotifications(element)) return;
+    if (!this.canFireAddRemoveNotifications(element)) return;
     if (!element.isPanel) {
       this.survey.questionRemoved(<Question>element);
     } else {
@@ -1551,7 +1727,7 @@ export class PanelModelBase extends SurveyElement<Question>
     }
   }
   private onElementStartWithNewLineChanged(element: any) {
-    if(this.locCountRowUpdates > 0) return;
+    if (this.locCountRowUpdates > 0) return;
     this.blockAnimations();
     this.updateRowsBeforeElementRemoved(element);
     this.updateRowsOnElementAdded(element);
@@ -1580,11 +1756,13 @@ export class PanelModelBase extends SurveyElement<Question>
     for (let i = 0; i < els.length; i++) {
       const el = els[i];
       const isNewRow = i == 0 || el.startWithNewLine;
-      const row = isNewRow ? this.createRowAndSetLazy(res.length) : res[res.length - 1];
+      const row = isNewRow
+        ? this.createRowAndSetLazy(res.length)
+        : res[res.length - 1];
       if (isNewRow) res.push(row);
       row.addElement(el);
     }
-    res.forEach(row => row.updateVisible());
+    res.forEach((row) => row.updateVisible());
     return res;
   }
   protected getElementsForRows(): Array<IElement> {
@@ -1596,10 +1774,16 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   private updateRowsOnElementRemoved(element: IElement) {
     if (!this.canBuildRows()) return;
-    this.updateRowsRemoveElementFromRow(element, this.findRowByElement(element));
+    this.updateRowsRemoveElementFromRow(
+      element,
+      this.findRowByElement(element)
+    );
     this.updateColumns();
   }
-  private updateRowsRemoveElementFromRow(element: IElement, row: QuestionRowModel): void {
+  private updateRowsRemoveElementFromRow(
+    element: IElement,
+    row: QuestionRowModel
+  ): void {
     if (!row || !row.panel) return;
     var elIndex = row.elements.indexOf(element);
     if (elIndex < 0) return;
@@ -1617,16 +1801,18 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   public getAllRows(): Array<QuestionRowModel> {
     const allRows: Array<QuestionRowModel> = [];
-    this.rows.forEach(row => {
+    this.rows.forEach((row) => {
       const nestedRows: Array<QuestionRowModel> = [];
-      row.elements.forEach(element => {
+      row.elements.forEach((element) => {
         if (element.isPanel) {
-          nestedRows.push(...(<any>element as PanelModelBase).getAllRows());
+          nestedRows.push(...((<any>element) as PanelModelBase).getAllRows());
         } else if (element.getType() == "paneldynamic") {
           if (this.isDesignMode) {
             nestedRows.push(...(element as any).template.getAllRows());
           } else {
-            (element as any).panels.forEach((panel: PanelModelBase) => nestedRows.push(...panel.getAllRows()));
+            (element as any).panels.forEach((panel: PanelModelBase) =>
+              nestedRows.push(...panel.getAllRows())
+            );
           }
         }
       });
@@ -1635,7 +1821,10 @@ export class PanelModelBase extends SurveyElement<Question>
     });
     return allRows;
   }
-  private findRowAndIndexByElement(el: IElement, rows?: Array<QuestionRowModel>): { row: QuestionRowModel, index: number } {
+  private findRowAndIndexByElement(
+    el: IElement,
+    rows?: Array<QuestionRowModel>
+  ): { row: QuestionRowModel; index: number } {
     if (!el) {
       return { row: undefined, index: this.rows.length - 1 };
     }
@@ -1651,7 +1840,11 @@ export class PanelModelBase extends SurveyElement<Question>
       row.stopLazyRendering();
     }
   }
-  public forceRenderElement(el: IElement, elementsRendered = () => { }, gap = 0): void {
+  public forceRenderElement(
+    el: IElement,
+    elementsRendered = () => {},
+    gap = 0
+  ): void {
     const allRows = this.getAllRows();
     const { row, index } = this.findRowAndIndexByElement(el, allRows);
     if (index >= 0 && index < allRows.length) {
@@ -1663,15 +1856,24 @@ export class PanelModelBase extends SurveyElement<Question>
       this.forceRenderRows(rowsToRender, elementsRendered);
     }
   }
-  public forceRenderRows(rows: Array<QuestionRowModel>, elementsRendered = () => { }): void {
-    const rowRenderedHandler = (rowsCount => () => {
+  public forceRenderRows(
+    rows: Array<QuestionRowModel>,
+    elementsRendered = () => {}
+  ): void {
+    const rowRenderedHandler = ((rowsCount) => () => {
       rowsCount--;
       if (rowsCount <= 0) {
         elementsRendered();
       }
     })(rows.length);
-    rows.forEach(row => new RenderingCompletedAwaiter(row.visibleElements as any, rowRenderedHandler));
-    rows.forEach(row => this.forceRenderRow(row));
+    rows.forEach(
+      (row) =>
+        new RenderingCompletedAwaiter(
+          row.visibleElements as any,
+          rowRenderedHandler
+        )
+    );
+    rows.forEach((row) => this.forceRenderRow(row));
   }
   public findRowByElement(el: IElement): QuestionRowModel {
     return this.findRowAndIndexByElement(el).row;
@@ -1708,13 +1910,14 @@ export class PanelModelBase extends SurveyElement<Question>
     if (!this.isLoadingFromJson) this.onVisibleChanged();
   }
   public onHidingContent(): void {
-    this.questions.forEach(q => q.onHidingContent());
+    this.questions.forEach((q) => q.onHidingContent());
   }
   protected onVisibleChanged(): void {
     if (this.isRandomizing) return;
     this.setPropertyValue("isVisible", this.isVisible);
     if (
-      !!this.survey && this.survey.getQuestionClearIfInvisible("default") !== "none" &&
+      !!this.survey &&
+      this.survey.getQuestionClearIfInvisible("default") !== "none" &&
       !this.isLoadingFromJson
     ) {
       const questions = this.questions;
@@ -1732,8 +1935,8 @@ export class PanelModelBase extends SurveyElement<Question>
   }
   protected notifyStateChanged(prevState: string): void {
     super.notifyStateChanged(prevState);
-    if(this.isCollapsed) {
-      this.questions.forEach(q => q.onHidingContent());
+    if (this.isCollapsed) {
+      this.questions.forEach((q) => q.onHidingContent());
     }
   }
 
@@ -1748,7 +1951,7 @@ export class PanelModelBase extends SurveyElement<Question>
     return this.areInvisibleElementsShowing || this.getIsPageVisible(null);
   }
   getIsContentVisible(exceptionQuestion?: IQuestion) {
-    if(this.areInvisibleElementsShowing) return true;
+    if (this.areInvisibleElementsShowing) return true;
     for (var i = 0; i < this.elements.length; i++) {
       if (this.elements[i] == exceptionQuestion) continue;
       if (this.elements[i].isVisible) return true;
@@ -1793,7 +1996,9 @@ export class PanelModelBase extends SurveyElement<Question>
   protected getPanelStartIndex(index: number): number {
     return index;
   }
-  protected isContinueNumbering(): boolean { return true; }
+  protected isContinueNumbering(): boolean {
+    return true;
+  }
   public get isReadOnly(): boolean {
     var isParentReadOnly = !!this.parent && this.parent.isReadOnly;
     var isSurveyReadOnly = !!this.survey && this.survey.isDisplayMode;
@@ -1842,40 +2047,44 @@ export class PanelModelBase extends SurveyElement<Question>
     } else {
       this.elements.splice(index, 0, element);
     }
-    if(this.wasRendered) {
+    if (this.wasRendered) {
       element.onFirstRendering();
     }
     this.updateColumns();
     return true;
   }
-  public insertElement(element: IElement, dest?: IElement, location: "bottom" | "top" | "left" | "right" = "bottom"): void {
-    if(!dest) {
+  public insertElement(
+    element: IElement,
+    dest?: IElement,
+    location: "bottom" | "top" | "left" | "right" = "bottom"
+  ): void {
+    if (!dest) {
       this.addElement(element);
       return;
     }
     this.blockRowsUpdates();
     let index = this.elements.indexOf(dest);
     const destRow = this.findRowByElement(dest);
-    if(location == "left" || location == "right") {
-      if(location == "right") {
+    if (location == "left" || location == "right") {
+      if (location == "right") {
         element.startWithNewLine = false;
         index++;
-      }
-      else {
-        if(destRow.elements.indexOf(dest) == 0) {
+      } else {
+        if (destRow.elements.indexOf(dest) == 0) {
           dest.startWithNewLine = false;
           element.startWithNewLine = true;
         } else {
           element.startWithNewLine = false;
         }
       }
-    }
-    else {
+    } else {
       element.startWithNewLine = true;
-      if(location == "top") {
+      if (location == "top") {
         index = this.elements.indexOf(destRow.elements[0]);
       } else {
-        index = this.elements.indexOf(destRow.elements[destRow.elements.length - 1]) + 1;
+        index =
+          this.elements.indexOf(destRow.elements[destRow.elements.length - 1]) +
+          1;
       }
     }
     this.releaseRowsUpdates();
@@ -1998,18 +2207,15 @@ export class PanelModelBase extends SurveyElement<Question>
       if (!!row) return row;
     }
     return null;
-
   }
 
   public needResponsiveWidth() {
     let result = false;
     this.elements.forEach((e) => {
-      if (e.needResponsiveWidth())
-        result = true;
+      if (e.needResponsiveWidth()) result = true;
     });
     this.rows.forEach((r) => {
-      if (r.elements.length > 1)
-        result = true;
+      if (r.elements.length > 1) result = true;
     });
 
     return result;
@@ -2042,13 +2248,18 @@ export class PanelModelBase extends SurveyElement<Question>
     this.setPropertyValue("questionErrorLocation", val);
   }
   public getQuestionErrorLocation(): string {
-    if(this.questionErrorLocation !== "default") return this.questionErrorLocation;
-    if(this.parent) return this.parent.getQuestionErrorLocation();
+    if (this.questionErrorLocation !== "default")
+      return this.questionErrorLocation;
+    if (this.parent) return this.parent.getQuestionErrorLocation();
     return this.survey ? this.survey.questionErrorLocation : "top";
   }
   //ITitleOwner
-  public getTitleOwner(): ITitleOwner { return this; }
-  public get no(): string { return ""; }
+  public getTitleOwner(): ITitleOwner {
+    return this;
+  }
+  public get no(): string {
+    return "";
+  }
   public get cssTitleNumber(): string {
     return this.cssClasses.panel.number;
   }
@@ -2111,8 +2322,14 @@ export class PanelModel extends PanelModelBase implements IElement {
       }
     });
     this.registerPropertyChangedHandlers(
-      ["indent", "innerIndent", "rightIndent"], () => { this.resetIndents(); });
-    this.registerPropertyChangedHandlers(["colSpan"], () => { this.parent?.updateColumns(); });
+      ["indent", "innerIndent", "rightIndent"],
+      () => {
+        this.resetIndents();
+      }
+    );
+    this.registerPropertyChangedHandlers(["colSpan"], () => {
+      this.parent?.updateColumns();
+    });
   }
   public getType(): string {
     return "panel";
@@ -2223,13 +2440,13 @@ export class PanelModel extends PanelModelBase implements IElement {
   }
   private calcNo(): string {
     let no = Helpers.getNumberByIndex(this.visibleIndex, this.getStartIndex());
-    if(this.survey) {
+    if (this.survey) {
       no = this.survey.getUpdatedPanelNo(this, no);
     }
     return no || "";
   }
   protected notifyStateChanged(prevState: string): void {
-    if(!this.isLoadingFromJson) {
+    if (!this.isLoadingFromJson) {
       this.locTitle.strChanged();
     }
     super.notifyStateChanged(prevState);
@@ -2237,7 +2454,7 @@ export class PanelModel extends PanelModelBase implements IElement {
   protected createLocTitleProperty(): LocalizableString {
     const locTitleValue = super.createLocTitleProperty();
     locTitleValue.onGetTextCallback = (text: string): string => {
-      if (!text && (this.state !== "default")) {
+      if (!text && this.state !== "default") {
         text = this.name;
       }
       return text;
@@ -2245,9 +2462,14 @@ export class PanelModel extends PanelModelBase implements IElement {
     return locTitleValue;
   }
   protected beforeSetVisibleIndex(index: number): number {
-    if(this.isPage) return super.beforeSetVisibleIndex(index);
+    if (this.isPage) return super.beforeSetVisibleIndex(index);
     let visibleIndex = -1;
-    if (this.showNumber && (this.isDesignMode || !this.locTitle.isEmpty || this.hasParentInQuestionIndex())) {
+    if (
+      this.showNumber &&
+      (this.isDesignMode ||
+        !this.locTitle.isEmpty ||
+        this.hasParentInQuestionIndex())
+    ) {
       visibleIndex = index;
     }
     this.setPropertyValue("visibleIndex", visibleIndex);
@@ -2260,13 +2482,16 @@ export class PanelModel extends PanelModelBase implements IElement {
     return index;
   }
   private hasParentInQuestionIndex(): boolean {
-    if(this.showQuestionNumbers !== "onpanel") return false;
+    if (this.showQuestionNumbers !== "onpanel") return false;
     const str = this.questionStartIndex;
     const index = str.indexOf(".");
     return index > -1 && index < str.length - 1;
   }
   protected isContinueNumbering(): boolean {
-    return this.showQuestionNumbers !== "off" && this.showQuestionNumbers !== "onpanel";
+    return (
+      this.showQuestionNumbers !== "off" &&
+      this.showQuestionNumbers !== "onpanel"
+    );
   }
   private notifySurveyOnVisibilityChanged() {
     if (this.survey != null && !this.isLoadingFromJson && !!this.page) {
@@ -2325,7 +2550,7 @@ export class PanelModel extends PanelModelBase implements IElement {
   }
 
   private getIndentSize(indent: number): string {
-    if(!this.survey) return undefined;
+    if (!this.survey) return undefined;
     if (indent < 1) return "";
     var css = (<any>this).survey["css"];
     if (!css || !css.question || !css.question.indent) return "";
@@ -2354,27 +2579,35 @@ export class PanelModel extends PanelModelBase implements IElement {
           locTitle: this.survey.locEditText,
           innerCss: this.survey.cssNavigationEdit,
           component: "sv-nav-btn",
-          action: () => { this.cancelPreview(); }
+          action: () => {
+            this.cancelPreview();
+          },
         });
       }
-      if(!!this.onGetFooterActionsCallback) {
+      if (!!this.onGetFooterActionsCallback) {
         actions = this.onGetFooterActionsCallback();
       } else {
         actions = this.survey?.getUpdatedPanelFooterActions(this, actions);
       }
-      this.footerToolbarValue = this.createActionContainer(this.allowAdaptiveActions);
-      let footerCss = this.onGetFooterToolbarCssCallback ? this.onGetFooterToolbarCssCallback() : "";
-      if(!footerCss) {
+      this.footerToolbarValue = this.createActionContainer(
+        this.allowAdaptiveActions
+      );
+      let footerCss = this.onGetFooterToolbarCssCallback
+        ? this.onGetFooterToolbarCssCallback()
+        : "";
+      if (!footerCss) {
         footerCss = this.cssClasses.panel?.footer;
       }
-      if(footerCss) {
+      if (footerCss) {
         this.footerToolbarValue.containerCss = footerCss;
       }
       this.footerToolbarValue.setItems(actions);
     }
     return this.footerToolbarValue;
   }
-  public get hasEditButton(): boolean { return false; }
+  public get hasEditButton(): boolean {
+    return false;
+  }
   public cancelPreview(): void {
     if (!this.hasEditButton) return;
     this.survey.cancelPreviewByPage(this);
@@ -2393,7 +2626,7 @@ export class PanelModel extends PanelModelBase implements IElement {
     return this.isDefaultV2Theme && !this.showPanelAsPage;
   }
   protected getCssError(cssClasses: any): string {
-    if(this.isPage) return super.getCssError(cssClasses);
+    if (this.isPage) return super.getCssError(cssClasses);
     const builder = new CssClassBuilder()
       .append(super.getCssError(cssClasses))
       .append(cssClasses.panel.errorsContainer);
@@ -2406,13 +2639,12 @@ export class PanelModel extends PanelModelBase implements IElement {
   public needResponsiveWidth() {
     if (!this.startWithNewLine) {
       return true;
-    }
-    else {
+    } else {
       return super.needResponsiveWidth();
     }
   }
   public focusIn(): void {
-    if(!this.survey) return;
+    if (!this.survey) return;
     (this.survey as SurveyModel).whenPanelFocusIn(this);
   }
   protected getHasFrameV2(): boolean {
@@ -2430,15 +2662,22 @@ export class PanelModel extends PanelModelBase implements IElement {
     super.expand();
   }
   protected onElementExpanded(elementIsRendered: boolean): void {
-    if(!this.forcusFirstQuestionOnExpand) { return; }
-    if(this.survey != null && !this.isLoadingFromJson) {
+    if (!this.forcusFirstQuestionOnExpand) {
+      return;
+    }
+    if (this.survey != null && !this.isLoadingFromJson) {
       const q = this.getFirstQuestionToFocus(false);
-      if(!!q) {
-        setTimeout(() => {
-          if(!this.isDisposed && !!this.survey) {
-            this.survey.scrollElementToTop(q, q, null, q.inputId, false, { behavior: "smooth" });
-          }
-        }, elementIsRendered ? 0: 15);
+      if (!!q) {
+        setTimeout(
+          () => {
+            if (!this.isDisposed && !!this.survey) {
+              this.survey.scrollElementToTop(q, q, null, q.inputId, false, {
+                behavior: "smooth",
+              });
+            }
+          },
+          elementIsRendered ? 0 : 15
+        );
       }
     }
   }
@@ -2447,7 +2686,10 @@ export class PanelModel extends PanelModelBase implements IElement {
       .append(super.getCssRoot(cssClasses))
       .append(cssClasses.container)
       .append(cssClasses.asPage, this.showPanelAsPage)
-      .append(cssClasses.invisible, !this.isDesignMode && this.areInvisibleElementsShowing && !this.visible)
+      .append(
+        cssClasses.invisible,
+        !this.isDesignMode && this.areInvisibleElementsShowing && !this.visible
+      )
       .toString();
   }
   public getContainerCss(): string {
@@ -2455,9 +2697,20 @@ export class PanelModel extends PanelModelBase implements IElement {
   }
   public afterRenderCore(element: HTMLElement): void {
     super.afterRenderCore(element);
-    if(this.isPanel) {
+    if (this.isPanel) {
       this.survey?.afterRenderPanel(this, element);
     }
+  }
+
+  public get elementData(): any {
+    const data = {};
+    const type = `fs-${this.getType()}`;
+    data["fs-element"] = type;
+    data[`${type}-name`] = this.title;
+    data[`${type}-expanded`] = this.isExpanded;
+    const elementData = this.createElementData(data);
+
+    return elementData;
   }
 }
 
@@ -2481,7 +2734,7 @@ Serializer.addClass(
       name: "questionTitleWidth",
       visibleIf: function (obj: any) {
         return !!obj && obj["availableQuestionTitleWidth"]();
-      }
+      },
     },
     {
       name: "questionTitleLocation",
@@ -2490,18 +2743,28 @@ Serializer.addClass(
     },
     {
       name: "gridLayoutColumns:panellayoutcolumns",
-      className: "panellayoutcolumn", isArray: true,
-      onSerializeValue: (obj: any): any => { return obj.getSerializableColumnsValue(); },
-      visibleIf: function (obj: any) { return !!obj && !!obj.survey && obj.survey.gridLayoutEnabled; }
+      className: "panellayoutcolumn",
+      isArray: true,
+      onSerializeValue: (obj: any): any => {
+        return obj.getSerializableColumnsValue();
+      },
+      visibleIf: function (obj: any) {
+        return !!obj && !!obj.survey && obj.survey.gridLayoutEnabled;
+      },
     },
     { name: "title:text", serializationProperty: "locTitle" },
     { name: "description:text", serializationProperty: "locDescription" },
     {
-      name: "questionOrder", alternativeName: "questionsOrder",
+      name: "questionOrder",
+      alternativeName: "questionsOrder",
       default: "default",
       choices: ["default", "initial", "random"],
     },
-    { name: "questionErrorLocation", default: "default", choices: ["default", "top", "bottom"] }
+    {
+      name: "questionErrorLocation",
+      default: "default",
+      choices: ["default", "top", "bottom"],
+    },
   ],
   function () {
     return new PanelModelBase();
@@ -2511,20 +2774,42 @@ Serializer.addClass(
 Serializer.addClass(
   "panel",
   [
-    { name: "state", default: "default", choices: ["default", "collapsed", "expanded"] },
+    {
+      name: "state",
+      default: "default",
+      choices: ["default", "collapsed", "expanded"],
+    },
     { name: "isRequired:switch", overridingProperty: "requiredIf" },
-    { name: "requiredErrorText:text", serializationProperty: "locRequiredErrorText" },
+    {
+      name: "requiredErrorText:text",
+      serializationProperty: "locRequiredErrorText",
+    },
     { name: "startWithNewLine:boolean", default: true },
     { name: "width" },
     { name: "minWidth", defaultFunc: () => "auto" },
     { name: "maxWidth", defaultFunc: () => settings.maxWidth },
-    { name: "colSpan:number", visible: false, onSerializeValue: (obj) => { return obj.getPropertyValue("colSpan"); } },
     {
-      name: "effectiveColSpan:number", minValue: 1, isSerializable: false,
-      visibleIf: function (obj: any) { return !!obj.survey && obj.survey.gridLayoutEnabled; }
+      name: "colSpan:number",
+      visible: false,
+      onSerializeValue: (obj) => {
+        return obj.getPropertyValue("colSpan");
+      },
+    },
+    {
+      name: "effectiveColSpan:number",
+      minValue: 1,
+      isSerializable: false,
+      visibleIf: function (obj: any) {
+        return !!obj.survey && obj.survey.gridLayoutEnabled;
+      },
     },
     { name: "innerIndent:number", default: 0, choices: [0, 1, 2, 3] },
-    { name: "indent:number", default: 0, choices: [0, 1, 2, 3], visible: false },
+    {
+      name: "indent:number",
+      default: 0,
+      choices: [0, 1, 2, 3],
+      visible: false,
+    },
     {
       name: "page",
       isSerializable: false,
@@ -2536,14 +2821,21 @@ Serializer.addClass(
         var survey = obj ? obj.survey : null;
         return survey
           ? survey.pages.map((p: any) => {
-            return { value: p.name, text: p.title };
-          })
+              return { value: p.name, text: p.title };
+            })
           : [];
       },
     },
     { name: "showNumber:boolean" },
-    { name: "showQuestionNumbers", default: "default", choices: ["default", "onpanel", "off"] },
-    { name: "questionStartIndex", visibleIf: (obj: PanelModel): boolean => obj.isPanel },
+    {
+      name: "showQuestionNumbers",
+      default: "default",
+      choices: ["default", "onpanel", "off"],
+    },
+    {
+      name: "questionStartIndex",
+      visibleIf: (obj: PanelModel): boolean => obj.isPanel,
+    },
     { name: "allowAdaptiveActions:boolean", default: true, visible: false },
   ],
   function () {

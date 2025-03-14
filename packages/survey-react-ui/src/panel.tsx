@@ -21,15 +21,11 @@ export class SurveyPanel extends SurveyPanelBase {
   protected renderElement(): React.JSX.Element {
     const header = this.renderHeader();
     const errors = (
-      <SurveyElementErrors
-        element={this.panelBase}
-        cssClasses={this.panelBase.cssClasses}
-        creator={this.creator}
-      />
+      <SurveyElementErrors element={this.panelBase} cssClasses={this.panelBase.cssClasses} creator={this.creator} />
     );
     const style = {
       paddingLeft: this.panel.innerPaddingLeft,
-      display: this.panel.renderedIsExpanded ? undefined : "none",
+      display: this.panel.renderedIsExpanded ? undefined : "none"
     };
     let content: React.JSX.Element | null = null;
     if (this.panel.renderedIsExpanded) {
@@ -41,13 +37,14 @@ export class SurveyPanel extends SurveyPanelBase {
     const focusIn = () => {
       if (this.panelBase) (this.panelBase as PanelModel).focusIn();
     };
+
     return (
       <div
+        {...this.panel.elementData}
         ref={this.rootRef}
         className={(this.panelBase as PanelModel).getContainerCss()}
         onFocus={focusIn}
         id={this.panelBase.id}
-
       >
         {this.panel.showErrorsAbovePanel ? errors : null}
         {header}
@@ -86,9 +83,7 @@ export class SurveyPanel extends SurveyPanelBase {
   protected renderDescription(): React.JSX.Element | null {
     if (!this.panelBase.description) return null;
     var text = SurveyElementBase.renderLocString(this.panelBase.locDescription);
-    return (
-      <div className={this.panel.cssClasses.panel.description}>{text}</div>
-    );
+    return <div className={this.panel.cssClasses.panel.description}>{text}</div>;
   }
   protected renderBottom(): React.JSX.Element | null {
     const footerToolbar = this.panel.getFooterToolbar();
@@ -98,9 +93,8 @@ export class SurveyPanel extends SurveyPanelBase {
   protected getIsVisible(): boolean {
     return this.panelBase.getIsContentVisible();
   }
-
 }
 
-ReactElementFactory.Instance.registerElement("panel", (props) => {
+ReactElementFactory.Instance.registerElement("panel", props => {
   return React.createElement(SurveyPanel, props);
 });
