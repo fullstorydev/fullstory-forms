@@ -6,7 +6,13 @@ import { EventBase, ComputedUpdater, Base } from "./base";
 import { UploadingFileError, ExceedSizeError } from "./error";
 import { SurveyError } from "./survey-error";
 import { CssClassBuilder } from "./utils/cssClassBuilder";
-import { classesToSelector, confirmActionAsync, detectIEOrEdge, isElementVisible, loadFileFromBase64 } from "./utils/utils";
+import {
+  classesToSelector,
+  confirmActionAsync,
+  detectIEOrEdge,
+  isElementVisible,
+  loadFileFromBase64,
+} from "./utils/utils";
 import { ActionContainer } from "./actions/container";
 import { Action } from "./actions/action";
 import { Helpers } from "./helpers";
@@ -19,7 +25,8 @@ import { AnimationTab, IAnimationConsumer } from "./utils/animation";
 
 export function dataUrl2File(dataUrl: string, fileName: string, type: string) {
   const str = atob(dataUrl.split(",")[1]);
-  const buffer = new Uint8Array(str.split("").map(c => c.charCodeAt(0))).buffer;
+  const buffer = new Uint8Array(str.split("").map((c) => c.charCodeAt(0)))
+    .buffer;
   return new File([buffer], fileName, { type: type });
 }
 /**
@@ -38,12 +45,10 @@ export class QuestionFileModelBase extends Question {
    * - `options.state`: `string`\
    * The current upload state: `"empty"`, `"loading"`, `"loaded"`, or `"error"`.
    */
-  public onUploadStateChanged: EventBase<QuestionFileModelBase> = this.addEvent<
-    QuestionFileModelBase
-  >();
-  public onStateChanged: EventBase<QuestionFileModelBase> = this.addEvent<
-    QuestionFileModelBase
-  >();
+  public onUploadStateChanged: EventBase<QuestionFileModelBase> =
+    this.addEvent<QuestionFileModelBase>();
+  public onStateChanged: EventBase<QuestionFileModelBase> =
+    this.addEvent<QuestionFileModelBase>();
   protected stateChanged(state: string) {
     if (this.currentState == state) {
       return;
@@ -76,10 +81,10 @@ export class QuestionFileModelBase extends Question {
     this.setPropertyValue("storeDataAsText", val);
   }
   /**
-     * Enable this property if you want to wait until files are uploaded to complete the survey.
-     *
-     * Default value: `false`
-     */
+   * Enable this property if you want to wait until files are uploaded to complete the survey.
+   *
+   * Default value: `false`
+   */
   public get waitForUpload(): boolean {
     return this.getPropertyValue("waitForUpload");
   }
@@ -93,9 +98,13 @@ export class QuestionFileModelBase extends Question {
   }
   public clearOnDeletingContainer() {
     if (!this.survey) return;
-    this.survey.clearFiles(this, this.name, this.value, null, () => { });
+    this.survey.clearFiles(this, this.name, this.value, null, () => {});
   }
-  protected onCheckForErrors(errors: Array<SurveyError>, isOnValueChanged: boolean, fireCallback: boolean): void {
+  protected onCheckForErrors(
+    errors: Array<SurveyError>,
+    isOnValueChanged: boolean,
+    fireCallback: boolean
+  ): void {
     super.onCheckForErrors(errors, isOnValueChanged, fireCallback);
     if (this.isUploading && this.waitForUpload) {
       errors.push(
@@ -109,31 +118,40 @@ export class QuestionFileModelBase extends Question {
   protected uploadFiles(files: File[]) {
     if (this.survey) {
       this.stateChanged("loading");
-      this.survey.uploadFiles(this, this.name, files, (arg1: any, arg2: any) => {
-        if (Array.isArray(arg1)) {
-          this.setValueFromResult(arg1);
-          if (Array.isArray(arg2)) {
-            arg2.forEach(error => this.errors.push(new UploadingFileError(error, this)));
+      this.survey.uploadFiles(
+        this,
+        this.name,
+        files,
+        (arg1: any, arg2: any) => {
+          if (Array.isArray(arg1)) {
+            this.setValueFromResult(arg1);
+            if (Array.isArray(arg2)) {
+              arg2.forEach((error) =>
+                this.errors.push(new UploadingFileError(error, this))
+              );
+              this.stateChanged("error");
+            }
+          }
+          if (arg1 === "success" && Array.isArray(arg2)) {
+            this.setValueFromResult(arg2);
+          }
+          if (arg1 === "error") {
+            if (typeof arg2 === "string") {
+              this.errors.push(new UploadingFileError(arg2, this));
+            }
+            if (Array.isArray(arg2) && arg2.length > 0) {
+              arg2.forEach((error) =>
+                this.errors.push(new UploadingFileError(error, this))
+              );
+            }
             this.stateChanged("error");
           }
+          this.stateChanged("loaded");
         }
-        if (arg1 === "success" && Array.isArray(arg2)) {
-          this.setValueFromResult(arg2);
-        }
-        if (arg1 === "error") {
-          if (typeof (arg2) === "string") {
-            this.errors.push(new UploadingFileError(arg2, this));
-          }
-          if (Array.isArray(arg2) && arg2.length > 0) {
-            arg2.forEach(error => this.errors.push(new UploadingFileError(error, this)));
-          }
-          this.stateChanged("error");
-        }
-        this.stateChanged("loaded");
-      });
+      );
     }
   }
-  protected loadPreview(newValue: any): void { }
+  protected loadPreview(newValue: any): void {}
   protected onChangeQuestionValue(newValue: any): void {
     super.onChangeQuestionValue(newValue);
     this.stateChanged(this.isEmpty() ? "empty" : "loaded");
@@ -143,7 +161,9 @@ export class QuestionFileModelBase extends Question {
     return super.getIsQuestionReady() && !this.isFileLoading;
   }
   private isFileLoadingValue: boolean;
-  protected get isFileLoading(): boolean { return this.isFileLoadingValue; }
+  protected get isFileLoading(): boolean {
+    return this.isFileLoadingValue;
+  }
   protected set isFileLoading(val: boolean) {
     this.isFileLoadingValue = val;
     this.updateIsReady();
@@ -155,7 +175,7 @@ export class QuestionFilePage extends Base {
   private static getId() {
     return "sv_sfp_" + QuestionFilePage.pageCounter++;
   }
-  @propertyArray({}) public items: Array<any>
+  @propertyArray({}) public items: Array<any>;
   public id: string;
   constructor(private question: QuestionFileModel, private index: number) {
     super();
@@ -177,14 +197,20 @@ export class QuestionFileModel extends QuestionFileModelBase {
   @propertyArray({}) public pages: QuestionFilePage[];
 
   navigationDirection: "left" | "right" | "left-delete";
-  @property({ defaultValue: 0, onSet: (val, target) =>{
-    target.updateRenderedPages();
-  } }) indexToShow: number;
   @property({
-    defaultValue: 1, onSet: (_, target) => {
+    defaultValue: 0,
+    onSet: (val, target) => {
+      target.updateRenderedPages();
+    },
+  })
+  indexToShow: number;
+  @property({
+    defaultValue: 1,
+    onSet: (_, target) => {
       target.updateFileNavigator();
-    }
-  }) pageSize: number;
+    },
+  })
+  pageSize: number;
   @property({ defaultValue: false }) containsMultiplyFiles: boolean;
   @property() allowCameraAccess: boolean;
   /**
@@ -204,8 +230,9 @@ export class QuestionFileModel extends QuestionFileModelBase {
       if (!obj.isLoadingFromJson) {
         obj.updateCurrentMode();
       }
-    }
-  }) sourceType: string;
+    },
+  })
+  sourceType: string;
 
   public fileNavigator: ActionContainer = new ActionContainer();
   protected prevFileAction: Action;
@@ -228,7 +255,13 @@ export class QuestionFileModel extends QuestionFileModelBase {
     const isPlayingVideo = this.isPlayingVideo;
     const containsMultipleFiles = this.containsMultiplyFiles;
     const needToShowFileNavigator = this.pageSize < this.previewValue.length;
-    return !isUploading && !isPlayingVideo && containsMultipleFiles && needToShowFileNavigator && this.isDefaultV2Theme;
+    return (
+      !isUploading &&
+      !isPlayingVideo &&
+      containsMultipleFiles &&
+      needToShowFileNavigator &&
+      this.isDefaultV2Theme
+    );
   }
   private get pagesCount() {
     return Math.ceil(this.previewValue.length / this.pageSize);
@@ -250,55 +283,84 @@ export class QuestionFileModel extends QuestionFileModelBase {
     this.fileIndexAction = new Action({
       id: "fileIndex",
       title: this.getFileIndexCaption(),
-      enabled: false
+      enabled: false,
     });
     this.prevFileAction = new Action({
       id: "prevPage",
       iconSize: 16,
       action: () => {
         this.navigationDirection = "left";
-        this.indexToShow = this.previewValue.length && ((this.indexToShow - 1 + this.pagesCount) % this.pagesCount) || 0;
+        this.indexToShow =
+          (this.previewValue.length &&
+            (this.indexToShow - 1 + this.pagesCount) % this.pagesCount) ||
+          0;
         this.fileIndexAction.title = this.getFileIndexCaption();
-      }
+      },
     });
     this.nextFileAction = new Action({
       id: "nextPage",
       iconSize: 16,
       action: () => {
         this.navigationDirection = "right";
-        this.indexToShow = this.previewValue.length && ((this.indexToShow + 1) % this.pagesCount) || 0;
+        this.indexToShow =
+          (this.previewValue.length &&
+            (this.indexToShow + 1) % this.pagesCount) ||
+          0;
         this.fileIndexAction.title = this.getFileIndexCaption();
-      }
+      },
     });
     this.takePictureAction = new Action({
       iconName: "icon-takepicture",
       id: "sv-file-take-picture",
       iconSize: "auto",
-      innerCss: <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append(this.cssClasses.contextButton).append(this.cssClasses.takePictureButton).toString()) as any),
+      innerCss: <string>(
+        (new ComputedUpdater<string>(() =>
+          new CssClassBuilder()
+            .append(this.cssClasses.contextButton)
+            .append(this.cssClasses.takePictureButton)
+            .toString()
+        ) as any)
+      ),
       locTitle: this.locTakePhotoCaption,
       showTitle: false,
       action: () => {
         this.snapPicture();
-      }
+      },
     });
     this.closeCameraAction = new Action({
       iconName: "icon-closecamera",
       id: "sv-file-close-camera",
       iconSize: "auto",
-      innerCss: <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append(this.cssClasses.contextButton).append(this.cssClasses.closeCameraButton).toString()) as any),
+      innerCss: <string>(
+        (new ComputedUpdater<string>(() =>
+          new CssClassBuilder()
+            .append(this.cssClasses.contextButton)
+            .append(this.cssClasses.closeCameraButton)
+            .toString()
+        ) as any)
+      ),
       action: () => {
         this.stopVideo();
-      }
+      },
     });
     this.changeCameraAction = new Action({
       iconName: "icon-changecamera",
       id: "sv-file-change-camera",
       iconSize: "auto",
-      innerCss: <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append(this.cssClasses.contextButton).append(this.cssClasses.changeCameraButton).toString()) as any),
-      visible: <boolean>(new ComputedUpdater<boolean>(() => this.canFlipCamera()) as any),
+      innerCss: <string>(
+        (new ComputedUpdater<string>(() =>
+          new CssClassBuilder()
+            .append(this.cssClasses.contextButton)
+            .append(this.cssClasses.changeCameraButton)
+            .toString()
+        ) as any)
+      ),
+      visible: <boolean>(
+        (new ComputedUpdater<boolean>(() => this.canFlipCamera()) as any)
+      ),
       action: () => {
         this.flipCamera();
-      }
+      },
     });
     this.chooseFileAction = new Action({
       iconName: "icon-choosefile",
@@ -306,18 +368,20 @@ export class QuestionFileModel extends QuestionFileModelBase {
       iconSize: "auto",
       data: { question: this },
       enabledIf: () => !this.isInputReadOnly,
-      component: "sv-file-choose-btn"
+      component: "sv-file-choose-btn",
     });
     this.startCameraAction = new Action({
       iconName: "icon-takepicture_24x24",
       id: "sv-file-start-camera",
       iconSize: "auto",
       locTitle: this.locTakePhotoCaption,
-      showTitle: <boolean>(new ComputedUpdater<boolean>(() => !this.isAnswered) as any),
+      showTitle: <boolean>(
+        (new ComputedUpdater<boolean>(() => !this.isAnswered) as any)
+      ),
       enabledIf: () => !this.isInputReadOnly,
       action: () => {
         this.startVideo();
-      }
+      },
     });
     this.cleanAction = new Action({
       iconName: "icon-clear",
@@ -326,41 +390,72 @@ export class QuestionFileModel extends QuestionFileModelBase {
       locTitle: this.locClearButtonCaption,
       showTitle: false,
       enabledIf: () => !this.isInputReadOnly,
-      innerCss: <string>(new ComputedUpdater<string>(() => this.cssClasses.removeButton) as any),
+      innerCss: <string>(
+        (new ComputedUpdater<string>(() => this.cssClasses.removeButton) as any)
+      ),
       action: () => {
         this.doClean();
-      }
+      },
     });
-    [this.closeCameraAction, this.changeCameraAction, this.takePictureAction].forEach((action) => {
+    [
+      this.closeCameraAction,
+      this.changeCameraAction,
+      this.takePictureAction,
+    ].forEach((action) => {
       action.cssClasses = {};
     });
-    this.registerFunctionOnPropertiesValueChanged(["sourceType", "currentMode", "isAnswered"], () => {
-      this.updateActionsVisibility();
-    });
-    this.actionsContainer.actions = [this.chooseFileAction, this.startCameraAction, this.cleanAction];
-    this.fileNavigator.actions = [this.prevFileAction, this.fileIndexAction, this.nextFileAction];
+    this.registerFunctionOnPropertiesValueChanged(
+      ["sourceType", "currentMode", "isAnswered"],
+      () => {
+        this.updateActionsVisibility();
+      }
+    );
+    this.actionsContainer.actions = [
+      this.chooseFileAction,
+      this.startCameraAction,
+      this.cleanAction,
+    ];
+    this.fileNavigator.actions = [
+      this.prevFileAction,
+      this.fileIndexAction,
+      this.nextFileAction,
+    ];
   }
-  public get videoId(): string { return this.id + "_video"; }
-  public get hasVideoUI(): boolean { return this.currentMode !== "file"; }
-  public get hasFileUI(): boolean { return this.currentMode !== "camera"; }
+  public get videoId(): string {
+    return this.id + "_video";
+  }
+  public get hasVideoUI(): boolean {
+    return this.currentMode !== "file";
+  }
+  public get hasFileUI(): boolean {
+    return this.currentMode !== "camera";
+  }
   private videoStream: MediaStream;
   public startVideo(): void {
-    if (this.currentMode === "file" || this.isDesignMode || this.isPlayingVideo) return;
+    if (this.currentMode === "file" || this.isDesignMode || this.isPlayingVideo)
+      return;
     this.setIsPlayingVideo(true);
     setTimeout(() => {
       this.startVideoInCamera();
     }, 0);
   }
   private get videoHtmlElement() {
-    return this.rootElement?.querySelector(`#${this.videoId}`) as HTMLVideoElement;
+    return this.rootElement?.querySelector(
+      `#${this.videoId}`
+    ) as HTMLVideoElement;
   }
   private startVideoInCamera(): void {
-    this.camera.startVideo(this.videoHtmlElement, (stream: MediaStream) => {
-      this.videoStream = stream;
-      if (!stream) {
-        this.stopVideo();
-      }
-    }, getRenderedSize(this.imageWidth), getRenderedSize(this.imageHeight));
+    this.camera.startVideo(
+      this.videoHtmlElement,
+      (stream: MediaStream) => {
+        this.videoStream = stream;
+        if (!stream) {
+          this.stopVideo();
+        }
+      },
+      getRenderedSize(this.imageWidth),
+      getRenderedSize(this.imageHeight)
+    );
   }
   public stopVideo(): void {
     this.setIsPlayingVideo(false);
@@ -370,7 +465,9 @@ export class QuestionFileModel extends QuestionFileModelBase {
     if (!this.isPlayingVideo) return;
     const blobCallback = (blob: Blob | null): void => {
       if (blob) {
-        const file = new File([blob], "snap_picture.png", { type: "image/png" });
+        const file = new File([blob], "snap_picture.png", {
+          type: "image/png",
+        });
         this.loadFiles([file]);
       }
     };
@@ -394,7 +491,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
   }
   private closeVideoStream(): void {
     if (!!this.videoStream) {
-      this.videoStream.getTracks().forEach(track => {
+      this.videoStream.getTracks().forEach((track) => {
         track.stop();
       });
       this.videoStream = undefined;
@@ -411,16 +508,23 @@ export class QuestionFileModel extends QuestionFileModelBase {
     this.updateCurrentMode();
   }
   private getFileIndexCaption(): string {
-    return this.getLocalizationFormatString("indexText", this.indexToShow + 1, this.pagesCount);
+    return this.getLocalizationFormatString(
+      "indexText",
+      this.indexToShow + 1,
+      this.pagesCount
+    );
   }
   private updateFileNavigator() {
     this.updatePages();
     this.navigationDirection = undefined;
-    this.indexToShow = this.previewValue.length && ((this.indexToShow + this.pagesCount) % this.pagesCount) || 0;
+    this.indexToShow =
+      (this.previewValue.length &&
+        (this.indexToShow + this.pagesCount) % this.pagesCount) ||
+      0;
     this.fileIndexAction.title = this.getFileIndexCaption();
   }
   private updateRenderedPages() {
-    if(this.pages && this.pages[this.indexToShow]) {
+    if (this.pages && this.pages[this.indexToShow]) {
       this.renderedPages = [this.pages[this.indexToShow]];
     }
   }
@@ -430,7 +534,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
     this.pages = [];
     this.renderedPages = [];
     this.previewValue.forEach((val, index) => {
-      if(index % this.pageSize == 0) {
+      if (index % this.pageSize == 0) {
         currentPage = new QuestionFilePage(this, this.pages.length);
         this.pages.push(currentPage);
       }
@@ -442,10 +546,10 @@ export class QuestionFileModel extends QuestionFileModelBase {
   private prevPreviewLength = 0;
   private previewValueChanged() {
     this.navigationDirection = undefined;
-    if(this.previewValue.length !== this.prevPreviewLength) {
-      if(this.previewValue.length > 0) {
-        if(this.prevPreviewLength > this.previewValue.length) {
-          if(this.indexToShow >= this.pagesCount && this.indexToShow > 0) {
+    if (this.previewValue.length !== this.prevPreviewLength) {
+      if (this.previewValue.length > 0) {
+        if (this.prevPreviewLength > this.previewValue.length) {
+          if (this.indexToShow >= this.pagesCount && this.indexToShow > 0) {
             this.indexToShow = this.pagesCount - 1;
             this.navigationDirection = "left-delete";
           }
@@ -459,7 +563,11 @@ export class QuestionFileModel extends QuestionFileModelBase {
     this.updatePages();
     this.fileIndexAction.title = this.getFileIndexCaption();
     this.containsMultiplyFiles = this.previewValue.length > 1;
-    if (this.previewValue.length > 0 && !this.calculatedGapBetweenItems && !this.calculatedItemWidth) {
+    if (
+      this.previewValue.length > 0 &&
+      !this.calculatedGapBetweenItems &&
+      !this.calculatedItemWidth
+    ) {
       setTimeout(() => {
         this.processResponsiveness(0, this._width);
       }, 1);
@@ -551,14 +659,24 @@ export class QuestionFileModel extends QuestionFileModelBase {
   public chooseFile(event: MouseEvent): void {
     if (!this.rootElement) return;
 
-    const inputElement = this.rootElement.querySelector(`#${this.inputId}`) as HTMLInputElement;
-    if(!inputElement) return;
+    const inputElement = this.rootElement.querySelector(
+      `#${this.inputId}`
+    ) as HTMLInputElement;
+    if (!inputElement) return;
 
     event.preventDefault();
     event.stopImmediatePropagation();
     if (inputElement) {
       if (this.survey) {
-        this.survey.chooseFiles(inputElement, files => this.loadFiles(files), { element: this, elementType: this.getType(), propertyName: this.name });
+        this.survey.chooseFiles(
+          inputElement,
+          (files) => this.loadFiles(files),
+          {
+            element: this,
+            elementType: this.getType(),
+            propertyName: this.name,
+          }
+        );
       } else {
         inputElement.click();
       }
@@ -578,17 +696,31 @@ export class QuestionFileModel extends QuestionFileModelBase {
   public getConfirmRemoveMessage(fileName: string): string {
     return (<any>this.confirmRemoveMessage).format(fileName);
   }
-  @property({ localizable: { defaultStr: "confirmRemoveFile" } }) confirmRemoveMessage: string;
-  @property({ localizable: { defaultStr: "confirmRemoveAllFiles" } }) confirmRemoveAllMessage: string;
-  @property({ localizable: { defaultStr: "noFileChosen" } }) noFileChosenCaption: string;
-  @property({ localizable: { defaultStr: "chooseFileCaption" } }) chooseButtonCaption: string;
-  public get takePhotoCaption(): string { return this.getLocalizableStringText("takePhotoCaption"); }
-  public set takePhotoCaption(val: string) { this.setLocalizableStringText("takePhotoCaption", val); }
-  public get locTakePhotoCaption(): LocalizableString { return this.getLocalizableString("takePhotoCaption"); }
-  @property({ localizable: { defaultStr: "replaceFileCaption" } }) replaceButtonCaption: string;
-  @property({ localizable: { defaultStr: "removeFileCaption" } }) removeFileCaption: string;
-  @property({ localizable: { defaultStr: "loadingFile" } }) loadingFileTitle: string;
-  @property({ localizable: { defaultStr: "chooseFile" } }) chooseFileTitle: string;
+  @property({ localizable: { defaultStr: "confirmRemoveFile" } })
+  confirmRemoveMessage: string;
+  @property({ localizable: { defaultStr: "confirmRemoveAllFiles" } })
+  confirmRemoveAllMessage: string;
+  @property({ localizable: { defaultStr: "noFileChosen" } })
+  noFileChosenCaption: string;
+  @property({ localizable: { defaultStr: "chooseFileCaption" } })
+  chooseButtonCaption: string;
+  public get takePhotoCaption(): string {
+    return this.getLocalizableStringText("takePhotoCaption");
+  }
+  public set takePhotoCaption(val: string) {
+    this.setLocalizableStringText("takePhotoCaption", val);
+  }
+  public get locTakePhotoCaption(): LocalizableString {
+    return this.getLocalizableString("takePhotoCaption");
+  }
+  @property({ localizable: { defaultStr: "replaceFileCaption" } })
+  replaceButtonCaption: string;
+  @property({ localizable: { defaultStr: "removeFileCaption" } })
+  removeFileCaption: string;
+  @property({ localizable: { defaultStr: "loadingFile" } })
+  loadingFileTitle: string;
+  @property({ localizable: { defaultStr: "chooseFile" } })
+  chooseFileTitle: string;
 
   public get clearButtonCaption(): string {
     return this.getLocalizableStringText("clearCaption");
@@ -605,42 +737,48 @@ export class QuestionFileModel extends QuestionFileModelBase {
    * @see filePlaceholder
    * @see photoPlaceholder
    */
-  @property({ localizable: { defaultStr: "fileOrPhotoPlaceholder" } }) fileOrPhotoPlaceholder: string;
+  @property({ localizable: { defaultStr: "fileOrPhotoPlaceholder" } })
+  fileOrPhotoPlaceholder: string;
   /**
    * A placeholder text displayed when the File Upload question doesn't contain any photos to upload. Applies only when the [`sourceType`](#sourceType) value is `"camera"`.
    * @see filePlaceholder
    * @see fileOrPhotoPlaceholder
    */
-  @property({ localizable: { defaultStr: "photoPlaceholder" } }) photoPlaceholder: string;
+  @property({ localizable: { defaultStr: "photoPlaceholder" } })
+  photoPlaceholder: string;
   /**
    * A placeholder text displayed when the File Upload question doesn't contain any files to upload. Applies only when the [`sourceType`](#sourceType) value is `"file"`.
    * @see photoPlaceholder
    * @see fileOrPhotoPlaceholder
    */
-  @property({ localizable: { defaultStr: "filePlaceholder" } }) filePlaceholder: string;
+  @property({ localizable: { defaultStr: "filePlaceholder" } })
+  filePlaceholder: string;
 
   @property() locRenderedPlaceholderValue: LocalizableString;
   public get locRenderedPlaceholder(): LocalizableString {
     if (this.locRenderedPlaceholderValue === undefined) {
-      this.locRenderedPlaceholderValue = <LocalizableString><unknown>(new ComputedUpdater<LocalizableString>(() => {
-        const isReadOnly = this.isReadOnly;
-        const hasFileUI = (!this.isDesignMode && this.hasFileUI) || (this.isDesignMode && this.sourceType != "camera");
-        const hasVideoUI = (!this.isDesignMode && this.hasVideoUI) || (this.isDesignMode && this.sourceType != "file");
-        let renderedPlaceholder: LocalizableString;
-        if (isReadOnly) {
-          renderedPlaceholder = this.locNoFileChosenCaption;
-        }
-        else if (hasFileUI && hasVideoUI) {
-          renderedPlaceholder = this.locFileOrPhotoPlaceholder;
-        }
-        else if (hasFileUI) {
-          renderedPlaceholder = this.locFilePlaceholder;
-        }
-        else {
-          renderedPlaceholder = this.locPhotoPlaceholder;
-        }
-        return renderedPlaceholder;
-      }));
+      this.locRenderedPlaceholderValue = <LocalizableString>(
+        (<unknown>new ComputedUpdater<LocalizableString>(() => {
+          const isReadOnly = this.isReadOnly;
+          const hasFileUI =
+            (!this.isDesignMode && this.hasFileUI) ||
+            (this.isDesignMode && this.sourceType != "camera");
+          const hasVideoUI =
+            (!this.isDesignMode && this.hasVideoUI) ||
+            (this.isDesignMode && this.sourceType != "file");
+          let renderedPlaceholder: LocalizableString;
+          if (isReadOnly) {
+            renderedPlaceholder = this.locNoFileChosenCaption;
+          } else if (hasFileUI && hasVideoUI) {
+            renderedPlaceholder = this.locFileOrPhotoPlaceholder;
+          } else if (hasFileUI) {
+            renderedPlaceholder = this.locFilePlaceholder;
+          } else {
+            renderedPlaceholder = this.locPhotoPlaceholder;
+          }
+          return renderedPlaceholder;
+        }))
+      );
     }
     return this.locRenderedPlaceholderValue;
   }
@@ -657,7 +795,10 @@ export class QuestionFileModel extends QuestionFileModelBase {
     if (!this.isDesignMode && this.survey) {
       if (this.sourceType !== "file") {
         this.camera.hasCamera((res: boolean) => {
-          this.setPropertyValue("currentMode", res && this.isDefaultV2Theme ? this.sourceType : "file");
+          this.setPropertyValue(
+            "currentMode",
+            res && this.isDefaultV2Theme ? this.sourceType : "file"
+          );
         });
       } else {
         this.setPropertyValue("currentMode", this.sourceType);
@@ -666,8 +807,12 @@ export class QuestionFileModel extends QuestionFileModelBase {
   }
   private updateActionsVisibility() {
     const isDesignMode = this.isDesignMode;
-    this.chooseFileAction.visible = (!isDesignMode && this.hasFileUI) || (isDesignMode && this.sourceType !== "camera");
-    this.startCameraAction.visible = (!isDesignMode && this.hasVideoUI) || (isDesignMode && this.sourceType !== "file");
+    this.chooseFileAction.visible =
+      (!isDesignMode && this.hasFileUI) ||
+      (isDesignMode && this.sourceType !== "camera");
+    this.startCameraAction.visible =
+      (!isDesignMode && this.hasVideoUI) ||
+      (isDesignMode && this.sourceType !== "file");
     this.cleanAction.visible = !!this.isAnswered;
   }
   get inputTitle(): string {
@@ -677,7 +822,9 @@ export class QuestionFileModel extends QuestionFileModelBase {
   }
 
   public get chooseButtonText() {
-    return this.isEmpty() || this.allowMultiple ? this.chooseButtonCaption : this.replaceButtonCaption;
+    return this.isEmpty() || this.allowMultiple
+      ? this.chooseButtonCaption
+      : this.replaceButtonCaption;
   }
 
   public clear(doneCallback?: () => void) {
@@ -729,14 +876,19 @@ export class QuestionFileModel extends QuestionFileModelBase {
     const showLoadingIndicator = this.showLoadingIndicator;
     const isReadOnly = this.isReadOnly;
     const isEmpty = this.isEmpty();
-    return !isReadOnly && !isEmpty && !showLoadingIndicator && !this.isDefaultV2Theme;
+    return (
+      !isReadOnly && !isEmpty && !showLoadingIndicator && !this.isDefaultV2Theme
+    );
   }
   get showRemoveButton(): boolean {
     return this.showRemoveButtonCore && this.cssClasses.removeButton;
   }
   get showRemoveButtonBottom(): boolean {
-    const cssClasses = new CssClassBuilder().append(this.cssClasses.removeButtonBottom).append(this.cssClasses.contextButton).toString();
-    return this.showRemoveButtonCore && cssClasses as any;
+    const cssClasses = new CssClassBuilder()
+      .append(this.cssClasses.removeButtonBottom)
+      .append(this.cssClasses.contextButton)
+      .toString();
+    return this.showRemoveButtonCore && (cssClasses as any);
   }
   //
   defaultImage(data: any) {
@@ -760,7 +912,9 @@ export class QuestionFileModel extends QuestionFileModelBase {
         if (status === "success") {
           var oldValue = this.value;
           if (Array.isArray(oldValue)) {
-            this.value = oldValue.filter((f) => !Helpers.isTwoValueEquals(f, content, true, false, false));
+            this.value = oldValue.filter(
+              (f) => !Helpers.isTwoValueEquals(f, content, true, false, false)
+            );
           } else {
             this.value = undefined;
           }
@@ -839,19 +993,17 @@ export class QuestionFileModel extends QuestionFileModelBase {
     var newValues = Array.isArray(newValue)
       ? newValue
       : !!newValue
-        ? [newValue]
-        : [];
+      ? [newValue]
+      : [];
 
     if (this.storeDataAsText) {
       newValues.forEach((value) => {
         var content = value.content || value;
-        this.previewValue.push(
-          {
-            name: value.name,
-            type: value.type,
-            content: content,
-          },
-        );
+        this.previewValue.push({
+          name: value.name,
+          type: value.type,
+          content: content,
+        });
       });
       this.previewValueChanged();
     } else {
@@ -883,9 +1035,9 @@ export class QuestionFileModel extends QuestionFileModelBase {
     return errorLength === this.errors.length;
   }
   private isFileImage(file: {
-    content: string,
-    name?: string,
-    type?: string,
+    content: string;
+    name?: string;
+    type?: string;
   }): boolean {
     if (!file || !file.content || !file.content.substring) return false;
     const imagePrefix = "data:image";
@@ -920,7 +1072,10 @@ export class QuestionFileModel extends QuestionFileModelBase {
     return questionPlainData;
   }
   public getImageWrapperCss(data: any): string {
-    return new CssClassBuilder().append(this.cssClasses.imageWrapper).append(this.cssClasses.imageWrapperDefaultImage, this.defaultImage(data)).toString();
+    return new CssClassBuilder()
+      .append(this.cssClasses.imageWrapper)
+      .append(this.cssClasses.imageWrapperDefaultImage, this.defaultImage(data))
+      .toString();
   }
   protected getActionsContainerCss(css: any): string {
     return new CssClassBuilder()
@@ -940,7 +1095,10 @@ export class QuestionFileModel extends QuestionFileModelBase {
       .append(this.cssClasses.chooseFile)
       .append(this.cssClasses.controlDisabled, this.isReadOnly)
       .append(this.cssClasses.chooseFileAsText, !isAnswered)
-      .append(this.cssClasses.chooseFileAsTextDisabled, !isAnswered && this.isInputReadOnly)
+      .append(
+        this.cssClasses.chooseFileAsTextDisabled,
+        !isAnswered && this.isInputReadOnly
+      )
       .append(this.cssClasses.contextButton, isAnswered)
       .append(this.cssClasses.chooseFileAsIcon, isAnswered)
       .toString();
@@ -960,7 +1118,12 @@ export class QuestionFileModel extends QuestionFileModelBase {
       .append(this.cssClasses.rootDragging, this.isDragging)
       .append(this.cssClasses.rootAnswered, this.isAnswered)
       .append(this.cssClasses.single, !this.allowMultiple)
-      .append(this.cssClasses.singleImage, !this.allowMultiple && this.isAnswered && this.canPreviewImage(this.value[0]))
+      .append(
+        this.cssClasses.singleImage,
+        !this.allowMultiple &&
+          this.isAnswered &&
+          this.canPreviewImage(this.value[0])
+      )
       .append(this.cssClasses.mobile, this.isMobile)
       .toString();
   }
@@ -987,7 +1150,8 @@ export class QuestionFileModel extends QuestionFileModelBase {
   protected calcCssClasses(css: any): any {
     const classes = super.calcCssClasses(css);
     this.actionsContainer.cssClasses = css.actionBar;
-    this.actionsContainer.cssClasses.itemWithTitle = this.actionsContainer.cssClasses.item;
+    this.actionsContainer.cssClasses.itemWithTitle =
+      this.actionsContainer.cssClasses.item;
     this.actionsContainer.cssClasses.item = "";
     this.actionsContainer.cssClasses.itemAsIcon = classes.contextButton;
     this.actionsContainer.containerCss = classes.actionsContainer;
@@ -1025,17 +1189,37 @@ export class QuestionFileModel extends QuestionFileModelBase {
     return {
       getEnterOptions: (page: QuestionFilePage) => {
         const pageClass = this.cssClasses.page;
-        return { cssClass: pageClass ? new CssClassBuilder()
-          .append(`${pageClass}--enter-from-left`, this.navigationDirection == "left" || this.navigationDirection == "left-delete")
-          .append(`${pageClass}--enter-from-right`, this.navigationDirection == "right").toString(): ""
+        return {
+          cssClass: pageClass
+            ? new CssClassBuilder()
+                .append(
+                  `${pageClass}--enter-from-left`,
+                  this.navigationDirection == "left" ||
+                    this.navigationDirection == "left-delete"
+                )
+                .append(
+                  `${pageClass}--enter-from-right`,
+                  this.navigationDirection == "right"
+                )
+                .toString()
+            : "",
         };
       },
       getLeaveOptions: (page: QuestionFilePage) => {
         const pageClass = this.cssClasses.page;
         return {
-          cssClass: pageClass ? new CssClassBuilder()
-            .append(`${pageClass}--leave-to-left`, this.navigationDirection == "right")
-            .append(`${pageClass}--leave-to-right`, this.navigationDirection == "left").toString() : ""
+          cssClass: pageClass
+            ? new CssClassBuilder()
+                .append(
+                  `${pageClass}--leave-to-left`,
+                  this.navigationDirection == "right"
+                )
+                .append(
+                  `${pageClass}--leave-to-right`,
+                  this.navigationDirection == "left"
+                )
+                .toString()
+            : "",
         };
       },
       getAnimatedElement: (page: QuestionFilePage) => {
@@ -1046,16 +1230,25 @@ export class QuestionFileModel extends QuestionFileModelBase {
       },
       getRerenderEvent: () => {
         return this.onElementRerendered;
-      }
+      },
     };
   }
-  private pagesAnimation = new AnimationTab<QuestionFilePage>(this.getPagesAnimationOptions(), (val) => {
-    this._renderedPages = val;
-  }, () => this.renderedPages);
+  private pagesAnimation = new AnimationTab<QuestionFilePage>(
+    this.getPagesAnimationOptions(),
+    (val) => {
+      this._renderedPages = val;
+    },
+    () => this.renderedPages
+  );
 
-  private calcAvailableItemsCount = (availableWidth: number, itemWidth: number, gap: number): number => {
+  private calcAvailableItemsCount = (
+    availableWidth: number,
+    itemWidth: number,
+    gap: number
+  ): number => {
     let itemsCount = Math.floor(availableWidth / (itemWidth + gap));
-    if ((itemsCount + 1) * (itemWidth + gap) - gap <= availableWidth) itemsCount++;
+    if ((itemsCount + 1) * (itemWidth + gap) - gap <= availableWidth)
+      itemsCount++;
     return itemsCount;
   };
   private calculatedGapBetweenItems: number;
@@ -1071,23 +1264,44 @@ export class QuestionFileModel extends QuestionFileModelBase {
   protected processResponsiveness(_: number, availableWidth: number): boolean {
     this._width = availableWidth;
     if (this.rootElement) {
-      if ((!this.calculatedGapBetweenItems || !this.calculatedItemWidth) && this.allowMultiple) {
+      if (
+        (!this.calculatedGapBetweenItems || !this.calculatedItemWidth) &&
+        this.allowMultiple
+      ) {
         const fileListSelector = this.getFileListSelector();
-        const fileListElement = fileListSelector ? this.rootElement.querySelector(this.getFileListSelector()) : undefined;
-        if(fileListElement) {
-          const visiblePage = fileListElement.querySelector(classesToSelector(this.cssClasses.page));
-          if(visiblePage) {
-            const firstVisibleItem = visiblePage.querySelector(classesToSelector(this.cssClasses.previewItem));
-            this.calculatedGapBetweenItems = Math.ceil(Number.parseFloat(DomDocumentHelper.getComputedStyle(visiblePage).gap));
-            if(firstVisibleItem) {
-              this.calculatedItemWidth = Math.ceil(Number.parseFloat(DomDocumentHelper.getComputedStyle(firstVisibleItem).width));
+        const fileListElement = fileListSelector
+          ? this.rootElement.querySelector(this.getFileListSelector())
+          : undefined;
+        if (fileListElement) {
+          const visiblePage = fileListElement.querySelector(
+            classesToSelector(this.cssClasses.page)
+          );
+          if (visiblePage) {
+            const firstVisibleItem = visiblePage.querySelector(
+              classesToSelector(this.cssClasses.previewItem)
+            );
+            this.calculatedGapBetweenItems = Math.ceil(
+              Number.parseFloat(
+                DomDocumentHelper.getComputedStyle(visiblePage).gap
+              )
+            );
+            if (firstVisibleItem) {
+              this.calculatedItemWidth = Math.ceil(
+                Number.parseFloat(
+                  DomDocumentHelper.getComputedStyle(firstVisibleItem).width
+                )
+              );
             }
           }
         }
       }
     }
     if (this.calculatedGapBetweenItems && this.calculatedItemWidth) {
-      this.pageSize = this.calcAvailableItemsCount(availableWidth, this.calculatedItemWidth, this.calculatedGapBetweenItems);
+      this.pageSize = this.calcAvailableItemsCount(
+        availableWidth,
+        this.calculatedItemWidth,
+        this.calculatedGapBetweenItems
+      );
       return true;
     }
     return false;
@@ -1096,7 +1310,13 @@ export class QuestionFileModel extends QuestionFileModelBase {
   //#region
   // web-based methods
   private rootElement: HTMLElement;
-  private canDragDrop(): boolean { return !this.isInputReadOnly && this.currentMode !== "camera" && !this.isPlayingVideo; }
+  private canDragDrop(): boolean {
+    return (
+      !this.isInputReadOnly &&
+      this.currentMode !== "camera" &&
+      !this.isPlayingVideo
+    );
+  }
   public afterRenderQuestionElement(el: HTMLElement): void {
     this.rootElement = el;
   }
@@ -1110,7 +1330,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       this.isDragging = true;
       this.dragCounter++;
     }
-  }
+  };
   onDragOver = (event: any) => {
     if (!this.canDragDrop()) {
       event.returnValue = false;
@@ -1118,7 +1338,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
     }
     event.dataTransfer.dropEffect = "copy";
     event.preventDefault();
-  }
+  };
   onDrop = (event: any) => {
     if (this.canDragDrop()) {
       this.isDragging = false;
@@ -1127,7 +1347,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       let src = event.dataTransfer;
       this.onChange(src);
     }
-  }
+  };
   onDragLeave = (event: any) => {
     if (this.canDragDrop()) {
       this.dragCounter--;
@@ -1135,24 +1355,26 @@ export class QuestionFileModel extends QuestionFileModelBase {
         this.isDragging = false;
       }
     }
-  }
+  };
   doChange = (event: any) => {
     var src = event.target || event.srcElement;
     this.onChange(src);
-  }
+  };
   doClean = () => {
     if (this.needConfirmRemoveFile) {
       confirmActionAsync({
         message: this.confirmRemoveAllMessage,
-        funcOnYes: () => { this.clearFilesCore(); },
+        funcOnYes: () => {
+          this.clearFilesCore();
+        },
         locale: this.getLocale(),
         rootElement: this.survey.rootElement,
-        cssClass: this.cssClasses.confirmDialog
+        cssClass: this.cssClasses.confirmDialog,
       });
       return;
     }
     this.clearFilesCore();
-  }
+  };
   private clearFilesCore(): void {
     if (this.rootElement) {
       const input = this.rootElement.querySelectorAll("input")[0];
@@ -1167,10 +1389,12 @@ export class QuestionFileModel extends QuestionFileModelBase {
     if (this.needConfirmRemoveFile) {
       confirmActionAsync({
         message: this.getConfirmRemoveMessage(data.name),
-        funcOnYes: () => { this.clearFilesCore(); },
+        funcOnYes: () => {
+          this.clearFilesCore();
+        },
         locale: this.getLocale(),
         rootElement: this.survey.rootElement,
-        cssClass: this.cssClasses.confirmDialog
+        cssClass: this.cssClasses.confirmDialog,
       });
       return;
     }
@@ -1178,34 +1402,57 @@ export class QuestionFileModel extends QuestionFileModelBase {
   }
   private removeFileCore(data: any): void {
     const previewIndex = this.previewValue.indexOf(data);
-    this.removeFileByContent(previewIndex === -1 ? data : this.value[previewIndex]);
+    this.removeFileByContent(
+      previewIndex === -1 ? data : this.value[previewIndex]
+    );
   }
   doDownloadFileFromContainer = (event: MouseEvent) => {
     event.stopPropagation();
     const currentTarget = event.currentTarget as HTMLElement;
-    if(currentTarget && currentTarget.getElementsByTagName) {
+    if (currentTarget && currentTarget.getElementsByTagName) {
       const link = currentTarget.getElementsByTagName("a")[0];
       link?.click();
     }
-  }
+  };
   doDownloadFile = (event: any, data: any) => {
     event.stopPropagation();
     if (detectIEOrEdge()) {
       event.preventDefault();
       loadFileFromBase64(data.content, data.name);
     }
-  }
+  };
   //#endregion
   public dispose(): void {
     this.cameraValue = undefined;
     this.closeVideoStream();
     super.dispose();
   }
+
+  public get elementData(): any {
+    if (this.value) {
+      const keys = Object.keys(this.value[0]);
+      const filedata = {};
+      keys.map((x) => {
+        filedata[`fs-file-${x}`] = this.value[0][x];
+      });
+
+      const data = this.createElementData(filedata, "fs-file");
+      return data;
+    } else {
+      const data = this.getDataElement("file");
+      return data;
+    }
+  }
 }
 Serializer.addClass(
   "file",
   [
-    { name: "showCommentArea:switch", layout: "row", visible: true, category: "general" },
+    {
+      name: "showCommentArea:switch",
+      layout: "row",
+      visible: true,
+      category: "general",
+    },
     { name: "showPreview:boolean", default: true, visible: false },
     "allowMultiple:boolean",
     {
@@ -1226,10 +1473,28 @@ Serializer.addClass(
     { name: "correctAnswer", visible: false },
     { name: "validators", visible: false },
     { name: "needConfirmRemoveFile:boolean" },
-    { name: "sourceType", choices: ["file", "camera", "file-camera"], default: "file", category: "general", visible: true },
-    { name: "fileOrPhotoPlaceholder:text", serializationProperty: "locFileOrPhotoPlaceholder", category: "general" },
-    { name: "photoPlaceholder:text", serializationProperty: "locPhotoPlaceholder", category: "general" },
-    { name: "filePlaceholder:text", serializationProperty: "locFilePlaceholder", category: "general" },
+    {
+      name: "sourceType",
+      choices: ["file", "camera", "file-camera"],
+      default: "file",
+      category: "general",
+      visible: true,
+    },
+    {
+      name: "fileOrPhotoPlaceholder:text",
+      serializationProperty: "locFileOrPhotoPlaceholder",
+      category: "general",
+    },
+    {
+      name: "photoPlaceholder:text",
+      serializationProperty: "locPhotoPlaceholder",
+      category: "general",
+    },
+    {
+      name: "filePlaceholder:text",
+      serializationProperty: "locFilePlaceholder",
+      category: "general",
+    },
     { name: "allowCameraAccess:switch", category: "general", visible: false },
   ],
   function () {
@@ -1242,32 +1507,39 @@ QuestionFactory.Instance.registerQuestion("file", (name) => {
 });
 
 export class FileLoader {
-  constructor(private fileQuestion: QuestionFileModelBase, private callback: (status: string, files: any[]) => void) {
-  }
+  constructor(
+    private fileQuestion: QuestionFileModelBase,
+    private callback: (status: string, files: any[]) => void
+  ) {}
   loaded: any[] = [];
   load(files: Array<any>): void {
     let downloadedCount = 0;
     this.loaded = new Array(files.length);
     files.forEach((value, index) => {
       if (this.fileQuestion.survey) {
-        this.fileQuestion.survey.downloadFile(this.fileQuestion, this.fileQuestion.name, value, (status, data) => {
-          if (!this.fileQuestion || !this.callback) {
-            return;
-          }
-          if (status !== "error") {
-            this.loaded[index] = {
-              content: data,
-              name: value.name,
-              type: value.type,
-            };
-            downloadedCount++;
-            if (downloadedCount === files.length) {
-              this.callback(status, this.loaded);
+        this.fileQuestion.survey.downloadFile(
+          this.fileQuestion,
+          this.fileQuestion.name,
+          value,
+          (status, data) => {
+            if (!this.fileQuestion || !this.callback) {
+              return;
             }
-          } else {
-            this.callback("error", this.loaded);
+            if (status !== "error") {
+              this.loaded[index] = {
+                content: data,
+                name: value.name,
+                type: value.type,
+              };
+              downloadedCount++;
+              if (downloadedCount === files.length) {
+                this.callback(status, this.loaded);
+              }
+            } else {
+              this.callback("error", this.loaded);
+            }
           }
-        });
+        );
       }
     });
   }

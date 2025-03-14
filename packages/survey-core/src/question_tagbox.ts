@@ -138,7 +138,14 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   @property() textWrapEnabled: boolean;
 
   public get elementData(): any {
-    const data = this.getDataElement("tagbox", this.inputValue);
+    let data;
+    if (!!this.selectedItems) {
+      const values = this.selectedItems.map((x) => x.text).join(", ");
+
+      data = this.getDataElement("tagbox", values);
+    } else {
+      data = this.getDataElement("tagbox");
+    }
 
     return data;
   }

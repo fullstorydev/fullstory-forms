@@ -18,7 +18,7 @@ export class QuestionCommentModel extends QuestionTextBase {
     super(name);
   }
   public get textAreaModel(): TextAreaModel {
-    if(!this.textAreaModelValue) {
+    if (!this.textAreaModelValue) {
       this.textAreaModelValue = new TextAreaModel(this.getTextAreaOptions());
     }
     return this.textAreaModelValue;
@@ -26,7 +26,9 @@ export class QuestionCommentModel extends QuestionTextBase {
   private getTextAreaOptions(): ITextArea {
     const _this = this;
     const updateQuestionValue = (newValue: any) => {
-      if (!Helpers.isTwoValueEquals(_this.value, newValue, false, true, false)) {
+      if (
+        !Helpers.isTwoValueEquals(_this.value, newValue, false, true, false)
+      ) {
         _this.value = newValue;
       }
     };
@@ -49,12 +51,24 @@ export class QuestionCommentModel extends QuestionTextBase {
       ariaDescribedBy: () => this.a11y_input_ariaDescribedBy,
       ariaInvalid: () => this.a11y_input_ariaInvalid,
       ariaErrormessage: () => this.a11y_input_ariaErrormessage,
-      getTextValue: () => { return this.value; },
-      onTextAreaChange: (e) => { updateQuestionValue(e.target.value); },
-      onTextAreaInput: (event) => { this.onInput(event); },
-      onTextAreaKeyDown: (event) => { this.onKeyDown(event); },
-      onTextAreaFocus: (event) => { this.onFocus(event); },
-      onTextAreaBlur: (event) => { this.onBlur(event); }
+      getTextValue: () => {
+        return this.value;
+      },
+      onTextAreaChange: (e) => {
+        updateQuestionValue(e.target.value);
+      },
+      onTextAreaInput: (event) => {
+        this.onInput(event);
+      },
+      onTextAreaKeyDown: (event) => {
+        this.onKeyDown(event);
+      },
+      onTextAreaFocus: (event) => {
+        this.onFocus(event);
+      },
+      onTextAreaBlur: (event) => {
+        this.onBlur(event);
+      },
     };
     return options;
   }
@@ -100,7 +114,9 @@ export class QuestionCommentModel extends QuestionTextBase {
   }
   public get renderedAutoGrow(): boolean {
     const autoGrow = this.autoGrow;
-    return autoGrow === undefined && this.survey ? this.survey.autoGrowComment : !!autoGrow;
+    return autoGrow === undefined && this.survey
+      ? this.survey.autoGrowComment
+      : !!autoGrow;
   }
   /**
    * Specifies whether to display a resize handle for the comment area.
@@ -138,8 +154,7 @@ export class QuestionCommentModel extends QuestionTextBase {
     this.element = undefined;
   }
   public onInput(event: any): void {
-    if (this.isInputTextUpdate)
-      this.value = event.target.value;
+    if (this.isInputTextUpdate) this.value = event.target.value;
     this.updateRemainingCharacterCounter(event.target.value);
   }
   protected onBlurCore(event: any): void {
@@ -147,7 +162,10 @@ export class QuestionCommentModel extends QuestionTextBase {
   }
   public onKeyDown(event: any): void {
     this.onKeyDownPreprocess && this.onKeyDownPreprocess(event);
-    if (!this.acceptCarriageReturn && (event.key === "Enter" || event.keyCode === 13)) {
+    if (
+      !this.acceptCarriageReturn &&
+      (event.key === "Enter" || event.keyCode === 13)
+    ) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -159,7 +177,9 @@ export class QuestionCommentModel extends QuestionTextBase {
     }
     super.setNewValue(newValue);
   }
-  protected getValueSeparator(): string { return "\n"; }
+  protected getValueSeparator(): string {
+    return "\n";
+  }
   protected notifyStateChanged(prevState: string): void {
     super.notifyStateChanged(prevState);
     if (!this.isCollapsed) {
@@ -167,7 +187,16 @@ export class QuestionCommentModel extends QuestionTextBase {
     }
   }
   public get className(): string {
-    return (this.cssClasses ? this.getControlClass() : "panel-comment-root") || undefined;
+    return (
+      (this.cssClasses ? this.getControlClass() : "panel-comment-root") ||
+      undefined
+    );
+  }
+
+  public get elementData(): any {
+    const data = this.getDataElement("textarea", this.value);
+
+    return data;
   }
 }
 Serializer.addClass(
@@ -176,9 +205,11 @@ Serializer.addClass(
     { name: "maxLength:number", default: -1 },
     { name: "cols:number", default: 50, visible: false, isSerializable: false },
     { name: "rows:number", default: 4 },
-    { name: "placeholder",
+    {
+      name: "placeholder",
       alternativeName: "placeHolder",
-      serializationProperty: "locPlaceholder" },
+      serializationProperty: "locPlaceholder",
+    },
     {
       name: "textUpdateMode",
       default: "default",
@@ -186,7 +217,7 @@ Serializer.addClass(
     },
     { name: "autoGrow:boolean", defaultFunc: () => undefined },
     { name: "allowResize:boolean", defaultFunc: () => undefined },
-    { name: "acceptCarriageReturn:boolean", default: true, visible: false }
+    { name: "acceptCarriageReturn:boolean", default: true, visible: false },
   ],
   function () {
     return new QuestionCommentModel("");

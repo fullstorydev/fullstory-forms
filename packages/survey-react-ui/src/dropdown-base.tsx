@@ -98,7 +98,6 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
         dropdownListModel.inputStringRendered = e.target.value;
       }
     };
-
     return (
       <div
         {...this.question.elementData}

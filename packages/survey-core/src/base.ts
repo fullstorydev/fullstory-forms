@@ -1491,6 +1491,60 @@ export class Base {
   public afterRerender(): void {
     this.onElementRerendered?.fire(this, { isCancel: false });
   }
+
+  public flattenArray(
+    schemas: any[],
+    properties: any,
+    type: string
+  ): { [k: string]: any } {
+    for (const schema of schemas) {
+      if (typeof schema === "string") {
+        properties[type] = properties[type]
+          ? `${properties[type]}, ${schema}`
+          : schema;
+      } else {
+        this.flattenObject(schema, properties);
+      }
+    }
+
+    return properties;
+  }
+
+  public flattenObject(
+    object,
+    properties: any = {},
+    parentKey: string = ""
+  ): { [k: string]: any } {
+    // extract surface level type
+    // type = this.getObjectType(object, type);
+
+    Object.keys(object).map((x, i) => {
+      // x = mostamount
+      // Capture the value of where we are in the object
+      const val = object[x]; // =  "asdfdsf"
+
+      // prepare key to be joined
+      const key = x.replace(/[^\w\s]/gi, "").toLocaleLowerCase(); // = mostamount
+      const keyName =
+        parentKey === "" ? key : `${parentKey.toLowerCase()}_${key}`;
+
+      // if the value is an object run this function and flatten that values
+      if (typeof val === "object") {
+        // determine if object is a list or not
+        Array.isArray(val)
+          ? this.flattenArray(val, properties, keyName)
+          : this.flattenObject(val, properties, keyName);
+        return;
+      }
+
+      // apply the value to the newly named key
+      properties[keyName] = !!properties[keyName]
+        ? `${properties[keyName]} / ${val}`
+        : val;
+    });
+
+    return properties;
+  }
 }
 
 export class ArrayChanges<T = any> {

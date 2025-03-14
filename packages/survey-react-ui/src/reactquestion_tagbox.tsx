@@ -20,8 +20,8 @@ export class SurveyQuestionTagbox extends SurveyQuestionDropdownBase<QuestionTag
     const items = this.question.selectedChoices.map((choice, index) => {
       return this.renderItem("item" + index, choice);
     });
-    const values = this.question.selectedChoices.map(choice => choice.id).join(", ");
     const css = `${this.question.getControlClass()} ${this.masked}`;
+
     return (
       <div
         {...this.question.elementData}

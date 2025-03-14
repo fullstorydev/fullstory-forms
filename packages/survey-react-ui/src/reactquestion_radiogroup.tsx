@@ -29,8 +29,6 @@ export class SurveyQuestionRadiogroup extends SurveyQuestionElementBase {
       );
     }
 
-    const elementData = this.getDataElement("fs-radio-group");
-
     return (
       <fieldset
         {...this.question.elementData}

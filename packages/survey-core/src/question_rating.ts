@@ -41,6 +41,16 @@ export class RenderedRatingItem extends Base {
     this.locText.onStringChanged.add(this.onStringChangedCallback.bind(this));
     this.onStringChangedCallback();
   }
+
+  public elementData(type: string): any {
+    const data = this.getDataElementItem(
+      type,
+      this.text,
+      this.itemValue.selected
+    );
+
+    return data;
+  }
 }
 
 class RatingItemValue extends ItemValue {

@@ -15,8 +15,18 @@ import { DomDocumentHelper } from "./global_variables_utils";
 export class QuestionBooleanModel extends Question {
   constructor(name: string) {
     super(name);
-    this.createLocalizableString("labelFalse", this, true, "booleanUncheckedLabel");
-    this.createLocalizableString("labelTrue", this, true, "booleanCheckedLabel");
+    this.createLocalizableString(
+      "labelFalse",
+      this,
+      true,
+      "booleanUncheckedLabel"
+    );
+    this.createLocalizableString(
+      "labelTrue",
+      this,
+      true,
+      "booleanCheckedLabel"
+    );
   }
   public getType(): string {
     return "boolean";
@@ -52,8 +62,12 @@ export class QuestionBooleanModel extends Question {
   }
   @property() booleanValueRendered: boolean;
 
-  public get checkedValue(): any { return this.booleanValue; }
-  public set checkedValue(val: any) { this.booleanValue = val; }
+  public get checkedValue(): any {
+    return this.booleanValue;
+  }
+  public set checkedValue(val: any) {
+    this.booleanValue = val;
+  }
   private setBooleanValue(val: any) {
     if (this.isValueEmpty(val)) {
       this.value = undefined;
@@ -74,12 +88,18 @@ export class QuestionBooleanModel extends Question {
   }
   public getDefaultValue(): any {
     const val = this.defaultValue;
-    if (val === "indeterminate" || val === undefined || val === null) return undefined;
+    if (val === "indeterminate" || val === undefined || val === null)
+      return undefined;
     return val == "true" ? this.getValueTrue() : this.getValueFalse();
   }
   public get locTitle(): LocalizableString {
     const original = this.getLocalizableString("title");
-    if ((this.isLabelRendered && !this.showTitle || this.isValueEmpty(original.text)) && !this.isValueEmpty(this.locLabel.text)) return this.locLabel;
+    if (
+      ((this.isLabelRendered && !this.showTitle) ||
+        this.isValueEmpty(original.text)) &&
+      !this.isValueEmpty(this.locLabel.text)
+    )
+      return this.locLabel;
     return original;
   }
   public get labelRenderedAriaID(): string {
@@ -102,7 +122,11 @@ export class QuestionBooleanModel extends Question {
     return this.titleLocation === "hidden" && this.useTitleAsLabel;
   }
   get canRenderLabelDescription(): boolean {
-    return this.isLabelRendered && this.hasDescription && (this.hasDescriptionUnderTitle || this.hasDescriptionUnderInput);
+    return (
+      this.isLabelRendered &&
+      this.hasDescription &&
+      (this.hasDescriptionUnderTitle || this.hasDescriptionUnderInput)
+    );
   }
   /**
    * Gets or sets a text label that corresponds to a positive answer.
@@ -133,10 +157,14 @@ export class QuestionBooleanModel extends Question {
    */
   @property({ defaultValue: false }) swapOrder: boolean;
   get locLabelLeft(): LocalizableString {
-    return this.swapOrder ? this.getLocalizableString("labelTrue") : this.getLocalizableString("labelFalse");
+    return this.swapOrder
+      ? this.getLocalizableString("labelTrue")
+      : this.getLocalizableString("labelFalse");
   }
   get locLabelRight(): LocalizableString {
-    return this.swapOrder ? this.getLocalizableString("labelFalse") : this.getLocalizableString("labelTrue");
+    return this.swapOrder
+      ? this.getLocalizableString("labelFalse")
+      : this.getLocalizableString("labelTrue");
   }
 
   /**
@@ -181,13 +209,22 @@ export class QuestionBooleanModel extends Question {
     return this.valueFalse !== undefined ? this.valueFalse : false;
   }
   protected setDefaultValue(): void {
-    if (this.isDefaultValueSet("true", this.valueTrue)) this.setBooleanValue(true);
-    if (this.isDefaultValueSet("false", this.valueFalse)) this.setBooleanValue(false);
+    if (this.isDefaultValueSet("true", this.valueTrue))
+      this.setBooleanValue(true);
+    if (this.isDefaultValueSet("false", this.valueFalse))
+      this.setBooleanValue(false);
     const val = this.defaultValue;
-    if (val === "indeterminate" || val === null || val === undefined) this.setBooleanValue(undefined);
+    if (val === "indeterminate" || val === null || val === undefined)
+      this.setBooleanValue(undefined);
   }
-  private isDefaultValueSet(defaultValueCheck: any, valueTrueOrFalse: any): boolean {
-    return this.defaultValue == defaultValueCheck || (valueTrueOrFalse !== undefined && this.defaultValue === valueTrueOrFalse);
+  private isDefaultValueSet(
+    defaultValueCheck: any,
+    valueTrueOrFalse: any
+  ): boolean {
+    return (
+      this.defaultValue == defaultValueCheck ||
+      (valueTrueOrFalse !== undefined && this.defaultValue === valueTrueOrFalse)
+    );
   }
   protected getDisplayValueCore(keysAsText: boolean, value: any): any {
     if (value == this.getValueTrue()) return this.locLabelTrue.textOrHtml;
@@ -211,28 +248,35 @@ export class QuestionBooleanModel extends Question {
     return this.getItemCssValue(this.cssClasses);
   }
   public getCheckboxItemCss() {
-    return this.getItemCssValue(
-      {
-        item: this.cssClasses.checkboxItem,
-        itemOnError: this.cssClasses.checkboxItemOnError,
-        itemDisabled: this.cssClasses.checkboxItemDisabled,
-        itemDisable: this.cssClasses.checkboxItemDisabled,
-        itemReadOnly: this.cssClasses.checkboxItemReadOnly,
-        itemPreview: this.cssClasses.checkboxItemPreview,
-        itemChecked: this.cssClasses.checkboxItemChecked,
-        itemIndeterminate: this.cssClasses.checkboxItemIndeterminate
-      }
-    );
+    return this.getItemCssValue({
+      item: this.cssClasses.checkboxItem,
+      itemOnError: this.cssClasses.checkboxItemOnError,
+      itemDisabled: this.cssClasses.checkboxItemDisabled,
+      itemDisable: this.cssClasses.checkboxItemDisabled,
+      itemReadOnly: this.cssClasses.checkboxItemReadOnly,
+      itemPreview: this.cssClasses.checkboxItemPreview,
+      itemChecked: this.cssClasses.checkboxItemChecked,
+      itemIndeterminate: this.cssClasses.checkboxItemIndeterminate,
+    });
   }
 
   public getLabelCss(checked: boolean): string {
     return new CssClassBuilder()
       .append(this.cssClasses.label)
-      .append(this.cssClasses.disabledLabel, this.booleanValue === !checked || this.isDisabledStyle)
+      .append(
+        this.cssClasses.disabledLabel,
+        this.booleanValue === !checked || this.isDisabledStyle
+      )
       .append(this.cssClasses.labelReadOnly, this.isReadOnlyStyle)
       .append(this.cssClasses.labelPreview, this.isPreviewStyle)
-      .append(this.cssClasses.labelTrue, !this.isIndeterminate && checked === !this.swapOrder)
-      .append(this.cssClasses.labelFalse, !this.isIndeterminate && checked === this.swapOrder)
+      .append(
+        this.cssClasses.labelTrue,
+        !this.isIndeterminate && checked === !this.swapOrder
+      )
+      .append(
+        this.cssClasses.labelFalse,
+        !this.isIndeterminate && checked === this.swapOrder
+      )
       .toString();
   }
 
@@ -245,9 +289,12 @@ export class QuestionBooleanModel extends Question {
   }
 
   public get svgIcon(): string {
-    if (this.booleanValue && this.cssClasses.svgIconCheckedId) return this.cssClasses.svgIconCheckedId;
-    if (!this.isDeterminated && this.cssClasses.svgIconIndId) return this.cssClasses.svgIconIndId;
-    if (!this.booleanValue && this.cssClasses.svgIconUncheckedId) return this.cssClasses.svgIconUncheckedId;
+    if (this.booleanValue && this.cssClasses.svgIconCheckedId)
+      return this.cssClasses.svgIconCheckedId;
+    if (!this.isDeterminated && this.cssClasses.svgIconIndId)
+      return this.cssClasses.svgIconIndId;
+    if (!this.booleanValue && this.cssClasses.svgIconUncheckedId)
+      return this.cssClasses.svgIconUncheckedId;
     return this.cssClasses.svgIconId;
   }
 
@@ -262,6 +309,16 @@ export class QuestionBooleanModel extends Question {
     return this.isIndeterminate && !this.isInputReadOnly;
   }
 
+  public get elementData(): any {
+    let data;
+    if (!!this.labelFalse && !!this.labelTrue) {
+      const val = this.value ? this.labelTrue : this.labelFalse;
+      data = this.getDataElement("boolean", val);
+    } else {
+      data = this.getDataElement("boolean");
+    }
+    return data;
+  }
   public getCheckedLabel(): LocalizableString {
     if (this.booleanValue === true) {
       return this.locLabelTrue;
@@ -269,7 +326,10 @@ export class QuestionBooleanModel extends Question {
       return this.locLabelFalse;
     }
   }
-  protected setQuestionValue(newValue: any, updateIsAnswered: boolean = true): void {
+  protected setQuestionValue(
+    newValue: any,
+    updateIsAnswered: boolean = true
+  ): void {
     if (newValue === "true" && this.valueTrue !== "true") newValue = true;
     if (newValue === "false" && this.valueFalse !== "false") newValue = false;
     if (newValue === "indeterminate" || newValue === null) newValue = undefined;
@@ -286,15 +346,15 @@ export class QuestionBooleanModel extends Question {
   private calculateBooleanValueByEvent(event: any, isRightClick: boolean) {
     let isRtl = false;
     if (DomDocumentHelper.isAvailable()) {
-      isRtl = DomDocumentHelper.getComputedStyle(event.target).direction == "rtl";
+      isRtl =
+        DomDocumentHelper.getComputedStyle(event.target).direction == "rtl";
     }
     this.booleanValue = isRtl ? !isRightClick : isRightClick;
   }
   public onSwitchClickModel(event: any) {
     if (this.allowClick) {
       preventDefaults(event);
-      var isRightClick =
-        event.offsetX / event.target.offsetWidth > 0.5;
+      var isRightClick = event.offsetX / event.target.offsetWidth > 0.5;
       this.calculateBooleanValueByEvent(event, isRightClick);
       return;
     }
@@ -335,7 +395,9 @@ export class QuestionBooleanModel extends Question {
   protected getCompactRenderAs(): string {
     return "radio";
   }
-  protected createActionContainer(allowAdaptiveActions?: boolean): ActionContainer {
+  protected createActionContainer(
+    allowAdaptiveActions?: boolean
+  ): ActionContainer {
     return super.createActionContainer(this.renderAs !== "checkbox");
   }
 
@@ -352,8 +414,18 @@ export class QuestionBooleanModel extends Question {
 Serializer.addClass(
   "boolean",
   [
-    { name: "showCommentArea:switch", layout: "row", visible: true, category: "general" },
-    { name: "label:text", serializationProperty: "locLabel", isSerializable: false, visible: false },
+    {
+      name: "showCommentArea:switch",
+      layout: "row",
+      visible: true,
+      category: "general",
+    },
+    {
+      name: "label:text",
+      serializationProperty: "locLabel",
+      isSerializable: false,
+      visible: false,
+    },
     {
       name: "labelTrue:text",
       serializationProperty: "locLabelTrue",

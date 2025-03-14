@@ -26,6 +26,7 @@ export class SurveyQuestionRating extends SurveyQuestionElementBase {
       handleOnClick: this.handleOnClick,
       isDisplayMode: this.isDisplayMode
     });
+
     return renderedItem;
   }
 
@@ -35,8 +36,8 @@ export class SurveyQuestionRating extends SurveyQuestionElementBase {
     var maxText = this.question.maxRateDescription ? this.renderLocString(this.question.locMaxRateDescription) : null;
 
     return (
-      <div {...this.question.elementData} className={this.question.ratingRootCss} ref={div => this.setControl(div)}>
-        <fieldset role="radiogroup">
+      <div className={this.question.ratingRootCss} ref={div => this.setControl(div)}>
+        <fieldset role="radiogroup" {...this.question.elementData}>
           <legend role="presentation" className={"sv-hidden"}></legend>
           {!!this.question.hasMinLabel ? <span className={cssClasses.minText}>{minText}</span> : null}
           {this.question.renderedRateItems.map((item, index) => this.renderItem(item, index))}

@@ -23,62 +23,69 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     const loadingIndicator = this.question.showLoadingIndicator ? this.renderLoadingIndicator() : null;
     const video = this.question.isPlayingVideo ? this.renderVideo() : null;
     const fileDecorator = this.question.showFileDecorator ? this.renderFileDecorator() : null;
-    const clearButton = this.question.showRemoveButton ? this.renderClearButton(
-      this.question.cssClasses.removeButton
+    const clearButton = this.question.showRemoveButton
+      ? this.renderClearButton(this.question.cssClasses.removeButton)
+      : null;
+    const clearButtonBottom = this.question.showRemoveButtonBottom
+      ? this.renderClearButton(this.question.cssClasses.removeButtonBottom)
+      : null;
+    const fileNavigator = this.question.fileNavigatorVisible ? (
+      <SurveyActionBar model={this.question.fileNavigator}></SurveyActionBar>
     ) : null;
-    const clearButtonBottom = this.question.showRemoveButtonBottom ? this.renderClearButton(
-      this.question.cssClasses.removeButtonBottom
-    ) : null;
-    const fileNavigator = this.question.fileNavigatorVisible ? (<SurveyActionBar model={this.question.fileNavigator}></SurveyActionBar>) : null;
     let fileInput;
     if (this.question.isReadOnlyAttr) {
-      fileInput = <input
-        readOnly
-        type="file"
-        className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
-        id={this.question.inputId}
-        ref={input => (this.setControl(input))}
-        style={!this.isDisplayMode ? {} : { color: "transparent" }}
-        multiple={this.question.allowMultiple}
-        placeholder={this.question.title}
-        accept={this.question.acceptedTypes}
-      />;
+      fileInput = (
+        <input
+          readOnly
+          type="file"
+          className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
+          id={this.question.inputId}
+          ref={input => this.setControl(input)}
+          style={!this.isDisplayMode ? {} : { color: "transparent" }}
+          multiple={this.question.allowMultiple}
+          placeholder={this.question.title}
+          accept={this.question.acceptedTypes}
+        />
+      );
     } else if (this.question.isDisabledAttr) {
-      fileInput = <input
-        disabled
-        type="file"
-        className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
-        id={this.question.inputId}
-        ref={input => (this.setControl(input))}
-        style={!this.isDisplayMode ? {} : { color: "transparent" }}
-        multiple={this.question.allowMultiple}
-        placeholder={this.question.title}
-        accept={this.question.acceptedTypes}
-      />;
+      fileInput = (
+        <input
+          disabled
+          type="file"
+          className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
+          id={this.question.inputId}
+          ref={input => this.setControl(input)}
+          style={!this.isDisplayMode ? {} : { color: "transparent" }}
+          multiple={this.question.allowMultiple}
+          placeholder={this.question.title}
+          accept={this.question.acceptedTypes}
+        />
+      );
     } else if (this.question.hasFileUI) {
-      fileInput = <input
-        type="file"
-        disabled={this.isDisplayMode}
-        tabIndex={-1}
-        className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
-        id={this.question.inputId}
-        ref={input => (this.setControl(input))}
-        style={!this.isDisplayMode ? {} : { color: "transparent" }}
-        aria-required={this.question.ariaRequired}
-        aria-label={this.question.ariaLabel}
-        aria-invalid={this.question.ariaInvalid}
-        aria-errormessage={this.question.ariaErrormessage}
-        multiple={this.question.allowMultiple}
-        title={this.question.inputTitle}
-        accept={this.question.acceptedTypes}
-        capture={this.question.renderCapture as "user" | "environment"}
-      />;
+      fileInput = (
+        <input
+          type="file"
+          disabled={this.isDisplayMode}
+          tabIndex={-1}
+          className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
+          id={this.question.inputId}
+          ref={input => this.setControl(input)}
+          style={!this.isDisplayMode ? {} : { color: "transparent" }}
+          aria-required={this.question.ariaRequired}
+          aria-label={this.question.ariaLabel}
+          aria-invalid={this.question.ariaInvalid}
+          aria-errormessage={this.question.ariaErrormessage}
+          multiple={this.question.allowMultiple}
+          title={this.question.inputTitle}
+          accept={this.question.acceptedTypes}
+          capture={this.question.renderCapture as "user" | "environment"}
+        />
+      );
     } else {
       fileInput = null;
     }
-
     return (
-      <div className={this.question.fileRootCss} ref={el => (this.setContent(el))}>
+      <div {...this.question.elementData} className={this.question.fileRootCss} ref={el => this.setContent(el)}>
         {fileInput}
         <div
           className={this.question.cssClasses.dragArea}
@@ -100,16 +107,17 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
   }
   protected renderFileDecorator(): React.JSX.Element {
     const chooseButton = this.question.showChooseButton ? this.renderChooseButton() : null;
-    const actionsContainer = this.question.actionsContainerVisible ? <SurveyActionBar model={this.question.actionsContainer}></SurveyActionBar> : null;
+    const actionsContainer = this.question.actionsContainerVisible ? (
+      <SurveyActionBar model={this.question.actionsContainer}></SurveyActionBar>
+    ) : null;
     const noFileChosen = this.question.isEmpty() ? (
-      <span className={this.question.cssClasses.noFileChosen}>
-        {this.question.noFileChosenCaption}
-      </span>) : null;
+      <span className={this.question.cssClasses.noFileChosen}>{this.question.noFileChosenCaption}</span>
+    ) : null;
     return (
-      <div
-        className={this.question.getFileDecoratorCss()}
-      >
-        <span className={this.question.cssClasses.dragAreaPlaceholder}>{this.renderLocString(this.question.locRenderedPlaceholder)}</span>
+      <div className={this.question.getFileDecoratorCss()}>
+        <span className={this.question.cssClasses.dragAreaPlaceholder}>
+          {this.renderLocString(this.question.locRenderedPlaceholder)}
+        </span>
         <div className={this.question.cssClasses.wrapper}>
           {chooseButton}
           {actionsContainer}
@@ -125,7 +133,13 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     return !this.question.isUploading ? (
       <button type="button" onClick={this.question.doClean} className={className}>
         <span>{this.question.clearButtonCaption}</span>
-        {(!!this.question.cssClasses.removeButtonIconId) ? <SvgIcon iconName={this.question.cssClasses.removeButtonIconId} size={"auto"} title={this.question.clearButtonCaption}></SvgIcon> : null}
+        {!!this.question.cssClasses.removeButtonIconId ? (
+          <SvgIcon
+            iconName={this.question.cssClasses.removeButtonIconId}
+            size={"auto"}
+            title={this.question.clearButtonCaption}
+          ></SvgIcon>
+        ) : null}
       </button>
     ) : null;
   }
@@ -133,15 +147,21 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     return ReactElementFactory.Instance.createElement("sv-file-preview", { question: this.question });
   }
   protected renderLoadingIndicator(): React.JSX.Element {
-    return <div className={this.question.cssClasses.loadingIndicator}><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
+    return (
+      <div className={this.question.cssClasses.loadingIndicator}>
+        <LoadingIndicatorComponent></LoadingIndicatorComponent>
+      </div>
+    );
   }
   protected renderVideo(): React.JSX.Element {
-    return (<div className={this.question.cssClasses.videoContainer}>
-      <SurveyAction item={this.question.changeCameraAction}></SurveyAction>
-      <SurveyAction item={this.question.closeCameraAction}></SurveyAction>
-      <video autoPlay playsInline id={this.question.videoId} className={this.question.cssClasses.video}></video>
-      <SurveyAction item={this.question.takePictureAction}></SurveyAction>
-    </div>);
+    return (
+      <div className={this.question.cssClasses.videoContainer}>
+        <SurveyAction item={this.question.changeCameraAction}></SurveyAction>
+        <SurveyAction item={this.question.closeCameraAction}></SurveyAction>
+        <video autoPlay playsInline id={this.question.videoId} className={this.question.cssClasses.video}></video>
+        <SurveyAction item={this.question.takePictureAction}></SurveyAction>
+      </div>
+    );
   }
 }
 

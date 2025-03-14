@@ -36,8 +36,14 @@ export class RatingItemBase extends SurveyElementBase<IRatingItemProps, any> {
 export class RatingItem extends RatingItemBase {
   render(): React.JSX.Element | null {
     var itemText = this.renderLocString(this.item.locText);
+
+    const elementData = this.item.elementData("fs-rating-number");
     return (
-      <label onMouseDown={this.handleOnMouseDown} className={this.question.getItemClassByText(this.item.itemValue, this.item.text)}>
+      <label
+        {...elementData}
+        onMouseDown={this.handleOnMouseDown}
+        className={this.question.getItemClassByText(this.item.itemValue, this.item.text)}
+      >
         <input
           type="radio"
           className="sv-visuallyhidden"
@@ -48,13 +54,15 @@ export class RatingItem extends RatingItemBase {
           readOnly={this.question.isReadOnlyAttr}
           checked={this.question.value == this.item.value}
           onClick={this.props.handleOnClick}
-          onChange={() => { }}
+          onChange={() => {}}
           aria-required={this.question.ariaRequired}
           aria-label={this.question.ariaLabel}
           aria-invalid={this.question.ariaInvalid}
           aria-errormessage={this.question.ariaErrormessage}
         />
-        <span className={this.question.cssClasses.itemText} data-text={this.item.text}>{itemText}</span>
+        <span className={this.question.cssClasses.itemText} data-text={this.item.text}>
+          {itemText}
+        </span>
       </label>
     );
   }
@@ -63,6 +71,6 @@ export class RatingItem extends RatingItemBase {
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-rating-item", (props) => {
+ReactElementFactory.Instance.registerElement("sv-rating-item", props => {
   return React.createElement(RatingItem, props);
 });
