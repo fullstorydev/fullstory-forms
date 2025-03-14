@@ -422,19 +422,7 @@ export class MultipleTextItemModel
   }
 
   public get elementData(): any {
-    // fs-element
-    const type = `fs-${this.getType()}`;
-    // fs-<INPUT_TYPE>-name
-    const title = this.title;
-
-    // fs-<INPUT_TYPE>-value
-    const values = this.getAllValues();
-    const flatValues = this.flattenObject(values);
-    console.log("flatvalues", flatValues);
-    const data = {
-      "fs-element": type,
-    };
-    data[`${type}-name`] = title;
+    const data = this.getDataElement(this.getType(), this.value);
 
     return data;
   }
@@ -935,10 +923,33 @@ export class QuestionMultipleTextModel
   }
 
   public get elementData(): any {
-    console.log("getAllValues", this.getAllValues());
-    const data = this.getDataElement("multipletext");
+    // get input type and prepare it to be the element name
+    const type = `fs-${this.getType()}`;
 
-    return data;
+    // create data object
+    const data = {};
+
+    // make fs element name the type
+    data[`fs-element`] = type;
+
+    // make the element name with type and title
+    data[`${type}-name`] = this.title;
+
+    // if values we can flatten them
+    if (!!Object.keys(this.getAllValues()).length) {
+      // flatten all values for data element
+      const flatValues = this.flattenObject(this.getAllValues());
+
+      // insert all flat values in data object with fs- appended
+      Object.keys(flatValues).map((x) => {
+        data[`fs-${x}`] = flatValues[x];
+      });
+    }
+
+    // create element data
+    const dataElement = this.createElementData(data);
+
+    return dataElement;
   }
 }
 

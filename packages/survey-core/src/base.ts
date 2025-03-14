@@ -472,10 +472,9 @@ export class Base {
     const data = {};
 
     data[`${title}-name`] = `fs-${title}`;
-    if (!!this.jsonObj["capture"]) {
-      if (this.jsonObj["capture"] === "unmask" && !!value) {
-        data[`${title}-value`] = value;
-      }
+
+    if (!!value) {
+      data[`${title}-value`] = value;
     }
 
     const element = this.createElementData(data, title);
