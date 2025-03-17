@@ -3,7 +3,6 @@ import { Base, ArrayChanges, SurveyModel, Helpers, PanelModel, LocalizableString
 import { ISurveyCreator } from "./reactquestion";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
-import { isDate } from "date-fns";
 
 export class SurveyElementBase<P, S> extends React.Component<P, S> {
   public static renderLocString(locStr: LocalizableString, style: any = null, key?: string): React.JSX.Element {

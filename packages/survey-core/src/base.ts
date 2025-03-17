@@ -1522,12 +1522,11 @@ export class Base {
     // type = this.getObjectType(object, type);
 
     Object.keys(object).map((x, i) => {
-      // x = mostamount
       // Capture the value of where we are in the object
-      const val = object[x]; // =  "asdfdsf"
+      const val = object[x];
 
       // prepare key to be joined
-      const key = x.replace(/[^\w\s]/gi, "").toLocaleLowerCase(); // = mostamount
+      const key = x.replace(/[^\w\s]/gi, "").toLocaleLowerCase();
       const keyName =
         parentKey === "" ? key : `${parentKey.toLowerCase()}_${key}`;
 

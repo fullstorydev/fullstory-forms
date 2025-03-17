@@ -940,13 +940,15 @@ export class QuestionMultipleTextModel
     data[`${type}-name`] = name;
 
     // if values we can flatten them
-    if (!!Object.keys(this.getAllValues()).length) {
+    if (!!this.value && !!Object.keys(this.value).length) {
       // flatten all values for data element
-      const flatValues = this.flattenObject(this.getAllValues());
+      const flatValues = this.flattenObject(this.value);
 
       // insert all flat values in data object with fs- appended
       Object.keys(flatValues).map((x) => {
-        data[`fs-${x}`] = flatValues[x];
+        if (typeof flatValues[x] !== "undefined") {
+          data[`fs-${x}`] = flatValues[x];
+        }
       });
     }
 
