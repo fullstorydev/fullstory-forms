@@ -59,7 +59,7 @@ export class QuestionRadiogroupModel extends QuestionCheckboxBase {
   public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
-    const data = this.getDataElement("radiogroup", name, this.inputValue);
+    const data = this.getDataElement("radiogroup", name, this.value);
 
     return data;
   }
