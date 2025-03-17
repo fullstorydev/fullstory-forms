@@ -13,7 +13,7 @@ export class SurveyQuestionRanking extends SurveyQuestionElementBase {
   protected renderElement(): React.JSX.Element {
     if (!this.question.selectToRankEnabled) {
       return (
-        <div className={this.question.rootClass} ref={root => this.setControl(root)}>
+        <div {...this.question.elementData} className={this.question.rootClass} ref={root => this.setControl(root)}>
           {this.getItems()}
         </div>
       );
