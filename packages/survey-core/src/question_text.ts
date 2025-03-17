@@ -375,7 +375,9 @@ export class QuestionTextModel extends QuestionTextBase {
   }
 
   public get elementData(): any {
-    const data = this.getDataElement("text", this.title, this.inputValue);
+    const name = this.name ? this.name : this.title;
+
+    const data = this.getDataElement("text", name, this.inputValue);
 
     return data;
   }

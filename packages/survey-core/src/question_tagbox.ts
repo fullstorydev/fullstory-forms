@@ -139,12 +139,14 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
 
   public get elementData(): any {
     let data;
+    const name = this.name ? this.name : this.title;
+
     if (!!this.selectedItems) {
       const values = this.selectedItems.map((x) => x.text).join(", ");
 
-      data = this.getDataElement("tagbox", this.title, values);
+      data = this.getDataElement("tagbox", name, values);
     } else {
-      data = this.getDataElement("tagbox", this.title);
+      data = this.getDataElement("tagbox", name);
     }
 
     return data;

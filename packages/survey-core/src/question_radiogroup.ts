@@ -57,7 +57,9 @@ export class QuestionRadiogroupModel extends QuestionCheckboxBase {
     return this.getLocalizationString("clearCaption");
   }
   public get elementData(): any {
-    const data = this.getDataElement("radiogroup", this.title, this.inputValue);
+    const name = this.name ? this.name : this.title;
+
+    const data = this.getDataElement("radiogroup", name, this.inputValue);
 
     return data;
   }

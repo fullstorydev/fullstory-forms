@@ -236,7 +236,9 @@ export class QuestionRatingModel extends Question {
   }
 
   public get elementData(): any {
-    const data = this.getDataElement("rating", this.title, this.inputValue);
+    const name = this.name ? this.name : this.title;
+
+    const data = this.getDataElement("rating", name, this.inputValue);
 
     return data;
   }

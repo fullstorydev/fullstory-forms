@@ -422,7 +422,9 @@ export class MultipleTextItemModel
   }
 
   public get elementData(): any {
-    const data = this.getDataElement(this.title, this.getType(), this.value);
+    const name = this.name ? this.name : this.title;
+
+    const data = this.getDataElement(this.getType(), name, this.value);
 
     return data;
   }
@@ -923,6 +925,8 @@ export class QuestionMultipleTextModel
   }
 
   public get elementData(): any {
+    const name = this.name ? this.name : this.title;
+
     // get input type and prepare it to be the element name
     const type = this.getType();
 
@@ -933,7 +937,7 @@ export class QuestionMultipleTextModel
     data[`fs-element`] = type;
 
     // make the element name with type and title
-    data[`${type}-name`] = this.title;
+    data[`${type}-name`] = name;
 
     // if values we can flatten them
     if (!!Object.keys(this.getAllValues()).length) {

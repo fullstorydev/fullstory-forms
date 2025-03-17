@@ -1429,9 +1429,11 @@ export class QuestionFileModel extends QuestionFileModelBase {
   }
 
   public get elementData(): any {
-    if (this.value) {
+    const name = this.name ? this.name : this.title;
+
+    if (this.value && this.value.length > 0) {
       const keys = Object.keys(this.value[0]);
-      const filedata = { "fs-file-name": this.title };
+      const filedata = { "fs-file-name": name };
       keys.map((x) => {
         if (x === "name") {
           filedata[`fs-file-filename`] = this.value[0][x];
@@ -1443,7 +1445,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       const data = this.createElementData(filedata, "file");
       return data;
     } else {
-      const data = this.getDataElement("file", this.title);
+      const data = this.getDataElement("file", name);
       return data;
     }
   }

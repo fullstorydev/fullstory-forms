@@ -471,7 +471,11 @@ export class Base {
   public getDataElement(elementType: string, title?: string, value?: any) {
     const data = {};
 
-    data[`fs-${elementType}-name`] = title;
+    data[`fs-${elementType}-name`] = title
+      .toLowerCase()
+      .trim()
+      .split(" ")
+      .join("-");
 
     if (!!value) {
       data[`fs-${elementType}-value`] = value;
