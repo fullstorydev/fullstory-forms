@@ -37,7 +37,7 @@ export class RatingItem extends RatingItemBase {
   render(): React.JSX.Element | null {
     var itemText = this.renderLocString(this.item.locText);
 
-    const elementData = this.item.elementData("fs-rating-number");
+    const elementData = this.item.elementData("rating-number");
     return (
       <label
         {...elementData}

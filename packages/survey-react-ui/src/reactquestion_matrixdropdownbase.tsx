@@ -114,12 +114,6 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
       matrixrow.push(this.renderCell(cells[i], cssClasses, i + 1, reason));
     }
     const key = "row" + keyValue;
-    const column = this.question.columns[index];
-
-    const data = { "fs-table-row-index": index + 1 };
-    if (!!column) {
-      data["fs-table-row-name"] = column.name;
-    }
 
     return (
       <React.Fragment key={key}>
@@ -141,8 +135,6 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
     reason?: string
   ): React.JSX.Element {
     const key = "cell" + cell.id;
-    const dataElement = { "fs-matrix-column": column };
-    const elementData = this.createElementData(dataElement, "fs-matrix-cell");
 
     if (cell.hasQuestion) {
       return (
@@ -181,14 +173,7 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
     }
 
     return (
-      <td
-        {...elementData}
-        className={cell.className}
-        key={key}
-        style={cellStyle}
-        colSpan={cell.colSpans}
-        title={cell.getTitle()}
-      >
+      <td className={cell.className} key={key} style={cellStyle} colSpan={cell.colSpans} title={cell.getTitle()}>
         {cellContent}
       </td>
     );

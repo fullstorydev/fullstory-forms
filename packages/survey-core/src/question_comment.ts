@@ -194,7 +194,7 @@ export class QuestionCommentModel extends QuestionTextBase {
   }
 
   public get elementData(): any {
-    const data = this.getDataElement("textarea", this.value);
+    const data = this.getDataElement("textarea", this.title, this.value);
 
     return data;
   }

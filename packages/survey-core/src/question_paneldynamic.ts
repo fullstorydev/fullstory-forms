@@ -2994,7 +2994,7 @@ export class QuestionPanelDynamicModel
   }
 
   public get elementData(): any {
-    const data = this.getDataElement(this.getType());
+    const data = this.getDataElement(this.getType(), this.title);
 
     return data;
   }

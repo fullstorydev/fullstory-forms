@@ -145,29 +145,17 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
     const tds: Array<React.JSX.Element> = [];
     const row = this.row;
     const cellComponent = this.question.cellComponent;
-    const elementDataStore = { "fs-matrix-row": this.row.item.id.split(" ").join("-") };
 
     for (var i = 0; i < this.question.visibleColumns.length; i++) {
       let td: React.JSX.Element | null = null;
       const column = this.question.visibleColumns[i];
       const key = "value" + i;
 
-      elementDataStore["fs-matrix-column"] = !!column.jsonObj.text
-        ? column.jsonObj.text.toLowerCase().split(" ").join("-")
-        : column.jsonObj;
-      if (this.masked === "fs-unmask") {
-        elementDataStore["fs-matrix-selected"] = false;
-        if (!!this.state) {
-          elementDataStore["fs-matrix-cell-selected"] = this.state.value === i + 1;
-        }
-      }
-      const elementData = this.createElementData(elementDataStore, "fs-matrix-cell");
-
       let itemClass = `${this.question.getItemClass(row, column)} ${this.masked}`;
       if (this.question.hasCellText) {
         const getHandler = (column: any) => () => this.cellClick(row, column);
         td = (
-          <td {...elementData} key={key} className={itemClass} onClick={getHandler ? getHandler(column) : () => {}}>
+          <td key={key} className={itemClass} onClick={getHandler ? getHandler(column) : () => {}}>
             {this.renderLocString(this.question.getCellDisplayLocText(row.name, column))}
           </td>
         );
@@ -184,7 +172,6 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
         });
         td = (
           <td
-            {...elementData}
             key={key}
             data-responsive-title={column.locText.renderedHtml}
             className={`${this.question.cssClasses.cell} ${this.masked}`}

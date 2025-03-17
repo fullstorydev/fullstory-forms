@@ -195,7 +195,7 @@ export class SurveyQuestionImagePickerItem extends ReactSurveyElement {
       );
     }
     const css = `${cssClasses.itemControl} ${this.masked}`;
-    const dataElement = this.item.elementData("fs-imagepicker-item");
+    const dataElement = this.item.elementData("imagepicker-item");
 
     const renderedItem = (
       <div className={itemClass}>

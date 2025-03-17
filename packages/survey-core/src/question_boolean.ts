@@ -310,12 +310,13 @@ export class QuestionBooleanModel extends Question {
   }
 
   public get elementData(): any {
+    const title = this.title;
     let data;
     if (!!this.labelFalse && !!this.labelTrue) {
       const val = this.value ? this.labelTrue : this.labelFalse;
-      data = this.getDataElement("boolean", val);
+      data = this.getDataElement("boolean", title, val);
     } else {
-      data = this.getDataElement("boolean");
+      data = this.getDataElement("boolean", title);
     }
     return data;
   }

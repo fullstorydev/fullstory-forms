@@ -2705,7 +2705,7 @@ export class PanelModel extends PanelModelBase implements IElement {
   public get elementData(): any {
     const data = {};
     const type = `fs-${this.getType()}`;
-    data["fs-element"] = type;
+    data["fs-element"] = this.getType();
     data[`${type}-name`] = this.title;
     data[`${type}-expanded`] = this.isExpanded;
     const elementData = this.createElementData(data);

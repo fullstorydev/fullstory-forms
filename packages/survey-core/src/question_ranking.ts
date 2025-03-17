@@ -376,7 +376,7 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
   }
 
   public get elementData(): any {
-    const data = this.getDataElement("ranking", this.inputValue);
+    const data = this.getDataElement("ranking", this.title, this.inputValue);
 
     return data;
   }

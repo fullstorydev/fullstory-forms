@@ -192,7 +192,7 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
       <span className={this.cssClasses.controlLabel}>{this.renderLocString(this.item.locText, this.textStyle)}</span>
     ) : null;
 
-    const elementData = this.item.elementData("fs-checkbox-item");
+    const elementData = this.item.elementData("checkbox-item");
 
     return (
       <div className={itemClass} role="presentation" ref={this.rootRef} {...elementData}>

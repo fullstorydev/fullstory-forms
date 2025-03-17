@@ -422,7 +422,7 @@ export class MultipleTextItemModel
   }
 
   public get elementData(): any {
-    const data = this.getDataElement(this.getType(), this.value);
+    const data = this.getDataElement(this.title, this.getType(), this.value);
 
     return data;
   }
@@ -924,7 +924,7 @@ export class QuestionMultipleTextModel
 
   public get elementData(): any {
     // get input type and prepare it to be the element name
-    const type = `fs-${this.getType()}`;
+    const type = this.getType();
 
     // create data object
     const data = {};

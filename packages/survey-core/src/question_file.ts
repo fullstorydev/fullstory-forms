@@ -1431,15 +1431,19 @@ export class QuestionFileModel extends QuestionFileModelBase {
   public get elementData(): any {
     if (this.value) {
       const keys = Object.keys(this.value[0]);
-      const filedata = {};
+      const filedata = { "fs-file-name": this.title };
       keys.map((x) => {
-        filedata[`fs-file-${x}`] = this.value[0][x];
+        if (x === "name") {
+          filedata[`fs-file-filename`] = this.value[0][x];
+        } else {
+          filedata[`fs-file-${x}`] = this.value[0][x];
+        }
       });
 
-      const data = this.createElementData(filedata, "fs-file");
+      const data = this.createElementData(filedata, "file");
       return data;
     } else {
-      const data = this.getDataElement("file");
+      const data = this.getDataElement("file", this.title);
       return data;
     }
   }

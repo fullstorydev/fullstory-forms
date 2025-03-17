@@ -23,68 +23,237 @@ var json = {
   logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
   logoPosition: "left",
   questions: [
-    // {
-    //   type: "panel",
-    //   title: "Panel",
-    //   innerIndent: 1,
-    //   state: "expanded",
-    //   elements: [
-    //     {
-    //       type: "checkbox",
-    //       choices: [
-    //         {
-    //           value: "1",
-    //           text: "Customer relationship"
-    //         },
-    //         {
-    //           value: "2",
-    //           text: "Service quality"
-    //         },
-    //         {
-    //           value: "3",
-    //           text: "Support response time"
-    //         }
-    //       ],
-    //       name: "What should be improved?"
-    //     },
-    //     {
-    //       type: "comment",
-    //       name: "suggestions",
-    //       title: "What would make you more satisfied with the Product?"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "paneldynamic",
-    //   name: "relatives",
-    //   title: "Panel Dynamic",
-    //   renderMode: "progressTop",
-    //   templateTitle: "Information about: {panel.relativeType}",
-    //   templateElements: [
-    //     {
-    //       name: "relativeType",
-    //       type: "dropdown",
-    //       title: "Relative",
-    //       choices: ["father", "mother", "brother", "sister", "son", "daughter"],
-    //       isRequired: true
-    //     }
-    //   ]
-    // }
-    // {
-    //   name: "signature",
-    //   type: "signaturepad",
-    //   capture: "unmask",
-    //   title: "Sign here",
-    //   isRequired: true
-    // },
-    // {
-    //   name: "name",
-    //   type: "text",
-    //   capture: "unmask",
-    //   title: "Text",
-    //   placeHolder: "Jon Snow",
-    //   isRequired: true
-    // },
+    {
+      type: "boolean",
+      name: "bool",
+      capture: "unmask",
+      title: "Age Choice",
+      label: "Are you 21 or older?",
+      isRequired: true
+    },
+    {
+      type: "checkbox",
+      name: "car",
+      title: "Car Checkbox",
+      isRequired: true,
+      showNoneItem: true,
+      colCount: 4,
+      showSelectAllItem: true,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "comment",
+      name: "suggestions",
+      title: "Suggestion Comment",
+      capture: "unmask"
+    },
+    {
+      type: "dropdown",
+      name: "cars",
+      title: "Car Dropdown",
+      isRequired: true,
+      showNoneItem: true,
+      capture: "unmask",
+      colCount: 4,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "file",
+      title: "Image Picker",
+      name: "image",
+      storeDataAsText: false,
+      showPreview: true,
+      imageWidth: 150,
+      maxSize: 102400
+    },
+    {
+      type: "imagepicker",
+      name: "choosepicture",
+      title: "Animal Picker",
+      capture: "unmask",
+      imageHeight: "150px",
+      imageWidth: "225px",
+      choices: [
+        {
+          value: "lion",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+        },
+        {
+          value: "giraffe",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+        },
+        {
+          value: "panda",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+        },
+        {
+          value: "camel",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+        }
+      ]
+    },
+    {
+      type: "multipletext",
+      name: "pricelimit",
+      title: "Payment Suggestion",
+      colCount: 2,
+      items: [
+        {
+          name: "mostamount",
+          title: "Most amount you would every pay for a product like ours"
+        },
+        {
+          name: "leastamount",
+          title: "The least amount you would feel comfortable paying"
+        }
+      ]
+    },
+    {
+      type: "panel",
+      title: "Checkbox Panel",
+      innerIndent: 1,
+      state: "expanded",
+      elements: [
+        {
+          type: "checkbox",
+          choices: [
+            {
+              value: "1",
+              text: "Customer relationship"
+            },
+            {
+              value: "2",
+              text: "Service quality"
+            },
+            {
+              value: "3",
+              text: "Support response time"
+            }
+          ],
+          name: "What should be improved?"
+        },
+        {
+          type: "comment",
+          name: "suggestions",
+          title: "What would make you more satisfied with the Product?"
+        }
+      ]
+    },
+    {
+      type: "paneldynamic",
+      name: "relatives",
+      title: "Dropdown Panel",
+      renderMode: "progressTop",
+      templateTitle: "Information about: {panel.relativeType}",
+      templateElements: [
+        {
+          name: "relativeType",
+          type: "dropdown",
+          title: "Relative",
+          choices: ["father", "mother", "brother", "sister", "son", "daughter"],
+          isRequired: true
+        }
+      ]
+    },
+    {
+      type: "radiogroup",
+      name: "cars",
+      title: "Car Radiogroup",
+      isRequired: true,
+      capture: "unmask",
+      colCount: 4,
+      choices: [
+        "None",
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "ranking",
+      name: "smartphone-features",
+      title: "Please rank the following smartphone features in order of importance:",
+      choices: [
+        "Battery life",
+        "Screen size",
+        "Storage space",
+        "Camera quality",
+        "Durability",
+        "Processor power",
+        "Price"
+      ]
+    },
+    {
+      type: "rating",
+      name: "satisfaction",
+      title: "Satisfaction Rating",
+      minRateDescription: "Not Satisfied",
+      maxRateDescription: "Completely satisfied"
+    },
+    {
+      name: "signature",
+      type: "signaturepad",
+      capture: "unmask",
+      title: "Sign here",
+      isRequired: true
+    },
+    {
+      type: "tagbox",
+      name: "cars2",
+      title: "Cars Tagbox",
+      capture: "unmask",
+      showNoneItem: true,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      name: "name",
+      type: "text",
+      capture: "unmask",
+      title: "Name",
+      placeHolder: "Jon Snow",
+      isRequired: true
+    }
+
     // {
     //     name: "birthdate",
     //     type: "text",
@@ -211,32 +380,7 @@ var json = {
     //   imageLink:
     //         "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
     // },
-    // {
-    //   type: "imagepicker",
-    //   name: "choosepicture",
-    //   title: "Imagepicker",
-    //   capture: "unmask",
-    //   imageHeight: "150px",
-    //   imageWidth: "225px",
-    //   choices: [
-    //     {
-    //       value: "lion",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-    //     },
-    //     {
-    //       value: "giraffe",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-    //     },
-    //     {
-    //       value: "panda",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-    //     },
-    //     {
-    //       value: "camel",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-    //     }
-    //   ]
-    // }
+
     // {
     //     type: "VideoPicker",
     //     name: "choosevideo",
@@ -294,90 +438,53 @@ var json = {
     //   displayStyle: "currency",
     //   startWithNewLine: false
     // }
+
     // {
-    //   type: "multipletext",
-    //   name: "pricelimit",
-    //   title: "Multipletext",
-    //   colCount: 2,
-    //   items: [
+    //   type: "matrix",
+    //   name: "Quality",
+    //   title: "Matrix",
+    //   capture: "unmask",
+    //   columns: [
     //     {
-    //       name: "mostamount",
-    //       title: "Most amount you would every pay for a product like ours"
+    //       value: 1,
+    //       text: "Strongly Disagree"
     //     },
     //     {
-    //       name: "leastamount",
-    //       title: "The least amount you would feel comfortable paying"
+    //       value: 2,
+    //       text: "Disagree"
+    //     },
+    //     {
+    //       value: 3,
+    //       text: "Neutral"
+    //     },
+    //     {
+    //       value: 4,
+    //       text: "Agree"
+    //     },
+    //     {
+    //       value: 5,
+    //       text: "Strongly Agree"
+    //     }
+    //   ],
+    //   rows: [
+    //     {
+    //       value: "affordable",
+    //       text: "Product is affordable"
+    //     },
+    //     {
+    //       value: "does what it claims",
+    //       text: "Product does what it claims"
+    //     },
+    //     {
+    //       value: "better than others",
+    //       text: "Product is better than other products on the market"
+    //     },
+    //     {
+    //       value: "easy to use",
+    //       text: "Product is easy to use"
     //     }
     //   ]
     // }
-    // {
-    //   type: "rating",
-    //   name: "satisfaction",
-    //   title: "Rating",
-    //   minRateDescription: "Not Satisfied",
-    //   maxRateDescription: "Completely satisfied"
-    // },
-    // {
-    //   type: "ranking",
-    //   name: "smartphone-features",
-    //   title: "Please rank the following smartphone features in order of importance:",
-    //   choices: [
-    //     "Battery life",
-    //     "Screen size",
-    //     "Storage space",
-    //     "Camera quality",
-    //     "Durability",
-    //     "Processor power",
-    //     "Price"
-    //   ]
-    // },
-
-    {
-      type: "matrix",
-      name: "Quality",
-      title: "Matrix",
-      capture: "unmask",
-      columns: [
-        {
-          value: 1,
-          text: "Strongly Disagree"
-        },
-        {
-          value: 2,
-          text: "Disagree"
-        },
-        {
-          value: 3,
-          text: "Neutral"
-        },
-        {
-          value: 4,
-          text: "Agree"
-        },
-        {
-          value: 5,
-          text: "Strongly Agree"
-        }
-      ],
-      rows: [
-        {
-          value: "affordable",
-          text: "Product is affordable"
-        },
-        {
-          value: "does what it claims",
-          text: "Product does what it claims"
-        },
-        {
-          value: "better than others",
-          text: "Product is better than other products on the market"
-        },
-        {
-          value: "easy to use",
-          text: "Product is easy to use"
-        }
-      ]
-    }
     // {
     //     type: "matrix",
     //     name: "planningPerformance",

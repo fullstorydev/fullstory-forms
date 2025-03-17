@@ -411,7 +411,7 @@ export class Base {
 
   public createElementData(
     obj: any,
-    name: string = ""
+    element: string = ""
   ): { "data-fs-properties-schema": string; [v: string]: string } {
     // Find all keys
     const keys = Object.keys(obj);
@@ -420,8 +420,8 @@ export class Base {
     const schema = {};
 
     // create store for element data
-    const elementData: { [v: string]: string } = name
-      ? { "data-fs-element": name }
+    const elementData: { [v: string]: string } = element
+      ? { "data-fs-element": element }
       : {};
 
     // loop over all keys
@@ -468,16 +468,16 @@ export class Base {
     return schema;
   }
 
-  public getDataElement(title?: string, value?: any) {
+  public getDataElement(elementType: string, title?: string, value?: any) {
     const data = {};
 
-    data[`${title}-name`] = `fs-${title}`;
+    data[`fs-${elementType}-name`] = title;
 
     if (!!value) {
-      data[`${title}-value`] = value;
+      data[`fs-${elementType}-value`] = value;
     }
 
-    const element = this.createElementData(data, title);
+    const element = this.createElementData(data, elementType);
 
     return element;
   }

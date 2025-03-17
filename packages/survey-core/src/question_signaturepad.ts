@@ -303,7 +303,11 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   }
 
   public get elementData(): any {
-    const data = this.getDataElement("signaturepad", this.inputValue);
+    const data = this.getDataElement(
+      "signaturepad",
+      this.title,
+      this.inputValue
+    );
 
     return data;
   }
