@@ -23,236 +23,493 @@ var json = {
   logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
   logoPosition: "left",
   questions: [
+    // {
+    //   type: "boolean",
+    //   name: "bool",
+    //   capture: "unmask",
+    //   title: "Age Choice",
+    //   label: "Are you 21 or older?",
+    //   isRequired: true
+    // },
+    // {
+    //   type: "checkbox",
+    //   name: "car",
+    //   title: "Car Checkbox",
+    //   isRequired: true,
+    //   showNoneItem: true,
+    //   colCount: 4,
+    //   showSelectAllItem: true,
+    //   choices: [
+    //     "Ford",
+    //     "Vauxhall",
+    //     "Volkswagen",
+    //     "Nissan",
+    //     "Audi",
+    //     "Mercedes-Benz",
+    //     "BMW",
+    //     "Peugeot",
+    //     "Toyota",
+    //     "Citroen"
+    //   ]
+    // },
+    // {
+    //   type: "comment",
+    //   name: "suggestions",
+    //   title: "Suggestion Comment",
+    //   capture: "unmask"
+    // },
+    // {
+    //   type: "dropdown",
+    //   name: "cars",
+    //   title: "Car Dropdown",
+    //   isRequired: true,
+    //   showNoneItem: true,
+    //   capture: "unmask",
+    //   colCount: 4,
+    //   choices: [
+    //     "Ford",
+    //     "Vauxhall",
+    //     "Volkswagen",
+    //     "Nissan",
+    //     "Audi",
+    //     "Mercedes-Benz",
+    //     "BMW",
+    //     "Peugeot",
+    //     "Toyota",
+    //     "Citroen"
+    //   ]
+    // },
+    // {
+    //   type: "file",
+    //   title: "Image Picker",
+    //   name: "image",
+    //   storeDataAsText: false,
+    //   showPreview: true,
+    //   imageWidth: 150,
+    //   maxSize: 102400
+    // },
+    // {
+    //   type: "imagepicker",
+    //   name: "choosepicture",
+    //   title: "Animal Picker",
+    //   capture: "unmask",
+    //   imageHeight: "150px",
+    //   imageWidth: "225px",
+    //   choices: [
+    //     {
+    //       value: "lion",
+    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+    //     },
+    //     {
+    //       value: "giraffe",
+    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+    //     },
+    //     {
+    //       value: "panda",
+    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+    //     },
+    //     {
+    //       value: "camel",
+    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+    //     }
+    //   ]
+    // },
+    // {
+    //   type: "multipletext",
+    //   name: "pricelimit",
+    //   title: "Payment Suggestion",
+    //   colCount: 2,
+    //   items: [
+    //     {
+    //       name: "mostamount",
+    //       title: "Most amount you would every pay for a product like ours"
+    //     },
+    //     {
+    //       name: "leastamount",
+    //       title: "The least amount you would feel comfortable paying"
+    //     }
+    //   ]
+    // },
+    // {
+    //   type: "panel",
+    //   title: "Checkbox Panel",
+    //   innerIndent: 1,
+    //   state: "expanded",
+    //   elements: [
+    //     {
+    //       type: "checkbox",
+    //       choices: [
+    //         {
+    //           value: "1",
+    //           text: "Customer relationship"
+    //         },
+    //         {
+    //           value: "2",
+    //           text: "Service quality"
+    //         },
+    //         {
+    //           value: "3",
+    //           text: "Support response time"
+    //         }
+    //       ],
+    //       name: "What should be improved?"
+    //     },
+    //     {
+    //       type: "comment",
+    //       name: "suggestions",
+    //       title: "What would make you more satisfied with the Product?"
+    //     }
+    //   ]
+    // },
+    // {
+    //   type: "paneldynamic",
+    //   name: "relatives",
+    //   title: "Dropdown Panel",
+    //   renderMode: "progressTop",
+    //   templateTitle: "Information about: {panel.relativeType}",
+    //   templateElements: [
+    //     {
+    //       name: "relativeType",
+    //       type: "dropdown",
+    //       title: "Relative",
+    //       choices: ["father", "mother", "brother", "sister", "son", "daughter"],
+    //       isRequired: true
+    //     }
+    //   ]
+    // },
+    // {
+    //   type: "radiogroup",
+    //   name: "cars",
+    //   title: "Car Radiogroup",
+    //   isRequired: true,
+    //   capture: "unmask",
+    //   colCount: 4,
+    //   choices: [
+    //     "None",
+    //     "Ford",
+    //     "Vauxhall",
+    //     "Volkswagen",
+    //     "Nissan",
+    //     "Audi",
+    //     "Mercedes-Benz",
+    //     "BMW",
+    //     "Peugeot",
+    //     "Toyota",
+    //     "Citroen"
+    //   ]
+    // },
+    // {
+    //   type: "ranking",
+    //   name: "smartphone-features",
+    //   title: "Please rank the following smartphone features in order of importance:",
+    //   choices: [
+    //     "Battery life",
+    //     "Screen size",
+    //     "Storage space",
+    //     "Camera quality",
+    //     "Durability",
+    //     "Processor power",
+    //     "Price"
+    //   ]
+    // },
+    // {
+    //   type: "rating",
+    //   name: "satisfaction",
+    //   title: "Satisfaction Rating",
+    //   minRateDescription: "Not Satisfied",
+    //   maxRateDescription: "Completely satisfied"
+    // },
+    // {
+    //   name: "signature",
+    //   type: "signaturepad",
+    //   capture: "unmask",
+    //   title: "Sign here",
+    //   isRequired: true
+    // },
+    // {
+    //   type: "tagbox",
+    //   name: "cars2",
+    //   title: "Cars Tagbox",
+    //   capture: "unmask",
+    //   showNoneItem: true,
+    //   choices: [
+    //     "Ford",
+    //     "Vauxhall",
+    //     "Volkswagen",
+    //     "Nissan",
+    //     "Audi",
+    //     "Mercedes-Benz",
+    //     "BMW",
+    //     "Peugeot",
+    //     "Toyota",
+    //     "Citroen"
+    //   ]
+    // },
+    // {
+    //   name: "name",
+    //   type: "text",
+    //   capture: "unmask",
+    //   title: "Name",
+    //   placeHolder: "Jon Snow",
+    //   isRequired: true
+    // }
+
+    // {
+    //   type: "matrix",
+    //   name: "Quality",
+    //   title: "Matrix",
+    //   capture: "unmask",
+    //   columns: [
+    //     {
+    //       value: 1,
+    //       text: "Strongly Disagree"
+    //     },
+    //     {
+    //       value: 2,
+    //       text: "Disagree"
+    //     },
+    //     {
+    //       value: 3,
+    //       text: "Neutral"
+    //     },
+    //     {
+    //       value: 4,
+    //       text: "Agree"
+    //     },
+    //     {
+    //       value: 5,
+    //       text: "Strongly Agree"
+    //     }
+    //   ],
+    //   rows: [
+    //     {
+    //       value: "affordable",
+    //       text: "Product is affordable"
+    //     },
+    //     {
+    //       value: "does what it claims",
+    //       text: "Product does what it claims"
+    //     },
+    //     {
+    //       value: "better than others",
+    //       text: "Product is better than other products on the market"
+    //     },
+    //     {
+    //       value: "easy to use",
+    //       text: "Product is easy to use"
+    //     }
+    //   ]
+    // },
+
+    // {
+    //   type: "matrixdynamic",
+    //   name: "teachersRate",
+    //   title: "Matrix Dynamic",
+    //   addRowText: "Add Subject",
+    //   horizontalScroll: true,
+    //   columnMinWidth: "130px",
+    //   columnColCount: 1,
+    //   cellType: "radiogroup",
+    //   capture: "unmask",
+    //   choices: [
+    //     {
+    //       value: 1,
+    //       text: "Yes"
+    //     },
+    //     {
+    //       value: 0,
+    //       text: "Sometimes"
+    //     },
+    //     {
+    //       value: -1,
+    //       text: "No"
+    //     }
+    //   ],
+    //   columns: [
+    //     {
+    //       name: "subject",
+    //       cellType: "dropdown",
+    //       title: "Select a subject",
+    //       isRequired: true,
+    //       capture: "unmask",
+    //       minWidth: "300px",
+    //       choices: [
+    //         "English: American Literature",
+    //         "English: British and World Literature",
+    //         "Math: Consumer Math",
+    //         "Math: Practical Math",
+    //         "Math: Developmental Algebra",
+    //         "Math: Continuing Algebra",
+    //         "Math: Pre-Algebra",
+    //         "Math: Algebra",
+    //         "Math: Geometry",
+    //         "Math: Integrated Mathematics",
+    //         "Science: Physical Science",
+    //         "Science: Earth Science",
+    //         "Science: Biology",
+    //         "Science: Chemistry",
+    //         "History: World History",
+    //         "History: Modern World Studies",
+    //         "History: U.S. History",
+    //         "History: Modern U.S. History",
+    //         "Social Sciences: U.S. Government and Politics",
+    //         "Social Sciences: U.S. and Global Economics",
+    //         "World Languages: Spanish",
+    //         "World Languages: French",
+    //         "World Languages: German",
+    //         "World Languages: Latin",
+    //         "World Languages: Chinese",
+    //         "World Languages: Japanese"
+    //       ]
+    //     },
+    //     {
+    //       name: "explains",
+    //       capture: "unmask",
+    //       title: "Clearly explains the objectives"
+    //     },
+    //     {
+    //       name: "interesting",
+    //       capture: "unmask",
+    //       title: "Makes class interesting"
+    //     },
+    //     {
+    //       name: "effective",
+    //       capture: "unmask",
+    //       title: "Uses class time effectively"
+    //     },
+    //     {
+    //       name: "frusturation",
+    //       cellType: "comment",
+    //       capture: "unmask",
+    //       title: "Is there anything about this class that frustrates you?",
+    //       minWidth: "250px"
+    //     },
+    //     {
+    //       name: "likeTheBest",
+    //       cellType: "comment",
+    //       capture: "unmask",
+    //       title: "What do you like best about this class and/or teacher?",
+    //       minWidth: "250px"
+    //     },
+    //     {
+    //       name: "improvements",
+    //       cellType: "comment",
+    //       capture: "unmask",
+    //       title: "What do you wish this teacher would do differently that would improve this class?",
+    //       minWidth: "250px"
+    //     }
+    //   ],
+    //   rowCount: 2
+    // },
+
     {
-      type: "boolean",
-      name: "bool",
-      capture: "unmask",
-      title: "Age Choice",
-      label: "Are you 21 or older?",
-      isRequired: true
-    },
-    {
-      type: "checkbox",
-      name: "car",
-      title: "Car Checkbox",
-      isRequired: true,
-      showNoneItem: true,
-      colCount: 4,
-      showSelectAllItem: true,
-      choices: [
-        "Ford",
-        "Vauxhall",
-        "Volkswagen",
-        "Nissan",
-        "Audi",
-        "Mercedes-Benz",
-        "BMW",
-        "Peugeot",
-        "Toyota",
-        "Citroen"
-      ]
-    },
-    {
-      type: "comment",
-      name: "suggestions",
-      title: "Suggestion Comment",
-      capture: "unmask"
-    },
-    {
-      type: "dropdown",
-      name: "cars",
-      title: "Car Dropdown",
-      isRequired: true,
-      showNoneItem: true,
-      capture: "unmask",
-      colCount: 4,
-      choices: [
-        "Ford",
-        "Vauxhall",
-        "Volkswagen",
-        "Nissan",
-        "Audi",
-        "Mercedes-Benz",
-        "BMW",
-        "Peugeot",
-        "Toyota",
-        "Citroen"
-      ]
-    },
-    {
-      type: "file",
-      title: "Image Picker",
-      name: "image",
-      storeDataAsText: false,
-      showPreview: true,
-      imageWidth: 150,
-      maxSize: 102400
-    },
-    {
-      type: "imagepicker",
-      name: "choosepicture",
-      title: "Animal Picker",
-      capture: "unmask",
-      imageHeight: "150px",
-      imageWidth: "225px",
-      choices: [
+      type: "matrixdynamic",
+      name: "Current Level of Function",
+      title: "Matrix Dynamic (vertical columns)",
+      columnLayout: "vertical",
+      minRowCount: 1,
+      maxRowCount: 5,
+      columns: [
         {
-          value: "lion",
-          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          name: "Date",
+          title: "Date",
+          cellType: "text",
+          inputType: "date"
         },
         {
-          value: "giraffe",
-          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          name: "AmbDistance",
+          title: "Amb Distance",
+          cellType: "text"
         },
         {
-          value: "panda",
-          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          name: "Amb Assistance",
+          cellType: "dropdown",
+          choices: ["D", "MAX", "MOD", "MIN"]
         },
         {
-          value: "camel",
-          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          name: "Standing Tolerance",
+          cellType: "text"
+        },
+        {
+          name: "UE Strength",
+          cellType: "text"
+        },
+        {
+          name: "Cognitive Function",
+          cellType: "comment"
         }
-      ]
-    },
-    {
-      type: "multipletext",
-      name: "pricelimit",
-      title: "Payment Suggestion",
-      colCount: 2,
-      items: [
-        {
-          name: "mostamount",
-          title: "Most amount you would every pay for a product like ours"
-        },
-        {
-          name: "leastamount",
-          title: "The least amount you would feel comfortable paying"
-        }
-      ]
-    },
-    {
-      type: "panel",
-      title: "Checkbox Panel",
-      innerIndent: 1,
-      state: "expanded",
-      elements: [
-        {
-          type: "checkbox",
-          choices: [
-            {
-              value: "1",
-              text: "Customer relationship"
-            },
-            {
-              value: "2",
-              text: "Service quality"
-            },
-            {
-              value: "3",
-              text: "Support response time"
-            }
-          ],
-          name: "What should be improved?"
-        },
-        {
-          type: "comment",
-          name: "suggestions",
-          title: "What would make you more satisfied with the Product?"
-        }
-      ]
-    },
-    {
-      type: "paneldynamic",
-      name: "relatives",
-      title: "Dropdown Panel",
-      renderMode: "progressTop",
-      templateTitle: "Information about: {panel.relativeType}",
-      templateElements: [
-        {
-          name: "relativeType",
-          type: "dropdown",
-          title: "Relative",
-          choices: ["father", "mother", "brother", "sister", "son", "daughter"],
-          isRequired: true
-        }
-      ]
-    },
-    {
-      type: "radiogroup",
-      name: "cars",
-      title: "Car Radiogroup",
-      isRequired: true,
-      capture: "unmask",
-      colCount: 4,
-      choices: [
-        "None",
-        "Ford",
-        "Vauxhall",
-        "Volkswagen",
-        "Nissan",
-        "Audi",
-        "Mercedes-Benz",
-        "BMW",
-        "Peugeot",
-        "Toyota",
-        "Citroen"
-      ]
-    },
-    {
-      type: "ranking",
-      name: "smartphone-features",
-      title: "Please rank the following smartphone features in order of importance:",
-      choices: [
-        "Battery life",
-        "Screen size",
-        "Storage space",
-        "Camera quality",
-        "Durability",
-        "Processor power",
-        "Price"
-      ]
-    },
-    {
-      type: "rating",
-      name: "satisfaction",
-      title: "Satisfaction Rating",
-      minRateDescription: "Not Satisfied",
-      maxRateDescription: "Completely satisfied"
-    },
-    {
-      name: "signature",
-      type: "signaturepad",
-      capture: "unmask",
-      title: "Sign here",
-      isRequired: true
-    },
-    {
-      type: "tagbox",
-      name: "cars2",
-      title: "Cars Tagbox",
-      capture: "unmask",
-      showNoneItem: true,
-      choices: [
-        "Ford",
-        "Vauxhall",
-        "Volkswagen",
-        "Nissan",
-        "Audi",
-        "Mercedes-Benz",
-        "BMW",
-        "Peugeot",
-        "Toyota",
-        "Citroen"
-      ]
-    },
-    {
-      name: "name",
-      type: "text",
-      capture: "unmask",
-      title: "Name",
-      placeHolder: "Jon Snow",
-      isRequired: true
+      ],
+      choices: [1],
+      cellType: "comment",
+      confirmDelete: true,
+      addRowText: "Add Date +",
+      removeRowText: "Remove"
     }
+    // {
+    //   type: "matrix",
+    //   name: "planningPerformance",
+    //   title: "Matrix Rubric",
+    //   columns: ["Ineffective", "Improvement Necessary", "Effective", "Highly Effective"],
+    //   rows: [
+    //     {
+    //       value: "dataToPlan",
+    //       text: "Utilizes Assessment Data to Plan"
+    //     },
+    //     {
+    //       value: "ambitiousGoals",
+    //       text: "Ambitious and Measurable Achievement Goal"
+    //     },
+    //     {
+    //       value: "developsStandards",
+    //       text: "Develops Standards.<br/>Based Unit Plans and Assessments.<br/>Evaluation Values."
+    //     },
+    //     {
+    //       value: "createsObjective",
+    //       text: "Creates Objective - Driven Lesson Plans and Assessments"
+    //     }
+    //   ],
+    //   cells: {
+    //     dataToPlan: {
+    //       Ineffective: "Teacher rarely or never uses formal and informal assessment data when planning",
+    //       "Improvement Necessary":
+    //         "Teacher uses formal and informal assessment data to formulate <br/> - Achievement goals, unit plans, or lesson plans, but not all of these",
+    //       Effective:
+    //         "Teacher uses formal and informal assessment data to formulate <br/>- Achievement goals, unit plans, and lesson plans",
+    //       "Highly Effective":
+    //         "Teacher uses formal and informal assessment data to formulate achievement goals, unit plans, and lesson plans<br/>- Incorporates differentiated instructional strategies in planning to reach every student at his/her level of understanding"
+    //     },
+    //     ambitiousGoals: {
+    //       Ineffective:
+    //         "Teacher rarely or never develops achievement goals for the class, or goals are developed but are too general to be helpful for planning purposes",
+    //       "Improvement Necessary":
+    //         "Teacher develops an annual student achievement goalthat lacks one or more of these traits:<br/>- Measurable<br/>- Aligned to content standards<br/>- Includes benchmarks to help monitor learning and inform interventions throughout the year",
+    //       Effective:
+    //         "Teacher develops an annual student achievement goal that<br/>- Is measurable<br/>- Is aligned to content standards<br/>- Includes benchmarks to help monitor learning and inform interventions throughout the year",
+    //       "Highly Effective":
+    //         "Teacher develops an annual student achievement goal that<br/>- Is measurable<br/>- Is aligned to content standards where applicable<br/>- Includes benchmarks to help monitor learning and informinterventions throughout the year"
+    //     },
+    //     developsStandards: {
+    //       Ineffective:
+    //         "Teacher rarely or never plans by identifying content standards that students will master in each unit, or there is little to no evidence that teacher plans units at all",
+    //       "Improvement Necessary":
+    //         "Based on achievement goals, teacher plans units but omits one or more of these steps:<br/>- Identifying content standards that students will master in each unit<br/>- Creating assessments before planning units<br/>- Allocating an instructionally appropriate amount of time for each unit",
+    //       Effective:
+    //         "Based on achievement goals, teacher plans units by<br/>- Identifying content standards that students will master in each unit<br/>- Creating assessments before each unit begins for backwards planning<br/>- Allocating an instructionally appropriate amount of time for each unit",
+    //       "Highly Effective":
+    //         "Based on achievement goals, teacher plans units by<br/>- Identifying content standards that students will master in each unit<br/>- Creating assessments before each unit begins for backwards planning<br/>- Allocating an instructionally appropriate amount of time for each unit"
+    //     },
+    //     createsObjective: {
+    //       Ineffective:
+    //         "Teacher rarely or never uses a system to track student assessment/progress data and/or has an ineffective grading system",
+    //       "Improvement Necessary":
+    //         "Teacher uses a data tracking system to record student assessment / progress data and maintain a grading system but fails in one or more of the following steps<br/>- Use data to analyze student progress toward mastery or to plan future lessons / units<br/>- Have a grading system that appropriately aligns with student learning goals",
+    //       Effective:
+    //         "Teacher uses an effective data tracking system for<br/>- Recording student assessment / progress data<br/>- Analyzing student progress towards mastery and planning future lessons/units accordingly<br/>- Maintaining a grading system aligned to student learning goals",
+    //       "Highly Effective":
+    //         "Teacher uses an effective data tracking system that<br/>- Records student assessment / progress data<br/>- Analyzes student progress toward mastery and plans future lessons/units accordingly<br/>- Maintains a grading system aligned to student learning goals"
+    //     }
+    //   }
+    // }
 
     // {
     //     name: "birthdate",
@@ -439,323 +696,6 @@ var json = {
     //   startWithNewLine: false
     // }
 
-    // {
-    //   type: "matrix",
-    //   name: "Quality",
-    //   title: "Matrix",
-    //   capture: "unmask",
-    //   columns: [
-    //     {
-    //       value: 1,
-    //       text: "Strongly Disagree"
-    //     },
-    //     {
-    //       value: 2,
-    //       text: "Disagree"
-    //     },
-    //     {
-    //       value: 3,
-    //       text: "Neutral"
-    //     },
-    //     {
-    //       value: 4,
-    //       text: "Agree"
-    //     },
-    //     {
-    //       value: 5,
-    //       text: "Strongly Agree"
-    //     }
-    //   ],
-    //   rows: [
-    //     {
-    //       value: "affordable",
-    //       text: "Product is affordable"
-    //     },
-    //     {
-    //       value: "does what it claims",
-    //       text: "Product does what it claims"
-    //     },
-    //     {
-    //       value: "better than others",
-    //       text: "Product is better than other products on the market"
-    //     },
-    //     {
-    //       value: "easy to use",
-    //       text: "Product is easy to use"
-    //     }
-    //   ]
-    // }
-    // {
-    //     type: "matrix",
-    //     name: "planningPerformance",
-    //     title: "Matrix Rubric",
-    //     columns: ["Ineffective", "Improvement Necessary", "Effective", "Highly Effective"],
-    //     rows: [
-    //         {
-    //             value: "dataToPlan",
-    //             text: "Utilizes Assessment Data to Plan"
-    //         },
-    //         {
-    //             value: "ambitiousGoals",
-    //             text: "Ambitious and Measurable Achievement Goal"
-    //         },
-    //         {
-    //             value: "developsStandards",
-    //             text: "Develops Standards.<br/>Based Unit Plans and Assessments.<br/>Evaluation Values."
-    //         },
-    //         {
-    //             value: "createsObjective",
-    //             text: "Creates Objective - Driven Lesson Plans and Assessments"
-    //         }
-    //     ],
-    //     cells: {
-    //         dataToPlan: {
-    //             Ineffective: "Teacher rarely or never uses formal and informal assessment data when planning",
-    //             "Improvement Necessary":
-    //                 "Teacher uses formal and informal assessment data to formulate <br/> - Achievement goals, unit plans, or lesson plans, but not all of these",
-    //             Effective:
-    //                 "Teacher uses formal and informal assessment data to formulate <br/>- Achievement goals, unit plans, and lesson plans",
-    //             "Highly Effective":
-    //                 "Teacher uses formal and informal assessment data to formulate achievement goals, unit plans, and lesson plans<br/>- Incorporates differentiated instructional strategies in planning to reach every student at his/her level of understanding"
-    //         },
-    //         ambitiousGoals: {
-    //             Ineffective:
-    //                 "Teacher rarely or never develops achievement goals for the class, or goals are developed but are too general to be helpful for planning purposes",
-    //             "Improvement Necessary":
-    //                 "Teacher develops an annual student achievement goalthat lacks one or more of these traits:<br/>- Measurable<br/>- Aligned to content standards<br/>- Includes benchmarks to help monitor learning and inform interventions throughout the year",
-    //             Effective:
-    //                 "Teacher develops an annual student achievement goal that<br/>- Is measurable<br/>- Is aligned to content standards<br/>- Includes benchmarks to help monitor learning and inform interventions throughout the year",
-    //             "Highly Effective":
-    //                 "Teacher develops an annual student achievement goal that<br/>- Is measurable<br/>- Is aligned to content standards where applicable<br/>- Includes benchmarks to help monitor learning and informinterventions throughout the year"
-    //         },
-    //         developsStandards: {
-    //             Ineffective:
-    //                 "Teacher rarely or never plans by identifying content standards that students will master in each unit, or there is little to no evidence that teacher plans units at all",
-    //             "Improvement Necessary":
-    //                 "Based on achievement goals, teacher plans units but omits one or more of these steps:<br/>- Identifying content standards that students will master in each unit<br/>- Creating assessments before planning units<br/>- Allocating an instructionally appropriate amount of time for each unit",
-    //             Effective:
-    //                 "Based on achievement goals, teacher plans units by<br/>- Identifying content standards that students will master in each unit<br/>- Creating assessments before each unit begins for backwards planning<br/>- Allocating an instructionally appropriate amount of time for each unit",
-    //             "Highly Effective":
-    //                 "Based on achievement goals, teacher plans units by<br/>- Identifying content standards that students will master in each unit<br/>- Creating assessments before each unit begins for backwards planning<br/>- Allocating an instructionally appropriate amount of time for each unit"
-    //         },
-    //         createsObjective: {
-    //             Ineffective:
-    //                 "Teacher rarely or never uses a system to track student assessment/progress data and/or has an ineffective grading system",
-    //             "Improvement Necessary":
-    //                 "Teacher uses a data tracking system to record student assessment / progress data and maintain a grading system but fails in one or more of the following steps<br/>- Use data to analyze student progress toward mastery or to plan future lessons / units<br/>- Have a grading system that appropriately aligns with student learning goals",
-    //             Effective:
-    //                 "Teacher uses an effective data tracking system for<br/>- Recording student assessment / progress data<br/>- Analyzing student progress towards mastery and planning future lessons/units accordingly<br/>- Maintaining a grading system aligned to student learning goals",
-    //             "Highly Effective":
-    //                 "Teacher uses an effective data tracking system that<br/>- Records student assessment / progress data<br/>- Analyzes student progress toward mastery and plans future lessons/units accordingly<br/>- Maintains a grading system aligned to student learning goals"
-    //         }
-    //     }
-    // },
-    // {
-    //     type: "matrix Dropdown",
-    //     name: "frameworksRate",
-    //     title: "Matrixdropdown",
-    //     choices: ["Excelent", "Good", "Average", "Fair", "Poor"],
-    //     columns: [
-    //         {
-    //             name: "using",
-    //             title: "Do you use it?",
-    //             choices: ["Yes", "No"],
-    //             cellType: "radiogroup"
-    //         },
-    //         {
-    //             name: "experience",
-    //             title: "How long do you use it?",
-    //             choices: [
-    //                 {
-    //                     value: 5,
-    //                     text: "3-5 years"
-    //                 },
-    //                 {
-    //                     value: 2,
-    //                     text: "1-2 years"
-    //                 },
-    //                 {
-    //                     value: 1,
-    //                     text: "less than a year"
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             name: "strength",
-    //             title: "What is main strength?",
-    //             choices: ["Easy", "Compact", "Fast", "Powerfull"],
-    //             cellType: "checkbox"
-    //         },
-    //         {
-    //             name: "knowledge",
-    //             title: "Please describe your experience",
-    //             cellType: "text"
-    //         },
-    //         {
-    //             name: "rate",
-    //             title: "Please rate the framework itself"
-    //         }
-    //     ],
-    //     rows: [
-    //         {
-    //             value: "angularv1",
-    //             text: "angularjs v1.x"
-    //         },
-    //         {
-    //             value: "angularv2",
-    //             text: "angularjs v2"
-    //         },
-    //         {
-    //             value: "knockoutjs"
-    //         },
-    //         {
-    //             value: "reactjs"
-    //         }
-    //     ]
-    // },
-    // {
-    //     type: "matrixdynamic",
-    //     name: "teachersRate",
-    //     title: "Matrix Dynamic",
-    //     addRowText: "Add Subject",
-    //     horizontalScroll: true,
-    //     columnMinWidth: "130px",
-    //     columnColCount: 1,
-    //     cellType: "radiogroup",
-    //     capture: "unmask",
-    //     choices: [
-    //         {
-    //             value: 1,
-    //             text: "Yes"
-    //         },
-    //         {
-    //             value: 0,
-    //             text: "Sometimes"
-    //         },
-    //         {
-    //             value: -1,
-    //             text: "No"
-    //         }
-    //     ],
-    //     columns: [
-    //         {
-    //             name: "subject",
-    //             cellType: "dropdown",
-    //             title: "Select a subject",
-    //             isRequired: true,
-    //             capture: "unmask",
-    //             minWidth: "300px",
-    //             choices: [
-    //                 "English: American Literature",
-    //                 "English: British and World Literature",
-    //                 "Math: Consumer Math",
-    //                 "Math: Practical Math",
-    //                 "Math: Developmental Algebra",
-    //                 "Math: Continuing Algebra",
-    //                 "Math: Pre-Algebra",
-    //                 "Math: Algebra",
-    //                 "Math: Geometry",
-    //                 "Math: Integrated Mathematics",
-    //                 "Science: Physical Science",
-    //                 "Science: Earth Science",
-    //                 "Science: Biology",
-    //                 "Science: Chemistry",
-    //                 "History: World History",
-    //                 "History: Modern World Studies",
-    //                 "History: U.S. History",
-    //                 "History: Modern U.S. History",
-    //                 "Social Sciences: U.S. Government and Politics",
-    //                 "Social Sciences: U.S. and Global Economics",
-    //                 "World Languages: Spanish",
-    //                 "World Languages: French",
-    //                 "World Languages: German",
-    //                 "World Languages: Latin",
-    //                 "World Languages: Chinese",
-    //                 "World Languages: Japanese"
-    //             ]
-    //         },
-    //         {
-    //             name: "explains",
-    //             capture: "unmask",
-    //             title: "Clearly explains the objectives"
-    //         },
-    //         {
-    //             name: "interesting",
-    //             capture: "unmask",
-    //             title: "Makes class interesting"
-    //         },
-    //         {
-    //             name: "effective",
-    //             capture: "unmask",
-    //             title: "Uses class time effectively"
-    //         },
-    //         {
-    //             name: "frusturation",
-    //             cellType: "comment",
-    //             capture: "unmask",
-    //             title: "Is there anything about this class that frustrates you?",
-    //             minWidth: "250px"
-    //         },
-    //         {
-    //             name: "likeTheBest",
-    //             cellType: "comment",
-    //             capture: "unmask",
-    //             title: "What do you like best about this class and/or teacher?",
-    //             minWidth: "250px"
-    //         },
-    //         {
-    //             name: "improvements",
-    //             cellType: "comment",
-    //             capture: "unmask",
-    //             title: "What do you wish this teacher would do differently that would improve this class?",
-    //             minWidth: "250px"
-    //         }
-    //     ],
-    //     rowCount: 2
-    // },
-    // {
-    //     type: "matrixdynamic",
-    //     name: "Current Level of Function",
-    //     title: "Matrix Dynamic (vertical columns)",
-    //     columnLayout: "vertical",
-    //     minRowCount: 1,
-    //     maxRowCount: 5,
-    //     columns: [
-    //         {
-    //             name: "Date",
-    //             title: "Date",
-    //             cellType: "text",
-    //             inputType: "date"
-    //         },
-    //         {
-    //             name: "AmbDistance",
-    //             title: "Amb Distance",
-    //             cellType: "text"
-    //         },
-    //         {
-    //             name: "Amb Assistance",
-    //             cellType: "dropdown",
-    //             choices: ["D", "MAX", "MOD", "MIN"]
-    //         },
-    //         {
-    //             name: "Standing Tolerance",
-    //             cellType: "text"
-    //         },
-    //         {
-    //             name: "UE Strength",
-    //             cellType: "text"
-    //         },
-    //         {
-    //             name: "Cognitive Function",
-    //             cellType: "comment"
-    //         }
-    //     ],
-    //     choices: [1],
-    //     cellType: "comment",
-    //     confirmDelete: true,
-    //     addRowText: "Add Date +",
-    //     removeRowText: "Remove"
-    // },
     // {
     //     type: "matrixdynamic",
     //     name: "orderList",

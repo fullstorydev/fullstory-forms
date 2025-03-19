@@ -316,6 +316,7 @@ export class SurveyQuestionAndErrorsCell extends SurveyQuestionAndErrorsWrapped 
     const focusIn = () => {
       cell.focusIn();
     };
+    console.log("this.props.cell", this.props.cell);
     return (
       <td
         ref={this.cellRef}

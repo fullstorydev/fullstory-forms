@@ -7,6 +7,7 @@ import { SurveyElementBase } from "../../reactquestion_element";
 interface IMatrixRowProps {
   model: QuestionMatrixDropdownRenderedRow;
   parentMatrix: QuestionMatrixDropdownModelBase;
+  index: number;
 }
 
 export class MatrixRow extends SurveyElementBase<IMatrixRowProps, any> {
@@ -19,6 +20,9 @@ export class MatrixRow extends SurveyElementBase<IMatrixRowProps, any> {
   }
   get parentMatrix(): QuestionMatrixDropdownModelBase {
     return this.props.parentMatrix;
+  }
+  get index(): number {
+    return this.props.index;
   }
   protected getStateElement() {
     return this.model;
@@ -56,8 +60,18 @@ export class MatrixRow extends SurveyElementBase<IMatrixRowProps, any> {
     const model = this.model;
     if (!model.visible) return null;
 
+    let elementData = {};
+    if (!this.model.elementData["fs-table-row-index"]) {
+      elementData = !!this.parentMatrix.visibleColumns[this.index]
+        ? this.parentMatrix.visibleColumns[this.index].elementData
+        : {};
+    } else {
+      elementData = this.model.elementData;
+    }
+
     return (
       <tr
+        {...elementData}
         ref={this.root}
         className={model.className}
         data-sv-drop-target-matrix-row={model.row && model.row.id}

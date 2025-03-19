@@ -85,7 +85,7 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
   renderFooter(): React.JSX.Element | null {
     const table = this.question.renderedTable;
     if (!table.showFooter) return null;
-    const row = this.renderRow("footer", null, table.footerRow, this.question.cssClasses, "row-footer");
+    const row = this.renderRow("footer", table.footerRow, this.question.cssClasses, 0, "row-footer");
     return <tfoot>{row}</tfoot>;
   }
   renderRows(): React.JSX.Element {
@@ -93,19 +93,22 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
     const rows: Array<React.JSX.Element> = [];
     const renderedRows = this.question.renderedTable.renderedRows;
     let count = 0;
+
     for (var i = 0; i < renderedRows.length; i++) {
       if (renderedRows[i].visible) {
-        rows.push(this.renderRow(renderedRows[i].id, count, renderedRows[i], cssClasses));
-        count = count + 1;
+        rows.push(this.renderRow(renderedRows[i].id, renderedRows[i], cssClasses, count));
+        if (!renderedRows[i].id.includes("error")) {
+          count = count + 1;
+        }
       }
     }
     return <tbody>{rows}</tbody>;
   }
   renderRow(
     keyValue: any,
-    index: number | null,
     row: QuestionMatrixDropdownRenderedRow,
     cssClasses: any,
+    index: number,
     reason?: string
   ): React.JSX.Element {
     const matrixrow: Array<React.JSX.Element> = [];
@@ -120,7 +123,7 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
         {reason == "row-footer" ? (
           <tr id={keyValue}>{matrixrow}</tr>
         ) : (
-          <MatrixRow model={row} parentMatrix={this.question}>
+          <MatrixRow model={row} index={index} parentMatrix={this.question}>
             {matrixrow}
           </MatrixRow>
         )}
@@ -241,7 +244,7 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
     const rows = this.renderRows();
 
     return (
-      <table className={this.question.getTableCss()}>
+      <table {...this.question.elementData} className={this.question.getTableCss()}>
         {header}
         {rows}
         {footers}
