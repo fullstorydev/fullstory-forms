@@ -316,9 +316,25 @@ export class SurveyQuestionAndErrorsCell extends SurveyQuestionAndErrorsWrapped 
     const focusIn = () => {
       cell.focusIn();
     };
-    console.log("this.props.cell", this.props.cell);
+    const columnData = this.props.cell.column.elementData;
+    const rowData = this.props.cell.row.elementData;
+
+    const cellData = {
+      "fs-element": "table-cell",
+      "fs-table-row-index": columnData["data-fs-table-row-index"],
+      "fs-table-row-name": !!columnData["data-fs-table-row-name"]
+        ? columnData["data-fs-table-row-name"]
+        : rowData["fs-tabe-row-name"],
+      "fs-table-column-index": rowData["fs-table-row-index"]
+    };
+
+    if (this.question.inputType) {
+      cellData["fs-cell-type"] = this.question.inputType;
+    }
+    const elementData = this.question.createElementData(cellData);
     return (
       <td
+        {...elementData}
         ref={this.cellRef}
         className={this.itemCss}
         colSpan={cell.colSpans}

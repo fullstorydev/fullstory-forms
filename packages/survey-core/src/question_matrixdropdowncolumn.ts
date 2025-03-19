@@ -952,7 +952,7 @@ export class MatrixDropdownColumn
     const name = this.name ? this.name : this.title;
     const data = {
       "fs-element": "table-row",
-      "fs-tabe-row-index": this.index + 1,
+      "fs-table-row-index": this.index + 1,
       "fs-table-row-name": name,
     };
 

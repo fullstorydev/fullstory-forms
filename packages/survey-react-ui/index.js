@@ -23,384 +23,384 @@ var json = {
   logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
   logoPosition: "left",
   questions: [
-    // {
-    //   type: "boolean",
-    //   name: "bool",
-    //   capture: "unmask",
-    //   title: "Age Choice",
-    //   label: "Are you 21 or older?",
-    //   isRequired: true
-    // },
-    // {
-    //   type: "checkbox",
-    //   name: "car",
-    //   title: "Car Checkbox",
-    //   isRequired: true,
-    //   showNoneItem: true,
-    //   colCount: 4,
-    //   showSelectAllItem: true,
-    //   choices: [
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   type: "comment",
-    //   name: "suggestions",
-    //   title: "Suggestion Comment",
-    //   capture: "unmask"
-    // },
-    // {
-    //   type: "dropdown",
-    //   name: "cars",
-    //   title: "Car Dropdown",
-    //   isRequired: true,
-    //   showNoneItem: true,
-    //   capture: "unmask",
-    //   colCount: 4,
-    //   choices: [
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   type: "file",
-    //   title: "Image Picker",
-    //   name: "image",
-    //   storeDataAsText: false,
-    //   showPreview: true,
-    //   imageWidth: 150,
-    //   maxSize: 102400
-    // },
-    // {
-    //   type: "imagepicker",
-    //   name: "choosepicture",
-    //   title: "Animal Picker",
-    //   capture: "unmask",
-    //   imageHeight: "150px",
-    //   imageWidth: "225px",
-    //   choices: [
-    //     {
-    //       value: "lion",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-    //     },
-    //     {
-    //       value: "giraffe",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-    //     },
-    //     {
-    //       value: "panda",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-    //     },
-    //     {
-    //       value: "camel",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "multipletext",
-    //   name: "pricelimit",
-    //   title: "Payment Suggestion",
-    //   colCount: 2,
-    //   items: [
-    //     {
-    //       name: "mostamount",
-    //       title: "Most amount you would every pay for a product like ours"
-    //     },
-    //     {
-    //       name: "leastamount",
-    //       title: "The least amount you would feel comfortable paying"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "panel",
-    //   title: "Checkbox Panel",
-    //   innerIndent: 1,
-    //   state: "expanded",
-    //   elements: [
-    //     {
-    //       type: "checkbox",
-    //       choices: [
-    //         {
-    //           value: "1",
-    //           text: "Customer relationship"
-    //         },
-    //         {
-    //           value: "2",
-    //           text: "Service quality"
-    //         },
-    //         {
-    //           value: "3",
-    //           text: "Support response time"
-    //         }
-    //       ],
-    //       name: "What should be improved?"
-    //     },
-    //     {
-    //       type: "comment",
-    //       name: "suggestions",
-    //       title: "What would make you more satisfied with the Product?"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "paneldynamic",
-    //   name: "relatives",
-    //   title: "Dropdown Panel",
-    //   renderMode: "progressTop",
-    //   templateTitle: "Information about: {panel.relativeType}",
-    //   templateElements: [
-    //     {
-    //       name: "relativeType",
-    //       type: "dropdown",
-    //       title: "Relative",
-    //       choices: ["father", "mother", "brother", "sister", "son", "daughter"],
-    //       isRequired: true
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "radiogroup",
-    //   name: "cars",
-    //   title: "Car Radiogroup",
-    //   isRequired: true,
-    //   capture: "unmask",
-    //   colCount: 4,
-    //   choices: [
-    //     "None",
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   type: "ranking",
-    //   name: "smartphone-features",
-    //   title: "Please rank the following smartphone features in order of importance:",
-    //   choices: [
-    //     "Battery life",
-    //     "Screen size",
-    //     "Storage space",
-    //     "Camera quality",
-    //     "Durability",
-    //     "Processor power",
-    //     "Price"
-    //   ]
-    // },
-    // {
-    //   type: "rating",
-    //   name: "satisfaction",
-    //   title: "Satisfaction Rating",
-    //   minRateDescription: "Not Satisfied",
-    //   maxRateDescription: "Completely satisfied"
-    // },
-    // {
-    //   name: "signature",
-    //   type: "signaturepad",
-    //   capture: "unmask",
-    //   title: "Sign here",
-    //   isRequired: true
-    // },
-    // {
-    //   type: "tagbox",
-    //   name: "cars2",
-    //   title: "Cars Tagbox",
-    //   capture: "unmask",
-    //   showNoneItem: true,
-    //   choices: [
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   name: "name",
-    //   type: "text",
-    //   capture: "unmask",
-    //   title: "Name",
-    //   placeHolder: "Jon Snow",
-    //   isRequired: true
-    // }
+    {
+      type: "boolean",
+      name: "bool",
+      capture: "unmask",
+      title: "Age Choice",
+      label: "Are you 21 or older?",
+      isRequired: true
+    },
+    {
+      type: "checkbox",
+      name: "car",
+      title: "Car Checkbox",
+      isRequired: true,
+      showNoneItem: true,
+      colCount: 4,
+      showSelectAllItem: true,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "comment",
+      name: "suggestions",
+      title: "Suggestion Comment",
+      capture: "unmask"
+    },
+    {
+      type: "dropdown",
+      name: "cars",
+      title: "Car Dropdown",
+      isRequired: true,
+      showNoneItem: true,
+      capture: "unmask",
+      colCount: 4,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "file",
+      title: "Image Picker",
+      name: "image",
+      storeDataAsText: false,
+      showPreview: true,
+      imageWidth: 150,
+      maxSize: 102400
+    },
+    {
+      type: "imagepicker",
+      name: "choosepicture",
+      title: "Animal Picker",
+      capture: "unmask",
+      imageHeight: "150px",
+      imageWidth: "225px",
+      choices: [
+        {
+          value: "lion",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+        },
+        {
+          value: "giraffe",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+        },
+        {
+          value: "panda",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+        },
+        {
+          value: "camel",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+        }
+      ]
+    },
+    {
+      type: "multipletext",
+      name: "pricelimit",
+      title: "Payment Suggestion",
+      colCount: 2,
+      items: [
+        {
+          name: "mostamount",
+          title: "Most amount you would every pay for a product like ours"
+        },
+        {
+          name: "leastamount",
+          title: "The least amount you would feel comfortable paying"
+        }
+      ]
+    },
+    {
+      type: "panel",
+      title: "Checkbox Panel",
+      innerIndent: 1,
+      state: "expanded",
+      elements: [
+        {
+          type: "checkbox",
+          choices: [
+            {
+              value: "1",
+              text: "Customer relationship"
+            },
+            {
+              value: "2",
+              text: "Service quality"
+            },
+            {
+              value: "3",
+              text: "Support response time"
+            }
+          ],
+          name: "What should be improved?"
+        },
+        {
+          type: "comment",
+          name: "suggestions",
+          title: "What would make you more satisfied with the Product?"
+        }
+      ]
+    },
+    {
+      type: "paneldynamic",
+      name: "relatives",
+      title: "Dropdown Panel",
+      renderMode: "progressTop",
+      templateTitle: "Information about: {panel.relativeType}",
+      templateElements: [
+        {
+          name: "relativeType",
+          type: "dropdown",
+          title: "Relative",
+          choices: ["father", "mother", "brother", "sister", "son", "daughter"],
+          isRequired: true
+        }
+      ]
+    },
+    {
+      type: "radiogroup",
+      name: "cars",
+      title: "Car Radiogroup",
+      isRequired: true,
+      capture: "unmask",
+      colCount: 4,
+      choices: [
+        "None",
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "ranking",
+      name: "smartphone-features",
+      title: "Please rank the following smartphone features in order of importance:",
+      choices: [
+        "Battery life",
+        "Screen size",
+        "Storage space",
+        "Camera quality",
+        "Durability",
+        "Processor power",
+        "Price"
+      ]
+    },
+    {
+      type: "rating",
+      name: "satisfaction",
+      title: "Satisfaction Rating",
+      minRateDescription: "Not Satisfied",
+      maxRateDescription: "Completely satisfied"
+    },
+    {
+      name: "signature",
+      type: "signaturepad",
+      capture: "unmask",
+      title: "Sign here",
+      isRequired: true
+    },
+    {
+      type: "tagbox",
+      name: "cars2",
+      title: "Cars Tagbox",
+      capture: "unmask",
+      showNoneItem: true,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      name: "name",
+      type: "text",
+      capture: "unmask",
+      title: "Name",
+      placeHolder: "Jon Snow",
+      isRequired: true
+    },
 
-    // {
-    //   type: "matrix",
-    //   name: "Quality",
-    //   title: "Matrix",
-    //   capture: "unmask",
-    //   columns: [
-    //     {
-    //       value: 1,
-    //       text: "Strongly Disagree"
-    //     },
-    //     {
-    //       value: 2,
-    //       text: "Disagree"
-    //     },
-    //     {
-    //       value: 3,
-    //       text: "Neutral"
-    //     },
-    //     {
-    //       value: 4,
-    //       text: "Agree"
-    //     },
-    //     {
-    //       value: 5,
-    //       text: "Strongly Agree"
-    //     }
-    //   ],
-    //   rows: [
-    //     {
-    //       value: "affordable",
-    //       text: "Product is affordable"
-    //     },
-    //     {
-    //       value: "does what it claims",
-    //       text: "Product does what it claims"
-    //     },
-    //     {
-    //       value: "better than others",
-    //       text: "Product is better than other products on the market"
-    //     },
-    //     {
-    //       value: "easy to use",
-    //       text: "Product is easy to use"
-    //     }
-    //   ]
-    // },
+    {
+      type: "matrix",
+      name: "Quality",
+      title: "Matrix",
+      capture: "unmask",
+      columns: [
+        {
+          value: 1,
+          text: "Strongly Disagree"
+        },
+        {
+          value: 2,
+          text: "Disagree"
+        },
+        {
+          value: 3,
+          text: "Neutral"
+        },
+        {
+          value: 4,
+          text: "Agree"
+        },
+        {
+          value: 5,
+          text: "Strongly Agree"
+        }
+      ],
+      rows: [
+        {
+          value: "affordable",
+          text: "Product is affordable"
+        },
+        {
+          value: "does what it claims",
+          text: "Product does what it claims"
+        },
+        {
+          value: "better than others",
+          text: "Product is better than other products on the market"
+        },
+        {
+          value: "easy to use",
+          text: "Product is easy to use"
+        }
+      ]
+    },
 
-    // {
-    //   type: "matrixdynamic",
-    //   name: "teachersRate",
-    //   title: "Matrix Dynamic",
-    //   addRowText: "Add Subject",
-    //   horizontalScroll: true,
-    //   columnMinWidth: "130px",
-    //   columnColCount: 1,
-    //   cellType: "radiogroup",
-    //   capture: "unmask",
-    //   choices: [
-    //     {
-    //       value: 1,
-    //       text: "Yes"
-    //     },
-    //     {
-    //       value: 0,
-    //       text: "Sometimes"
-    //     },
-    //     {
-    //       value: -1,
-    //       text: "No"
-    //     }
-    //   ],
-    //   columns: [
-    //     {
-    //       name: "subject",
-    //       cellType: "dropdown",
-    //       title: "Select a subject",
-    //       isRequired: true,
-    //       capture: "unmask",
-    //       minWidth: "300px",
-    //       choices: [
-    //         "English: American Literature",
-    //         "English: British and World Literature",
-    //         "Math: Consumer Math",
-    //         "Math: Practical Math",
-    //         "Math: Developmental Algebra",
-    //         "Math: Continuing Algebra",
-    //         "Math: Pre-Algebra",
-    //         "Math: Algebra",
-    //         "Math: Geometry",
-    //         "Math: Integrated Mathematics",
-    //         "Science: Physical Science",
-    //         "Science: Earth Science",
-    //         "Science: Biology",
-    //         "Science: Chemistry",
-    //         "History: World History",
-    //         "History: Modern World Studies",
-    //         "History: U.S. History",
-    //         "History: Modern U.S. History",
-    //         "Social Sciences: U.S. Government and Politics",
-    //         "Social Sciences: U.S. and Global Economics",
-    //         "World Languages: Spanish",
-    //         "World Languages: French",
-    //         "World Languages: German",
-    //         "World Languages: Latin",
-    //         "World Languages: Chinese",
-    //         "World Languages: Japanese"
-    //       ]
-    //     },
-    //     {
-    //       name: "explains",
-    //       capture: "unmask",
-    //       title: "Clearly explains the objectives"
-    //     },
-    //     {
-    //       name: "interesting",
-    //       capture: "unmask",
-    //       title: "Makes class interesting"
-    //     },
-    //     {
-    //       name: "effective",
-    //       capture: "unmask",
-    //       title: "Uses class time effectively"
-    //     },
-    //     {
-    //       name: "frusturation",
-    //       cellType: "comment",
-    //       capture: "unmask",
-    //       title: "Is there anything about this class that frustrates you?",
-    //       minWidth: "250px"
-    //     },
-    //     {
-    //       name: "likeTheBest",
-    //       cellType: "comment",
-    //       capture: "unmask",
-    //       title: "What do you like best about this class and/or teacher?",
-    //       minWidth: "250px"
-    //     },
-    //     {
-    //       name: "improvements",
-    //       cellType: "comment",
-    //       capture: "unmask",
-    //       title: "What do you wish this teacher would do differently that would improve this class?",
-    //       minWidth: "250px"
-    //     }
-    //   ],
-    //   rowCount: 2
-    // },
+    {
+      type: "matrixdynamic",
+      name: "teachersRate",
+      title: "Matrix Dynamic",
+      addRowText: "Add Subject",
+      horizontalScroll: true,
+      columnMinWidth: "130px",
+      columnColCount: 1,
+      cellType: "radiogroup",
+      capture: "unmask",
+      choices: [
+        {
+          value: 1,
+          text: "Yes"
+        },
+        {
+          value: 0,
+          text: "Sometimes"
+        },
+        {
+          value: -1,
+          text: "No"
+        }
+      ],
+      columns: [
+        {
+          name: "subject",
+          cellType: "dropdown",
+          title: "Select a subject",
+          isRequired: true,
+          capture: "unmask",
+          minWidth: "300px",
+          choices: [
+            "English: American Literature",
+            "English: British and World Literature",
+            "Math: Consumer Math",
+            "Math: Practical Math",
+            "Math: Developmental Algebra",
+            "Math: Continuing Algebra",
+            "Math: Pre-Algebra",
+            "Math: Algebra",
+            "Math: Geometry",
+            "Math: Integrated Mathematics",
+            "Science: Physical Science",
+            "Science: Earth Science",
+            "Science: Biology",
+            "Science: Chemistry",
+            "History: World History",
+            "History: Modern World Studies",
+            "History: U.S. History",
+            "History: Modern U.S. History",
+            "Social Sciences: U.S. Government and Politics",
+            "Social Sciences: U.S. and Global Economics",
+            "World Languages: Spanish",
+            "World Languages: French",
+            "World Languages: German",
+            "World Languages: Latin",
+            "World Languages: Chinese",
+            "World Languages: Japanese"
+          ]
+        },
+        {
+          name: "explains",
+          capture: "unmask",
+          title: "Clearly explains the objectives"
+        },
+        {
+          name: "interesting",
+          capture: "unmask",
+          title: "Makes class interesting"
+        },
+        {
+          name: "effective",
+          capture: "unmask",
+          title: "Uses class time effectively"
+        },
+        {
+          name: "frusturation",
+          cellType: "comment",
+          capture: "unmask",
+          title: "Is there anything about this class that frustrates you?",
+          minWidth: "250px"
+        },
+        {
+          name: "likeTheBest",
+          cellType: "comment",
+          capture: "unmask",
+          title: "What do you like best about this class and/or teacher?",
+          minWidth: "250px"
+        },
+        {
+          name: "improvements",
+          cellType: "comment",
+          capture: "unmask",
+          title: "What do you wish this teacher would do differently that would improve this class?",
+          minWidth: "250px"
+        }
+      ],
+      rowCount: 2
+    },
 
     {
       type: "matrixdynamic",

@@ -114,7 +114,7 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
     const matrixrow: Array<React.JSX.Element> = [];
     const cells = row.cells;
     for (var i = 0; i < cells.length; i++) {
-      matrixrow.push(this.renderCell(cells[i], cssClasses, i + 1, reason));
+      matrixrow.push(this.renderCell(cells[i], cssClasses, reason));
     }
     const key = "row" + keyValue;
 
@@ -131,12 +131,7 @@ class SurveyQuestionMatrixTable extends SurveyElementBase<
     );
   }
 
-  renderCell(
-    cell: QuestionMatrixDropdownRenderedCell,
-    cssClasses: any,
-    column: number,
-    reason?: string
-  ): React.JSX.Element {
+  renderCell(cell: QuestionMatrixDropdownRenderedCell, cssClasses: any, reason?: string): React.JSX.Element {
     const key = "cell" + cell.id;
 
     if (cell.hasQuestion) {
