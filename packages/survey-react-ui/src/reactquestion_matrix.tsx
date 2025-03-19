@@ -71,11 +71,12 @@ export class SurveyQuestionMatrix extends SurveyQuestionElementBase {
         </tr>
       </thead>
     );
+
     return (
       <div className={cssClasses.tableWrapper} ref={root => this.setControl(root)}>
         <fieldset>
           <legend className="sv-hidden">{this.question.locTitle.renderedHtml}</legend>
-          <table className={this.question.getTableCss()}>
+          <table {...this.question.elementData} className={this.question.getTableCss()}>
             {header}
             <tbody>{rows}</tbody>
           </table>
@@ -134,7 +135,7 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
     var tds = this.generateTds();
 
     return (
-      <tr className={this.row.rowClasses || undefined}>
+      <tr {...this.row.elementData} className={this.row.rowClasses || undefined}>
         {rowsTD}
         {tds}
       </tr>
@@ -217,6 +218,18 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
   private get columnIndex(): number {
     return this.props.columnIndex;
   }
+  private get cellElementData(): any {
+    const data = { ...this.column.elementData("column"), ...this.row.elementData };
+    const index = this.question.rows.findIndex(x => x.id === this.row.name);
+
+    data["fs-element"] = "table-cell";
+    data["fs-table-row-index"] = index + 1;
+    data["fs-table-cell-selected"] = data["fs-column-index"] === data["fs-table-row-value"];
+
+    delete data["fs-table-row-value"];
+
+    return this.question.createElementData(data);
+  }
   protected canRender(): boolean {
     return !!this.question && !!this.row;
   }
@@ -227,8 +240,9 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
     const mobileSpan = this.question.isMobile ? (
       <span className={this.question.cssClasses.cellResponsiveTitle}>{this.renderLocString(this.column.locText)}</span>
     ) : undefined;
+
     return (
-      <label onMouseDown={this.handleOnMouseDown} className={itemClass}>
+      <label {...this.cellElementData} onMouseDown={this.handleOnMouseDown} className={itemClass}>
         {this.renderInput(inputId, isChecked)}
         <span className={this.question.cssClasses.materialDecorator}>
           {this.question.itemSvgIcon ? (

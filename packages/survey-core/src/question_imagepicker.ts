@@ -291,7 +291,7 @@ export class QuestionImagePickerModel extends QuestionCheckboxBase {
   public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
-    const data = this.getDataElement("imagepicker", name, this.inputValue);
+    const data = this.getDataElement("imagepicker", name, this.value);
 
     return data;
   }

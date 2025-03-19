@@ -70,11 +70,19 @@ export class MatrixRowModel extends Base {
   public setValueDirectly(val: any): void {
     this.setPropertyValue("value", val);
   }
-  public get isReadOnly(): boolean { return !this.item.enabled || this.data.isInputReadOnly; }
-  public get isReadOnlyAttr(): boolean { return this.data.isReadOnlyAttr; }
-  public get isDisabledAttr(): boolean { return !this.item.enabled || this.data.isDisabledAttr; }
+  public get isReadOnly(): boolean {
+    return !this.item.enabled || this.data.isInputReadOnly;
+  }
+  public get isReadOnlyAttr(): boolean {
+    return this.data.isReadOnlyAttr;
+  }
+  public get isDisabledAttr(): boolean {
+    return !this.item.enabled || this.data.isDisabledAttr;
+  }
   public get rowTextClasses(): string {
-    return new CssClassBuilder().append(this.data.cssClasses.rowTextCell).toString();
+    return new CssClassBuilder()
+      .append(this.data.cssClasses.rowTextCell)
+      .toString();
   }
   public get hasError(): boolean {
     return this.getPropertyValue("hasError", false);
@@ -84,11 +92,24 @@ export class MatrixRowModel extends Base {
   }
   public get rowClasses(): string {
     const cssClasses = (<any>this.data).cssClasses;
-    return new CssClassBuilder().append(cssClasses.row)
+    return new CssClassBuilder()
+      .append(cssClasses.row)
       .append(cssClasses.rowError, this.hasError)
       .append(cssClasses.rowReadOnly, this.isReadOnly)
       .append(cssClasses.rowDisabled, this.data.isDisabledStyle)
       .toString();
+  }
+
+  public get elementData(): any {
+    const data = {
+      "fs-element": "table-row",
+      "fs-table-row-name": this.name,
+    };
+
+    if (this.value) {
+      data["fs-table-row-value"] = this.value;
+    }
+    return data;
   }
 }
 
@@ -103,7 +124,9 @@ export class MatrixCells extends Base {
   public constructor(public cellsOwner: IMatrixCellsOwner) {
     super();
   }
-  public getType(): string { return "cells"; }
+  public getType(): string {
+    return "cells";
+  }
   public get isEmpty(): boolean {
     return Object.keys(this.values).length == 0;
   }
@@ -147,7 +170,9 @@ export class MatrixCells extends Base {
     }
     return res;
   }
-  private get defaultRowValue() { return settings.matrix.defaultRowName; }
+  private get defaultRowValue() {
+    return settings.matrix.defaultRowName;
+  }
   private getCellLocData(row: any, col: any): any {
     let data = this.getCellLocDataFromValue(row, col);
     if (data) return data;
@@ -217,7 +242,11 @@ export class MatrixCells extends Base {
       const resRow: { [index: string]: any } = {};
       const rowValues = this.values[row];
       for (let col in rowValues) {
-        if (row === this.defaultRowValue || !defaultRow || defaultRow[col] !== rowValues[col]) {
+        if (
+          row === this.defaultRowValue ||
+          !defaultRow ||
+          defaultRow[col] !== rowValues[col]
+        ) {
           resRow[col] = rowValues[col];
         }
       }
@@ -239,14 +268,20 @@ export class MatrixCells extends Base {
       }
     }
     this.locNotification = true;
-    this.runFuncOnLocs((row: any, col: any, loc: LocalizableString) => loc.setJson(this.getCellLocData(row, col)));
+    this.runFuncOnLocs((row: any, col: any, loc: LocalizableString) =>
+      loc.setJson(this.getCellLocData(row, col))
+    );
     this.locNotification = false;
     this.valuesChanged();
   }
   public locStrsChanged(): void {
-    this.runFuncOnLocs((row: any, col: any, loc: LocalizableString) => loc.strChanged());
+    this.runFuncOnLocs((row: any, col: any, loc: LocalizableString) =>
+      loc.strChanged()
+    );
   }
-  private runFuncOnLocs(func: (row: any, col: any, loc: LocalizableString) => void): void {
+  private runFuncOnLocs(
+    func: (row: any, col: any, loc: LocalizableString) => void
+  ): void {
     for (let row in this.locs) {
       const rowValues = this.locs[row];
       for (let col in rowValues) {
@@ -257,16 +292,23 @@ export class MatrixCells extends Base {
   protected createString(): LocalizableString {
     return new LocalizableString(this.cellsOwner, true);
   }
+
+  public get elementData(): any {
+    const data = { "fs-element": "table-cell" };
+
+    return data;
+  }
 }
 
 /**
-  * A class that describes the Single-Select Matrix question type.
-  *
-  * [View Demo](https://surveyjs.io/form-library/examples/single-selection-matrix-table-question/ (linkStyle))
-  */
+ * A class that describes the Single-Select Matrix question type.
+ *
+ * [View Demo](https://surveyjs.io/form-library/examples/single-selection-matrix-table-question/ (linkStyle))
+ */
 export class QuestionMatrixModel
   extends QuestionMatrixBaseModel<MatrixRowModel, ItemValue>
-  implements IMatrixData, IMatrixCellsOwner {
+  implements IMatrixData, IMatrixCellsOwner
+{
   private isRowChanging = false;
   private cellsValue: MatrixCells;
 
@@ -281,7 +323,10 @@ export class QuestionMatrixModel
       this.onColumnsChanged();
     });
     this.registerPropertyChangedHandlers(["rows"], () => {
-      this.runCondition(this.getDataFilteredValues(), this.getDataFilteredProperties());
+      this.runCondition(
+        this.getDataFilteredValues(),
+        this.getDataFilteredProperties()
+      );
       this.onRowsChanged();
     });
     this.registerPropertyChangedHandlers(["hideIfRowsEmpty"], () => {
@@ -395,11 +440,26 @@ export class QuestionMatrixModel
     return new CssClassBuilder()
       .append(css.cell, hasCellText)
       .append(hasCellText ? css.cellText : css.label)
-      .append(css.itemOnError, !hasCellText && (this.eachRowRequired || this.eachRowUnique ? row.hasError : this.hasCssError()))
+      .append(
+        css.itemOnError,
+        !hasCellText &&
+          (this.eachRowRequired || this.eachRowUnique
+            ? row.hasError
+            : this.hasCssError())
+      )
       .append(hasCellText ? css.cellTextSelected : css.itemChecked, isChecked)
-      .append(hasCellText ? css.cellTextDisabled : css.itemDisabled, this.isDisabledStyle)
-      .append(hasCellText ? css.cellTextReadOnly : css.itemReadOnly, this.isReadOnlyStyle)
-      .append(hasCellText ? css.cellTextPreview : css.itemPreview, this.isPreviewStyle)
+      .append(
+        hasCellText ? css.cellTextDisabled : css.itemDisabled,
+        this.isDisabledStyle
+      )
+      .append(
+        hasCellText ? css.cellTextReadOnly : css.itemReadOnly,
+        this.isReadOnlyStyle
+      )
+      .append(
+        hasCellText ? css.cellTextPreview : css.itemPreview,
+        this.isPreviewStyle
+      )
       .append(css.itemHover, allowHover && !hasCellText)
       .toString();
   }
@@ -433,12 +493,22 @@ export class QuestionMatrixModel
     }
     return res;
   }
-  protected runConditionCore(values: HashTable<any>, properties: HashTable<any>): void {
-    ItemValue.runEnabledConditionsForItems(this.rows, undefined, values, properties);
+  protected runConditionCore(
+    values: HashTable<any>,
+    properties: HashTable<any>
+  ): void {
+    ItemValue.runEnabledConditionsForItems(
+      this.rows,
+      undefined,
+      values,
+      properties
+    );
     super.runConditionCore(values, properties);
   }
   protected createRowsVisibleIfRunner(): ConditionRunner {
-    return !!this.rowsVisibleIf ? new ConditionRunner(this.rowsVisibleIf) : null;
+    return !!this.rowsVisibleIf
+      ? new ConditionRunner(this.rowsVisibleIf)
+      : null;
   }
   protected onRowsChanged(): void {
     this.clearGeneratedRows();
@@ -462,8 +532,7 @@ export class QuestionMatrixModel
   protected sortVisibleRows(
     array: Array<MatrixRowModel>
   ): Array<MatrixRowModel> {
-    if (!!this.survey && this.survey.isDesignMode)
-      return array;
+    if (!!this.survey && this.survey.isDesignMode) return array;
     var order = this.rowOrder.toLowerCase();
     if (order === "random")
       return Helpers.randomizeArray<MatrixRowModel>(array);
@@ -525,7 +594,11 @@ export class QuestionMatrixModel
     return this.isMouseDown === true && this.hasValuesInAllRows();
   }
   private errorsInRow: HashTable<boolean>;
-  protected onCheckForErrors(errors: Array<SurveyError>, isOnValueChanged: boolean, fireCallback: boolean): void {
+  protected onCheckForErrors(
+    errors: Array<SurveyError>,
+    isOnValueChanged: boolean,
+    fireCallback: boolean
+  ): void {
     super.onCheckForErrors(errors, isOnValueChanged, fireCallback);
     if (!isOnValueChanged || this.hasCssError()) {
       const rowsErrors = { noValue: false, isNotUnique: false };
@@ -543,7 +616,11 @@ export class QuestionMatrixModel
     this.checkErrorsAllRows(false, rowsErrors, true);
     return !rowsErrors.noValue;
   }
-  private checkErrorsAllRows(modifyErrors: boolean, res: { noValue: boolean, isNotUnique: boolean }, allRowsRequired?: boolean): void {
+  private checkErrorsAllRows(
+    modifyErrors: boolean,
+    res: { noValue: boolean; isNotUnique: boolean },
+    allRowsRequired?: boolean
+  ): void {
     var rows = this.generatedVisibleRows;
     if (!rows) rows = this.visibleRows;
     if (!rows) return;
@@ -559,7 +636,7 @@ export class QuestionMatrixModel
     for (var i = 0; i < rows.length; i++) {
       const val = rows[i].value;
       let isEmpty = this.isValueEmpty(val);
-      const isNotUnique = rowsUnique && (!isEmpty && hash[val] === true);
+      const isNotUnique = rowsUnique && !isEmpty && hash[val] === true;
       isEmpty = isEmpty && rowsRequired;
       if (modifyErrors && (isEmpty || isNotUnique)) {
         this.addErrorIntoRow(rows[i]);
@@ -571,7 +648,7 @@ export class QuestionMatrixModel
       res.isNotUnique = res.isNotUnique || isNotUnique;
     }
     if (modifyErrors) {
-      rows.forEach(row => {
+      rows.forEach((row) => {
         row.hasError = this.hasErrorInRow(row);
       });
     }
@@ -597,7 +674,7 @@ export class QuestionMatrixModel
     this.onMatrixRowCreated(row);
     return row;
   }
-  protected onMatrixRowCreated(row: MatrixRowModel) { }
+  protected onMatrixRowCreated(row: MatrixRowModel) {}
   protected setQuestionValue(newValue: any, updateIsAnswered: boolean = true) {
     super.setQuestionValue(newValue, this.isRowChanging || updateIsAnswered);
     if (!this.generatedVisibleRows || this.generatedVisibleRows.length == 0)
@@ -709,7 +786,11 @@ export class QuestionMatrixModel
   protected clearInvisibleValuesInRows(): void {
     this.clearInvisibleValuesInRowsAndColumns(true, false, false);
   }
-  protected clearInvisibleValuesInRowsAndColumns(inRows: boolean, inColumns: boolean, inCorrectRows: boolean): void {
+  protected clearInvisibleValuesInRowsAndColumns(
+    inRows: boolean,
+    inColumns: boolean,
+    inCorrectRows: boolean
+  ): void {
     if (this.isEmpty()) return;
     let updatedData = this.getUnbindValue(this.value);
     const newData: any = {};
@@ -717,7 +798,10 @@ export class QuestionMatrixModel
     for (var i = 0; i < rows.length; i++) {
       var key = rows[i].value;
       if (!!updatedData[key]) {
-        if (inRows && !rows[i].isVisible || inColumns && !this.getVisibleColumnByValue(updatedData[key])) {
+        if (
+          (inRows && !rows[i].isVisible) ||
+          (inColumns && !this.getVisibleColumnByValue(updatedData[key]))
+        ) {
           delete updatedData[key];
         } else {
           newData[key] = updatedData[key];
@@ -803,6 +887,13 @@ export class QuestionMatrixModel
       "row-header"
     );
   }
+
+  public get elementData(): any {
+    const name = this.name ? this.name : this.title;
+    const data = this.getDataElement("table", name);
+
+    return data;
+  }
 }
 
 Serializer.addClass(
@@ -810,27 +901,30 @@ Serializer.addClass(
   [
     "rowTitleWidth",
     {
-      name: "columns:itemvalue[]", uniqueProperty: "value",
+      name: "columns:itemvalue[]",
+      uniqueProperty: "value",
       baseValue: function () {
         return getLocaleString("matrix_column");
       },
     },
     {
-      name: "rows:itemvalue[]", uniqueProperty: "value",
+      name: "rows:itemvalue[]",
+      uniqueProperty: "value",
       baseValue: function () {
         return getLocaleString("matrix_row");
       },
     },
     { name: "cells:cells", serializationProperty: "cells" },
     {
-      name: "rowOrder", alternativeName: "rowsOrder",
+      name: "rowOrder",
+      alternativeName: "rowsOrder",
       default: "initial",
       choices: ["initial", "random"],
     },
     { name: "eachRowRequired:boolean", alternativeName: "isAllRowRequired" },
     { name: "eachRowUnique:boolean", category: "validation" },
     "hideIfRowsEmpty:boolean",
-    { name: "cellComponent", visible: false, default: "survey-matrix-cell" }
+    { name: "cellComponent", visible: false, default: "survey-matrix-cell" },
   ],
   function () {
     return new QuestionMatrixModel("");

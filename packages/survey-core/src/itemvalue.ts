@@ -270,7 +270,13 @@ export class ItemValue
   }
 
   public elementData(type: string): any {
-    const data = this.getDataElementItem(type, this.text, this.selected);
+    let data = {};
+    if (type === "column") {
+      data["fs-column-name"] = this.title ? this.title : "";
+      data["fs-column-index"] = this.value;
+    } else {
+      data = this.getDataElementItem(type, this.text, this.selected);
+    }
 
     return data;
   }
