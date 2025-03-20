@@ -1506,7 +1506,7 @@ export class Base {
           ? `${properties[type]}, ${schema}`
           : schema;
       } else {
-        this.flattenObject(schema, properties);
+        this.flattenObject(schema, properties, type);
       }
     }
 
@@ -1526,7 +1526,11 @@ export class Base {
       const val = object[x];
 
       // prepare key to be joined
-      const key = x.replace(/[^\w\s]/gi, "").toLocaleLowerCase();
+      const key = x
+        .replace(/[^\w\s]/gi, "")
+        .toLocaleLowerCase()
+        .split(" ")
+        .join("-");
       const keyName =
         parentKey === "" ? key : `${parentKey.toLowerCase()}_${key}`;
 

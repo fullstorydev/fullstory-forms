@@ -13,6 +13,7 @@ export class SurveyNavigationButton extends ReactSurveyElement {
   protected renderElement(): React.JSX.Element {
     return (
       <input
+        {...this.item.elementData}
         className={this.item.innerCss}
         type="button"
         disabled={this.item.disabled}
@@ -25,9 +26,6 @@ export class SurveyNavigationButton extends ReactSurveyElement {
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  "sv-nav-btn",
-  (props) => {
-    return React.createElement(SurveyNavigationButton, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-nav-btn", props => {
+  return React.createElement(SurveyNavigationButton, props);
+});

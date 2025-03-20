@@ -31,16 +31,12 @@ export class SurveyAction extends SurveyElementBase<IActionBarItemProps, any> {
   renderElement() {
     //refactor
     const itemClass = this.item.getActionRootCss();
-    const separator = this.item.needSeparator ? (
-      <SurveyActionBarSeparator></SurveyActionBarSeparator>
-    ) : null;
+    const separator = this.item.needSeparator ? <SurveyActionBarSeparator></SurveyActionBarSeparator> : null;
 
-    const itemComponent = ReactElementFactory.Instance.createElement(
-      this.item.component || "sv-action-bar-item",
-      {
-        item: this.item,
-      }
-    );
+    const itemComponent = ReactElementFactory.Instance.createElement(this.item.component || "sv-action-bar-item", {
+      item: this.item
+    });
+
     return (
       <div className={itemClass} id={this.item.id} ref={this.ref}>
         <div className="sv-action__content">
@@ -58,7 +54,7 @@ export class SurveyAction extends SurveyElementBase<IActionBarItemProps, any> {
     super.componentDidMount();
     this.item.updateModeCallback = (mode, callback) => {
       queueMicrotask(() => {
-        if((ReactDOM as any)["flushSync"]) {
+        if ((ReactDOM as any)["flushSync"]) {
           (ReactDOM as any)["flushSync"](() => {
             this.item.mode = mode;
           });
@@ -74,10 +70,7 @@ export class SurveyAction extends SurveyElementBase<IActionBarItemProps, any> {
   }
 }
 
-export class SurveyActionBarItem extends SurveyElementBase<
-  IActionBarItemProps,
-  any
-> {
+export class SurveyActionBarItem extends SurveyElementBase<IActionBarItemProps, any> {
   get item(): Action {
     return this.props.item;
   }
@@ -123,9 +116,9 @@ export class SurveyActionBarItem extends SurveyElementBase<
         className={className}
         type="button"
         disabled={this.item.disabled}
-        onMouseDown={(args) => this.item.doMouseDown(args)}
-        onFocus={(args) => this.item.doFocus(args)}
-        onClick={(args) => this.item.doAction(args)}
+        onMouseDown={args => this.item.doMouseDown(args)}
+        onFocus={args => this.item.doFocus(args)}
+        onClick={args => this.item.doAction(args)}
         title={title}
         tabIndex={tabIndex}
         aria-checked={this.item.ariaChecked}
@@ -133,12 +126,15 @@ export class SurveyActionBarItem extends SurveyElementBase<
         role={this.item.ariaRole}
       >
         {buttonContent}
-      </button>, this.item, { processEsc: false });
+      </button>,
+      this.item,
+      { processEsc: false }
+    );
 
     return button;
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-action-bar-item", (props) => {
+ReactElementFactory.Instance.registerElement("sv-action-bar-item", props => {
   return React.createElement(SurveyActionBarItem, props);
 });

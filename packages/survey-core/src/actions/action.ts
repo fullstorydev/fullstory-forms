@@ -160,28 +160,47 @@ export interface IAction {
   hidePopup?: () => void;
 }
 
-export interface IActionDropdownPopupOptions extends IListModel, IPopupOptionsBase {
-}
-export function createDropdownActionModel(actionOptions: IAction, dropdownOptions: IActionDropdownPopupOptions, locOwner?: ILocalizableOwner): Action {
+export interface IActionDropdownPopupOptions
+  extends IListModel,
+    IPopupOptionsBase {}
+export function createDropdownActionModel(
+  actionOptions: IAction,
+  dropdownOptions: IActionDropdownPopupOptions,
+  locOwner?: ILocalizableOwner
+): Action {
   dropdownOptions.locOwner = locOwner;
-  return createDropdownActionModelAdvanced(actionOptions, dropdownOptions, dropdownOptions);
+  return createDropdownActionModelAdvanced(
+    actionOptions,
+    dropdownOptions,
+    dropdownOptions
+  );
 }
-export function createDropdownActionModelAdvanced(actionOptions: IAction, listOptions: IListModel, popupOptions?: IPopupOptionsBase): Action {
+export function createDropdownActionModelAdvanced(
+  actionOptions: IAction,
+  listOptions: IListModel,
+  popupOptions?: IPopupOptionsBase
+): Action {
   const originalSelectionChanged = listOptions.onSelectionChanged;
   listOptions.onSelectionChanged = (item: Action, ...params: any[]) => {
-    if (newAction.hasTitle) { newAction.title = item.title; }
+    if (newAction.hasTitle) {
+      newAction.title = item.title;
+    }
     if (originalSelectionChanged) {
       originalSelectionChanged(item, params);
     }
   };
-  const popupModel: PopupModel = createPopupModelWithListModel(listOptions, popupOptions);
+  const popupModel: PopupModel = createPopupModelWithListModel(
+    listOptions,
+    popupOptions
+  );
   popupModel.getTargetCallback = getActionDropdownButtonTarget;
   const newActionOptions = Object.assign({}, actionOptions, {
     component: "sv-action-bar-item-dropdown",
     popupModel: popupModel,
     action: (action: IAction, isUserAction: boolean) => {
-      !!(actionOptions.action) && actionOptions.action();
-      popupModel.isFocusedContent = popupModel.isFocusedContent || !isUserAction;
+      !!actionOptions.action && actionOptions.action();
+      popupModel.isFocusedContent =
+        popupModel.isFocusedContent || !isUserAction;
       popupModel.show();
     },
   });
@@ -191,7 +210,10 @@ export function createDropdownActionModelAdvanced(actionOptions: IAction, listOp
   return newAction;
 }
 
-export function createPopupModelWithListModel(listOptions: IListModel, popupOptions: IPopupOptionsBase): PopupModel {
+export function createPopupModelWithListModel(
+  listOptions: IListModel,
+  popupOptions: IPopupOptionsBase
+): PopupModel {
   const listModel: ListModel = new ListModel(listOptions as any);
   listModel.onSelectionChanged = (item: Action) => {
     if (listOptions.onSelectionChanged) {
@@ -201,8 +223,14 @@ export function createPopupModelWithListModel(listOptions: IListModel, popupOpti
   };
 
   const _popupOptions = popupOptions || {};
-  _popupOptions.onDispose = () => { listModel.dispose(); };
-  const popupModel: PopupModel = new PopupModel("sv-list", { model: listModel }, _popupOptions);
+  _popupOptions.onDispose = () => {
+    listModel.dispose();
+  };
+  const popupModel: PopupModel = new PopupModel(
+    "sv-list",
+    { model: listModel },
+    _popupOptions
+  );
   popupModel.isFocusedContent = listModel.showFilter;
   popupModel.onShow = () => {
     if (!!_popupOptions.onShow) _popupOptions.onShow();
@@ -212,14 +240,18 @@ export function createPopupModelWithListModel(listOptions: IListModel, popupOpti
   return popupModel;
 }
 
-export function getActionDropdownButtonTarget(container: HTMLElement): HTMLElement {
+export function getActionDropdownButtonTarget(
+  container: HTMLElement
+): HTMLElement {
   return container?.previousElementSibling as HTMLElement;
 }
 
 export abstract class BaseAction extends Base implements IAction {
   items?: IAction[];
   private static renderedId = 1;
-  private static getNextRendredId(): number { return BaseAction.renderedId++; }
+  private static getNextRendredId(): number {
+    return BaseAction.renderedId++;
+  }
   private cssClassesValue: any;
   private rendredIdValue = BaseAction.getNextRendredId();
   private ownerValue: ILocalizableOwner;
@@ -245,12 +277,16 @@ export abstract class BaseAction extends Base implements IAction {
   @property() iconName: string;
   @property({ defaultValue: 24 }) iconSize: number | string;
   @property() markerIconName: string;
-  @property() css?: string
+  @property() css?: string;
   minDimension: number;
   maxDimension: number;
 
-  public get renderedId(): number { return this.rendredIdValue; }
-  public get owner(): ILocalizableOwner { return this.ownerValue; }
+  public get renderedId(): number {
+    return this.rendredIdValue;
+  }
+  public get owner(): ILocalizableOwner {
+    return this.ownerValue;
+  }
   public set owner(val: ILocalizableOwner) {
     if (val !== this.owner) {
       this.ownerValue = val;
@@ -368,26 +404,22 @@ export abstract class BaseAction extends Base implements IAction {
     if (this.hidePopupTimeout) clearTimeout(this.hidePopupTimeout);
   }
   public showPopupDelayed(delay: number) {
-
     this.clearPopupTimeouts();
     this.showPopupTimeout = setTimeout(() => {
       this.clearPopupTimeouts();
 
       this.showPopup();
-
     }, delay);
   }
 
   public hidePopupDelayed(delay: number) {
     if (this.popupModel?.isVisible) {
-
       this.clearPopupTimeouts();
       this.hidePopupTimeout = setTimeout(() => {
         this.clearPopupTimeouts();
 
         this.hidePopup();
         this.isHovered = false;
-
       }, delay);
     } else {
       this.clearPopupTimeouts();
@@ -416,13 +448,18 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
   }
   constructor(innerItemData: IAction) {
     super();
-    const innerItem: IAction = (innerItemData instanceof Action) ? innerItemData.innerItem : innerItemData;
+    const innerItem: IAction =
+      innerItemData instanceof Action ? innerItemData.innerItem : innerItemData;
     this.innerItem = innerItem;
     this.locTitle = !!innerItem ? innerItem["locTitle"] : null;
     //Object.assign(this, item) to support IE11
     if (!!innerItem) {
       for (var key in innerItem) {
-        if (key === "locTitle" || key === "title" && !!this.locTitle && !!this.title) continue;
+        if (
+          key === "locTitle" ||
+          (key === "title" && !!this.locTitle && !!this.title)
+        )
+          continue;
         (<any>this)[key] = (<any>innerItem)[key];
       }
     }
@@ -444,10 +481,11 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     this.items = [...options.items];
     const listOptions = Object.assign({}, options);
     listOptions.searchEnabled = false;
-    const popupModel = createPopupModelWithListModel(
-      listOptions,
-      { horizontalPosition: "right", showPointer: false, canShrink: false }
-    );
+    const popupModel = createPopupModelWithListModel(listOptions, {
+      horizontalPosition: "right",
+      showPointer: false,
+      canShrink: false,
+    });
     popupModel.cssClass = "sv-popup-inner";
     this.popupModel = popupModel;
   }
@@ -455,15 +493,18 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
   location?: string;
   @property() id: string;
   @property({
-    defaultValue: true, onSet: (_, target: Action) => {
+    defaultValue: true,
+    onSet: (_, target: Action) => {
       target.raiseUpdate();
-    }
-  }) private _visible: boolean;
+    },
+  })
+  private _visible: boolean;
   @property({
     onSet: (_, target: Action) => {
       target.locTooltipChanged();
-    }
-  }) locTooltipName?: string;
+    },
+  })
+  locTooltipName?: string;
   @property() private _enabled: boolean;
   @property() action: (context?: any, isUserAction?: boolean) => void;
   @property() onFocus: (isMouse: boolean, event: any) => void;
@@ -473,8 +514,9 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     onSet: (val, target) => {
       if (target.locTitleValue.text === val) return;
       target.locTitleValue.text = val;
-    }
-  }) _title: string;
+    },
+  })
+  _title: string;
   protected getLocTitle(): LocalizableString {
     return this.locTitleValue;
   }
@@ -525,11 +567,16 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     this.isMouseDown = false;
   }
   private locStrChangedInPopupModel(): void {
-    if (!this.popupModel || !this.popupModel.contentComponentData || !this.popupModel.contentComponentData.model) return;
+    if (
+      !this.popupModel ||
+      !this.popupModel.contentComponentData ||
+      !this.popupModel.contentComponentData.model
+    )
+      return;
     const model = this.popupModel.contentComponentData.model;
     if (Array.isArray(model.actions)) {
       const actions: Array<any> = model.actions;
-      actions.forEach(item => {
+      actions.forEach((item) => {
         if (!!(<any>item).locStrsChanged) {
           (<any>item).locStrsChanged();
         }
@@ -539,18 +586,28 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
   private locTitleChanged = () => {
     const val = this.locTitle.renderedHtml;
     this.setPropertyValue("_title", !!val ? val : undefined);
-  }
+  };
   private locTooltipChanged(): void {
     if (!this.locTooltipName) return;
     this.tooltip = getLocaleString(this.locTooltipName, this.locTitle.locale);
   }
 
   //ILocalizableOwner
-  getLocale(): string { return this.owner ? this.owner.getLocale() : ""; }
-  getMarkdownHtml(text: string, name: string): string { return this.owner ? this.owner.getMarkdownHtml(text, name) : undefined; }
-  getProcessedText(text: string): string { return this.owner ? this.owner.getProcessedText(text) : text; }
-  getRenderer(name: string): string { return this.owner ? this.owner.getRenderer(name) : null; }
-  getRendererContext(locStr: LocalizableString): any { return this.owner ? this.owner.getRendererContext(locStr) : locStr; }
+  getLocale(): string {
+    return this.owner ? this.owner.getLocale() : "";
+  }
+  getMarkdownHtml(text: string, name: string): string {
+    return this.owner ? this.owner.getMarkdownHtml(text, name) : undefined;
+  }
+  getProcessedText(text: string): string {
+    return this.owner ? this.owner.getProcessedText(text) : text;
+  }
+  getRenderer(name: string): string {
+    return this.owner ? this.owner.getRenderer(name) : null;
+  }
+  getRendererContext(locStr: LocalizableString): any {
+    return this.owner ? this.owner.getRendererContext(locStr) : locStr;
+  }
 
   public setVisible(val: boolean): void {
     if (this.visible !== val) {
@@ -587,11 +644,15 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
       this.popupModel.dispose();
     }
   }
-  public updateDimension(mode: actionModeType, htmlElement: HTMLElement, calcDimension: (el: HTMLElement) => number): void {
+  public updateDimension(
+    mode: actionModeType,
+    htmlElement: HTMLElement,
+    calcDimension: (el: HTMLElement) => number
+  ): void {
     const property = mode == "small" ? "minDimension" : "maxDimension";
-    if(htmlElement) {
+    if (htmlElement) {
       const actionContainer = htmlElement;
-      if(actionContainer.classList.contains("sv-action--hidden")) {
+      if (actionContainer.classList.contains("sv-action--hidden")) {
         actionContainer.classList.remove("sv-action--hidden");
         this[property] = calcDimension(htmlElement);
         actionContainer.classList.add("sv-action--hidden");
@@ -603,13 +664,19 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
 
   public needUpdateMaxDimension: boolean = false;
   public needUpdateMinDimension: boolean = false;
-  public updateModeCallback: (mode: actionModeType, callback: (mode: actionModeType, el: HTMLElement) => void) => void;
+  public updateModeCallback: (
+    mode: actionModeType,
+    callback: (mode: actionModeType, el: HTMLElement) => void
+  ) => void;
   public afterRenderCallback: () => void;
   public afterRender(): void {
     this.afterRenderCallback && this.afterRenderCallback();
   }
-  public updateMode(mode: actionModeType, callback: (mode: actionModeType, el: HTMLElement) => void): void {
-    if(this.updateModeCallback) {
+  public updateMode(
+    mode: actionModeType,
+    callback: (mode: actionModeType, el: HTMLElement) => void
+  ): void {
+    if (this.updateModeCallback) {
       this.updateModeCallback(mode, callback);
     } else {
       this.afterRenderCallback = () => {
@@ -618,19 +685,42 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
       };
     }
   }
-  public updateDimensions(calcDimension: (htmlElement: HTMLElement) => number, callback: () => void, modeToCalculate?: actionModeType): void {
-    const mode = !modeToCalculate || (modeToCalculate == "large" && this.mode !== "small") ? this.mode : modeToCalculate;
+  public updateDimensions(
+    calcDimension: (htmlElement: HTMLElement) => number,
+    callback: () => void,
+    modeToCalculate?: actionModeType
+  ): void {
+    const mode =
+      !modeToCalculate || (modeToCalculate == "large" && this.mode !== "small")
+        ? this.mode
+        : modeToCalculate;
     this.updateMode(mode, (mode, htmlElement) => {
       this.updateDimension(mode, htmlElement, calcDimension);
-      if(!modeToCalculate) {
-        this.updateMode(mode !== "small" ? "small" : "large", (mode, htmlElement) => {
-          this.updateDimension(mode, htmlElement, calcDimension);
-          callback();
-        });
+      if (!modeToCalculate) {
+        this.updateMode(
+          mode !== "small" ? "small" : "large",
+          (mode, htmlElement) => {
+            this.updateDimension(mode, htmlElement, calcDimension);
+            callback();
+          }
+        );
       } else {
         callback();
       }
     });
+  }
+
+  public get elementData(): any {
+    //@ts-ignore
+    const data = this.locTitleValue.owner.data;
+    let elementData = {};
+    if (Object.keys(data).length > 0) {
+      elementData = this.createElementData(this.flattenObject(data));
+    }
+
+    //@ts-ignore
+    elementData["fs-survey-name"] = this.locTitleValue.owner.title;
+    return elementData;
   }
 }
 
@@ -641,19 +731,26 @@ export class ActionDropdownViewModel {
     this.setupPopupCallbacks();
   }
   private setupPopupCallbacks() {
-    const popupModel = this.popupModel = this.item.popupModel;
+    const popupModel = (this.popupModel = this.item.popupModel);
     if (!popupModel) return;
-    popupModel.registerPropertyChangedHandlers(["isVisible"], () => {
-      if (!popupModel.isVisible) {
-        this.item.pressed = false;
-      } else {
-        this.item.pressed = true;
-      }
-    }, this.funcKey);
+    popupModel.registerPropertyChangedHandlers(
+      ["isVisible"],
+      () => {
+        if (!popupModel.isVisible) {
+          this.item.pressed = false;
+        } else {
+          this.item.pressed = true;
+        }
+      },
+      this.funcKey
+    );
   }
   private removePopupCallbacks() {
     if (!!this.popupModel) {
-      this.popupModel.unregisterPropertyChangedHandlers(["isVisible"], this.funcKey);
+      this.popupModel.unregisterPropertyChangedHandlers(
+        ["isVisible"],
+        this.funcKey
+      );
     }
   }
   public dispose(): void {
