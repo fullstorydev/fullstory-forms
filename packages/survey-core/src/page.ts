@@ -41,24 +41,29 @@ export class PageModel extends PanelModel implements IPage {
     return true;
   }
   public get hasEditButton(): boolean {
-    return this.isPanel && this.survey && this.survey.state === "preview"
-     && !!this.parent && !this.parent.isPanel;
+    return (
+      this.isPanel &&
+      this.survey &&
+      this.survey.state === "preview" &&
+      !!this.parent &&
+      !this.parent.isPanel
+    );
   }
   protected getElementsForRows(): Array<IElement> {
     const q = this.survey?.currentSingleQuestion;
-    if(!!q) {
-      if((<any>q).page === this) return [q];
+    if (!!q) {
+      if ((<any>q).page === this) return [q];
       return [];
     }
     return super.getElementsForRows();
   }
   protected disposeElements(): void {
-    if(!this.isPageContainer) {
+    if (!this.isPageContainer) {
       super.disposeElements();
     }
   }
   protected onRemoveElement(element: IElement): void {
-    if(this.isPageContainer) {
+    if (this.isPageContainer) {
       element.parent = null;
       this.unregisterElementPropertiesChanged(element);
     } else {
@@ -69,7 +74,7 @@ export class PageModel extends PanelModel implements IPage {
     return this.isPanel ? "panel" : super.getTemplate();
   }
   public get no(): string {
-    if(!this.canShowPageNumber() || !this.survey) return "";
+    if (!this.canShowPageNumber() || !this.survey) return "";
     let no = this.isStartPage ? "" : this.num + ". ";
     return this.survey.getUpdatedPageNo(this, no);
   }
@@ -116,7 +121,7 @@ export class PageModel extends PanelModel implements IPage {
     return this.getLocalizableString("navigationDescription");
   }
   public navigationLocStrChanged(): void {
-    if(this.locNavigationTitle.isEmpty) {
+    if (this.locNavigationTitle.isEmpty) {
       this.locTitle.strChanged();
     }
     this.locNavigationTitle.strChanged();
@@ -162,10 +167,25 @@ export class PageModel extends PanelModel implements IPage {
   public get isStartPage(): boolean {
     return this.survey && this.survey.isPageStarted(this);
   }
-  public get isStarted(): boolean { return this.isStartPage; }
+  public get isStarted(): boolean {
+    return this.isStartPage;
+  }
   protected calcCssClasses(css: any): any {
-    if(this.isPanel) return super.calcCssClasses(css);
-    const classes = { page: {}, error: {}, pageTitle: "", pageDescription: "", row: "", rowMultiple: "", pageRow: "", rowCompact: "", rowEnter: "", rowLeave: "", rowDelayedEnter: "", rowReplace: "" };
+    if (this.isPanel) return super.calcCssClasses(css);
+    const classes = {
+      page: {},
+      error: {},
+      pageTitle: "",
+      pageDescription: "",
+      row: "",
+      rowMultiple: "",
+      pageRow: "",
+      rowCompact: "",
+      rowEnter: "",
+      rowLeave: "",
+      rowDelayedEnter: "",
+      rowReplace: "",
+    };
     this.copyCssClasses(classes.page, css.page);
     this.copyCssClasses(classes.error, css.error);
     if (!!css.pageTitle) {
@@ -204,27 +224,36 @@ export class PageModel extends PanelModel implements IPage {
     return classes;
   }
   protected getCssPanelTitle(): string {
-    if(this.isPanel) return super.getCssPanelTitle();
-    if(!this.cssClasses.page) return "";
-    return new CssClassBuilder()
-      .append(this.cssClasses.page.title)
-      .toString();
+    if (this.isPanel) return super.getCssPanelTitle();
+    if (!this.cssClasses.page) return "";
+    return new CssClassBuilder().append(this.cssClasses.page.title).toString();
   }
   public get cssRoot(): string {
-    if(this.isPanel || !this.cssClasses.page || !this.survey) return "";
+    if (this.isPanel || !this.cssClasses.page || !this.survey) return "";
     return new CssClassBuilder()
       .append(this.cssClasses.page.root)
-      .append(this.cssClasses.page.emptyHeaderRoot, !(<any>this.survey).renderedHasHeader &&
-        !((<any>this.survey).isShowProgressBarOnTop && !(<any>this.survey).isStaring))
+      .append(
+        this.cssClasses.page.emptyHeaderRoot,
+        !(<any>this.survey).renderedHasHeader &&
+          !(
+            (<any>this.survey).isShowProgressBarOnTop &&
+            !(<any>this.survey).isStaring
+          )
+      )
       .toString();
   }
   protected getCssError(cssClasses: any): string {
-    if(this.isPanel) return super.getCssError(cssClasses);
+    if (this.isPanel) return super.getCssError(cssClasses);
     return new CssClassBuilder()
       .append(super.getCssError(cssClasses))
-      .append(cssClasses.page.errorsContainer).toString();
+      .append(cssClasses.page.errorsContainer)
+      .toString();
   }
-  @property({ defaultValue: -1, onSet: (val: number, target: PageModel) => target.onNumChanged(val) }) num: number;
+  @property({
+    defaultValue: -1,
+    onSet: (val: number, target: PageModel) => target.onNumChanged(val),
+  })
+  num: number;
   /**
    * @deprecated Use the [`showNavigationButtons`](https://surveyjs.io/form-library/documentation/api-reference/page-model#showNavigationButtons) property instead.
    */
@@ -286,12 +315,14 @@ export class PageModel extends PanelModel implements IPage {
     var els = this.elements;
     for (var i = 0; i < els.length; i++) {
       if (els[i].isPanel) {
-        (<PanelModelBase><any>els[i]).randomizeElements(this.areQuestionsRandomized);
+        (<PanelModelBase>(<any>els[i])).randomizeElements(
+          this.areQuestionsRandomized
+        );
       }
     }
-    if(this.randomizeElements(this.areQuestionsRandomized)) {
+    if (this.randomizeElements(this.areQuestionsRandomized)) {
       const singleQuestion: any = this.survey?.currentSingleQuestion;
-      if(singleQuestion?.page === this) {
+      if (singleQuestion?.page === this) {
         this.survey.currentSingleQuestion = this.getFirstVisibleQuestion();
       }
     }
@@ -322,7 +353,10 @@ export class PageModel extends PanelModel implements IPage {
     this.addPanelsIntoList(result, visibleOnly, includingDesignTime);
     return result;
   }
-  public getPanels(visibleOnly: boolean = false, includingDesignTime: boolean = false): Array<IPanel> {
+  public getPanels(
+    visibleOnly: boolean = false,
+    includingDesignTime: boolean = false
+  ): Array<IPanel> {
     return this.getAllPanels(visibleOnly, includingDesignTime);
   }
   /**
@@ -349,11 +383,11 @@ export class PageModel extends PanelModel implements IPage {
     this.timeLimit = val;
   }
   public getMaxTimeToFinish(): number {
-    if(this.timeLimit !== 0) return this.timeLimit;
+    if (this.timeLimit !== 0) return this.timeLimit;
     const res = !!this.survey ? this.survey.timeLimitPerPage : 0;
     return res > 0 ? res : 0;
   }
-  protected onNumChanged(value: number) { }
+  protected onNumChanged(value: number) {}
   protected onVisibleChanged() {
     if (this.isRandomizing) return;
     super.onVisibleChanged();
@@ -374,8 +408,9 @@ export class PageModel extends PanelModel implements IPage {
   public set isReadyForClean(val: boolean) {
     const oldValue = this._isReadyForClean;
     this._isReadyForClean = val;
-    if(this._isReadyForClean !== oldValue) {
-      this.isReadyForCleanChangedCallback && this.isReadyForCleanChangedCallback();
+    if (this._isReadyForClean !== oldValue) {
+      this.isReadyForCleanChangedCallback &&
+        this.isReadyForCleanChangedCallback();
     }
   }
   public isReadyForCleanChangedCallback: () => void;
@@ -386,6 +421,16 @@ export class PageModel extends PanelModel implements IPage {
   public disableOnElementRerenderedEvent(): void {
     super.disableOnElementRerenderedEvent();
     this.isReadyForClean = true;
+  }
+
+  public get elementData(): any {
+    const data = {
+      "fs-element": "page",
+      "fs-page-name": this.name,
+      "fs-page-num": this.num,
+    };
+
+    return this.createElementData(data);
   }
 }
 
@@ -398,7 +443,7 @@ Serializer.addClass(
       onSetValue: function (obj: any, value: any) {
         obj && obj.setShowNavigationButtonsProperty(value);
       },
-      alternativeName: "navigationButtonsVisibility"
+      alternativeName: "navigationButtonsVisibility",
     },
     {
       name: "timeLimit:number",
@@ -407,12 +452,15 @@ Serializer.addClass(
       minValue: 0,
       visibleIf: (obj: any) => {
         return !!obj.survey && obj.survey.showTimer;
-      }
+      },
     },
     {
       name: "navigationTitle",
       visibleIf: function (obj: any) {
-        return !!obj.survey && (obj.survey.progressBarType === "buttons" || obj.survey.showTOC);
+        return (
+          !!obj.survey &&
+          (obj.survey.progressBarType === "buttons" || obj.survey.showTOC)
+        );
       },
       serializationProperty: "locNavigationTitle",
     },
@@ -440,7 +488,11 @@ Serializer.addClass(
     { name: "showQuestionNumbers", visible: false },
     { name: "questionStartIndex", visible: false },
     { name: "allowAdaptiveActions", visible: false },
-    { name: "requiredErrorText:text", serializationProperty: "locRequiredErrorText", visible: false },
+    {
+      name: "requiredErrorText:text",
+      serializationProperty: "locRequiredErrorText",
+      visible: false,
+    },
   ],
   function () {
     return new PageModel();

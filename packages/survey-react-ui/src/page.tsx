@@ -26,19 +26,16 @@ export class SurveyPage extends SurveyPanelBase {
     var description = this.renderDescription();
     var rows = this.renderRows(this.panelBase.cssClasses);
     const errors = (
-      <SurveyElementErrors
-        element={this.panelBase}
-        cssClasses={this.panelBase.cssClasses}
-        creator={this.creator}
-      />
+      <SurveyElementErrors element={this.panelBase} cssClasses={this.panelBase.cssClasses} creator={this.creator} />
     );
+
     return (
-      <div ref={this.rootRef} className={this.page.cssRoot}>
+      <div {...this.page.elementData} ref={this.rootRef} className={this.page.cssRoot}>
         {title}
         {description}
         {errors}
         {rows}
-      </div >
+      </div>
     );
   }
   protected renderTitle(): React.JSX.Element {
@@ -47,8 +44,6 @@ export class SurveyPage extends SurveyPanelBase {
   protected renderDescription(): React.JSX.Element | null {
     if (!this.page._showDescription) return null;
     var text = SurveyElementBase.renderLocString(this.page.locDescription);
-    return (
-      <div className={this.panelBase.cssClasses.page.description}>{text}</div>
-    );
+    return <div className={this.panelBase.cssClasses.page.description}>{text}</div>;
   }
 }
