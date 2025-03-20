@@ -33,7 +33,7 @@ var json = {
     },
     {
       type: "checkbox",
-      name: "car",
+      name: "car checkbox",
       title: "Car Checkbox",
       isRequired: true,
       showNoneItem: true,
@@ -54,13 +54,13 @@ var json = {
     },
     {
       type: "comment",
-      name: "suggestions",
+      name: "comment suggestion",
       title: "Suggestion Comment",
       capture: "unmask"
     },
     {
       type: "dropdown",
-      name: "cars",
+      name: "car dropdown",
       title: "Car Dropdown",
       isRequired: true,
       showNoneItem: true,
@@ -162,24 +162,8 @@ var json = {
       ]
     },
     {
-      type: "paneldynamic",
-      name: "relatives",
-      title: "Dropdown Panel",
-      renderMode: "progressTop",
-      templateTitle: "Information about: {panel.relativeType}",
-      templateElements: [
-        {
-          name: "relativeType",
-          type: "dropdown",
-          title: "Relative",
-          choices: ["father", "mother", "brother", "sister", "son", "daughter"],
-          isRequired: true
-        }
-      ]
-    },
-    {
       type: "radiogroup",
-      name: "cars",
+      name: "car radiogroup",
       title: "Car Radiogroup",
       isRequired: true,
       capture: "unmask",
@@ -228,7 +212,7 @@ var json = {
     },
     {
       type: "tagbox",
-      name: "cars2",
+      name: "cars tagbox",
       title: "Cars Tagbox",
       capture: "unmask",
       showNoneItem: true,
@@ -246,7 +230,7 @@ var json = {
       ]
     },
     {
-      name: "name",
+      name: "name input",
       type: "text",
       capture: "unmask",
       title: "Name",
@@ -400,51 +384,51 @@ var json = {
         }
       ],
       rowCount: 2
-    },
-
-    {
-      type: "matrixdynamic",
-      name: "Current Level of Function",
-      title: "Matrix Dynamic (vertical columns)",
-      columnLayout: "vertical",
-      minRowCount: 1,
-      maxRowCount: 5,
-      columns: [
-        {
-          name: "Date",
-          title: "Date",
-          cellType: "text",
-          inputType: "date"
-        },
-        {
-          name: "AmbDistance",
-          title: "Amb Distance",
-          cellType: "text"
-        },
-        {
-          name: "Amb Assistance",
-          cellType: "dropdown",
-          choices: ["D", "MAX", "MOD", "MIN"]
-        },
-        {
-          name: "Standing Tolerance",
-          cellType: "text"
-        },
-        {
-          name: "UE Strength",
-          cellType: "text"
-        },
-        {
-          name: "Cognitive Function",
-          cellType: "comment"
-        }
-      ],
-      choices: [1],
-      cellType: "comment",
-      confirmDelete: true,
-      addRowText: "Add Date +",
-      removeRowText: "Remove"
     }
+
+    // {
+    //   type: "matrixdynamic",
+    //   name: "Current Level of Function",
+    //   title: "Matrix Dynamic (vertical columns)",
+    //   columnLayout: "vertical",
+    //   minRowCount: 1,
+    //   maxRowCount: 5,
+    //   columns: [
+    //     {
+    //       name: "Date",
+    //       title: "Date",
+    //       cellType: "text",
+    //       inputType: "date"
+    //     },
+    //     {
+    //       name: "AmbDistance",
+    //       title: "Amb Distance",
+    //       cellType: "text"
+    //     },
+    //     {
+    //       name: "Amb Assistance",
+    //       cellType: "dropdown",
+    //       choices: ["D", "MAX", "MOD", "MIN"]
+    //     },
+    //     {
+    //       name: "Standing Tolerance",
+    //       cellType: "text"
+    //     },
+    //     {
+    //       name: "UE Strength",
+    //       cellType: "text"
+    //     },
+    //     {
+    //       name: "Cognitive Function",
+    //       cellType: "comment"
+    //     }
+    //   ],
+    //   choices: [1],
+    //   cellType: "comment",
+    //   confirmDelete: true,
+    //   addRowText: "Add Date +",
+    //   removeRowText: "Remove"
+    // }
     // {
     //   type: "matrix",
     //   name: "planningPerformance",
@@ -1139,6 +1123,190 @@ var json = {
 // Survey.StylesManager.applyTheme("modern");
 // Survey.StylesManager.applyTheme("defaultV2");
 
+// const json = {
+//   completedHtmlOnCondition: [
+//     {
+//       expression: "{nps-score} <= 6 or {rebuy} = false",
+//       html: {
+//         default:
+//           "Thanks for your feedback! We highly value all ideas and suggestions from our customers, whether they're positive or critical. In the future, our team might reach out to you to learn more about how we can further improve our product so that it exceeds your expectations.",
+//         fr: "Merci pour vos commentaires! Nous accordons une grande importance à toutes les idées et suggestions de nos clients, qu'elles soient positives ou critiques. À l'avenir, notre équipe pourrait vous contacter pour en savoir plus sur la façon dont nous pouvons encore améliorer notre produit afin qu'il dépasse vos attentes."
+//       }
+//     },
+//     {
+//       expression: "{nps-score} = 6 or {nps-score} = 7",
+//       html: {
+//         default:
+//           "Thanks for your feedback. Our goal is to create the best possible product, and your thoughts, ideas, and suggestions play a major role in helping us identify opportunities to improve.",
+//         fr: "Merci pour vos commentaires. Notre objectif est de créer le meilleur produit possible, et vos réflexions, idées et suggestions jouent un rôle majeur pour nous aider à identifier les opportunités d'amélioration."
+//       }
+//     },
+//     {
+//       expression: "{nps-score} >= 8",
+//       html: {
+//         default:
+//           "Thanks for your feedback. It's great to hear that you're a fan of our product. Your feedback helps us discover new opportunities to improve it and make sure you have the best possible experience.",
+//         fr: "Merci pour vos commentaires. Nous sommes ravis d'entendre que vous avez apprécié notre produit. Vos commentaires nous aident à découvrir de nouvelles opportunités pour l'améliorer et vous assurer la meilleure expérience possible."
+//       }
+//     }
+//   ],
+//   pages: [
+//     {
+//       name: "page1",
+//       elements: [
+//         {
+//           id: "nps-dropdown",
+//           type: "rating",
+//           name: "nps-score",
+//           title: {
+//             default: "On a scale from 0 to 10, how likely are you to recommend us to a friend or family member?"
+//           },
+//           rateMin: 0,
+//           rateMax: 10,
+//           minRateDescription: {
+//             default: "Very unlikely"
+//           },
+//           maxRateDescription: {
+//             default: "Very likely"
+//           },
+//           rateDescriptionLocation: "bottom"
+//         },
+//         {
+//           type: "comment",
+//           name: "disappointing-experience",
+//           visibleIf: "{nps-score} <= 5",
+//           title: {
+//             default: "How did we disappoint you and what can we do to make things right?"
+//           },
+//           maxLength: 300
+//         },
+//         {
+//           type: "comment",
+//           name: "improvements-required",
+//           visibleIf: "{nps-score} >= 6",
+//           title: {
+//             default: "What can we do to make your experience more satisfying?"
+//           },
+//           maxLength: 300
+//         },
+//         {
+//           type: "checkbox",
+//           name: "promoter-features",
+//           visibleIf: "{nps-score} >= 9",
+//           title: {
+//             default: "Which of the following features do you value the most in a vehicle?"
+//           },
+//           description: {
+//             default: "Please select no more than three features."
+//           },
+//           isRequired: true,
+//           choices: [
+//             {
+//               value: "mpg",
+//               text: "Miles Per Gallon"
+//             },
+//             {
+//               value: "space",
+//               text: {
+//                 default: "Space"
+//               }
+//             },
+//             {
+//               value: "body",
+//               text: {
+//                 default: "Body Type"
+//               }
+//             },
+//             {
+//               value: "luxury features",
+//               text: {
+//                 default: "Luxury Features"
+//               }
+//             },
+//             {
+//               value: "brand",
+//               text: {
+//                 default: "brand"
+//               }
+//             }
+//           ],
+//           showOtherItem: true,
+//           otherPlaceholder: {
+//             default: "Please specify..."
+//           },
+//           otherText: {
+//             default: "Other features"
+//           },
+//           colCount: 2,
+//           maxSelectedChoices: 3
+//         }
+//       ]
+//     },
+//     {
+//       name: "page2",
+//       elements: [
+//         {
+//           type: "boolean",
+//           name: "rebuy",
+//           title: {
+//             default: "Would you rent from Cargo again?"
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       name: "page3",
+//       elements: [
+//         {
+//           type: "radiogroup",
+//           name: "testimonial",
+//           title: {
+//             default: "Would you mind providing us a brief testimonial for the website?"
+//           },
+//           choices: [
+//             {
+//               value: "yes",
+//               text: {
+//                 default: "Sure!"
+//               }
+//             },
+//             {
+//               value: "no",
+//               text: {
+//                 default: "No"
+//               }
+//             }
+//           ]
+//         },
+//         {
+//           type: "text",
+//           name: "email",
+//           visibleIf: "{testimonial} = 'yes'",
+//           title: {
+//             default: "What is your email address?"
+//           },
+//           validators: [
+//             {
+//               type: "email"
+//             }
+//           ],
+//           placeholder: {
+//             default: "Enter your email here"
+//           }
+//         }
+//       ]
+//     }
+//   ],
+//   name: "cargo-nps",
+//   showPrevButton: false,
+//   showQuestionNumbers: "off",
+//   completeText: {
+//     fr: "Envoyer"
+//   },
+//   widthMode: "static",
+//   width: "auto"
+// };
+
 var model = new Survey.Model(json);
 //model.setDesignMode(true);
 window.survey = model;
@@ -1178,6 +1346,10 @@ model.onUploadFiles.add(function (survey, options) {
       };
     })
   );
+});
+
+model.onComplete.add((sender, options) => {
+  console.log(JSON.stringify(sender.data, null, 3));
 });
 
 ReactDOM.render(<SurveyReact.Survey model={model} />, document.getElementById("surveyElement"));
