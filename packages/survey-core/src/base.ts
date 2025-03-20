@@ -1527,7 +1527,7 @@ export class Base {
 
       // prepare key to be joined
       const key = x
-        .replace(/[^\w\s]/gi, "")
+        .replace(/[^\w\s-]/gi, "")
         .toLocaleLowerCase()
         .split(" ")
         .join("-");

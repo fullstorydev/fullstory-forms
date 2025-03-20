@@ -713,13 +713,29 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
   public get elementData(): any {
     //@ts-ignore
     const data = this.locTitleValue.owner.data;
+    //@ts-ignore
+    data["fs-survey-name"] = this.locTitleValue.owner.jsonObj?.name;
+
+    if (this.innerItem.id === "sv-nav-next") {
+      data["fs-button-type"] = "next";
+    }
+    if (this.innerItem.id === "sv-nav-complete") {
+      data["fs-button-type"] = "complete";
+    }
+
+    //@ts-ignore
+    if (!!this.owner.locOwner.activePage) {
+      //@ts-ignore
+      data["fs-page-num"] = this.owner.locOwner.activePage.num;
+      //@ts-ignore
+      data["fs-page-name"] = this.owner.locOwner.activePage.name;
+    }
+
     let elementData = {};
     if (Object.keys(data).length > 0) {
       elementData = this.createElementData(this.flattenObject(data));
     }
 
-    //@ts-ignore
-    elementData["fs-survey-name"] = this.locTitleValue.owner.title;
     return elementData;
   }
 }
