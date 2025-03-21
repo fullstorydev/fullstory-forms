@@ -60,22 +60,8 @@
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
-        "multiline": {
-          "delimiter": "semicolons",
-          "requireLast": true
-        },
-        "singleline": {
-          "delimiter": "comma",
-          "requireLast": false
-        },
-        "overrides": {
-          "interface": {
-            "multiline": {
-              "delimiter": "semi",
-              "requireLast": true
-            }
-          }
-        }
+        "multiline": { "delimiter": "semi", "requireLast": true },
+        "singleline": { "delimiter": "semi", "requireLast": false }
       }
     ],
     "no-case-declarations": "off",
