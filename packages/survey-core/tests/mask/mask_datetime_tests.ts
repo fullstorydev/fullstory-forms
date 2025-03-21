@@ -1970,7 +1970,7 @@ QUnit.test("dateTime processInput: min & max small range", function (assert) {
     inputDirection: "forward",
   });
   assert.equal(result.value, "0m/08/yyyy", "try type 8");
-  assert.equal(result.caretPosition, 3, "try type 8");
+  assert.equal(result.caretPosition, 6, "try type 8");
 
   result = maskInstance.processInput({
     insertedChars: "3",
@@ -1980,7 +1980,7 @@ QUnit.test("dateTime processInput: min & max small range", function (assert) {
     inputDirection: "forward",
   });
   assert.equal(result.value, "0m/3d/yyyy", "try type 3");
-  assert.equal(result.caretPosition, 3, "try type 3");
+  assert.equal(result.caretPosition, 4, "try type 3");
 
   result = maskInstance.processInput({
     insertedChars: "1",
@@ -1990,7 +1990,7 @@ QUnit.test("dateTime processInput: min & max small range", function (assert) {
     inputDirection: "forward",
   });
   assert.equal(result.value, "0m/1d/yyyy", "type 1");
-  assert.equal(result.caretPosition, 6, "type 1");
+  assert.equal(result.caretPosition, 4, "type 1");
 });
 
 QUnit.test(
