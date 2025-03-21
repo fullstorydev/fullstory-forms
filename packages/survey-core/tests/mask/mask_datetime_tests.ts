@@ -391,8 +391,8 @@ QUnit.test("get masked date if set min & max mm/dd/yyyy", function (assert) {
   maskInstance.min = "2024-04-01";
   maskInstance.max = "2024-05-01";
 
-  assert.equal(maskInstance._getMaskedValue("05/3", false), "05/");
-  assert.equal(maskInstance._getMaskedValue("05/3", false), "05/");
+  assert.equal(maskInstance._getMaskedValue("05/3", false), "0m/3");
+  assert.equal(maskInstance._getMaskedValue("05/3", false), "0m/3");
 });
 
 QUnit.test("get unmasked valid date text mm/dd/yyyy", function (assert) {
