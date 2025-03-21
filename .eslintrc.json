@@ -81,7 +81,8 @@
     "no-case-declarations": "off",
     "quotes": [
       "error",
-
+      "single",
+      "double",
       {
         "avoidEscape": true
       }
