@@ -79,13 +79,13 @@
       }
     ],
     "no-case-declarations": "off",
-    // "quotes": [
-    //   "error",
+    "quotes": [
+      "error",
 
-    //   {
-    //     "avoidEscape": true
-    //   }
-    // ],
+      {
+        "avoidEscape": true
+      }
+    ],
     "no-useless-escape": "off",
     // group: add in future
     "@typescript-eslint/no-var-requires": "off", // TODO add ignores
