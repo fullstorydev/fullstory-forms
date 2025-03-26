@@ -28,10 +28,9 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [1.12.5](https://github.com/surveyjs/survey-library/compare/v1.12.4...v1.12.5) (2024-10-08)
 
-
 ### Bug Fixes
 
-* frames disappearing when using root css config ([53c0c17](https://github.com/surveyjs/survey-library/commit/53c0c172047871824bce5e6742d08faeb14ee9d2))
+- frames disappearing when using root css config ([53c0c17](https://github.com/surveyjs/survey-library/commit/53c0c172047871824bce5e6742d08faeb14ee9d2))
 
 ## [1.12.4](https://github.com/surveyjs/survey-library/compare/v1.12.3...v1.12.4) (2024-10-01)
 
@@ -111,10 +110,9 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [1.9.125](https://github.com/surveyjs/survey-library/compare/v1.9.124...v1.9.125) (2024-01-11)
 
-
 ### Bug Fixes
 
-* 🐛 resolved globalThis is undefinded in react-native-window ([#7629](https://github.com/surveyjs/survey-library/issues/7629)) ([36f25e6](https://github.com/surveyjs/survey-library/commit/36f25e6b162d2482ce3c1e0d58d4a45d34053129))
+- 🐛 resolved globalThis is undefinded in react-native-window ([#7629](https://github.com/surveyjs/survey-library/issues/7629)) ([36f25e6](https://github.com/surveyjs/survey-library/commit/36f25e6b162d2482ce3c1e0d58d4a45d34053129))
 
 ## [1.9.124](https://github.com/surveyjs/survey-library/compare/v1.9.123...v1.9.124) (2024-01-05)
 
@@ -122,11 +120,10 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [1.9.122](https://github.com/surveyjs/survey-library/compare/v1.9.121...v1.9.122) (2023-12-20)
 
-
 ### Bug Fixes
 
-* Prevent clear other questions when name equals other value name ([aafad36](https://github.com/surveyjs/survey-library/commit/aafad36dc7258a2180a77f5d2edb973a76f4be6a))
-* Use valueName getter instead ([a077429](https://github.com/surveyjs/survey-library/commit/a07742941627eea82848c16ebb6773848aaf37d5))
+- Prevent clear other questions when name equals other value name ([aafad36](https://github.com/surveyjs/survey-library/commit/aafad36dc7258a2180a77f5d2edb973a76f4be6a))
+- Use valueName getter instead ([a077429](https://github.com/surveyjs/survey-library/commit/a07742941627eea82848c16ebb6773848aaf37d5))
 
 ## [1.9.121](https://github.com/surveyjs/survey-library/compare/v1.9.120...v1.9.121) (2023-12-12)
 
@@ -174,19 +171,17 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [1.9.99](https://github.com/surveyjs/survey-library/compare/v1.9.98...v1.9.99) (2023-07-26)
 
-
 ### Bug Fixes
 
-* should be one instance of survey-core in example ([cd30e10](https://github.com/surveyjs/survey-library/commit/cd30e10887cc1d1b24dad0a7455df0b560045258))
+- should be one instance of fullstory-form-core in example ([cd30e10](https://github.com/surveyjs/survey-library/commit/cd30e10887cc1d1b24dad0a7455df0b560045258))
 
 ## [1.9.98](https://github.com/surveyjs/survey-library/compare/v1.9.97...v1.9.98) (2023-07-18)
 
 ## [1.9.97](https://github.com/surveyjs/survey-library/compare/v1.9.96...v1.9.97) (2023-07-12)
 
-
 ### Bug Fixes
 
-* **popup:** prevent crash on Legacy Edge when opening a popup ([#6514](https://github.com/surveyjs/survey-library/issues/6514)) ([7c07538](https://github.com/surveyjs/survey-library/commit/7c075381d3d562dc2b8b1a71fe3109c8e3a14b53))
+- **popup:** prevent crash on Legacy Edge when opening a popup ([#6514](https://github.com/surveyjs/survey-library/issues/6514)) ([7c07538](https://github.com/surveyjs/survey-library/commit/7c075381d3d562dc2b8b1a71fe3109c8e3a14b53))
 
 ## [1.9.96](https://github.com/surveyjs/survey-library/compare/v1.9.95...v1.9.96) (2023-07-04)
 
@@ -226,10 +221,9 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [1.9.78](https://github.com/surveyjs/survey-library/compare/v1.9.77...v1.9.78) (2023-03-15)
 
-
 ### Bug Fixes
 
-* return original function name ([96fc3ff](https://github.com/surveyjs/survey-library/commit/96fc3ffedaab6ff02c25f2dab783c225c185e233))
+- return original function name ([96fc3ff](https://github.com/surveyjs/survey-library/commit/96fc3ffedaab6ff02c25f2dab783c225c185e233))
 
 ## [1.9.77](https://github.com/surveyjs/survey-library/compare/v1.9.76...v1.9.77) (2023-03-07)
 
@@ -253,10 +247,9 @@ All notable changes to this project will be documented in this file. See [commit
 
 ### [1.9.66](https://github.com/surveyjs/survey-library/compare/v1.9.65...v1.9.66) (2022-12-30)
 
-
 ### Bug Fixes
 
-* **matrix:** export IMatrixDropdownData to allow extending MatrixDynamicRowModel ([#5394](https://github.com/surveyjs/survey-library/issues/5394)) ([6376506](https://github.com/surveyjs/survey-library/commit/63765064cbfe51c00380f7f1daaf69cffed93395))
+- **matrix:** export IMatrixDropdownData to allow extending MatrixDynamicRowModel ([#5394](https://github.com/surveyjs/survey-library/issues/5394)) ([6376506](https://github.com/surveyjs/survey-library/commit/63765064cbfe51c00380f7f1daaf69cffed93395))
 
 ### [1.9.65](https://github.com/surveyjs/survey-library/compare/v1.9.64...v1.9.65) (2022-12-20)
 
@@ -408,67 +401,60 @@ All notable changes to this project will be documented in this file. See [commit
 
 ### [1.8.71](https://github.com/surveyjs/survey-library/compare/v1.8.70...v1.8.71) (2021-10-07)
 
-
 ### Bug Fixes
 
-* matrix dropdown getDisplayText doesn't work for filtered rows [#3430](https://github.com/surveyjs/survey-library/issues/3430) ([#3431](https://github.com/surveyjs/survey-library/issues/3431)) ([93db076](https://github.com/surveyjs/survey-library/commit/93db076130c2e6cb645eb4fddca0f2426be5419c))
-* survey-vue warnings: "Duplicate keys detected: 'nav1' [#3413](https://github.com/surveyjs/survey-library/issues/3413) ([#3428](https://github.com/surveyjs/survey-library/issues/3428)) ([318271e](https://github.com/surveyjs/survey-library/commit/318271ebec484a4206eca17499ccf737ac46c0ae))
+- matrix dropdown getDisplayText doesn't work for filtered rows [#3430](https://github.com/surveyjs/survey-library/issues/3430) ([#3431](https://github.com/surveyjs/survey-library/issues/3431)) ([93db076](https://github.com/surveyjs/survey-library/commit/93db076130c2e6cb645eb4fddca0f2426be5419c))
+- survey-vue warnings: "Duplicate keys detected: 'nav1' [#3413](https://github.com/surveyjs/survey-library/issues/3413) ([#3428](https://github.com/surveyjs/survey-library/issues/3428)) ([318271e](https://github.com/surveyjs/survey-library/commit/318271ebec484a4206eca17499ccf737ac46c0ae))
 
 ### [1.8.70](https://github.com/surveyjs/survey-library/compare/v1.8.69...v1.8.70) (2021-09-29)
 
-
 ### Bug Fixes
 
-* Localization strings returns internal object on getJson() [#3394](https://github.com/surveyjs/survey-library/issues/3394) ([#3395](https://github.com/surveyjs/survey-library/issues/3395)) ([3094c05](https://github.com/surveyjs/survey-library/commit/3094c054f5b4b3bac39f6bb84a9264493e812292))
+- Localization strings returns internal object on getJson() [#3394](https://github.com/surveyjs/survey-library/issues/3394) ([#3395](https://github.com/surveyjs/survey-library/issues/3395)) ([3094c05](https://github.com/surveyjs/survey-library/commit/3094c054f5b4b3bac39f6bb84a9264493e812292))
 
 ### [1.8.69](https://github.com/surveyjs/survey-library/compare/v1.8.68...v1.8.69) (2021-09-28)
 
-
 ### Bug Fixes
 
-* Detail panel is not read-only when matrix is read-only [#3357](https://github.com/surveyjs/survey-library/issues/3357) ([#3358](https://github.com/surveyjs/survey-library/issues/3358)) ([ffc52d7](https://github.com/surveyjs/survey-library/commit/ffc52d7611fa7ce2ee64c73e710da67881fb8347))
-* Navigation issue with onProgressText callback and questionOrder - random [#3383](https://github.com/surveyjs/survey-library/issues/3383) ([#3388](https://github.com/surveyjs/survey-library/issues/3388)) ([f7e45a2](https://github.com/surveyjs/survey-library/commit/f7e45a20ce3a7d7af3f00dedf912ed382850886d))
-* On changing text question dataList onPropertyChanged is not fired [#3385](https://github.com/surveyjs/survey-library/issues/3385) ([#3386](https://github.com/surveyjs/survey-library/issues/3386)) ([90cfbb9](https://github.com/surveyjs/survey-library/commit/90cfbb980b901366f6a3263906cc1168a7da0030))
-* Signagure pad internally uses valueChangedCallback [#3360](https://github.com/surveyjs/survey-library/issues/3360) ([39dd68a](https://github.com/surveyjs/survey-library/commit/39dd68a421e15c880a7cb76ded9bcf49fe565b21))
-* survey.prevPage() function never returns true [#3370](https://github.com/surveyjs/survey-library/issues/3370) ([#3371](https://github.com/surveyjs/survey-library/issues/3371)) ([cf74175](https://github.com/surveyjs/survey-library/commit/cf74175a35876b7738e4bb17845075f6a1d7f091))
-* text question dataList can return undefined [#3378](https://github.com/surveyjs/survey-library/issues/3378) ([b9b8918](https://github.com/surveyjs/survey-library/commit/b9b8918513e3ded51d800d2ec18dd2b476019ccc))
+- Detail panel is not read-only when matrix is read-only [#3357](https://github.com/surveyjs/survey-library/issues/3357) ([#3358](https://github.com/surveyjs/survey-library/issues/3358)) ([ffc52d7](https://github.com/surveyjs/survey-library/commit/ffc52d7611fa7ce2ee64c73e710da67881fb8347))
+- Navigation issue with onProgressText callback and questionOrder - random [#3383](https://github.com/surveyjs/survey-library/issues/3383) ([#3388](https://github.com/surveyjs/survey-library/issues/3388)) ([f7e45a2](https://github.com/surveyjs/survey-library/commit/f7e45a20ce3a7d7af3f00dedf912ed382850886d))
+- On changing text question dataList onPropertyChanged is not fired [#3385](https://github.com/surveyjs/survey-library/issues/3385) ([#3386](https://github.com/surveyjs/survey-library/issues/3386)) ([90cfbb9](https://github.com/surveyjs/survey-library/commit/90cfbb980b901366f6a3263906cc1168a7da0030))
+- Signagure pad internally uses valueChangedCallback [#3360](https://github.com/surveyjs/survey-library/issues/3360) ([39dd68a](https://github.com/surveyjs/survey-library/commit/39dd68a421e15c880a7cb76ded9bcf49fe565b21))
+- survey.prevPage() function never returns true [#3370](https://github.com/surveyjs/survey-library/issues/3370) ([#3371](https://github.com/surveyjs/survey-library/issues/3371)) ([cf74175](https://github.com/surveyjs/survey-library/commit/cf74175a35876b7738e4bb17845075f6a1d7f091))
+- text question dataList can return undefined [#3378](https://github.com/surveyjs/survey-library/issues/3378) ([b9b8918](https://github.com/surveyjs/survey-library/commit/b9b8918513e3ded51d800d2ec18dd2b476019ccc))
 
 ### [1.8.68](https://github.com/surveyjs/survey-library/compare/v1.8.67...v1.8.68) (2021-09-21)
 
-
 ### Bug Fixes
 
-* Async expression validators don't focus element when false at validation [#3343](https://github.com/surveyjs/survey-library/issues/3343) ([85b1e47](https://github.com/surveyjs/survey-library/commit/85b1e4734de3a6e8c46a20779c1a22c90dfbda5b))
-* React TitleElement doesn't re-render on title element change in … ([#3356](https://github.com/surveyjs/survey-library/issues/3356)) ([623c722](https://github.com/surveyjs/survey-library/commit/623c722610272d9f5ad9dced3a5f99c4aab7b655)), closes [#3355](https://github.com/surveyjs/survey-library/issues/3355) [#3355](https://github.com/surveyjs/survey-library/issues/3355)
-* Started page is not rendered in react in versions: v1.8.66-67 in react [#3348](https://github.com/surveyjs/survey-library/issues/3348) ([#3349](https://github.com/surveyjs/survey-library/issues/3349)) ([65d26fc](https://github.com/surveyjs/survey-library/commit/65d26fcdffb620fecfd5cd9192408fc13a160f86))
+- Async expression validators don't focus element when false at validation [#3343](https://github.com/surveyjs/survey-library/issues/3343) ([85b1e47](https://github.com/surveyjs/survey-library/commit/85b1e4734de3a6e8c46a20779c1a22c90dfbda5b))
+- React TitleElement doesn't re-render on title element change in … ([#3356](https://github.com/surveyjs/survey-library/issues/3356)) ([623c722](https://github.com/surveyjs/survey-library/commit/623c722610272d9f5ad9dced3a5f99c4aab7b655)), closes [#3355](https://github.com/surveyjs/survey-library/issues/3355) [#3355](https://github.com/surveyjs/survey-library/issues/3355)
+- Started page is not rendered in react in versions: v1.8.66-67 in react [#3348](https://github.com/surveyjs/survey-library/issues/3348) ([#3349](https://github.com/surveyjs/survey-library/issues/3349)) ([65d26fc](https://github.com/surveyjs/survey-library/commit/65d26fcdffb620fecfd5cd9192408fc13a160f86))
 
 ### [1.8.67](https://github.com/surveyjs/survey-library/compare/v1.8.66...v1.8.67) (2021-09-17)
 
-
 ### Bug Fixes
 
-* Checkbox choices aren't being rendered after using fromJSON? [#3331](https://github.com/surveyjs/survey-library/issues/3331) ([0d2c772](https://github.com/surveyjs/survey-library/commit/0d2c7728ff9fb9149aa73a0e248e03c5bc9565a9))
+- Checkbox choices aren't being rendered after using fromJSON? [#3331](https://github.com/surveyjs/survey-library/issues/3331) ([0d2c772](https://github.com/surveyjs/survey-library/commit/0d2c7728ff9fb9149aa73a0e248e03c5bc9565a9))
 
 ### [1.8.66](https://github.com/surveyjs/survey-library/compare/v1.8.65...v1.8.66) (2021-09-15)
 
-
 ### Bug Fixes
 
-* Imagepicker localized images broken [#3287](https://github.com/surveyjs/survey-library/issues/3287) ([#3299](https://github.com/surveyjs/survey-library/issues/3299)) ([69606ce](https://github.com/surveyjs/survey-library/commit/69606ce985e80d20ad3c3c5534977c802cd6556d))
-* Incorrect proccess text that reference value getting from choices loaded from the web [#3325](https://github.com/surveyjs/survey-library/issues/3325) ([c8b733a](https://github.com/surveyjs/survey-library/commit/c8b733aca8a71f7024173c6107b1b1b9fd926721))
-* Place holder in text and comment questions are not updated on changing locale [#3292](https://github.com/surveyjs/survey-library/issues/3292) ([#3293](https://github.com/surveyjs/survey-library/issues/3293)) ([fd87943](https://github.com/surveyjs/survey-library/commit/fd87943a222b1a64fdba75396930caf19a911494))
-* React page use visible property to decide render or not instead of isVisible [#3283](https://github.com/surveyjs/survey-library/issues/3283) ([bfa1269](https://github.com/surveyjs/survey-library/commit/bfa1269a4cfffbae43ea8d6a3e56d9dbac46e073))
+- Imagepicker localized images broken [#3287](https://github.com/surveyjs/survey-library/issues/3287) ([#3299](https://github.com/surveyjs/survey-library/issues/3299)) ([69606ce](https://github.com/surveyjs/survey-library/commit/69606ce985e80d20ad3c3c5534977c802cd6556d))
+- Incorrect proccess text that reference value getting from choices loaded from the web [#3325](https://github.com/surveyjs/survey-library/issues/3325) ([c8b733a](https://github.com/surveyjs/survey-library/commit/c8b733aca8a71f7024173c6107b1b1b9fd926721))
+- Place holder in text and comment questions are not updated on changing locale [#3292](https://github.com/surveyjs/survey-library/issues/3292) ([#3293](https://github.com/surveyjs/survey-library/issues/3293)) ([fd87943](https://github.com/surveyjs/survey-library/commit/fd87943a222b1a64fdba75396930caf19a911494))
+- React page use visible property to decide render or not instead of isVisible [#3283](https://github.com/surveyjs/survey-library/issues/3283) ([bfa1269](https://github.com/surveyjs/survey-library/commit/bfa1269a4cfffbae43ea8d6a3e56d9dbac46e073))
 
 ### [1.8.65](https://github.com/surveyjs/survey-library/compare/v1.8.64...v1.8.65) (2021-09-07)
 
 ### [1.8.64](https://github.com/surveyjs/survey-library/compare/v1.8.63...v1.8.64) (2021-08-31)
 
-
 ### Bug Fixes
 
-* Default value doesn't work correctly in composite component question [#3231](https://github.com/surveyjs/survey-library/issues/3231) ([#3232](https://github.com/surveyjs/survey-library/issues/3232)) ([ecfc682](https://github.com/surveyjs/survey-library/commit/ecfc682b44af0f82a1a235463f7d5c2174d6819a))
-* question.isAnswered and question.cssTitle do not update correctly [#3237](https://github.com/surveyjs/survey-library/issues/3237) ([db3305c](https://github.com/surveyjs/survey-library/commit/db3305c7866b67cacb6defac3c661835e4d445ed))
-* survey.fromJSON() doesn't work if "pages" is missed. [#3233](https://github.com/surveyjs/survey-library/issues/3233) ([#3234](https://github.com/surveyjs/survey-library/issues/3234)) ([779e04d](https://github.com/surveyjs/survey-library/commit/779e04d99758b7deac915f30988480f200f0f145))
+- Default value doesn't work correctly in composite component question [#3231](https://github.com/surveyjs/survey-library/issues/3231) ([#3232](https://github.com/surveyjs/survey-library/issues/3232)) ([ecfc682](https://github.com/surveyjs/survey-library/commit/ecfc682b44af0f82a1a235463f7d5c2174d6819a))
+- question.isAnswered and question.cssTitle do not update correctly [#3237](https://github.com/surveyjs/survey-library/issues/3237) ([db3305c](https://github.com/surveyjs/survey-library/commit/db3305c7866b67cacb6defac3c661835e4d445ed))
+- survey.fromJSON() doesn't work if "pages" is missed. [#3233](https://github.com/surveyjs/survey-library/issues/3233) ([#3234](https://github.com/surveyjs/survey-library/issues/3234)) ([779e04d](https://github.com/surveyjs/survey-library/commit/779e04d99758b7deac915f30988480f200f0f145))
 
 ### [1.8.63](https://github.com/surveyjs/survey-library/compare/v1.8.62...v1.8.63) (2021-08-25)
 
@@ -476,85 +462,76 @@ All notable changes to this project will be documented in this file. See [commit
 
 ### [1.8.61](https://github.com/surveyjs/survey-library/compare/v1.8.60...v1.8.61) (2021-08-19)
 
-
 ### Bug Fixes
 
-* row.isLazyRendering() is function now, [#3198](https://github.com/surveyjs/survey-library/issues/3198) ([#3200](https://github.com/surveyjs/survey-library/issues/3200)) ([f51ae0b](https://github.com/surveyjs/survey-library/commit/f51ae0b7fc24db526dc3aa6f6bdddb3967f4dde1))
+- row.isLazyRendering() is function now, [#3198](https://github.com/surveyjs/survey-library/issues/3198) ([#3200](https://github.com/surveyjs/survey-library/issues/3200)) ([f51ae0b](https://github.com/surveyjs/survey-library/commit/f51ae0b7fc24db526dc3aa6f6bdddb3967f4dde1))
 
 ### [1.8.60](https://github.com/surveyjs/survey-library/compare/v1.8.59...v1.8.60) (2021-08-11)
 
-
 ### Bug Fixes
 
-* onCompleting event doesn't work on "complete" trigger [#3184](https://github.com/surveyjs/survey-library/issues/3184) ([#3185](https://github.com/surveyjs/survey-library/issues/3185)) ([f1065a0](https://github.com/surveyjs/survey-library/commit/f1065a017051eb98aecee25db9a0d8bc42c3fcb3))
-* React: remove subscription in matrix dynamic on row count changed [#3170](https://github.com/surveyjs/survey-library/issues/3170) ([b15f762](https://github.com/surveyjs/survey-library/commit/b15f76242864e87c1b4b48f0b89a2af46343ec67))
-* Setting properties like pageNextText does not rerender buttons [#3175](https://github.com/surveyjs/survey-library/issues/3175) ([#3179](https://github.com/surveyjs/survey-library/issues/3179)) ([0e94ad6](https://github.com/surveyjs/survey-library/commit/0e94ad640052fdd42a7d667fec4d156997651346))
-* When refreshing the page, others isn't cleared [#3172](https://github.com/surveyjs/survey-library/issues/3172) ([#3178](https://github.com/surveyjs/survey-library/issues/3178)) ([c3650da](https://github.com/surveyjs/survey-library/commit/c3650dafef12f2610e38747f764397fde979b1df))
+- onCompleting event doesn't work on "complete" trigger [#3184](https://github.com/surveyjs/survey-library/issues/3184) ([#3185](https://github.com/surveyjs/survey-library/issues/3185)) ([f1065a0](https://github.com/surveyjs/survey-library/commit/f1065a017051eb98aecee25db9a0d8bc42c3fcb3))
+- React: remove subscription in matrix dynamic on row count changed [#3170](https://github.com/surveyjs/survey-library/issues/3170) ([b15f762](https://github.com/surveyjs/survey-library/commit/b15f76242864e87c1b4b48f0b89a2af46343ec67))
+- Setting properties like pageNextText does not rerender buttons [#3175](https://github.com/surveyjs/survey-library/issues/3175) ([#3179](https://github.com/surveyjs/survey-library/issues/3179)) ([0e94ad6](https://github.com/surveyjs/survey-library/commit/0e94ad640052fdd42a7d667fec4d156997651346))
+- When refreshing the page, others isn't cleared [#3172](https://github.com/surveyjs/survey-library/issues/3172) ([#3178](https://github.com/surveyjs/survey-library/issues/3178)) ([c3650da](https://github.com/surveyjs/survey-library/commit/c3650dafef12f2610e38747f764397fde979b1df))
 
 ### [1.8.59](https://github.com/surveyjs/survey-library/compare/v1.8.58...v1.8.59) (2021-08-03)
 
-
 ### Bug Fixes
 
-* Clear setValue for setvalue trigger can produce exception [#3145](https://github.com/surveyjs/survey-library/issues/3145) ([e2efee1](https://github.com/surveyjs/survey-library/commit/e2efee12c203558e793b4c0e7bb279d7c4388a52))
-* Do not call notification on setting the same value in select base renderedValue property [#3160](https://github.com/surveyjs/survey-library/issues/3160) ([#3161](https://github.com/surveyjs/survey-library/issues/3161)) ([b4c8e76](https://github.com/surveyjs/survey-library/commit/b4c8e76fcab91574313218d8937ee56d739870a5))
-* onCompleting event doesn't work correctly in preview mode. [#3157](https://github.com/surveyjs/survey-library/issues/3157) ([#3158](https://github.com/surveyjs/survey-library/issues/3158)) ([efd793f](https://github.com/surveyjs/survey-library/commit/efd793fa5416491a81c3da8608471186ea867ff4))
-* onPropertyValueChangedCallback fuction calls for survey only and not for owner [#3149](https://github.com/surveyjs/survey-library/issues/3149) ([ee9899e](https://github.com/surveyjs/survey-library/commit/ee9899eefd2043b33516ab0064e00e40833b77f4))
-* Override array value vs ordinary value in setPropertyValue [#3153](https://github.com/surveyjs/survey-library/issues/3153) ([#3154](https://github.com/surveyjs/survey-library/issues/3154)) ([75b3c0e](https://github.com/surveyjs/survey-library/commit/75b3c0e557650c87d50f902b9f9fbc7e0088680d))
-* title actions produce error in IE11 [#3143](https://github.com/surveyjs/survey-library/issues/3143) ([9502ffe](https://github.com/surveyjs/survey-library/commit/9502ffe010c9722fa6243218f16a4e478546c64a))
+- Clear setValue for setvalue trigger can produce exception [#3145](https://github.com/surveyjs/survey-library/issues/3145) ([e2efee1](https://github.com/surveyjs/survey-library/commit/e2efee12c203558e793b4c0e7bb279d7c4388a52))
+- Do not call notification on setting the same value in select base renderedValue property [#3160](https://github.com/surveyjs/survey-library/issues/3160) ([#3161](https://github.com/surveyjs/survey-library/issues/3161)) ([b4c8e76](https://github.com/surveyjs/survey-library/commit/b4c8e76fcab91574313218d8937ee56d739870a5))
+- onCompleting event doesn't work correctly in preview mode. [#3157](https://github.com/surveyjs/survey-library/issues/3157) ([#3158](https://github.com/surveyjs/survey-library/issues/3158)) ([efd793f](https://github.com/surveyjs/survey-library/commit/efd793fa5416491a81c3da8608471186ea867ff4))
+- onPropertyValueChangedCallback fuction calls for survey only and not for owner [#3149](https://github.com/surveyjs/survey-library/issues/3149) ([ee9899e](https://github.com/surveyjs/survey-library/commit/ee9899eefd2043b33516ab0064e00e40833b77f4))
+- Override array value vs ordinary value in setPropertyValue [#3153](https://github.com/surveyjs/survey-library/issues/3153) ([#3154](https://github.com/surveyjs/survey-library/issues/3154)) ([75b3c0e](https://github.com/surveyjs/survey-library/commit/75b3c0e557650c87d50f902b9f9fbc7e0088680d))
+- title actions produce error in IE11 [#3143](https://github.com/surveyjs/survey-library/issues/3143) ([9502ffe](https://github.com/surveyjs/survey-library/commit/9502ffe010c9722fa6243218f16a4e478546c64a))
 
 ### [1.8.58](https://github.com/surveyjs/survey-library/compare/v1.8.57...v1.8.58) (2021-07-28)
 
-
 ### Bug Fixes
 
-* Action ResponsivityManager works incorrectly with invisible actions [#3129](https://github.com/surveyjs/survey-library/issues/3129) ([#3130](https://github.com/surveyjs/survey-library/issues/3130)) ([0f054f1](https://github.com/surveyjs/survey-library/commit/0f054f1dfc2510367f7f18bbc795a1220323034f))
-* Calling clearIncorrectValues function in matrix cell will onMatrixCellValueChanging event even for emtpy cell [#3131](https://github.com/surveyjs/survey-library/issues/3131) ([af1636f](https://github.com/surveyjs/survey-library/commit/af1636f4a82e075eaf20728707bc6f384ef3e6e0))
-* Null exception on showing preview in file question located in dynamic panel [#3115](https://github.com/surveyjs/survey-library/issues/3115) ([127d90c](https://github.com/surveyjs/survey-library/commit/127d90c269b3f1d61bcc7a1630a4c3074f768783))
-* The first title action fired on pressing enter in a text editor ([3e62c77](https://github.com/surveyjs/survey-library/commit/3e62c7709a5399227c559cb3d854aa5b37399d9a))
+- Action ResponsivityManager works incorrectly with invisible actions [#3129](https://github.com/surveyjs/survey-library/issues/3129) ([#3130](https://github.com/surveyjs/survey-library/issues/3130)) ([0f054f1](https://github.com/surveyjs/survey-library/commit/0f054f1dfc2510367f7f18bbc795a1220323034f))
+- Calling clearIncorrectValues function in matrix cell will onMatrixCellValueChanging event even for emtpy cell [#3131](https://github.com/surveyjs/survey-library/issues/3131) ([af1636f](https://github.com/surveyjs/survey-library/commit/af1636f4a82e075eaf20728707bc6f384ef3e6e0))
+- Null exception on showing preview in file question located in dynamic panel [#3115](https://github.com/surveyjs/survey-library/issues/3115) ([127d90c](https://github.com/surveyjs/survey-library/commit/127d90c269b3f1d61bcc7a1630a4c3074f768783))
+- The first title action fired on pressing enter in a text editor ([3e62c77](https://github.com/surveyjs/survey-library/commit/3e62c7709a5399227c559cb3d854aa5b37399d9a))
 
 ### [1.8.57](https://github.com/surveyjs/survey-library/compare/v1.8.56...v1.8.57) (2021-07-20)
 
-
 ### Bug Fixes
 
-* Could not override defaultValue for question hideNumber property [#3111](https://github.com/surveyjs/survey-library/issues/3111) ([021aacf](https://github.com/surveyjs/survey-library/commit/021aacffe6d0ad8938f4446c6f5b53012be0005f))
-* Exception on runTriggers() function in complex scenario [#3095](https://github.com/surveyjs/survey-library/issues/3095) ([#3096](https://github.com/surveyjs/survey-library/issues/3096)) ([aaebe98](https://github.com/surveyjs/survey-library/commit/aaebe9865a13c23ac0b7f6f01f4fee5a455d8f39))
-* getPlainData() function doesn't work correctly for matrix dropdown [#3097](https://github.com/surveyjs/survey-library/issues/3097) ([#3098](https://github.com/surveyjs/survey-library/issues/3098)) ([71bfbe8](https://github.com/surveyjs/survey-library/commit/71bfbe83ad286564780bd47a69743ba4abc5e38b))
-* Questions are not rendering in lazyRendering mode on deleting elements on the top [#3104](https://github.com/surveyjs/survey-library/issues/3104) ([#3105](https://github.com/surveyjs/survey-library/issues/3105)) ([24d6a1e](https://github.com/surveyjs/survey-library/commit/24d6a1e084ee7e9884b1abb6c4fa1855e7c268f8))
+- Could not override defaultValue for question hideNumber property [#3111](https://github.com/surveyjs/survey-library/issues/3111) ([021aacf](https://github.com/surveyjs/survey-library/commit/021aacffe6d0ad8938f4446c6f5b53012be0005f))
+- Exception on runTriggers() function in complex scenario [#3095](https://github.com/surveyjs/survey-library/issues/3095) ([#3096](https://github.com/surveyjs/survey-library/issues/3096)) ([aaebe98](https://github.com/surveyjs/survey-library/commit/aaebe9865a13c23ac0b7f6f01f4fee5a455d8f39))
+- getPlainData() function doesn't work correctly for matrix dropdown [#3097](https://github.com/surveyjs/survey-library/issues/3097) ([#3098](https://github.com/surveyjs/survey-library/issues/3098)) ([71bfbe8](https://github.com/surveyjs/survey-library/commit/71bfbe83ad286564780bd47a69743ba4abc5e38b))
+- Questions are not rendering in lazyRendering mode on deleting elements on the top [#3104](https://github.com/surveyjs/survey-library/issues/3104) ([#3105](https://github.com/surveyjs/survey-library/issues/3105)) ([24d6a1e](https://github.com/surveyjs/survey-library/commit/24d6a1e084ee7e9884b1abb6c4fa1855e7c268f8))
 
 ### [1.8.56](https://github.com/surveyjs/survey-library/compare/v1.8.55...v1.8.56) (2021-07-13)
 
-
 ### Bug Fixes
 
-* Do not run answer count validator on empty array [#3069](https://github.com/surveyjs/survey-library/issues/3069) ([#3070](https://github.com/surveyjs/survey-library/issues/3070)) ([a2059eb](https://github.com/surveyjs/survey-library/commit/a2059ebadcbfc5b54d78120fb3b532a0ea24d4f7))
-* survey.onGetQuestionTitle event doesn't work in knockout [#3080](https://github.com/surveyjs/survey-library/issues/3080) ([#3081](https://github.com/surveyjs/survey-library/issues/3081)) ([0801b4f](https://github.com/surveyjs/survey-library/commit/0801b4fb23c88624b081f9c4c04c213afb9b3406))
-* Text validator validates empty string [#3065](https://github.com/surveyjs/survey-library/issues/3065) ([#3068](https://github.com/surveyjs/survey-library/issues/3068)) ([148125b](https://github.com/surveyjs/survey-library/commit/148125b6a3cbed7f2d8c0309af92eb429ce2e874))
+- Do not run answer count validator on empty array [#3069](https://github.com/surveyjs/survey-library/issues/3069) ([#3070](https://github.com/surveyjs/survey-library/issues/3070)) ([a2059eb](https://github.com/surveyjs/survey-library/commit/a2059ebadcbfc5b54d78120fb3b532a0ea24d4f7))
+- survey.onGetQuestionTitle event doesn't work in knockout [#3080](https://github.com/surveyjs/survey-library/issues/3080) ([#3081](https://github.com/surveyjs/survey-library/issues/3081)) ([0801b4f](https://github.com/surveyjs/survey-library/commit/0801b4fb23c88624b081f9c4c04c213afb9b3406))
+- Text validator validates empty string [#3065](https://github.com/surveyjs/survey-library/issues/3065) ([#3068](https://github.com/surveyjs/survey-library/issues/3068)) ([148125b](https://github.com/surveyjs/survey-library/commit/148125b6a3cbed7f2d8c0309af92eb429ce2e874))
 
 ### [1.8.55](https://github.com/surveyjs/survey-library/compare/v1.8.54...v1.8.55) (2021-07-07)
 
-
 ### Bug Fixes
 
-* Expression with "anyof" with 0 can executed incorrectly [#3052](https://github.com/surveyjs/survey-library/issues/3052) ([dcd7d1c](https://github.com/surveyjs/survey-library/commit/dcd7d1cef878ef6538cecba7dae7804dc4ee85bc))
+- Expression with "anyof" with 0 can executed incorrectly [#3052](https://github.com/surveyjs/survey-library/issues/3052) ([dcd7d1c](https://github.com/surveyjs/survey-library/commit/dcd7d1cef878ef6538cecba7dae7804dc4ee85bc))
 
 ### [1.8.54](https://github.com/surveyjs/survey-library/compare/v1.8.53...v1.8.54) (2021-06-30)
 
-
 ### Bug Fixes
 
-* (React) Single matrix columns are not updated on changing if matrix is editing in property grid [#3027](https://github.com/surveyjs/survey-library/issues/3027) ([#3028](https://github.com/surveyjs/survey-library/issues/3028)) ([e5a87a0](https://github.com/surveyjs/survey-library/commit/e5a87a0d4c57b8cb46c5b2b16fb488868a44cdb6))
-* Survey-React, conditional rendering is broken with inline questions [#3031](https://github.com/surveyjs/survey-library/issues/3031) ([#3033](https://github.com/surveyjs/survey-library/issues/3033)) ([66f074b](https://github.com/surveyjs/survey-library/commit/66f074b9c5c89bb766ba8f2435616d4c269a64e6))
+- (React) Single matrix columns are not updated on changing if matrix is editing in property grid [#3027](https://github.com/surveyjs/survey-library/issues/3027) ([#3028](https://github.com/surveyjs/survey-library/issues/3028)) ([e5a87a0](https://github.com/surveyjs/survey-library/commit/e5a87a0d4c57b8cb46c5b2b16fb488868a44cdb6))
+- Survey-React, conditional rendering is broken with inline questions [#3031](https://github.com/surveyjs/survey-library/issues/3031) ([#3033](https://github.com/surveyjs/survey-library/issues/3033)) ([66f074b](https://github.com/surveyjs/survey-library/commit/66f074b9c5c89bb766ba8f2435616d4c269a64e6))
 
 ### [1.8.53](https://github.com/surveyjs/survey-library/compare/v1.8.52...v1.8.53) (2021-06-23)
 
-
 ### Bug Fixes
 
-* Column header title doesn't render correctly on adding column without title in code [#3003](https://github.com/surveyjs/survey-library/issues/3003) ([#3004](https://github.com/surveyjs/survey-library/issues/3004)) ([ec8c32e](https://github.com/surveyjs/survey-library/commit/ec8c32e31f60c03b406dd70cdcddc5bc53eaa44c))
-* Editing doesn't work in matrices if there is a question with the same name in detail panel [#3001](https://github.com/surveyjs/survey-library/issues/3001) ([#3002](https://github.com/surveyjs/survey-library/issues/3002)) ([e320c81](https://github.com/surveyjs/survey-library/commit/e320c810fe7604f4868f92aa868cf977ecc735e3))
-* If choicesByUrl.allowEmptyResponse is true and we have other value on loading in question, it doesn't set [#3009](https://github.com/surveyjs/survey-library/issues/3009) ([#3010](https://github.com/surveyjs/survey-library/issues/3010)) ([42f78d6](https://github.com/surveyjs/survey-library/commit/42f78d69e1ca3a357e34e6b434e48c4bb7546089))
+- Column header title doesn't render correctly on adding column without title in code [#3003](https://github.com/surveyjs/survey-library/issues/3003) ([#3004](https://github.com/surveyjs/survey-library/issues/3004)) ([ec8c32e](https://github.com/surveyjs/survey-library/commit/ec8c32e31f60c03b406dd70cdcddc5bc53eaa44c))
+- Editing doesn't work in matrices if there is a question with the same name in detail panel [#3001](https://github.com/surveyjs/survey-library/issues/3001) ([#3002](https://github.com/surveyjs/survey-library/issues/3002)) ([e320c81](https://github.com/surveyjs/survey-library/commit/e320c810fe7604f4868f92aa868cf977ecc735e3))
+- If choicesByUrl.allowEmptyResponse is true and we have other value on loading in question, it doesn't set [#3009](https://github.com/surveyjs/survey-library/issues/3009) ([#3010](https://github.com/surveyjs/survey-library/issues/3010)) ([42f78d6](https://github.com/surveyjs/survey-library/commit/42f78d69e1ca3a357e34e6b434e48c4bb7546089))
 
 ### [1.8.52](https://github.com/surveyjs/survey-library/compare/v1.8.51...v1.8.52) (2021-06-16)
 

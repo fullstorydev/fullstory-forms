@@ -1,8 +1,8 @@
-import { DropdownListModel, settings } from "survey-core";
+import { DropdownListModel, settings } from "fullstory-form-core";
 import { registerMarkupTests } from "./helper";
 
-registerMarkupTests(
-  [{
+registerMarkupTests([
+  {
     name: "Test Rating question integers",
     json: {
       questions: [
@@ -11,9 +11,9 @@ registerMarkupTests(
           type: "rating",
           title: "Question title",
           rateMax: 4,
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "rating-simple",
   },
@@ -27,9 +27,9 @@ registerMarkupTests(
           title: "Question title",
           readOnly: "true",
           rateMax: 4,
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "rating-simple-readonly",
   },
@@ -42,9 +42,9 @@ registerMarkupTests(
           type: "rating",
           title: "Question title",
           rateMax: 4,
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     initSurvey: (survey) => survey.setDesignMode(true),
     snapshot: "rating-simple-disabled",
@@ -60,9 +60,9 @@ registerMarkupTests(
           rateMax: 4,
           titleLocation: "hidden",
           minRateDescription: "min",
-          maxRateDescription: "max"
-        }
-      ]
+          maxRateDescription: "max",
+        },
+      ],
     },
     snapshot: "rating-min-max",
   },
@@ -78,9 +78,9 @@ registerMarkupTests(
           displayRateDescriptionsAsExtremeItems: true,
           titleLocation: "hidden",
           minRateDescription: "min",
-          maxRateDescription: "max"
-        }
-      ]
+          maxRateDescription: "max",
+        },
+      ],
     },
     snapshot: "rating-min-max-items",
   },
@@ -95,8 +95,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           renderAs: "dropdown",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
 
     snapshot: "rating-as-dropdown",
@@ -113,14 +113,9 @@ registerMarkupTests(
           minRateDescription: "mimimi",
           maxRateDescription: "mamama",
           displayMode: "dropdown",
-          rateValues: [
-            1,
-            2,
-            3,
-            4
-          ]
-        }
-      ]
+          rateValues: [1, 2, 3, 4],
+        },
+      ],
     },
     initSurvey: (survey) => {
       let q1 = survey.getQuestionByName("name");
@@ -144,8 +139,8 @@ registerMarkupTests(
           readOnly: true,
           renderAs: "dropdown",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
 
     snapshot: "rating-as-dropdown-readonly",
@@ -163,8 +158,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           renderAs: "dropdown",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
 
     snapshot: "rating-as-dropdown-readonly-with-value",
@@ -181,8 +176,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           renderAs: "dropdown",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
     initSurvey: (survey) => survey.setDesignMode(true),
     snapshot: "rating-as-dropdown-disabled-with-value",
@@ -199,8 +194,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           renderAs: "dropdown",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
     initSurvey: (survey) => {
       let q1 = survey.getQuestionByName("name");
@@ -224,11 +219,11 @@ registerMarkupTests(
           titleLocation: "hidden",
           displayMode: "buttons",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
 
-    snapshot: "rating-as-wrappable"
+    snapshot: "rating-as-wrappable",
   },
   {
     name: "Test Rating question as stars",
@@ -241,8 +236,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           rateType: "stars",
           rateMax: 2,
-        }
-      ]
+        },
+      ],
     },
     snapshot: "rating-stars",
   },
@@ -258,8 +253,8 @@ registerMarkupTests(
           readonly: "true",
           rateType: "stars",
           rateMax: 2,
-        }
-      ]
+        },
+      ],
     },
     snapshot: "rating-stars-readonly",
   },
@@ -274,8 +269,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           rateType: "stars",
           rateMax: 2,
-        }
-      ]
+        },
+      ],
     },
     snapshot: "rating-stars-disabled",
     initSurvey: (survey) => survey.setDesignMode(true),
@@ -291,8 +286,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           rateType: "smileys",
           rateMax: 2,
-        }
-      ]
+        },
+      ],
     },
     snapshot: "rating-smileys",
   },
@@ -308,8 +303,8 @@ registerMarkupTests(
           readOnly: true,
           rateType: "smileys",
           rateMax: 2,
-        }
-      ]
+        },
+      ],
     },
     snapshot: "rating-smileys-readonly",
   },
@@ -324,8 +319,8 @@ registerMarkupTests(
           titleLocation: "hidden",
           rateType: "smileys",
           rateMax: 2,
-        }
-      ]
+        },
+      ],
     },
     initSurvey: (survey) => survey.setDesignMode(true),
     snapshot: "rating-smileys-disabled",
@@ -341,12 +336,12 @@ registerMarkupTests(
           titleLocation: "hidden",
           displayMode: "buttons",
           rateMax: 4,
-        }
-      ]
+        },
+      ],
     },
-    initSurvey: survey => {
+    initSurvey: (survey) => {
       survey.mode = "display";
     },
     snapshot: "rating-display-mode",
-  }]
-);
+  },
+]);

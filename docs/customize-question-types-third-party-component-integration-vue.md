@@ -27,7 +27,7 @@ npm install @lk77/vue3-color --save
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-vue-components (linkStyle))
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-vue-components "linkStyle")
 
 ## Create a Model
 
@@ -36,38 +36,38 @@ To integrate a third-party component, you need to configure a custom question ty
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { Question } from "survey-core";
+  import { Question } from "fullstory-form-core";
 
-const CUSTOM_TYPE = "color-picker";
+  const CUSTOM_TYPE = "color-picker";
 
-export class QuestionColorPickerModel extends Question {
-  getType() {
-    return CUSTOM_TYPE;
-  }
+  export class QuestionColorPickerModel extends Question {
+    getType() {
+      return CUSTOM_TYPE;
+    }
 
-  get colorPickerType(): string {
-    return this.getPropertyValue("colorPickerType");
-  }
-  set colorPickerType(val) {
-    this.setPropertyValue("colorPickerType", val);
-  }
-  get isSlider(): boolean {
-    return this.colorPickerType === "Slider";
-  }
-  get isSketch(): boolean {
-    return this.colorPickerType === "Sketch";
-  }
-  get isColorCompact(): boolean {
-    return this.colorPickerType === "Compact";
-  }
+    get colorPickerType(): string {
+      return this.getPropertyValue("colorPickerType");
+    }
+    set colorPickerType(val) {
+      this.setPropertyValue("colorPickerType", val);
+    }
+    get isSlider(): boolean {
+      return this.colorPickerType === "Slider";
+    }
+    get isSketch(): boolean {
+      return this.colorPickerType === "Sketch";
+    }
+    get isColorCompact(): boolean {
+      return this.colorPickerType === "Compact";
+    }
 
-  get disableAlpha(): boolean {
-    return this.getPropertyValue("disableAlpha");
+    get disableAlpha(): boolean {
+      return this.getPropertyValue("disableAlpha");
+    }
+    set disableAlpha(val) {
+      this.setPropertyValue("disableAlpha", val);
+    }
   }
-  set disableAlpha(val) {
-    this.setPropertyValue("disableAlpha", val);
-  }
-}
 </script>
 ```
 
@@ -76,16 +76,16 @@ Register the created model in the `ElementFactory` under the name returned by th
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { ..., ElementFactory } from "survey-core";
+  import { ..., ElementFactory } from "fullstory-form-core";
 
-// ...
+  // ...
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name: string) => {
-    return new QuestionColorPickerModel(name);
-  }
-);
+  ElementFactory.Instance.registerElement(
+    CUSTOM_TYPE,
+    (name: string) => {
+      return new QuestionColorPickerModel(name);
+    }
+  );
 </script>
 ```
 
@@ -93,47 +93,47 @@ ElementFactory.Instance.registerElement(
 
 Our model exists only in JavaScript code, but SurveyJS works with JSON objects. You need to configure how your model should be serialized into JSON. To do this, call the `addClass(name, propMeta[], constructor, baseClassName)` method on the `Serializer` object. This method accepts the following arguments:
 
-- `name`      
-A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the model's JavaScript class.
+- `name`  
+  A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the model's JavaScript class.
 
-- `propMeta[]`      
-An array of objects used to serialize custom model properties into JSON. This array must include all custom model properties. [Our model](#create-a-model) contains two writable custom properties (`colorPickerType` and `disableAlpha`), and the code below configures their serialization.
+- `propMeta[]`  
+  An array of objects used to serialize custom model properties into JSON. This array must include all custom model properties. [Our model](#create-a-model) contains two writable custom properties (`colorPickerType` and `disableAlpha`), and the code below configures their serialization.
 
-- `constructor`       
-A function that returns an instance of the model's JavaScript class (`QuestionColorPickerModel`) associated with the JSON object.
+- `constructor`  
+  A function that returns an instance of the model's JavaScript class (`QuestionColorPickerModel`) associated with the JSON object.
 
-- `baseClassName`        
-The name of a class that the custom class extends (`"question"`).
+- `baseClassName`  
+  The name of a class that the custom class extends (`"question"`).
 
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { ..., Serializer } from "survey-core";
+  import { ..., Serializer } from "fullstory-form-core";
 
-// ...
+  // ...
 
-Serializer.addClass(
-  CUSTOM_TYPE,
-  [{
-    name: "colorPickerType",
-    default: "Slider",
-    choices: ["Slider", "Sketch", "Compact"],
-    category: "general",
-    visibleIndex: 2 // Place after the Name and Title
-  }, {
-    name: "disableAlpha:boolean",
-    dependsOn: "colorPickerType",
-    visibleIf: function (obj: QuestionColorPickerModel) {
-      return obj.colorPickerType === "Sketch";
+  Serializer.addClass(
+    CUSTOM_TYPE,
+    [{
+      name: "colorPickerType",
+      default: "Slider",
+      choices: ["Slider", "Sketch", "Compact"],
+      category: "general",
+      visibleIndex: 2 // Place after the Name and Title
+    }, {
+      name: "disableAlpha:boolean",
+      dependsOn: "colorPickerType",
+      visibleIf: function (obj: QuestionColorPickerModel) {
+        return obj.colorPickerType === "Sketch";
+      },
+      category: "general",
+      visibleIndex: 3 // Place after the Name, Title, and Color Picker Type
+    }],
+    function () {
+      return new QuestionColorPickerModel("");
     },
-    category: "general",
-    visibleIndex: 3 // Place after the Name, Title, and Color Picker Type
-  }],
-  function () {
-    return new QuestionColorPickerModel("");
-  },
-  "question"
-);
+    "question"
+  );
 </script>
 ```
 
@@ -144,21 +144,21 @@ Declare a template that renders your third-party component. Model properties are
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { Sketch, Compact, Slider } from "@lk77/vue3-color";
-// ...
-// The model configured earlier goes here
-// ...
+  import { Sketch, Compact, Slider } from "@lk77/vue3-color";
+  // ...
+  // The model configured earlier goes here
+  // ...
 </script>
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false });
-const props = defineProps<{ question: QuestionColorPickerModel }>();
+  defineOptions({ inheritAttrs: false });
+  const props = defineProps<{ question: QuestionColorPickerModel }>();
 
-function updateValue(val: any) {
-  const hex: string = val.hex;
-  if (hex) {
-    props.question.value = hex.toLowerCase();
+  function updateValue(val: any) {
+    const hex: string = val.hex;
+    if (hex) {
+      props.question.value = hex.toLowerCase();
+    }
   }
-}
 </script>
 <template>
   <Slider
@@ -198,16 +198,16 @@ Survey Creator generates captions for your custom question type and its properti
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-// ...
-import { editorLocalization } from "survey-creator-core";
+  // ...
+  import { editorLocalization } from "survey-creator-core";
 
-const CUSTOM_TYPE = "color-picker";
-// ...
+  const CUSTOM_TYPE = "color-picker";
+  // ...
 
-const locale = editorLocalization.getLocale("");
-locale.qt[CUSTOM_TYPE] = "Color Picker";
-locale.pe.colorPickerType = "Color picker type";
-locale.pe.disableAlpha = "Disable alpha channel";
+  const locale = editorLocalization.getLocale("");
+  locale.qt[CUSTOM_TYPE] = "Color Picker";
+  locale.pe.colorPickerType = "Color picker type";
+  locale.pe.disableAlpha = "Disable alpha channel";
 </script>
 ```
 
@@ -218,15 +218,15 @@ Each question type has an icon that is displayed next to the type name in the [T
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { ..., SvgRegistry } from "survey-core"
+  import { ..., SvgRegistry } from "fullstory-form-core"
 
-const CUSTOM_TYPE = "color-picker";
-// ...
+  const CUSTOM_TYPE = "color-picker";
+  // ...
 
-SvgRegistry.registerIconFromSvg(
-  CUSTOM_TYPE,
-  '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="..." /></svg>'
-);
+  SvgRegistry.registerIconFromSvg(
+    CUSTOM_TYPE,
+    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="..." /></svg>'
+  );
 </script>
 ```
 
@@ -235,12 +235,12 @@ Alternatively, you can use one of [built-in SurveyJS icons](https://surveyjs.io/
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { ..., settings } from "survey-core";
+  import { ..., settings } from "fullstory-form-core";
 
-const CUSTOM_TYPE = "color-picker";
-// ...
+  const CUSTOM_TYPE = "color-picker";
+  // ...
 
-settings.customIcons["icon-" + CUSTOM_TYPE] = "icon-text";
+  settings.customIcons["icon-" + CUSTOM_TYPE] = "icon-text";
 </script>
 ```
 
@@ -251,22 +251,22 @@ The [Property Grid](/Documentation/Survey-Creator?id=property-grid) is built upo
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { ..., PropertyGridEditorCollection } from "survey-creator-core";
+  import { ..., PropertyGridEditorCollection } from "survey-creator-core";
 
-const CUSTOM_TYPE = "color-picker";
-// ...
+  const CUSTOM_TYPE = "color-picker";
+  // ...
 
-PropertyGridEditorCollection.register({
-  fit: function (prop) {
-    return prop.type === "color";
-  },
-  getJSON: function () {
-    return {
-      type: CUSTOM_TYPE,
-      colorPickerType: "Compact"
-    };
-  }
-});
+  PropertyGridEditorCollection.register({
+    fit: function (prop) {
+      return prop.type === "color";
+    },
+    getJSON: function () {
+      return {
+        type: CUSTOM_TYPE,
+        colorPickerType: "Compact"
+      };
+    }
+  });
 </script>
 ```
 
@@ -275,53 +275,60 @@ To try the functionality, you can add a custom property of the `"color"` type to
 ```html
 <!-- src/components/SurveyCreator.vue -->
 <script setup lang="ts">
-import 'survey-core/defaultV2.min.css';
-import "survey-creator-core/survey-creator-core.min.css";
+  import "survey-core/defaultV2.min.css";
+  import "survey-creator-core/survey-creator-core.min.css";
 
-import { Serializer } from "survey-core";
-import { SurveyCreatorModel } from "survey-creator-core";
-import type { SurveyModel } from "survey-core";
-import type { CreatorBase } from "survey-creator-core";
+  import { Serializer } from "fullstory-form-core";
+  import { SurveyCreatorModel } from "survey-creator-core";
+  import type { SurveyModel } from "fullstory-form-core";
+  import type { CreatorBase } from "survey-creator-core";
 
-Serializer.addProperty("survey", {
-  name: "backgroundColor",
-  displayName: "Background color",
-  type: "color",
-  category: "general",
-  visibleIndex: 3,
-  onSetValue: (survey: SurveyModel, value: string) => {
-    survey.setPropertyValue("backgroundColor", value);
-    applyBackground(value);
+  Serializer.addProperty("survey", {
+    name: "backgroundColor",
+    displayName: "Background color",
+    type: "color",
+    category: "general",
+    visibleIndex: 3,
+    onSetValue: (survey: SurveyModel, value: string) => {
+      survey.setPropertyValue("backgroundColor", value);
+      applyBackground(value);
+    },
+  });
+
+  const surveyJson = {
+    elements: [
+      {
+        type: "color-picker",
+        name: "question1",
+        title: "Pick a color",
+        colorPickerType: "Sketch",
+      },
+    ],
+  };
+
+  function applyBackground(color: string) {
+    setTimeout(() => {
+      const surveyEl = document.getElementsByClassName(
+        "sd-root-modern"
+      )[0] as HTMLElement;
+      if (surveyEl) {
+        surveyEl.style.setProperty("--background", color);
+      }
+    }, 50);
   }
-});
 
-const surveyJson = {
-  elements: [{
-    type: "color-picker",
-    name: "question1",
-    title: "Pick a color",
-    colorPickerType: "Sketch"
-  }]
-};
-
-function applyBackground(color: string) {
-  setTimeout(() => {
-    const surveyEl = document.getElementsByClassName("sd-root-modern")[0] as HTMLElement;
-    if (surveyEl) {
-      surveyEl.style.setProperty("--background", color);
+  function handleActiveTabChange(
+    sender: CreatorBase,
+    { tabName }: { tabName: string }
+  ) {
+    if (tabName === "test" || tabName === "designer") {
+      applyBackground(sender.survey.backgroundColor);
     }
-  }, 50);
-}
-
-function handleActiveTabChange(sender: CreatorBase, { tabName }: { tabName: string }) {
-  if (tabName === "test" || tabName === "designer") {
-    applyBackground(sender.survey.backgroundColor);
   }
-}
 
-const creator = new SurveyCreatorModel({});
-creator.onActiveTabChanged.add(handleActiveTabChange);
-creator.JSON = surveyJson;
+  const creator = new SurveyCreatorModel({});
+  creator.onActiveTabChanged.add(handleActiveTabChange);
+  creator.JSON = surveyJson;
 </script>
 
 <template>
@@ -334,24 +341,23 @@ You might want to use a third-party component only as a property editor, without
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-import { ..., ElementFactory } from "survey-core";
+  import { ..., ElementFactory } from "fullstory-form-core";
 
-// ...
+  // ...
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name: string) => {
-    return new QuestionColorPickerModel(name);
-  },
-  false
-);
+  ElementFactory.Instance.registerElement(
+    CUSTOM_TYPE,
+    (name: string) => {
+      return new QuestionColorPickerModel(name);
+    },
+    false
+  );
 </script>
 ```
 
+[View Demo](/survey-creator/examples/custom-colorpicker-property-editor/vue3js "linkStyle")
 
-[View Demo](/survey-creator/examples/custom-colorpicker-property-editor/vue3js (linkStyle))
-
-[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-vue-components (linkStyle))
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-vue-components "linkStyle")
 
 ## Further Reading
 

@@ -19,11 +19,11 @@ Composite questions are containers for other questions. They are useful when a g
 The following code configures a Full Name composite question that contains the First Name and Last Name [Text](/Documentation/Library?id=questiontextmodel) questions:
 
 ```js
-import { ComponentCollection } from "survey-core";
+import { ComponentCollection } from "fullstory-form-core";
 
 ComponentCollection.Instance.add({
   // A unique name; must use lowercase
-  name: "fullname", 
+  name: "fullname",
   // A display name used in the Toolbox
   title: "Full Name",
   // A default title for questions created with this question type
@@ -31,8 +31,14 @@ ComponentCollection.Instance.add({
   // An array of JSON schemas that configure the nested questions
   elementsJSON: [
     { type: "text", name: "firstName", title: "First Name", isRequired: true },
-    { type: "text", name: "lastName", title: "Last Name", isRequired: true, startWithNewLine: false }
-  ]
+    {
+      type: "text",
+      name: "lastName",
+      title: "Last Name",
+      isRequired: true,
+      startWithNewLine: false,
+    },
+  ],
 });
 ```
 
@@ -56,7 +62,7 @@ A composite question produces an object for a value:
 }
 ```
 
-[View Demo](/Examples/Survey-Creator?id=component-fullname (linkStyle))
+[View Demo](/Examples/Survey-Creator?id=component-fullname "linkStyle")
 
 ## Add Custom Properties to Composite Question Types
 
@@ -65,17 +71,29 @@ If you need to control nested questions, add a custom property to their composit
 For example, the Full Name composite question from the previous topic may include an optional Middle Name question. The following code adds a custom `showMiddleName` property that controls the Middle Name question visibility:
 
 ```js
-import { ComponentCollection, Serializer } from "survey-core";
+import { ComponentCollection, Serializer } from "fullstory-form-core";
 
 ComponentCollection.Instance.add({
-  name: "fullname", 
-  title: "Full Name", 
+  name: "fullname",
+  title: "Full Name",
   defaultQuestionTitle: "Enter your full name:",
   elementsJSON: [
     { type: "text", name: "firstName", title: "First Name", isRequired: true },
     // Optional question, hidden by default
-    { type: "text", name: "middleName", title: "Middle Name", startWithNewLine: false, visible: false },
-    { type: "text", name: "lastName", title: "Last Name", isRequired: true, startWithNewLine: false }
+    {
+      type: "text",
+      name: "middleName",
+      title: "Middle Name",
+      startWithNewLine: false,
+      visible: false,
+    },
+    {
+      type: "text",
+      name: "lastName",
+      title: "Last Name",
+      isRequired: true,
+      startWithNewLine: false,
+    },
   ],
 
   onInit() {
@@ -100,7 +118,7 @@ ComponentCollection.Instance.add({
   changeMiddleNameVisibility(question) {
     const middleName = question.contentPanel.getQuestionByName("middleName");
     if (!!middleName) {
-      // Set the `middleName` question's visibility based on the composite question's `showMiddleName` property 
+      // Set the `middleName` question's visibility based on the composite question's `showMiddleName` property
       middleName.visible = question.showMiddleName;
     }
   },
@@ -124,7 +142,7 @@ The steps below summarize how to add a custom property to your composite questio
 3. Call this function from the [`onLoaded`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onLoaded) function to apply the custom property when the survey JSON schema is loaded.
 4. Call the same function from the [`onPropertyChanged`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onPropertyChanged) function to reapply the custom property each time its value changes.
 
-[View Demo](/Examples/Survey-Creator?id=component-fullname (linkStyle))
+[View Demo](/Examples/Survey-Creator?id=component-fullname "linkStyle")
 
 ## Expressions and Triggers in Composite Question Types
 
@@ -180,33 +198,41 @@ The following code shows how you can use expressions and triggers to implement t
 Survey Creator users can implement the same UI and logic, but this requires time and basic understanding of expressions and triggers. To help the users with this task, you can create a custom composite question type that already implements this UI and logic. The code below demonstrates this composite question type configuration. Note that the [`enableIf`](/Documentation/Library?id=questioncommentmodel#enableIf) expression uses the `composite` prefix to access a nested question. Instead of triggers, composite questions use the [`onValueChanged`](https://surveyjs.io/form-library/documentation/api-reference/icustomquestiontypeconfiguration#onValueChanged) function to implement the trigger logic.
 
 ```js
-import { ComponentCollection } from "survey-core";
+import { ComponentCollection } from "fullstory-form-core";
 
 ComponentCollection.Instance.add({
   name: "shippingaddress",
   title: "Shipping Address",
-  elementsJSON: [{
-    type: "comment",
-    name: "businessAddress",
-    title: "Business Address",
-    isRequired: true
-  }, {
-    type: "boolean",
-    name: "shippingSameAsBusiness",
-    title: "Shipping address same as business address",
-    defaultValue: true
-  }, {
-    type: "comment",
-    name: "shippingAddress",
-    title: "Shipping Address",
-    // Use the `composite` prefix to access a question nested in the composite question
-    enableIf: "{composite.shippingSameAsBusiness} <> true",
-    isRequired: true
-  }],
+  elementsJSON: [
+    {
+      type: "comment",
+      name: "businessAddress",
+      title: "Business Address",
+      isRequired: true,
+    },
+    {
+      type: "boolean",
+      name: "shippingSameAsBusiness",
+      title: "Shipping address same as business address",
+      defaultValue: true,
+    },
+    {
+      type: "comment",
+      name: "shippingAddress",
+      title: "Shipping Address",
+      // Use the `composite` prefix to access a question nested in the composite question
+      enableIf: "{composite.shippingSameAsBusiness} <> true",
+      isRequired: true,
+    },
+  ],
   onValueChanged(question, name) {
-    const businessAddress = question.contentPanel.getQuestionByName("businessAddress");
-    const shippingAddress = question.contentPanel.getQuestionByName("shippingAddress");
-    const shippingSameAsBusiness = question.contentPanel.getQuestionByName("shippingSameAsBusiness");
+    const businessAddress =
+      question.contentPanel.getQuestionByName("businessAddress");
+    const shippingAddress =
+      question.contentPanel.getQuestionByName("shippingAddress");
+    const shippingSameAsBusiness = question.contentPanel.getQuestionByName(
+      "shippingSameAsBusiness"
+    );
 
     if (name === "businessAddress") {
       // If "Shipping address same as business address" is selected
@@ -218,9 +244,10 @@ ComponentCollection.Instance.add({
     if (name === "shippingSameAsBusiness") {
       // If "Shipping address same as business address" is selected, copy the Business Address to Shipping Address
       // Otherwise, clear the Shipping Address value
-      shippingAddress.value = shippingSameAsBusiness.value == true ? businessAddress.value : "";
+      shippingAddress.value =
+        shippingSameAsBusiness.value == true ? businessAddress.value : "";
     }
-  }
+  },
 });
 ```
 
@@ -233,7 +260,7 @@ Users can add a custom question to their survey like they add a built-in questio
 }
 ```
 
-[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress (linkStyle))
+[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress "linkStyle")
 
 ## Override Base Question Properties
 
@@ -242,7 +269,7 @@ Composite questions inherit properties from their base question type ([`Question
 The following code shows how to override base question properties. This code hides the properties from the Property Grid (`visible: false`) and excludes them from serialization to JSON. The [`titleLocation`](/Documentation/Library?id=Question#titleLocation) property also gets a new default value.
 
 ```js
-import { ComponentCollection, Serializer } from "survey-core";
+import { ComponentCollection, Serializer } from "fullstory-form-core";
 
 ComponentCollection.Instance.add({
   name: "shippingaddress",
@@ -261,7 +288,7 @@ ComponentCollection.Instance.add({
       name: "description",
       visible: false,
     });
-  }
+  },
 });
 ```
 
@@ -274,7 +301,7 @@ ComponentCollection.Instance.add({
   onCreated(question) {
     question.contentPanel.showQuestionNumbers = "default";
     // ...
-  }
+  },
 });
 ```
 
@@ -285,9 +312,10 @@ ComponentCollection.Instance.add({
   name: "shippingaddress",
   // ...
   onCreated(question) {
-    const businessAddress = question.contentPanel.getQuestionByName("businessAddress");
+    const businessAddress =
+      question.contentPanel.getQuestionByName("businessAddress");
     businessAddress.visible = false;
-  }
+  },
 });
 ```
 
@@ -296,43 +324,43 @@ ComponentCollection.Instance.add({
 You can localize composite questions by following the same technique used to [localize survey contents](https://surveyjs.io/form-library/documentation/survey-localization#localize-survey-contents). The following code shows how to translate texts within a composite question to French and German while using English as the default language:
 
 ```js
-import { ComponentCollection } from "survey-core";
+import { ComponentCollection } from "fullstory-form-core";
 
 ComponentCollection.Instance.add({
-  name: "fullname", 
+  name: "fullname",
   title: {
-    "default": "Full Name",
-    "fr": "Nom et prénom",
-    "de": "Vollständiger Name"
+    default: "Full Name",
+    fr: "Nom et prénom",
+    de: "Vollständiger Name",
   },
   defaultQuestionTitle: {
-    "default": "Enter your full name:",
-    "fr": "Entrez votre nom complet:",
-    "de": "Geben Sie Ihren vollständigen Namen ein:"
+    default: "Enter your full name:",
+    fr: "Entrez votre nom complet:",
+    de: "Geben Sie Ihren vollständigen Namen ein:",
   },
   elementsJSON: [
     {
       type: "text",
       name: "firstName",
       title: {
-        "default": "First Name",
-        "fr": "Prénom",
-        "de": "Vorname"
+        default: "First Name",
+        fr: "Prénom",
+        de: "Vorname",
       },
-      isRequired: true
+      isRequired: true,
     },
     {
       type: "text",
       name: "lastName",
       title: {
-        "default": "Last Name",
-        "fr": "Nom de famille",
-        "de": "Nachname"
+        default: "Last Name",
+        fr: "Nom de famille",
+        de: "Nachname",
       },
       isRequired: true,
-      startWithNewLine: false
-    }
-  ]
+      startWithNewLine: false,
+    },
+  ],
 });
 ```
 

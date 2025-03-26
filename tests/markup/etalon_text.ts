@@ -1,4 +1,4 @@
-import { settings } from "survey-core";
+import { settings } from "fullstory-form-core";
 import { registerMarkupTest } from "./helper";
 
 registerMarkupTest(
@@ -11,28 +11,28 @@ registerMarkupTest(
           name: "name",
           type: "text",
           title: "Question title",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "text",
-  });
-registerMarkupTest(
-  {
-    name: "Test Text (text update mode) question markup",
-    json: {
-      questions: [
-        {
-          name: "name",
-          type: "text",
-          title: "Question title",
-          titleLocation: "hidden"
-        }
-      ],
-      textUpdateMode: "onTyping"
-    },
-    snapshot: "text-typing",
-  });
+  }
+);
+registerMarkupTest({
+  name: "Test Text (text update mode) question markup",
+  json: {
+    questions: [
+      {
+        name: "name",
+        type: "text",
+        title: "Question title",
+        titleLocation: "hidden",
+      },
+    ],
+    textUpdateMode: "onTyping",
+  },
+  snapshot: "text-typing",
+});
 registerMarkupTest({
   name: "Test Text readonly question markup",
   json: {
@@ -41,10 +41,10 @@ registerMarkupTest({
         name: "name",
         type: "text",
         title: "Question title",
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
-    mode: "display"
+    mode: "display",
   },
   snapshot: "text-readonly",
 });
@@ -56,8 +56,8 @@ registerMarkupTest({
         name: "name",
         type: "text",
         title: "Question title",
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
   },
   initSurvey: (survey) => survey.setDesignMode(true),
@@ -72,13 +72,13 @@ registerMarkupTest({
         type: "text",
         defaultValue: "test",
         title: "Question title",
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
     mode: "display",
   },
-  before: () => settings.readOnlyTextRenderMode = "div",
-  after: () => settings.readOnlyTextRenderMode = "input",
+  before: () => (settings.readOnlyTextRenderMode = "div"),
+  after: () => (settings.readOnlyTextRenderMode = "input"),
   snapshot: "text-div",
 });
 registerMarkupTest({
@@ -92,8 +92,8 @@ registerMarkupTest({
         title: "Question title",
         isRequired: true,
         autocomplete: "bdate",
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
   },
   snapshot: "text-date",
@@ -112,11 +112,11 @@ registerMarkupTest({
         autocomplete: "email",
         validators: [
           {
-            type: "email"
-          }
+            type: "email",
+          },
         ],
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
   },
   snapshot: "text-email",
@@ -124,14 +124,13 @@ registerMarkupTest({
 registerMarkupTest({
   name: "Test Text Data list markup",
   json: {
-
     questions: [
       {
         type: "text",
         name: "q1",
         dataList: ["abc", "def", "ghk"],
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
   },
   snapshot: "text-datalist",
@@ -139,14 +138,13 @@ registerMarkupTest({
 registerMarkupTest({
   name: "Test Text numeric mask type markup",
   json: {
-
     questions: [
       {
         type: "text",
         name: "q1",
         maskType: "numeric",
-        titleLocation: "hidden"
-      }
+        titleLocation: "hidden",
+      },
     ],
   },
   snapshot: "text-masktype-numeric",

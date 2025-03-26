@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
-    "lib": [
-      "DOM",
-      "ES5",
-      "ES6",
-      "ES2015.Promise"
-    ],
+    "lib": ["DOM", "ES5", "ES6", "ES2015.Promise"],
     "sourceMap": true,
     "noImplicitAny": true,
     "importHelpers": false,
@@ -17,22 +12,14 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "survey-core": [
-        "./src/entries/core.ts"
-      ],
-      "@coreIconsV1": [
-        "packages/survey-core/src/iconsV1"
-      ],
-      "@coreIconsV2": [
-        "packages/survey-core/src/iconsV2"
-      ]
+      "fullstory-form-core": ["./src/entries/core.ts"],
+      "@coreIconsV1": ["packages/fullstory-form-core/src/iconsV1"],
+      "@coreIconsV2": ["packages/fullstory-form-core/src/iconsV2"]
     }
   },
-  "exclude": [
-    "src/entries/**/*.ts"
-  ],
+  "exclude": ["src/entries/**/*.ts"],
   "include": [
     "src/**/*.ts",
-    "packages/survey-core/entries/chunks/core-wo-model.ts"
+    "packages/fullstory-form-core/entries/chunks/core-wo-model.ts"
   ]
 }

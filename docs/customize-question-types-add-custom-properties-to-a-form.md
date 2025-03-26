@@ -15,34 +15,34 @@ In SurveyJS, each question type is implemented by a specific class. These classe
 
 To add a custom property to an existing class, call the `addProperty(className, propMeta)` method on the `Serializer` object. This method has the following parameters:
 
-- `className`     
-The name of a base or derived class (see the [`getType()`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) method description).
+- `className`  
+  The name of a base or derived class (see the [`getType()`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) method description).
 
-- `propMeta`      
-A JSON object with [property settings](#survey-element-property-settings).
+- `propMeta`  
+  A JSON object with [property settings](#survey-element-property-settings).
 
 If you add a property to a base class, all its derived classes will also have this property. For instance, the following code adds a custom property to the base Question class and to all questions as a result:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("question", {
   name: "customNumericProperty",
   type: "number",
   category: "general",
   default: 1,
-  visibleIndex: 0
+  visibleIndex: 0,
 });
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/add-properties-to-property-grid/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/add-properties-to-property-grid/ "linkStyle")
 
 ## Define Custom Properties in a New Class
 
 This approach is suitable if you create a new class. Each custom property should be defined by a getter/setter pair that returns and sets the property value. For instance, the following code shows how to implement `MyCustomClass` based on the `Question` class and define one custom property.
 
 ```js
-import { Question, ElementFactory } from "survey-core";
+import { Question, ElementFactory } from "fullstory-form-core";
 
 export class MyCustomClass extends Question {
   getType() {
@@ -65,22 +65,22 @@ ElementFactory.Instance.registerElement("my-custom-class", (name) => {
 
 To finish creating a new class, you need to configure how it should be serialized to and deserialized from JSON. Call the `addClass(name, propMeta[], constructor, baseClassName)` method on the `Serializer` object. This method has the following parameters:
 
-- `name`      
-A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the JavaScript class.
+- `name`  
+  A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the JavaScript class.
 
-- `propMeta[]`      
-An array of objects with [property settings](#survey-element-property-settings) used to serialize custom properties to JSON.
+- `propMeta[]`  
+  An array of objects with [property settings](#survey-element-property-settings) used to serialize custom properties to JSON.
 
-- `constructor`       
-A function that returns an instance of the JavaScript class associated with the JSON object.
+- `constructor`  
+  A function that returns an instance of the JavaScript class associated with the JSON object.
 
-- `baseClassName`        
-The name of a class that the custom class extends.
+- `baseClassName`  
+  The name of a class that the custom class extends.
 
 The following code shows how to call the `addClass()` method for the custom class declared previously:
 
 ```js
-import { ..., Serializer } from "survey-core";
+import { ..., Serializer } from "fullstory-form-core";
 
 // ...
 
@@ -98,17 +98,17 @@ Serializer.addClass(
 );
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/custom-colorpicker-property-editor/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/custom-colorpicker-property-editor/ "linkStyle")
 
 ### Define a Custom Item Collection Property
 
 In addition to a getter/setter pair, a custom item collection property needs the `this.createItemValues(name)` method to be called in the class constructor. This method adds reactivity and localization support to the item collection.
 
 ```js
-import { Question, ElementFactory } from "survey-core";
+import { Question, ElementFactory } from "fullstory-form-core";
 
 export class MyCustomClass extends Question {
-   constructor() {
+  constructor() {
     super();
     this.createItemValues("myItemCollectionProperty");
   }
@@ -129,12 +129,14 @@ ElementFactory.Instance.registerElement("my-custom-class", (name) => {
 
 Serializer.addClass(
   "my-custom-class",
-  [{
-    name: "myItemCollectionProperty",
-    type: "itemvalues",
-    category: "general",
-    visibleIndex: 3
-  }],
+  [
+    {
+      name: "myItemCollectionProperty",
+      type: "itemvalues",
+      category: "general",
+      visibleIndex: 3,
+    },
+  ],
   function () {
     return new MyCustomClass("");
   },
@@ -151,7 +153,7 @@ Follow the steps below to add a custom localizable property to a new class:
 3. In serialization settings, set the `serializationProperty` setting to the name of the getter that returns the `LocalizableString` instance.
 
 ```js
-import { Question, ElementFactory, Serializer } from "survey-core";
+import { Question, ElementFactory, Serializer } from "fullstory-form-core";
 
 export class MyCustomClass extends Question {
   constructor() {
@@ -183,13 +185,15 @@ ElementFactory.Instance.registerElement("my-custom-class", (name) => {
 
 Serializer.addClass(
   "my-custom-class",
-  [{
-    name: "myLocalizableProperty",
-    category: "general",
-    visibleIndex: 2,
-    // Step 3: Deserialize `myLocalizableProperty` to `locMyLocalizableProperty`
-    serializationProperty: "locMyLocalizableProperty"
-  }],
+  [
+    {
+      name: "myLocalizableProperty",
+      category: "general",
+      visibleIndex: 2,
+      // Step 3: Deserialize `myLocalizableProperty` to `locMyLocalizableProperty`
+      serializationProperty: "locMyLocalizableProperty",
+    },
+  ],
   function () {
     return new MyCustomClass("");
   },
@@ -197,7 +201,7 @@ Serializer.addClass(
 );
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/custom-descriptive-text-element/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/custom-descriptive-text-element/ "linkStyle")
 
 ## Override Default Property Values
 
@@ -205,7 +209,7 @@ You can specify a different default value for a property. To do this, call `Seri
 
 ```js
 // Override the default value of the `isAllRowRequired` property for Single-Select Matrix questions
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
 ```
 
@@ -221,29 +225,29 @@ A string value that specifies the property name. It is the only required propert
 
 A string value that specifies the property type. Accepts one of the values described in the table below. Each type produces a different property editor in Survey Creator's Property Grid.
 
-| `type` | Property Editor | Description |
-| ------ | --------------- | ----------- |
-| `"string"` (default) | Text input | Use this type for short string values. |
-| `"dropdown"` | Drop-down menu | Use this type to allow respondents to select from a set of predefined options. Requires a defined [`choices`](#choices) array. |
-| `"buttongroup"` | A group of related buttons | Use this type to allow respondents to select from a small set of predefined options (typically, no more than three). Requires a defined [`choices`](#choices) array. |
-| `"boolean"` | Checkbox | Use this type for Boolean values. |
-| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/form-library/documentation/api-reference/question#visibleIf) or [`enableIf`](https://surveyjs.io/form-library/documentation/api-reference/question#enableIf). Requires an implemented [`onExecuteExpression`](#onexecuteexpression) function. |
-| `"expression"` | Multi-line text input with a hint icon | Use this type for non-Boolean [expressions](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#expressions). Requires an implemented [`onExecuteExpression`](#onexecuteexpression) function. |
-| `"number"` | Text input | Use this type for numeric values. |
-| `"spinedit"` | Text input with increase and decrease buttons | Use this type for integer values. |
-| `"text"` | Multi-line text input | Use this type for multi-line text values. |
-| `"file"` | Text input with a button that opens a Select File dialog window | Use this type to allow respondents to select a file or enter a file URL. |
-| `"color"` | Color picker | Use this type for color values. |
-| `"html"` | Multi-line text input | Use this type for HTML markup. |
-| [`"itemvalues"`](#define-a-custom-item-collection-property) | Customized text inputs for entering value-text pairs | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkboxes, and Radio Button Group questions use this type for the [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) property. |
-| `"value"` | Button that opens a dialog window  | The dialog window displays the survey element and allows users to set the element's default value. |
-| `"multiplevalues"` | A group of checkboxes with a Select All checkbox | Use this type to allow respondents to select more than one predefined option. Requires a defined [`choices`](#choices) array. |
+| `type`                                                      | Property Editor                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ----------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `"string"` (default)                                        | Text input                                                      | Use this type for short string values.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `"dropdown"`                                                | Drop-down menu                                                  | Use this type to allow respondents to select from a set of predefined options. Requires a defined [`choices`](#choices) array.                                                                                                                                                                                                                                                                                                            |
+| `"buttongroup"`                                             | A group of related buttons                                      | Use this type to allow respondents to select from a small set of predefined options (typically, no more than three). Requires a defined [`choices`](#choices) array.                                                                                                                                                                                                                                                                      |
+| `"boolean"`                                                 | Checkbox                                                        | Use this type for Boolean values.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `"condition"`                                               | Multi-line text input with an optional dialog window            | Use this type for [Boolean expressions](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/form-library/documentation/api-reference/question#visibleIf) or [`enableIf`](https://surveyjs.io/form-library/documentation/api-reference/question#enableIf). Requires an implemented [`onExecuteExpression`](#onexecuteexpression) function. |
+| `"expression"`                                              | Multi-line text input with a hint icon                          | Use this type for non-Boolean [expressions](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#expressions). Requires an implemented [`onExecuteExpression`](#onexecuteexpression) function.                                                                                                                                                                                                                  |
+| `"number"`                                                  | Text input                                                      | Use this type for numeric values.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `"spinedit"`                                                | Text input with increase and decrease buttons                   | Use this type for integer values.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `"text"`                                                    | Multi-line text input                                           | Use this type for multi-line text values.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `"file"`                                                    | Text input with a button that opens a Select File dialog window | Use this type to allow respondents to select a file or enter a file URL.                                                                                                                                                                                                                                                                                                                                                                  |
+| `"color"`                                                   | Color picker                                                    | Use this type for color values.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `"html"`                                                    | Multi-line text input                                           | Use this type for HTML markup.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| [`"itemvalues"`](#define-a-custom-item-collection-property) | Customized text inputs for entering value-text pairs            | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkboxes, and Radio Button Group questions use this type for the [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) property.                                                                                                                                |
+| `"value"`                                                   | Button that opens a dialog window                               | The dialog window displays the survey element and allows users to set the element's default value.                                                                                                                                                                                                                                                                                                                                        |
+| `"multiplevalues"`                                          | A group of checkboxes with a Select All checkbox                | Use this type to allow respondents to select more than one predefined option. Requires a defined [`choices`](#choices) array.                                                                                                                                                                                                                                                                                                             |
 
-`type` can also accept custom values. In this case, you need to register a property editor for the custom type in the `PropertyGridEditorCollection` and specify a standard JSON object that the custom type should produce. For example, the following code configures a `"shortname"` property that has a custom `"shorttext"` type: 
+`type` can also accept custom values. In this case, you need to register a property editor for the custom type in the `PropertyGridEditorCollection` and specify a standard JSON object that the custom type should produce. For example, the following code configures a `"shortname"` property that has a custom `"shorttext"` type:
 
 ```js
 import { PropertyGridEditorCollection } from "survey-creator-core";
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 PropertyGridEditorCollection.register({
   // Use this editor for properties with `type: "shorttext"`
@@ -254,7 +258,7 @@ PropertyGridEditorCollection.register({
   // (a single-line input editor that is limited to 15 characters)
   getJSON: (obj, prop, options) => {
     return { type: "text", maxLength: 15 };
-  }
+  },
 });
 
 // Add a custom property that uses the "shorttext" editor
@@ -263,18 +267,18 @@ Serializer.addProperty("question", {
   displayName: "Short name",
   type: "shorttext",
   category: "general",
-  visibleIndex: 3
+  visibleIndex: 3,
 });
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/customize-property-editors/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/customize-property-editors/ "linkStyle")
 
 You can add the type to the `name` property after a colon character as a shortcut:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question", 
+Serializer.addProperty("question",
   { name: "myBooleanProperty", type: "boolean" }
   // ===== or =====
   { name: "myBooleanProperty:boolean" }
@@ -286,28 +290,35 @@ Serializer.addProperty("question",
 A default value for the property. If not specified, `default` equals `""` for string values, 0 for numbers, and `false` for Boolean values. The default value is not serialized into a survey JSON schema.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("dropdown", 
-  { name: "myStringProperty", default: "custom-default-value" }
-);
+Serializer.addProperty("dropdown", {
+  name: "myStringProperty",
+  default: "custom-default-value",
+});
 
-Serializer.addProperty("checkbox", 
-  { name: "myNumericProperty", type: "number", default: 100 }
-);
+Serializer.addProperty("checkbox", {
+  name: "myNumericProperty",
+  type: "number",
+  default: 100,
+});
 
-Serializer.addProperty("question", 
-  { name: "myBooleanProperty", type: "boolean", default: true }
-);
+Serializer.addProperty("question", {
+  name: "myBooleanProperty",
+  type: "boolean",
+  default: true,
+});
 ```
 
 If you are creating a [localizable property](#islocalizable) and want to display different default values for different locales, use localization capabilities to specify these default values. You can assign them at runtime, as shown below:
 
 ```js
-import { surveyLocalization } from "survey-core";
+import { surveyLocalization } from "fullstory-form-core";
 
-surveyLocalization.getLocaleStrings("en")["myStringProperty"] = "Default value for English";
-surveyLocalization.getLocaleStrings("fr")["myStringProperty"] = "Default value for French";
+surveyLocalization.getLocaleStrings("en")["myStringProperty"] =
+  "Default value for English";
+surveyLocalization.getLocaleStrings("fr")["myStringProperty"] =
+  "Default value for French";
 ```
 
 Alternatively, you can add your custom property to each used [localization dictionary](https://github.com/surveyjs/survey-library/tree/01bd8abd0c574719956d4d579d48c8010cd389d4/packages/survey-core/src/localization). In this case, the default value for the current locale will be applied automatically. [Rebuild the library](https://github.com/surveyjs/survey-library/tree/01bd8abd0c574719956d4d579d48c8010cd389d4/packages/survey-core/src/localization#update-an-existing-dictionary) after updating the dictionaries.
@@ -316,16 +327,16 @@ Alternatively, you can add your custom property to each used [localization dicti
 // localization/english.ts
 export var englishStrings = {
   // ...
-  myStringProperty: "Default value for English"
-}
+  myStringProperty: "Default value for English",
+};
 ```
 
 ```js
 // localization/french.ts
 export var frenchSurveyStrings = {
   // ...
-  myStringProperty: "Default value for French"
-}
+  myStringProperty: "Default value for French",
+};
 ```
 
 ### `displayName`
@@ -333,11 +344,12 @@ export var frenchSurveyStrings = {
 A string value that specifies a property caption. If not specified, the [`name`](#name) value is used instead.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("dropdown", 
-  { name: "myStringProperty", displayName: "Custom Caption" }
-);
+Serializer.addProperty("dropdown", {
+  name: "myStringProperty",
+  displayName: "Custom Caption",
+});
 ```
 
 ### `choices`
@@ -345,19 +357,19 @@ Serializer.addProperty("dropdown",
 An array of selection choices or a function that loads the choices from a web service. Applies only to text and numeric properties. If `choices` are specified, Survey Creator renders a drop-down menu as the property editor.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 // Define `choices` locally
 Serializer.addProperty("question", {
   name: "myStringProperty",
-  choices: [ "option1", "option2", "option3" ],
+  choices: ["option1", "option2", "option3"],
   // If item captions should be different from item values:
   // choices: [
   //   { value: "option1", text: "Option 1" },
   //   { value: "option2", text: "Option 2" },
   //   { value: "option3", text: "Option 3" },
   // ],
-  default: "option1"
+  default: "option1",
 });
 
 // Load `choices` from a web service
@@ -367,7 +379,7 @@ Serializer.addProperty("survey", {
   choices: (obj, choicesCallback) => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "https://surveyjs.io/api/CountriesExample");
-    xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = () => {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.response);
@@ -376,14 +388,14 @@ Serializer.addProperty("survey", {
         result.push({ value: null });
         // Web service returns objects that are converted to the `{ value, text }` format
         // If your web service returns an array of strings, pass this array to `choicesCallback`
-        response.forEach(item => {
+        response.forEach((item) => {
           result.push({ value: item.cioc, text: item.name });
         });
         choicesCallback(result);
       }
     };
     xhr.send();
-  }
+  },
 });
 ```
 
@@ -392,9 +404,9 @@ Serializer.addProperty("survey", {
 A Boolean value that specifies whether the property must have a value. Defaults to `false`. You can add an exclamation mark before `name` as a shortcut for this setting:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question", 
+Serializer.addProperty("question",
   { name: "myBooleanProperty", type: "boolean", isRequired: true }
   // ===== or =====
   { name: "!myBooleanProperty", type: "boolean" }
@@ -410,16 +422,18 @@ A Boolean value that specifies whether to include the property in the survey JSO
 A Boolean value that specifies whether users can translate the property value to different languages in the Translation tab. Applies only to text properties. Defaults to `false`.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question", 
-  { name: "myTextProperty", type: "text", isLocalizable: true }
-);
+Serializer.addProperty("question", {
+  name: "myTextProperty",
+  type: "text",
+  isLocalizable: true,
+});
 ```
 
-The `isLocalizable` setting applies only if you add a custom property to an *existing* class. For information on how to add a custom localizable property to a *new* class, refer to the following section:
+The `isLocalizable` setting applies only if you add a custom property to an _existing_ class. For information on how to add a custom localizable property to a _new_ class, refer to the following section:
 
-[Define a Custom Localizable Property](#define-a-custom-localizable-property (linkStyle))
+[Define a Custom Localizable Property](#define-a-custom-localizable-property "linkStyle")
 
 ### `visible`
 
@@ -434,7 +448,7 @@ If the property visibility depends on another property, use the [`dependsOn`](#d
 In the following code, the `dateFormat` property depends on the `inputType` property and is visible only if `inputType` is set to one of the date types:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("text", {
   name: "dateFormat",
@@ -447,20 +461,21 @@ Serializer.addProperty("text", {
       obj.inputType === "datetime" ||
       obj.inputType === "datetime-local"
     );
-  }
+  },
 });
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ "linkStyle")
 
 ### `visibleIndex`
 
 A number that specifies the property position within its [`category`](#category). Defaults to -1 (the last position).
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question", 
+Serializer.addProperty(
+  "question",
   // Display "myStringProperty" at the top in the General category
   { name: "myStringProperty", category: "general", visibleIndex: 0 }
 );
@@ -471,11 +486,12 @@ Serializer.addProperty("question",
 A Boolean value that specifies whether the property value is read-only. Defaults to `false`.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question", 
-  { name: "myStringProperty", readOnly: true }
-);
+Serializer.addProperty("question", {
+  name: "myStringProperty",
+  readOnly: true,
+});
 ```
 
 ### `enableIf`
@@ -485,7 +501,7 @@ A function that specifies a condition based on which the property is switched to
 In the following code, the `dateFormat` property is enabled only if an `inputType` property is set to one of the date types:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("text", {
   name: "dateFormat",
@@ -497,7 +513,7 @@ Serializer.addProperty("text", {
       obj.inputType === "datetime" ||
       obj.inputType === "datetime-local"
     );
-  }
+  },
 });
 ```
 
@@ -541,9 +557,10 @@ The following table describes predefined categories:
 A number that specifies a category position. If `categoryIndex` is not set, the category is added to the end. No category can be placed above General.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question",
+Serializer.addProperty(
+  "question",
   // Display "Custom Category" after the General category
   { name: "myStringProperty", category: "Custom Category", categoryIndex: 1 }
 );
@@ -558,11 +575,12 @@ If you enable this setting, the property will be added to the same [category](#c
 A matrix column's [`cellType`](https://surveyjs.io/form-library/documentation/api-reference/multi-select-matrix-column-values#cellType) must match the class name to which you add the property. For example, the following code adds a property to [Rating Scale](https://surveyjs.io/form-library/documentation/api-reference/rating-scale-question-model) questions and matrix columns of the `"rating"` `cellType`.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("rating", 
-  { name: "myStringProperty", availableInMatrixColumn: true }
-);
+Serializer.addProperty("rating", {
+  name: "myStringProperty",
+  availableInMatrixColumn: true,
+});
 ```
 
 ### `maxLength`
@@ -570,11 +588,13 @@ Serializer.addProperty("rating",
 A numeric value that specifies the maximum number of characters users can enter into the text input.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question",
-  { name: "myTextProperty", type: "text", maxLength: 280 }
-);
+Serializer.addProperty("question", {
+  name: "myTextProperty",
+  type: "text",
+  maxLength: 280,
+});
 ```
 
 ### `minValue` and `maxValue`
@@ -582,11 +602,14 @@ Serializer.addProperty("question",
 Numeric values that specify the minimum and maximum numbers users can enter into the editor.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question",
-  { name: "myNumericProperty", type: "number", minValue: 0, maxValue: 100 }
-);
+Serializer.addProperty("question", {
+  name: "myNumericProperty",
+  type: "number",
+  minValue: 0,
+  maxValue: 100,
+});
 ```
 
 ### `dependsOn`
@@ -596,7 +619,7 @@ An array of property names upon which the current property depends. When one of 
 The following code declares two custom properties. `dependent-property` fills `choices` depending on the `myCustomProperty` value:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("question", {
   name: "myCustomProperty",
@@ -605,7 +628,7 @@ Serializer.addProperty("question", {
 
 Serializer.addProperty("question", {
   name: "dependent-property",
-  dependsOn: [ "myCustomProperty" ],
+  dependsOn: ["myCustomProperty"],
   choices: (obj) => {
     const choices = [];
     const targetPropertyValue = !!obj ? obj["myCustomProperty"] : null;
@@ -618,14 +641,14 @@ Serializer.addProperty("question", {
     choices.push(targetPropertyValue + ": Suboption 2");
     choices.push(targetPropertyValue + ": Suboption 3");
     return choices;
-  }
+  },
 });
 ```
 
 The following example shows how to load `choices` for the `country` property from a web service. They are reloaded each time a user changes the `region` value:
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("survey", {
   name: "region",
@@ -637,7 +660,7 @@ Serializer.addProperty("survey", {
 Serializer.addProperty("survey", {
   name: "country",
   category: "Region",
-  dependsOn: [ "region" ],
+  dependsOn: ["region"],
   choices: (obj, choicesCallback) => {
     const xhr = new XMLHttpRequest();
     const url =
@@ -645,34 +668,34 @@ Serializer.addProperty("survey", {
         ? "https://surveyjs.io/api/CountriesExample?region=" + obj.region
         : "https://surveyjs.io/api/CountriesExample";
     xhr.open("GET", url);
-    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = () => {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.response);
         const result = [];
         // Make the property nullable
         result.push({ value: null });
-        response.forEach(item => {
+        response.forEach((item) => {
           result.push({ value: item.cioc, text: item.name });
         });
         choicesCallback(result);
       }
     };
     xhr.send();
-  }
+  },
 });
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ "linkStyle")
 
 ### `overridingProperty`
 
 The name of a property that overrides the current property.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
-Serializer.addProperty("question", 
+Serializer.addProperty("question",
   { name: "myMasterProperty", type: "condition" }
   { name: "myDependentProperty", type: "boolean", overridingProperty: "myMasterProperty" }
 );
@@ -687,16 +710,17 @@ If you specify `overridingProperty`, the Property Grid disables the current prop
 A function that you can use to adjust the property value or exclude it from the survey JSON schema.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("question", {
   name: "calculated-property",
   onGetValue: (surveyElement) => {
     // Do not serialize the property to JSON
     return null;
-  }
+  },
 });
 ```
+
 ### `onSetValue`
 
 A function that you can use to perform actions when the property value is set (for example, update another property value).
@@ -704,7 +728,7 @@ A function that you can use to perform actions when the property value is set (f
 > Do not assign a value directly to an object property because this will trigger the `onSetValue` function again. Use the object's `setPropertyValue(propertyName, newValue)` method instead.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("question", {
   name: "myStringProperty",
@@ -715,7 +739,7 @@ Serializer.addProperty("question", {
     surveyElement.setPropertyValue("myStringProperty", value);
     // You can perform required actions after the `value` is set
     // ...
-  }
+  },
 });
 ```
 
@@ -726,7 +750,7 @@ A function that is called when an expression is evaluated.
 Define this function for custom properties of the `"condition"` or `"expression"` [`type`](#type). Within it, you can handle the expression evaluation result. For example, the following code adds a custom `showHeaderIf` property to the [Single-Select Matrix](https://surveyjs.io/form-library/examples/single-selection-matrix-table-question/) question type. This property shows or hides the matrix header based on a condition: the result of the condition evaluation is assigned to the question's [`showHeader`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#showHeader) property.
 
 ```js
-import { Serializer } from "survey-core";
+import { Serializer } from "fullstory-form-core";
 
 Serializer.addProperty("matrix", {
   name: "showHeaderIf",
@@ -734,36 +758,35 @@ Serializer.addProperty("matrix", {
   category: "logic",
   onExecuteExpression: (obj, res) => {
     obj.showHeader = res;
-  }
+  },
 });
 
 // Usage
 const surveyJson = {
-  "elements": [{
-    "type": "matrix",
-    "showHeaderIf": "{question1} = 'item2'"
-  }]
-}
+  elements: [
+    {
+      type: "matrix",
+      showHeaderIf: "{question1} = 'item2'",
+    },
+  ],
+};
 ```
 
-[View Demo](https://surveyjs.io/form-library/examples/add-custom-expression-property/ (linkStyle))   
+[View Demo](https://surveyjs.io/form-library/examples/add-custom-expression-property/ "linkStyle")
 
 The `onExecuteExpression` function applies only if you [add a custom property to an existing class](#add-custom-properties-to-an-existing-class). If you are adding a custom expression or condition property to a [new class](#define-custom-properties-in-a-new-class), call the `this.addExpressionProperty(name, onExecuteExpression)` method in the class constructor instead:
 
 ```js
-import { Question, ElementFactory, Serializer } from "survey-core";
+import { Question, ElementFactory, Serializer } from "fullstory-form-core";
 
 export class MyCustomClass extends Question {
   constructor() {
     super();
-    this.addExpressionProperty(
-      "myCustomPropertyExpression",
-      (obj, res) => {
-        if (res) {
-          obj.myCustomProperty = res.toString();
-        }
+    this.addExpressionProperty("myCustomPropertyExpression", (obj, res) => {
+      if (res) {
+        obj.myCustomProperty = res.toString();
       }
-    );
+    });
   }
   getType() {
     return "my-custom-class";
@@ -788,15 +811,18 @@ ElementFactory.Instance.registerElement("my-custom-class", (name) => {
 
 Serializer.addClass(
   "my-custom-class",
-  [{
-    name: "myCustomProperty",
-    category: "general",
-    visibleIndex: 2
-  }, {
-    name: "myCustomPropertyExpression",
-    type: "expression",
-    category: "logic"
-  }],
+  [
+    {
+      name: "myCustomProperty",
+      category: "general",
+      visibleIndex: 2,
+    },
+    {
+      name: "myCustomPropertyExpression",
+      type: "expression",
+      category: "logic",
+    },
+  ],
   function () {
     return new MyCustomClass("");
   },

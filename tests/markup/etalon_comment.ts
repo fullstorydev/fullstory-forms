@@ -1,8 +1,8 @@
 import { registerMarkupTests } from "./helper";
-import { settings } from "survey-core";
+import { settings } from "fullstory-form-core";
 
-registerMarkupTests(
-  [{
+registerMarkupTests([
+  {
     name: "Test Comment question markup",
     json: {
       questions: [
@@ -11,9 +11,9 @@ registerMarkupTests(
           type: "comment",
           title: "Question title",
           placeholder: "placeholder text",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "comment",
   },
@@ -27,9 +27,9 @@ registerMarkupTests(
           type: "comment",
           title: "Question title",
           placeholder: "placeholder text",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "comment-readonly",
   },
@@ -42,12 +42,14 @@ registerMarkupTests(
           type: "comment",
           title: "Question title",
           placeholder: "placeholder text",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
-    initSurvey: (survey) => { survey.setDesignMode(true); },
-    snapshot: "comment-disabled"
+    initSurvey: (survey) => {
+      survey.setDesignMode(true);
+    },
+    snapshot: "comment-disabled",
   },
   {
     name: "Test Comment question Read-only DIV markup",
@@ -60,12 +62,12 @@ registerMarkupTests(
           title: "Question title",
           placeholder: "placeholder text",
           defaultValue: "val",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
-    before: () => settings.readOnly.commentRenderMode = "div",
-    after: () => settings.readOnly.commentRenderMode = "textarea",
+    before: () => (settings.readOnly.commentRenderMode = "div"),
+    after: () => (settings.readOnly.commentRenderMode = "textarea"),
     snapshot: "comment-div",
   },
   {
@@ -78,9 +80,9 @@ registerMarkupTests(
           title: "Question title",
           placeholder: "placeholder text",
           allowResize: false,
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "comment-allowResize",
   },
@@ -91,18 +93,16 @@ registerMarkupTests(
       pages: [
         {
           name: "page1",
-          elements: [{
-            type: "radiogroup",
-            name: "name",
-            defaultValue: "other",
-            showOtherItem: true,
-            titleLocation: "hidden",
-            choices: [
-              "Item 1",
-              "Item 2",
-              "Item 3"
-            ],
-          }],
+          elements: [
+            {
+              type: "radiogroup",
+              name: "name",
+              defaultValue: "other",
+              showOtherItem: true,
+              titleLocation: "hidden",
+              choices: ["Item 1", "Item 2", "Item 3"],
+            },
+          ],
         },
       ],
     },
@@ -115,23 +115,20 @@ registerMarkupTests(
       pages: [
         {
           name: "page1",
-          elements: [{
-            type: "radiogroup",
-            name: "name",
-            defaultValue: "other",
-            showOtherItem: true,
-            showCommentArea: true,
-            titleLocation: "hidden",
-            choices: [
-              "Item 1",
-              "Item 2",
-              "Item 3"
-            ],
-          }],
+          elements: [
+            {
+              type: "radiogroup",
+              name: "name",
+              defaultValue: "other",
+              showOtherItem: true,
+              showCommentArea: true,
+              titleLocation: "hidden",
+              choices: ["Item 1", "Item 2", "Item 3"],
+            },
+          ],
         },
       ],
     },
     snapshot: "comment-into-question-commentAreaRows",
   },
-  ]
-);
+]);

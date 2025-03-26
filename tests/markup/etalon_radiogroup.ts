@@ -1,23 +1,19 @@
-import { settings } from "survey-core";
+import { settings } from "fullstory-form-core";
 import { registerMarkupTests } from "./helper";
 
-registerMarkupTests(
-  [{
+registerMarkupTests([
+  {
     name: "Test radiogroup question markup",
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2",
-            "item3"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup",
   },
@@ -26,20 +22,16 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2",
-            "item3"
-          ],
-          "hasOther": true,
-          "defaultValue": "other",
-          "otherText": "Other (describe)",
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          hasOther: true,
+          defaultValue: "other",
+          otherText: "Other (describe)",
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-other",
   },
@@ -49,17 +41,13 @@ registerMarkupTests(
       mode: "display",
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2",
-            "item3"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-readonly",
   },
@@ -68,17 +56,13 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2",
-            "item3"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
     initSurvey: (survey) => survey.setDesignMode(true),
     snapshot: "radiogroup-disabled",
@@ -89,18 +73,14 @@ registerMarkupTests(
       mode: "display",
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2",
-            "item3"
-          ],
-          "defaultValue": "item1",
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          defaultValue: "item1",
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-readonly-selected",
   },
@@ -109,16 +89,13 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2"],
+          titleLocation: "hidden",
+        },
+      ],
     },
 
     snapshot: "radiogroup-v2",
@@ -128,16 +105,13 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "choices": [
-            "item1",
-            "item2"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2"],
+          titleLocation: "hidden",
+        },
+      ],
     },
 
     snapshot: "radiogroup-modern",
@@ -147,17 +121,14 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "choices": [
-            "item1",
-            "item2"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          choices: ["item1", "item2"],
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-clear",
   },
@@ -166,18 +137,15 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "colCount": 2,
-          "choices": [
-            "item1",
-            "item2"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          colCount: 2,
+          choices: ["item1", "item2"],
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-columns",
   },
@@ -186,44 +154,37 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "colCount": 2,
-          "isMobile": true,
-          "choices": [
-            "item1",
-            "item2",
-            "item3"
-          ],
-          titleLocation: "hidden"
-        }
-      ]
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          colCount: 2,
+          isMobile: true,
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-columns-mobile",
-    initSurvey: survey => survey.setIsMobile(true),
+    initSurvey: (survey) => survey.setIsMobile(true),
   },
   {
     name: "Test radiogroup columns with header and footer",
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "colCount": 2,
-          "choices": [
-            "item1",
-            "item2"
-          ],
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          colCount: 2,
+          choices: ["item1", "item2"],
           hasNone: true,
           hasOther: true,
           titleLocation: "hidden",
-          separateSpecialChoices: true
-        }
-      ]
+          separateSpecialChoices: true,
+        },
+      ],
     },
     snapshot: "radiogroup-columns-head-foot",
   },
@@ -232,46 +193,44 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "colCount": 2,
-          "choices": [
-            "item1",
-            "item2"
-          ],
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          colCount: 2,
+          choices: ["item1", "item2"],
           hasNone: true,
           hasOther: true,
           separateSpecialChoices: false,
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-columns-no-head-foot",
-    before: () => { settings.itemFlowDirection = "row"; },
-    after: () => { settings.itemFlowDirection = "column"; }
+    before: () => {
+      settings.itemFlowDirection = "row";
+    },
+    after: () => {
+      settings.itemFlowDirection = "column";
+    },
   },
   {
     name: "Test radiogroup row with header and footer",
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "colCount": 0,
-          "choices": [
-            "item1",
-            "item2"
-          ],
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          colCount: 0,
+          choices: ["item1", "item2"],
           hasNone: true,
           hasOther: true,
           titleLocation: "hidden",
-          separateSpecialChoices: true
-        }
-      ]
+          separateSpecialChoices: true,
+        },
+      ],
     },
     snapshot: "radiogroup-row-head-foot",
   },
@@ -280,23 +239,19 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "radiogroup",
-          "name": "name",
-          "title": "Question title",
-          "showClearButton": true,
-          "colCount": 0,
-          "choices": [
-            "item1",
-            "item2"
-          ],
+          type: "radiogroup",
+          name: "name",
+          title: "Question title",
+          showClearButton: true,
+          colCount: 0,
+          choices: ["item1", "item2"],
           hasNone: true,
           hasOther: true,
           separateSpecialChoices: false,
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "radiogroup-row-no-head-foot",
-  }
-  ]
-);
+  },
+]);

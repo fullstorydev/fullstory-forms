@@ -1,8 +1,8 @@
-import { settings } from "survey-core";
+import { settings } from "fullstory-form-core";
 import { registerMarkupTests } from "./helper";
 
-registerMarkupTests(
-  [{
+registerMarkupTests([
+  {
     name: "Test Boolean question markup",
     json: {
       questions: [
@@ -10,9 +10,9 @@ registerMarkupTests(
           name: "name",
           type: "boolean",
           title: "Question title",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "boolean",
   },
@@ -25,9 +25,9 @@ registerMarkupTests(
           name: "name",
           type: "boolean",
           title: "Question title",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "boolean-readonly",
   },
@@ -40,9 +40,9 @@ registerMarkupTests(
           name: "name",
           type: "boolean",
           title: "Question title",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "boolean-disabled",
     initSurvey: (survey) => survey.setDesignMode(true),
@@ -55,9 +55,9 @@ registerMarkupTests(
           name: "name",
           type: "boolean",
           title: "Question title",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "boolean-v2",
   },
@@ -70,9 +70,9 @@ registerMarkupTests(
           type: "boolean",
           defaultValue: true,
           title: "Question title",
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     snapshot: "boolean-value-v2",
   },
@@ -86,9 +86,9 @@ registerMarkupTests(
           title: "Question title",
           titleLocation: "hidden",
           defaultValue: "true",
-          renderAs: "checkbox"
-        }
-      ]
+          renderAs: "checkbox",
+        },
+      ],
     },
 
     snapshot: "boolean-checkbox-defaultV2",
@@ -104,9 +104,9 @@ registerMarkupTests(
           title: "Question title",
           titleLocation: "hidden",
           defaultValue: "true",
-          renderAs: "checkbox"
-        }
-      ]
+          renderAs: "checkbox",
+        },
+      ],
     },
 
     snapshot: "boolean-checkbox-readonly-defaultV2",
@@ -121,9 +121,9 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "checkbox"
-        }
-      ]
+          renderAs: "checkbox",
+        },
+      ],
     },
     snapshot: "boolean-checkbox-disabled",
     initSurvey: (survey) => survey.setDesignMode(true),
@@ -137,9 +137,9 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "checkbox"
-        }
-      ]
+          renderAs: "checkbox",
+        },
+      ],
     },
     snapshot: "boolean-checkbox",
   },
@@ -152,11 +152,11 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "checkbox"
-        }
-      ]
+          renderAs: "checkbox",
+        },
+      ],
     },
-    initSurvey: survey => {
+    initSurvey: (survey) => {
       survey.css = { boolean: { svgIconId: "#test-icon" } };
       survey.getAllQuestions()[0].updateElementCss();
     },
@@ -172,9 +172,9 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "radio"
-        }
-      ]
+          renderAs: "radio",
+        },
+      ],
     },
     snapshot: "boolean-radio",
   },
@@ -188,12 +188,11 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "radio"
-        }
-      ]
+          renderAs: "radio",
+        },
+      ],
     },
     snapshot: "boolean-radio-v2",
-
   },
   {
     name: "Test Boolean Radio with true/false values question markup",
@@ -205,11 +204,11 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          "valueTrue": "true_val",
-          "valueFalse": "false_val",
-          renderAs: "radio"
-        }
-      ]
+          valueTrue: "true_val",
+          valueFalse: "false_val",
+          renderAs: "radio",
+        },
+      ],
     },
     snapshot: "boolean-radio-values",
   },
@@ -223,9 +222,9 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "radio"
-        }
-      ]
+          renderAs: "radio",
+        },
+      ],
     },
     snapshot: "boolean-radio-readonly",
   },
@@ -239,12 +238,11 @@ registerMarkupTests(
           type: "boolean",
           title: "Question title",
           titleLocation: "hidden",
-          renderAs: "radio"
-        }
-      ]
+          renderAs: "radio",
+        },
+      ],
     },
     snapshot: "boolean-radio-disabled",
     initSurvey: (survey) => survey.setDesignMode(true),
   },
-  ]
-);
+]);

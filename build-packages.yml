@@ -136,9 +136,9 @@ jobs:
         displayName: "run lint command"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-library/packages/survey-core
+          cd $(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core
           npm install
-        displayName: "NPM install packages/survey-core"
+        displayName: "NPM install packages/fullstory-form-core"
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
@@ -147,33 +147,33 @@ jobs:
         displayName: "Set up git config"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-library/packages/survey-core
+          cd $(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core
           npm run release -- --release-as $(SurveyJSVersion)
         displayName: "npm run release"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-library/packages/survey-core
+          cd $(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core
           npm run build:all
         displayName: "Build Core"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-library/packages/survey-core
+          cd $(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core
           npm test
         displayName: "run unit test"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-library/packages/survey-core
+          cd $(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core
           npm run test:postcss
         displayName: "check postcss compatibility"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-library/packages/survey-core
+          cd $(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core
           npm run doc_gen
         displayName: "generate docs"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/docs"
+          SourceFolder: "$(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core/docs"
           Contents: |
             classes.json
             pmes.json
@@ -215,8 +215,8 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
-          TargetFolder: "$(Build.ArtifactStagingDirectory)/SurveyJSLibraryBuild/packages/survey-core"
+          SourceFolder: "$(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core/build"
+          TargetFolder: "$(Build.ArtifactStagingDirectory)/SurveyJSLibraryBuild/packages/fullstory-form-core"
 
       #trigger next build via the artifact file 'version.txt'
       - task: CopyFiles@2
@@ -227,7 +227,7 @@ jobs:
 
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSLibraryBuild/packages/survey-core"
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSLibraryBuild/packages/fullstory-form-core"
           ArtifactName: "SurveyJSLibraryBuildCore-$(Build.BuildId)"
           publishLocation: "Container"
 
@@ -314,7 +314,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core/build"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-library/packages/survey-react-ui
@@ -436,7 +436,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core/build"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-library/packages/survey-angular-ui
@@ -568,7 +568,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core/build"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-library/packages/survey-vue3-ui
@@ -699,7 +699,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/fullstory-form-core/build"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-library/packages/survey-js-ui

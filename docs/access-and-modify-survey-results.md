@@ -18,16 +18,19 @@ To access an individual question value, use the question's [`value`](/Documentat
 The following code configures an `nps_score` question and uses the API members described above to access the question's value:
 
 ```js
-import { Model } from "survey-core";
+import { Model } from "fullstory-form-core";
 
 const surveyJson = {
-  "elements": [{
-    "type": "rating",
-    "name": "nps_score",
-    "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
-    "rateMin": 0,
-    "rateMax": 10,
-  }]
+  elements: [
+    {
+      type: "rating",
+      name: "nps_score",
+      title:
+        "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+      rateMin: 0,
+      rateMax: 10,
+    },
+  ],
 };
 const survey = new Model(surveyJson);
 const npsQuestion = survey.getQuestionByName("nps_score");
@@ -45,7 +48,9 @@ If you need to access an individual question value before or immediately after i
 
 ```js
 survey.onValueChanging.add((survey, { name, question, oldValue, value }) => {
-  console.log(`The ${name} question value is about to change from ${oldValue} to ${value}.`);
+  console.log(
+    `The ${name} question value is about to change from ${oldValue} to ${value}.`
+  );
   // You can redefine the `value` argument if you want to change the question value:
   // value = myNewValue;
 });
@@ -55,7 +60,7 @@ survey.onValueChanged.add((survey, { name, question, value }) => {
 });
 ```
 
-[View Demo](https://surveyjs.io/form-library/examples/auto-populate-form-fields/ (linkStyle))
+[View Demo](https://surveyjs.io/form-library/examples/auto-populate-form-fields/ "linkStyle")
 
 ## Access Full Survey Results
 
@@ -87,7 +92,7 @@ Depending on the question type, question values can also be nested objects or ar
 The following code outputs the `data` property into the browser's console:
 
 ```js
-import { Model } from "survey-core";
+import { Model } from "fullstory-form-core";
 
 const surveyJson = { ... };
 const survey = new Model(surveyJson);
@@ -95,7 +100,7 @@ const survey = new Model(surveyJson);
 console.log(survey.data);
 ```
 
-[View Demo](https://surveyjs.io/form-library/examples/survey-editprevious/ (linkStyle))
+[View Demo](https://surveyjs.io/form-library/examples/survey-editprevious/ "linkStyle")
 
 If you need to get survey results as an array of JavaScript objects, call the Survey's [`getPlainData()`](/Documentation/Library?id=surveymodel#getPlainData) method. The objects in the array have the following structure:
 
@@ -142,7 +147,7 @@ survey.onComplete.add((survey) => {
         name: key,
         value: question.value,
         title: question.displayValue,
-        displayValue: question.displayValue
+        displayValue: question.displayValue,
       };
       resultData.push(item);
     }

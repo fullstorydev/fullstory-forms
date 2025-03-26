@@ -1,31 +1,37 @@
-import { settings } from "survey-core";
+import { settings } from "fullstory-form-core";
 import { registerMarkupTests } from "./helper";
 
-registerMarkupTests(
-  [{
+registerMarkupTests([
+  {
     name: "Test image picker question markup",
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": "#item2.jpg"
-            }
+              value: "item2",
+              imageLink: "#item2.jpg",
+            },
           ],
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
-    initSurvey: survey => {
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
+    initSurvey: (survey) => {
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
     },
     snapshot: "imagepicker",
   },
@@ -35,25 +41,31 @@ registerMarkupTests(
       questions: [
         {
           multiSelect: true,
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": "#item2.jpg"
-            }
+              value: "item2",
+              imageLink: "#item2.jpg",
+            },
           ],
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
-    initSurvey: survey => {
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
+    initSurvey: (survey) => {
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
     },
     snapshot: "imagepicker-multi",
   },
@@ -62,28 +74,34 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "imagepicker",
+          type: "imagepicker",
 
-          "name": "question1",
-          "choices": [
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.mp4"
+              value: "item1",
+              imageLink: "#item1.mp4",
             },
             {
-              "value": "item2",
-              "imageLink": "#item2.mp4"
-            }
+              value: "item2",
+              imageLink: "#item2.mp4",
+            },
           ],
           titleLocation: "hidden",
-          contentMode: "video"
-        }
-      ]
+          contentMode: "video",
+        },
+      ],
     },
     timeout: 500,
-    initSurvey: survey => {
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
+    initSurvey: (survey) => {
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
     },
     snapshot: "imagepicker-video",
   },
@@ -92,26 +110,32 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": "#item2.jpg"
-            }
+              value: "item2",
+              imageLink: "#item2.jpg",
+            },
           ],
           titleLocation: "hidden",
-          showLabel: true
-        }
-      ]
+          showLabel: true,
+        },
+      ],
     },
-    initSurvey: survey => {
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
+    initSurvey: (survey) => {
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
     },
     snapshot: "imagepicker-labels",
   },
@@ -120,27 +144,33 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": ""
-            }
+              value: "item2",
+              imageLink: "",
+            },
           ],
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     timeout: 500,
-    initSurvey: survey => {
+    initSurvey: (survey) => {
       survey.getAllQuestions()[0]["choices"][0]["contentNotLoaded"] = true;
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = true; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = true; };
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = true;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = true;
+        };
     },
     snapshot: "imagepicker-no-image",
   },
@@ -149,111 +179,131 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": ""
-            }
+              value: "item2",
+              imageLink: "",
+            },
           ],
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
     timeout: 500,
-    initSurvey: survey => {
+    initSurvey: (survey) => {
       survey.getAllQuestions()[0]["choices"][0]["contentNotLoaded"] = true;
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = true; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = true; };
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = true;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = true;
+        };
     },
     snapshot: "imagepicker-no-image-v2",
-    before: () => { },
+    before: () => {},
   },
   {
     name: "Test image picker colCount 2, V2 markup",
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
+          type: "imagepicker",
+          name: "question1",
           colCount: 2,
-          "choices": [
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": "#item2.jpg"
-            }
+              value: "item2",
+              imageLink: "#item2.jpg",
+            },
           ],
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
-    initSurvey: survey => {
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
+    initSurvey: (survey) => {
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
     },
     snapshot: "imagepicker-colCount-2-v2",
-    before: () => { },
+    before: () => {},
   },
   {
     name: "Test image picker colCount 1, V2 markup",
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
+          type: "imagepicker",
+          name: "question1",
           colCount: 1,
-          "choices": [
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "#item1.jpg"
+              value: "item1",
+              imageLink: "#item1.jpg",
             },
             {
-              "value": "item2",
-              "imageLink": "#item2.jpg"
-            }
+              value: "item2",
+              imageLink: "#item2.jpg",
+            },
           ],
-          titleLocation: "hidden"
-        }
-      ]
+          titleLocation: "hidden",
+        },
+      ],
     },
-    initSurvey: survey => {
-      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
-      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] = function() { this["contentNotLoaded"] = false; };
+    initSurvey: (survey) => {
+      survey.getAllQuestions()[0]["choices"][0]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
+      survey.getAllQuestions()[0]["choices"][1]["onErrorHandler"] =
+        function () {
+          this["contentNotLoaded"] = false;
+        };
     },
     snapshot: "imagepicker-colCount-1-v2",
-    before: () => { },
+    before: () => {},
   },
   {
     name: "Test image picker readonly question markup",
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              value: "item1",
+              imageLink:
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             {
-              "value": "item2",
-              "imageLink": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            }
+              value: "item2",
+              imageLink:
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            },
           ],
           titleLocation: "hidden",
-          showLabel: true
-        }
+          showLabel: true,
+        },
       ],
-      mode: "display"
+      mode: "display",
     },
     snapshot: "imagepicker-readonly",
   },
@@ -262,25 +312,26 @@ registerMarkupTests(
     json: {
       questions: [
         {
-          "type": "imagepicker",
-          "name": "question1",
-          "choices": [
+          type: "imagepicker",
+          name: "question1",
+          choices: [
             {
-              "value": "item1",
-              "imageLink": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              value: "item1",
+              imageLink:
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             {
-              "value": "item2",
-              "imageLink": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            }
+              value: "item2",
+              imageLink:
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            },
           ],
           titleLocation: "hidden",
-          showLabel: true
-        }
+          showLabel: true,
+        },
       ],
     },
     initSurvey: (survey) => survey.setDesignMode(true),
     snapshot: "imagepicker-disabled",
   },
-  ]
-);
+]);

@@ -1,8 +1,8 @@
-import { AdaptiveActionContainer } from "survey-core";
+import { AdaptiveActionContainer } from "fullstory-form-core";
 import { registerMarkupTests } from "./helper";
 
-registerMarkupTests(
-  [{
+registerMarkupTests([
+  {
     name: "Test paneldynamic with old navigation (progressTop) markup",
     json: {
       questions: [
@@ -13,7 +13,7 @@ registerMarkupTests(
           renderMode: "progressTop",
           panelCount: 2,
         },
-      ]
+      ],
     },
     removeIds: true,
     snapshot: "paneldynamic-progress-top-legacy-navigation",
@@ -29,10 +29,9 @@ registerMarkupTests(
           renderMode: "progressTop",
           panelCount: 2,
         },
-      ]
+      ],
     },
     snapshot: "paneldynamic-progress-top",
-
   },
   {
     name: "Test paneldynamic with old navigation (progressBottom) markup",
@@ -45,7 +44,7 @@ registerMarkupTests(
           renderMode: "progressBottom",
           panelCount: 2,
         },
-      ]
+      ],
     },
     removeIds: true,
     snapshot: "paneldynamic-progress-bottom-legacy-navigation",
@@ -61,10 +60,9 @@ registerMarkupTests(
           renderMode: "progressBottom",
           panelCount: 2,
         },
-      ]
+      ],
     },
     snapshot: "paneldynamic-progress-bottom",
-
   },
   {
     name: "Test paneldynamic with old navigation (list) markup",
@@ -77,7 +75,7 @@ registerMarkupTests(
           renderMode: "list",
           panelCount: 2,
         },
-      ]
+      ],
     },
     removeIds: true,
     snapshot: "paneldynamic-list-legacy-navigation",
@@ -93,10 +91,9 @@ registerMarkupTests(
           renderMode: "list",
           panelCount: 2,
         },
-      ]
+      ],
     },
     snapshot: "paneldynamic-list",
-
   },
   {
     name: "Test paneldynamic (list) #2 markup",
@@ -109,19 +106,19 @@ registerMarkupTests(
           renderMode: "list",
           templateElements: [
             {
-              "type": "text",
-              "titleLocation": "hidden",
-              "name": "q1"
-            }
+              type: "text",
+              titleLocation: "hidden",
+              name: "q1",
+            },
           ],
           panelCount: 1,
         },
-      ]
+      ],
     },
     event: "onAfterRenderPage",
     snapshot: "paneldynamic-remove-btn-action-bar",
-    before: () => { },
-    initSurvey: survey => {
+    before: () => {},
+    initSurvey: (survey) => {
       survey.getAllQuestions()[0]["panels"][0].allowAdaptiveActions = false;
     },
   },
@@ -137,72 +134,71 @@ registerMarkupTests(
           panelRemoveButtonLocation: "right",
           templateElements: [
             {
-              "type": "text",
-              "titleLocation": "hidden",
-              "name": "q1"
-            }
+              type: "text",
+              titleLocation: "hidden",
+              name: "q1",
+            },
           ],
           panelCount: 1,
         },
-      ]
+      ],
     },
     event: "onAfterRenderPage",
     snapshot: "paneldynamic-remove-btn-right",
-
   },
   {
     name: "Test paneldynamic do not render empty footer (do not allow add) markup",
     json: {
       questions: [
         {
-          "type": "paneldynamic",
-          "name": "question1",
-          "titleLocation": "hidden",
-          "templateElements": [
+          type: "paneldynamic",
+          name: "question1",
+          titleLocation: "hidden",
+          templateElements: [
             {
-              "type": "text",
-              "titleLocation": "hidden",
-              "name": "question2"
-            }
+              type: "text",
+              titleLocation: "hidden",
+              name: "question2",
+            },
           ],
-          "allowAddPanel": false,
-          "panelCount": 1
+          allowAddPanel: false,
+          panelCount: 1,
         },
-      ]
+      ],
     },
     event: "onAfterRenderPage",
     snapshot: "paneldynamic-no-footer-1",
     removeIds: true,
     excludePlatform: "Vue",
-    before: () => { },
+    before: () => {},
   },
   {
     name: "Test paneldynamic do not render empty footer (max panels reached) markup",
     json: {
       questions: [
         {
-          "type": "paneldynamic",
-          "name": "question1",
-          "titleLocation": "hidden",
-          "templateElements": [
+          type: "paneldynamic",
+          name: "question1",
+          titleLocation: "hidden",
+          templateElements: [
             {
-              "type": "text",
-              "titleLocation": "hidden",
-              "name": "question2"
-            }
+              type: "text",
+              titleLocation: "hidden",
+              name: "question2",
+            },
           ],
-          "allowAddPanel": true,
-          "maxPanelCount": 1,
-          "panelCount": 1
+          allowAddPanel: true,
+          maxPanelCount: 1,
+          panelCount: 1,
         },
-      ]
+      ],
     },
     event: "onAfterRenderPage",
     snapshot: "paneldynamic-no-footer-2",
     removeIds: true,
     excludePlatform: "Vue",
-
-  }, {
+  },
+  {
     name: "Test paneldynamic (tab) markup",
     json: {
       questions: [
@@ -213,16 +209,16 @@ registerMarkupTests(
           renderMode: "tab",
           panelCount: 2,
         },
-      ]
+      ],
     },
     snapshot: "paneldynamic-progress-tab-center",
     removeIds: true,
     excludePlatform: "Vue",
     before: () => {
       AdaptiveActionContainer["ContainerID"] = 1;
-
     },
-  }, {
+  },
+  {
     name: "Test paneldynamic (tab) tabAlign right markup",
     json: {
       questions: [
@@ -234,16 +230,16 @@ registerMarkupTests(
           tabAlign: "right",
           panelCount: 2,
         },
-      ]
+      ],
     },
     snapshot: "paneldynamic-progress-tab-right",
     removeIds: true,
     excludePlatform: "Vue",
     before: () => {
       AdaptiveActionContainer["ContainerID"] = 1;
-
     },
-  }, {
+  },
+  {
     name: "Test paneldynamic (tab) tabAlign left markup",
     json: {
       questions: [
@@ -255,15 +251,13 @@ registerMarkupTests(
           tabAlign: "left",
           panelCount: 2,
         },
-      ]
+      ],
     },
     snapshot: "paneldynamic-progress-tab-left",
     removeIds: true,
     excludePlatform: "Vue",
     before: () => {
       AdaptiveActionContainer["ContainerID"] = 1;
-
     },
-  }
-  ]
-);
+  },
+]);

@@ -2,7 +2,7 @@ name: NodeJS 16.x
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
@@ -11,41 +11,41 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Build Core
-      run: |
-        cd ./packages/survey-core
-        npm install
-        npm run build:all
+      - name: Build Core
+        run: |
+          cd ./packages/fullstory-form-core
+          npm install
+          npm run build:all
 
-    - name: Build React UI
-      run: |
-        cd ./packages/survey-react-ui
-        npm install
-        npm run build
+      - name: Build React UI
+        run: |
+          cd ./packages/survey-react-ui
+          npm install
+          npm run build
 
-    - name: Build Angular UI
-      run: |
-        cd ./packages/survey-angular-ui
-        npm install
-        npm run build
+      - name: Build Angular UI
+        run: |
+          cd ./packages/survey-angular-ui
+          npm install
+          npm run build
 
-    - name: Build Vue3 UI
-      run: |
-        cd ./packages/survey-vue3-ui
-        npm install
-        npm run build
+      - name: Build Vue3 UI
+        run: |
+          cd ./packages/survey-vue3-ui
+          npm install
+          npm run build
 
-    - name: Build JS UI
-      run: |
-        cd ./packages/survey-js-ui
-        npm install
-        npm run build
+      - name: Build JS UI
+        run: |
+          cd ./packages/survey-js-ui
+          npm install
+          npm run build

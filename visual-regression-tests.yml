@@ -52,18 +52,18 @@ jobs:
         displayName: "run lint command"
 
       - script: |
-          cd packages/survey-core
+          cd packages/fullstory-form-core
           npm install
-        displayName: "NPM install packages/survey-core"
+        displayName: "NPM install packages/fullstory-form-core"
 
       - script: |
-          cd packages/survey-core
+          cd packages/fullstory-form-core
           npm run build:all
         displayName: "Build core"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/packages/survey-core/build"
+          SourceFolder: "$(Build.SourcesDirectory)/packages/fullstory-form-core/build"
           targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSLibraryBuild/build/survey-core
 
       - task: PublishBuildArtifacts@1
@@ -118,7 +118,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-VRT-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/packages/fullstory-form-core/build"
 
       - script: |
           cd packages/survey-react-ui
@@ -198,7 +198,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-VRT-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/packages/fullstory-form-core/build"
 
       - script: |
           cd packages/survey-angular-ui
@@ -287,7 +287,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-VRT-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/packages/fullstory-form-core/build"
 
       - script: |
           cd packages/survey-vue3-ui
@@ -377,7 +377,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore-VRT-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/packages/survey-core/build"
+          TargetFolder: "$(Build.SourcesDirectory)/packages/fullstory-form-core/build"
 
       - script: |
           cd packages/survey-js-ui

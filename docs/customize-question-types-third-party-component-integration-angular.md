@@ -41,14 +41,14 @@ The following live example illustrates Survey Creator with an integrated Angular
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-angular-components (linkStyle))
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-angular-components "linkStyle")
 
 ## Create a Model
 
 To integrate a third-party component, you need to configure a custom question type for it. All question types in SurveyJS demand a model. To create it, add a custom class (`QuestionColorPickerModel` in the code below) that extends the [`Question`](https://surveyjs.io/Documentation/Library?id=question) class and inherits all its properties and methods. Override the [`getType()`](https://surveyjs.io/Documentation/Library?id=question#getType) method with an implementation that returns the name of your custom question type. If the model requires custom properties, declare them as getter + setter pairs. In the following code, the model includes two such properties: `colorPickerType` and `disableAlpha`.
 
 ```js
-import { Question } from "survey-core";
+import { Question } from "fullstory-form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -75,36 +75,33 @@ export class QuestionColorPickerModel extends Question {
 Register the created model in the `ElementFactory` under the name returned by the `getType()` method:
 
 ```js
-import { ElementFactory } from "survey-core";
+import { ElementFactory } from "fullstory-form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name) => {
-    return new QuestionColorPickerModel(name);
-  }
-);
+ElementFactory.Instance.registerElement(CUSTOM_TYPE, (name) => {
+  return new QuestionColorPickerModel(name);
+});
 ```
 
 ## Configure JSON Serialization
 
 Our model exists only in JavaScript code, but SurveyJS works with JSON objects. You need to configure how your model should be serialized into JSON. To do this, call the `addClass(name, propMeta[], constructor, baseClassName)` method on the `Serializer` object. This method accepts the following arguments:
 
-- `name`      
-A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the model's JavaScript class.
+- `name`  
+  A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the model's JavaScript class.
 
-- `propMeta[]`      
-An array of objects used to serialize custom model properties into JSON. This array must include all custom model properties. [Our model](#create-a-model) contains two custom properties (`colorPickerType` and `disableAlpha`), and the code below configures their serialization.
+- `propMeta[]`  
+  An array of objects used to serialize custom model properties into JSON. This array must include all custom model properties. [Our model](#create-a-model) contains two custom properties (`colorPickerType` and `disableAlpha`), and the code below configures their serialization.
 
-- `constructor`       
-A function that returns an instance of the model's JavaScript class (`QuestionColorPickerModel`) associated with the JSON object.
+- `constructor`  
+  A function that returns an instance of the model's JavaScript class (`QuestionColorPickerModel`) associated with the JSON object.
 
-- `baseClassName`        
-The name of a class that the custom class extends (`"question"`).
+- `baseClassName`  
+  The name of a class that the custom class extends (`"question"`).
 
 ```js
-import { ..., Serializer } from "survey-core";
+import { ..., Serializer } from "fullstory-form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -139,12 +136,12 @@ Implement a custom Angular component that renders the desired UI elements. This 
 ```js
 import { Component } from "@angular/core";
 import { QuestionAngular } from "survey-angular-ui";
-import { ColorEvent } from 'ngx-color';
+import { ColorEvent } from "ngx-color";
 
 @Component({
   selector: "color-picker",
   templateUrl: "./color-picker.component.html",
-  styleUrls: [ "./color-picker.component.css" ]
+  styleUrls: ["./color-picker.component.css"],
 })
 export class ColorPickerComponent extends QuestionAngular<QuestionColorPickerModel> {
   handleChange($event: ColorEvent) {
@@ -162,13 +159,23 @@ The component's template should render different color picker elements based upo
 
 ```html
 <ng-container *ngIf="model.colorPickerType === 'Sketch'">
-  <color-sketch [disableAlpha]="model.disableAlpha" (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-sketch>
+  <color-sketch
+    [disableAlpha]="model.disableAlpha"
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-sketch>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Slider'">
-  <color-slider (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-slider>
+  <color-slider
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-slider>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Compact'">
-  <color-compact (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-compact>
+  <color-compact
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-compact>
 </ng-container>
 ```
 
@@ -184,8 +191,8 @@ Import your custom component into `AppComponent` as shown in the code below. Oth
 
 ```js
 // app.component.ts
-import { Component } from '@angular/core';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { Component } from "@angular/core";
+import { ColorPickerComponent } from "./color-picker/color-picker.component";
 
 @Component({
   // ...
@@ -202,22 +209,25 @@ export class AppComponent {
 // color-picker.component.ts
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
-import { ElementFactory, Question, Serializer } from "survey-core";
-import { ColorEvent } from 'ngx-color';
+import { ElementFactory, Question, Serializer } from "fullstory-form-core";
+import { ColorEvent } from "ngx-color";
 
 const CUSTOM_TYPE = "color-picker";
 
 @Component({
   selector: "color-picker",
   templateUrl: "./color-picker.component.html",
-  styleUrls: [ "./color-picker.component.css" ]
+  styleUrls: ["./color-picker.component.css"],
 })
 export class ColorPickerComponent extends QuestionAngular<QuestionColorPickerModel> {
   handleChange($event: ColorEvent) {
     this.model.value = $event.color.hex;
   }
 }
-AngularComponentFactory.Instance.registerComponent(CUSTOM_TYPE + "-question", ColorPickerComponent);
+AngularComponentFactory.Instance.registerComponent(
+  CUSTOM_TYPE + "-question",
+  ColorPickerComponent
+);
 
 export class QuestionColorPickerModel extends Question {
   getType() {
@@ -239,31 +249,31 @@ export class QuestionColorPickerModel extends Question {
   }
 }
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name) => {
-    return new QuestionColorPickerModel(name);
-  }
-);
+ElementFactory.Instance.registerElement(CUSTOM_TYPE, (name) => {
+  return new QuestionColorPickerModel(name);
+});
 
 // Add question type metadata for further serialization into JSON
 Serializer.addClass(
   CUSTOM_TYPE,
-  [{
-    name: "colorPickerType",
-    default: "Slider",
-    choices: ["Slider", "Sketch", "Compact"],
-    category: "general",
-    visibleIndex: 2 // After the Name and Title
-  }, {
-    name: "disableAlpha:boolean",
-    dependsOn: "colorPickerType",
-    visibleIf: function (obj) {
-      return obj.colorPickerType === "Sketch";
+  [
+    {
+      name: "colorPickerType",
+      default: "Slider",
+      choices: ["Slider", "Sketch", "Compact"],
+      category: "general",
+      visibleIndex: 2, // After the Name and Title
     },
-    category: "general",
-    visibleIndex: 3 // After the Name, Title, and Color Picker type
-  }],
+    {
+      name: "disableAlpha:boolean",
+      dependsOn: "colorPickerType",
+      visibleIf: function (obj) {
+        return obj.colorPickerType === "Sketch";
+      },
+      category: "general",
+      visibleIndex: 3, // After the Name, Title, and Color Picker type
+    },
+  ],
   function () {
     return new QuestionColorPickerModel("");
   },
@@ -274,25 +284,35 @@ Serializer.addClass(
 ```html
 <!-- color-picker.component.html -->
 <ng-container *ngIf="model.colorPickerType === 'Sketch'">
-  <color-sketch [disableAlpha]="model.disableAlpha" (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-sketch>
+  <color-sketch
+    [disableAlpha]="model.disableAlpha"
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-sketch>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Slider'">
-  <color-slider (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-slider>
+  <color-slider
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-slider>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Compact'">
-  <color-compact (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-compact>
+  <color-compact
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-compact>
 </ng-container>
 ```
 
 ```js
 // app.component.ts
-import { Component } from '@angular/core';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { Component } from "@angular/core";
+import { ColorPickerComponent } from "./color-picker/color-picker.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
   static declaration = [ColorPickerComponent];
@@ -323,23 +343,26 @@ locale.pe.disableAlpha = "Disable alpha channel";
 // color-picker.component.ts
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
-import { ElementFactory, Question, Serializer } from "survey-core";
+import { ElementFactory, Question, Serializer } from "fullstory-form-core";
 import { editorLocalization } from "survey-creator-core";
-import { ColorEvent } from 'ngx-color';
+import { ColorEvent } from "ngx-color";
 
 const CUSTOM_TYPE = "color-picker";
 
 @Component({
   selector: "color-picker",
   templateUrl: "./color-picker.component.html",
-  styleUrls: [ "./color-picker.component.css" ]
+  styleUrls: ["./color-picker.component.css"],
 })
 export class ColorPickerComponent extends QuestionAngular<QuestionColorPickerModel> {
   handleChange($event: ColorEvent) {
     this.model.value = $event.color.hex;
   }
 }
-AngularComponentFactory.Instance.registerComponent(CUSTOM_TYPE + "-question", ColorPickerComponent);
+AngularComponentFactory.Instance.registerComponent(
+  CUSTOM_TYPE + "-question",
+  ColorPickerComponent
+);
 
 export class QuestionColorPickerModel extends Question {
   getType() {
@@ -361,31 +384,31 @@ export class QuestionColorPickerModel extends Question {
   }
 }
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name) => {
-    return new QuestionColorPickerModel(name);
-  }
-);
+ElementFactory.Instance.registerElement(CUSTOM_TYPE, (name) => {
+  return new QuestionColorPickerModel(name);
+});
 
 // Add question type metadata for further serialization into JSON
 Serializer.addClass(
   CUSTOM_TYPE,
-  [{
-    name: "colorPickerType",
-    default: "Slider",
-    choices: ["Slider", "Sketch", "Compact"],
-    category: "general",
-    visibleIndex: 2 // After the Name and Title
-  }, {
-    name: "disableAlpha:boolean",
-    dependsOn: "colorPickerType",
-    visibleIf: function (obj) {
-      return obj.colorPickerType === "Sketch";
+  [
+    {
+      name: "colorPickerType",
+      default: "Slider",
+      choices: ["Slider", "Sketch", "Compact"],
+      category: "general",
+      visibleIndex: 2, // After the Name and Title
     },
-    category: "general",
-    visibleIndex: 3 // After the Name, Title, and Color Picker type
-  }],
+    {
+      name: "disableAlpha:boolean",
+      dependsOn: "colorPickerType",
+      visibleIf: function (obj) {
+        return obj.colorPickerType === "Sketch";
+      },
+      category: "general",
+      visibleIndex: 3, // After the Name, Title, and Color Picker type
+    },
+  ],
   function () {
     return new QuestionColorPickerModel("");
   },
@@ -401,25 +424,35 @@ locale.pe.disableAlpha = "Disable alpha channel";
 ```html
 <!-- color-picker.component.html -->
 <ng-container *ngIf="model.colorPickerType === 'Sketch'">
-  <color-sketch [disableAlpha]="model.disableAlpha" (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-sketch>
+  <color-sketch
+    [disableAlpha]="model.disableAlpha"
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-sketch>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Slider'">
-  <color-slider (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-slider>
+  <color-slider
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-slider>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Compact'">
-  <color-compact (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-compact>
+  <color-compact
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-compact>
 </ng-container>
 ```
 
 ```js
 // app.component.ts
-import { Component } from '@angular/core';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { Component } from "@angular/core";
+import { ColorPickerComponent } from "./color-picker/color-picker.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
   static declaration = [ColorPickerComponent];
@@ -433,7 +466,7 @@ export class AppComponent {
 Each question type has an icon that is displayed next to the type name in the [Toolbox](/Documentation/Survey-Creator?id=toolbox) and the Add Question menu. The following code shows how to register an SVG icon for your custom question type:
 
 ```js
-import { ..., SvgRegistry } from "survey-core"
+import { ..., SvgRegistry } from "fullstory-form-core"
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -446,7 +479,7 @@ SvgRegistry.registerIconFromSvg(
 Alternatively, you can use one of [built-in SurveyJS icons](https://surveyjs.io/form-library/documentation/icons#built-in-icons). The code below shows how to use the Text icon:
 
 ```js
-import { ..., settings } from "survey-core";
+import { ..., settings } from "fullstory-form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -460,23 +493,31 @@ settings.customIcons["icon-" + CUSTOM_TYPE] = "icon-text";
 // color-picker.component.ts
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
-import { ElementFactory, Question, Serializer, SvgRegistry } from "survey-core";
+import {
+  ElementFactory,
+  Question,
+  Serializer,
+  SvgRegistry,
+} from "fullstory-form-core";
 import { editorLocalization } from "survey-creator-core";
-import { ColorEvent } from 'ngx-color';
+import { ColorEvent } from "ngx-color";
 
 const CUSTOM_TYPE = "color-picker";
 
 @Component({
   selector: "color-picker",
   templateUrl: "./color-picker.component.html",
-  styleUrls: [ "./color-picker.component.css" ]
+  styleUrls: ["./color-picker.component.css"],
 })
 export class ColorPickerComponent extends QuestionAngular<QuestionColorPickerModel> {
   handleChange($event: ColorEvent) {
     this.model.value = $event.color.hex;
   }
 }
-AngularComponentFactory.Instance.registerComponent(CUSTOM_TYPE + "-question", ColorPickerComponent);
+AngularComponentFactory.Instance.registerComponent(
+  CUSTOM_TYPE + "-question",
+  ColorPickerComponent
+);
 
 export class QuestionColorPickerModel extends Question {
   getType() {
@@ -498,31 +539,31 @@ export class QuestionColorPickerModel extends Question {
   }
 }
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name) => {
-    return new QuestionColorPickerModel(name);
-  }
-);
+ElementFactory.Instance.registerElement(CUSTOM_TYPE, (name) => {
+  return new QuestionColorPickerModel(name);
+});
 
 // Add question type metadata for further serialization into JSON
 Serializer.addClass(
   CUSTOM_TYPE,
-  [{
-    name: "colorPickerType",
-    default: "Slider",
-    choices: ["Slider", "Sketch", "Compact"],
-    category: "general",
-    visibleIndex: 2 // After the Name and Title
-  }, {
-    name: "disableAlpha:boolean",
-    dependsOn: "colorPickerType",
-    visibleIf: function (obj) {
-      return obj.colorPickerType === "Sketch";
+  [
+    {
+      name: "colorPickerType",
+      default: "Slider",
+      choices: ["Slider", "Sketch", "Compact"],
+      category: "general",
+      visibleIndex: 2, // After the Name and Title
     },
-    category: "general",
-    visibleIndex: 3 // After the Name, Title, and Color Picker type
-  }],
+    {
+      name: "disableAlpha:boolean",
+      dependsOn: "colorPickerType",
+      visibleIf: function (obj) {
+        return obj.colorPickerType === "Sketch";
+      },
+      category: "general",
+      visibleIndex: 3, // After the Name, Title, and Color Picker type
+    },
+  ],
   function () {
     return new QuestionColorPickerModel("");
   },
@@ -545,30 +586,41 @@ SvgRegistry.registerIconFromSvg(
 ```html
 <!-- color-picker.component.html -->
 <ng-container *ngIf="model.colorPickerType === 'Sketch'">
-  <color-sketch [disableAlpha]="model.disableAlpha" (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-sketch>
+  <color-sketch
+    [disableAlpha]="model.disableAlpha"
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-sketch>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Slider'">
-  <color-slider (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-slider>
+  <color-slider
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-slider>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Compact'">
-  <color-compact (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-compact>
+  <color-compact
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-compact>
 </ng-container>
 ```
 
 ```js
 // app.component.ts
-import { Component } from '@angular/core';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { Component } from "@angular/core";
+import { ColorPickerComponent } from "./color-picker/color-picker.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
   static declaration = [ColorPickerComponent];
 }
 ```
+
 </details>
 
 ## Use the Custom Component as an Editor in the Property Grid
@@ -600,7 +652,7 @@ To try the functionality, you can add a custom property of the `"color"` type to
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
-import { Serializer, SurveyModel } from "survey-core";
+import { Serializer, SurveyModel } from "fullstory-form-core";
 
 function applyBackground(color) {
   setTimeout(() => {
@@ -630,7 +682,7 @@ export class SurveyCreatorComponent implements OnInit {
   surveyCreatorModel!: SurveyCreatorModel;
   ngOnInit() {
     const creator = new SurveyCreatorModel(creatorOptions);
-      
+
     Serializer.addProperty("survey", {
       name: "backgroundColor",
       displayName: "Background color",
@@ -642,8 +694,8 @@ export class SurveyCreatorComponent implements OnInit {
         applyBackground(value);
       }
     });
-      
-    creator.onActiveTabChanged.add(handleActiveTabChange);      
+
+    creator.onActiveTabChanged.add(handleActiveTabChange);
     this.surveyCreatorModel = creator;
   }
 }
@@ -652,7 +704,7 @@ export class SurveyCreatorComponent implements OnInit {
 You might want to use a third-party component only as a property editor, without allowing survey editors to use it in questions. In this case, you need to hide the component from the Toolbox and the Add Question menu. To do this, pass `false` as a third argument to the `ElementFactory.Instance.registerElement` method when you register a [freshly created model](#create-a-model):
 
 ```js
-import { ElementFactory } from "survey-core";
+import { ElementFactory } from "fullstory-form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -672,23 +724,34 @@ ElementFactory.Instance.registerElement(
 // color-picker.component.ts
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
-import { ElementFactory, Question, Serializer, SvgRegistry } from "survey-core";
-import { PropertyGridEditorCollection, editorLocalization } from "survey-creator-core";
-import { ColorEvent } from 'ngx-color';
+import {
+  ElementFactory,
+  Question,
+  Serializer,
+  SvgRegistry,
+} from "fullstory-form-core";
+import {
+  PropertyGridEditorCollection,
+  editorLocalization,
+} from "survey-creator-core";
+import { ColorEvent } from "ngx-color";
 
 const CUSTOM_TYPE = "color-picker";
 
 @Component({
   selector: "color-picker",
   templateUrl: "./color-picker.component.html",
-  styleUrls: [ "./color-picker.component.css" ]
+  styleUrls: ["./color-picker.component.css"],
 })
 export class ColorPickerComponent extends QuestionAngular<QuestionColorPickerModel> {
   handleChange($event: ColorEvent) {
     this.model.value = $event.color.hex;
   }
 }
-AngularComponentFactory.Instance.registerComponent(CUSTOM_TYPE + "-question", ColorPickerComponent);
+AngularComponentFactory.Instance.registerComponent(
+  CUSTOM_TYPE + "-question",
+  ColorPickerComponent
+);
 
 export class QuestionColorPickerModel extends Question {
   getType() {
@@ -710,38 +773,38 @@ export class QuestionColorPickerModel extends Question {
   }
 }
 
-ElementFactory.Instance.registerElement(
-  CUSTOM_TYPE,
-  (name) => {
-    return new QuestionColorPickerModel(name);
-  }
-);
+ElementFactory.Instance.registerElement(CUSTOM_TYPE, (name) => {
+  return new QuestionColorPickerModel(name);
+});
 
 // Add question type metadata for further serialization into JSON
 Serializer.addClass(
   CUSTOM_TYPE,
-  [{
-    name: "colorPickerType",
-    default: "Slider",
-    choices: ["Slider", "Sketch", "Compact"],
-    category: "general",
-    visibleIndex: 2 // After the Name and Title
-  }, {
-    name: "disableAlpha:boolean",
-    dependsOn: "colorPickerType",
-    visibleIf: function (obj) {
-      return obj.colorPickerType === "Sketch";
+  [
+    {
+      name: "colorPickerType",
+      default: "Slider",
+      choices: ["Slider", "Sketch", "Compact"],
+      category: "general",
+      visibleIndex: 2, // After the Name and Title
     },
-    category: "general",
-    visibleIndex: 3 // After the Name, Title, and Color Picker type
-  }],
+    {
+      name: "disableAlpha:boolean",
+      dependsOn: "colorPickerType",
+      visibleIf: function (obj) {
+        return obj.colorPickerType === "Sketch";
+      },
+      category: "general",
+      visibleIndex: 3, // After the Name, Title, and Color Picker type
+    },
+  ],
   function () {
     return new QuestionColorPickerModel("");
   },
   "question"
 );
 
-// Specify display names for the question type and its properties 
+// Specify display names for the question type and its properties
 const locale = editorLocalization.getLocale("");
 locale.qt[CUSTOM_TYPE] = "Color Picker";
 locale.pe.colorPickerType = "Color picker type";
@@ -761,22 +824,32 @@ PropertyGridEditorCollection.register({
   getJSON: function () {
     return {
       type: CUSTOM_TYPE,
-      colorPickerType: "Compact"
+      colorPickerType: "Compact",
     };
-  }
+  },
 });
 ```
 
 ```html
 <!-- color-picker.component.html -->
 <ng-container *ngIf="model.colorPickerType === 'Sketch'">
-  <color-sketch [disableAlpha]="model.disableAlpha" (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-sketch>
+  <color-sketch
+    [disableAlpha]="model.disableAlpha"
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-sketch>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Slider'">
-  <color-slider (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-slider>
+  <color-slider
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-slider>
 </ng-container>
 <ng-container *ngIf="model.colorPickerType === 'Compact'">
-  <color-compact (onChange)="handleChange($event)" [color]="model.value || '#fff'"></color-compact>
+  <color-compact
+    (onChange)="handleChange($event)"
+    [color]="model.value || '#fff'"
+  ></color-compact>
 </ng-container>
 ```
 
@@ -784,7 +857,7 @@ PropertyGridEditorCollection.register({
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
-import { Serializer, SurveyModel } from "survey-core";
+import { Serializer, SurveyModel } from "fullstory-form-core";
 
 function applyBackground(color) {
   setTimeout(() => {
@@ -823,7 +896,7 @@ export class SurveyCreatorComponent implements OnInit {
   surveyCreatorModel!: SurveyCreatorModel;
   ngOnInit() {
     const creator = new SurveyCreatorModel(creatorOptions);
-      
+
     Serializer.addProperty("survey", {
       name: "backgroundColor",
       displayName: "Background color",
@@ -835,10 +908,10 @@ export class SurveyCreatorComponent implements OnInit {
         applyBackground(value);
       }
     });
-      
+
     creator.onActiveTabChanged.add(handleActiveTabChange);
     creator.JSON = surveyJson;
-      
+
     this.surveyCreatorModel = creator;
   }
 }
@@ -853,55 +926,52 @@ export class SurveyCreatorComponent implements OnInit {
 
 ```js
 // app.module.ts
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { SurveyCreatorModule } from 'survey-creator-angular';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { SurveyCreatorModule } from "survey-creator-angular";
 import { ColorSketchModule } from "ngx-color/sketch";
 import { ColorSliderModule } from "ngx-color/slider";
 import { ColorCompactModule } from "ngx-color/compact";
 
-import { AppComponent } from './app.component';
-import { SurveyCreatorComponent } from './survey-creator/survey-creator.component';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { AppComponent } from "./app.component";
+import { SurveyCreatorComponent } from "./survey-creator/survey-creator.component";
+import { ColorPickerComponent } from "./color-picker/color-picker.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SurveyCreatorComponent,
-    ColorPickerComponent
-  ],
+  declarations: [AppComponent, SurveyCreatorComponent, ColorPickerComponent],
   imports: [
     BrowserModule,
     SurveyCreatorModule,
     ColorSketchModule,
     ColorSliderModule,
-    ColorCompactModule
+    ColorCompactModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
 ```js
 // app.component.ts
-import { Component } from '@angular/core';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { Component } from "@angular/core";
+import { ColorPickerComponent } from "./color-picker/color-picker.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
   static declaration = [ColorPickerComponent];
 }
 ```
+
 </details>
 
-[View Demo](https://surveyjs.io/survey-creator/examples/custom-colorpicker-property-editor/angular (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/custom-colorpicker-property-editor/angular "linkStyle")
 
-[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-angular-components (linkStyle))
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-angular-components "linkStyle")
 
 ## Further Reading
 
