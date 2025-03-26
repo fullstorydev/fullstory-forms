@@ -14,7 +14,8 @@ const today = new Date();
 const year = today.getFullYear();
 
 const banner = [
-  "surveyjs - Survey JavaScript library v" + packageJson.version,
+  "surveyjs - FullStory Forms Core is JavaScript library v" +
+    packageJson.version,
   "Copyright (c) 2015-" + year + " Devsoft Baltic OÜ  - http://surveyjs.io/",
   "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
 ].join("\n");
@@ -22,62 +23,61 @@ const banner = [
 var buildPlatformJson = {
   name: packageJson.name,
   version: packageJson.version,
-  "description": "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
-  "keywords": [
+  description:
+    "FullStory Forms Core is a JavaScript Survey Library powered by Survey.js. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
+  keywords: [
     "Survey",
     "JavaScript",
     "Bootstrap",
     "Library",
     "survey",
-    "library"
+    "library",
   ],
-  "homepage": "https://surveyjs.io/",
-  "license": "MIT",
-  files: [
-    "**/*"
-  ],
-  "module": "fesm/survey-core.js",
-  "main": "survey.core.js",
-  "exports": {
+  homepage: "https://surveyjs.io/",
+  license: "MIT",
+  files: ["**/*"],
+  module: "fesm/survey-core.js",
+  main: "survey.core.js",
+  exports: {
     ".": {
-      "types": "./typings/entries/index.d.ts",
-      "import": "./fesm/survey-core.js",
-      "require": "./survey.core.js"
+      types: "./typings/entries/index.d.ts",
+      import: "./fesm/survey-core.js",
+      require: "./survey.core.js",
     },
     "./*.css": "./*.css",
     "./survey.i18n": {
-      "import": "./fesm/survey.i18n.js",
-      "require": "./survey.i18n.js"
+      import: "./fesm/survey.i18n.js",
+      require: "./survey.i18n.js",
     },
     "./i18n": {
-      "import": "./fesm/i18n/index.js",
-      "require": "./i18n/index.js"
+      import: "./fesm/i18n/index.js",
+      require: "./i18n/index.js",
     },
     "./i18n/*": {
-      "import": "./fesm/i18n/*.js",
-      "require": "./i18n/*.js"
+      import: "./fesm/i18n/*.js",
+      require: "./i18n/*.js",
     },
     "./themes": {
-      "types": "./themes/index.d.ts",
-      "import": "./fesm/themes/index.js",
-      "require": "./themes/index.js"
+      types: "./themes/index.d.ts",
+      import: "./fesm/themes/index.js",
+      require: "./themes/index.js",
     },
     "./themes/*": {
-      "types": "./themes/*.d.ts",
-      "import": "./fesm/themes/*.js",
-      "require": "./themes/*.js"
+      types: "./themes/*.d.ts",
+      import: "./fesm/themes/*.js",
+      require: "./themes/*.js",
     },
     "./icons/*": {
-      "types": "./icons/*.d.ts",
-      "import": "./fesm/icons/*.js",
-      "require": "./icons/*.js"
-    }
+      types: "./icons/*.d.ts",
+      import: "./fesm/icons/*.js",
+      require: "./icons/*.js",
+    },
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/surveyjs/surveyjs.git"
+  repository: {
+    type: "git",
+    url: "https://github.com/surveyjs/surveyjs.git",
   },
-  typings: "./typings/entries/index.d.ts"
+  typings: "./typings/entries/index.d.ts",
 };
 
 function getPercentageHandler(emitNonSourceFiles, buildPath) {
@@ -95,7 +95,6 @@ function getPercentageHandler(emitNonSourceFiles, buildPath) {
       );
     }
   };
-
 }
 
 module.exports = function (options) {
@@ -103,16 +102,24 @@ module.exports = function (options) {
   const emitNonSourceFiles = !!options.emitNonSourceFiles;
   var buildPath = __dirname + "/build/";
   var isProductionBuild = options.buildType === "prod";
-  const compilerOptions = emitDeclarations ? {} : {
-    declaration: false,
-    declarationDir: null
-  };
+  const compilerOptions = emitDeclarations
+    ? {}
+    : {
+        declaration: false,
+        declarationDir: null,
+      };
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       "survey.core": path.resolve(__dirname, "./entries/index.ts"),
-      "survey-core": path.resolve(__dirname, "./src/default-theme/default.scss"),
-      "survey-core.fontless": path.resolve(__dirname, "./src/default-theme/default.fontless.scss")
+      "survey-core": path.resolve(
+        __dirname,
+        "./src/default-theme/default.scss"
+      ),
+      "survey-core.fontless": path.resolve(
+        __dirname,
+        "./src/default-theme/default.fontless.scss"
+      ),
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -127,8 +134,8 @@ module.exports = function (options) {
           loader: "ts-loader",
           options: {
             configFile: options.tsConfigFile || "tsconfig.json",
-            compilerOptions
-          }
+            compilerOptions,
+          },
         },
         {
           test: /\.s(c|a)ss$/,
@@ -136,8 +143,8 @@ module.exports = function (options) {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                publicPath: ""
-              }
+                publicPath: "",
+              },
             },
             {
               loader: "css-loader",
@@ -170,13 +177,17 @@ module.exports = function (options) {
       },
       libraryTarget: "umd",
       globalObject: "this",
-      umdNamedDefine: true
+      umdNamedDefine: true,
     },
     plugins: [
-      new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, buildPath)),
+      new webpack.ProgressPlugin(
+        getPercentageHandler(emitNonSourceFiles, buildPath)
+      ),
       new DashedNamePlugin(),
       new webpack.DefinePlugin({
-        "process.env.RELEASE_DATE": JSON.stringify(new Date().toISOString().slice(0, 10)),
+        "process.env.RELEASE_DATE": JSON.stringify(
+          new Date().toISOString().slice(0, 10)
+        ),
         "process.env.VERSION": JSON.stringify(packageJson.version),
       }),
       new RemoveCoreFromName(),

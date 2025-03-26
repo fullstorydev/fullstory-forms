@@ -1,10 +1,9 @@
 import React from "react";
 import { SurveyElementBase } from "../../reactquestion_element";
-import { QuestionFileModel } from "survey-core";
+import { QuestionFileModel } from "fullstory-form-core";
 import { SvgIcon } from "../svg-icon/svg-icon";
 
-export class SurveyFileItem extends SurveyElementBase<{ question: QuestionFileModel, item: any }, {}> {
-
+export class SurveyFileItem extends SurveyElementBase<{ question: QuestionFileModel; item: any }, {}> {
   protected get question(): QuestionFileModel {
     return this.props.question;
   }
@@ -37,7 +36,7 @@ export class SurveyFileItem extends SurveyElementBase<{ question: QuestionFileMo
     return (
       <span
         className={this.question.cssClasses.previewItem}
-        onClick={(event) => this.question.doDownloadFileFromContainer(event as any)}
+        onClick={event => this.question.doDownloadFileFromContainer(event as any)}
       >
         {this.renderFileSign(this.question.cssClasses.fileSign, val)}
         <div className={this.question.getImageWrapperCss(val)}>
@@ -47,18 +46,27 @@ export class SurveyFileItem extends SurveyElementBase<{ question: QuestionFileMo
               style={{ height: this.question.imageHeight, width: this.question.imageWidth }}
               alt="File preview"
             />
-          ) : (this.question.cssClasses.defaultImage ? (
-            <SvgIcon iconName={this.question.cssClasses.defaultImageIconId} size={"auto"} className={this.question.cssClasses.defaultImage}></SvgIcon>
-          ) : null)}
+          ) : this.question.cssClasses.defaultImage ? (
+            <SvgIcon
+              iconName={this.question.cssClasses.defaultImageIconId}
+              size={"auto"}
+              className={this.question.cssClasses.defaultImage}
+            ></SvgIcon>
+          ) : null}
           {val.name && !this.question.isReadOnly ? (
-            <div className={this.question.getRemoveButtonCss()} onClick={(event) => this.question.doRemoveFile(val, event)}>
-              <span
-                className={this.question.cssClasses.removeFile}
-              >
-                {this.question.removeFileCaption}
-              </span>
-              {(this.question.cssClasses.removeFileSvgIconId) ?
-                (<SvgIcon title={this.question.removeFileCaption} iconName={this.question.cssClasses.removeFileSvgIconId} size={"auto"} className={this.question.cssClasses.removeFileSvg}></SvgIcon>) : null}
+            <div
+              className={this.question.getRemoveButtonCss()}
+              onClick={event => this.question.doRemoveFile(val, event)}
+            >
+              <span className={this.question.cssClasses.removeFile}>{this.question.removeFileCaption}</span>
+              {this.question.cssClasses.removeFileSvgIconId ? (
+                <SvgIcon
+                  title={this.question.removeFileCaption}
+                  iconName={this.question.cssClasses.removeFileSvgIconId}
+                  size={"auto"}
+                  className={this.question.cssClasses.removeFileSvg}
+                ></SvgIcon>
+              ) : null}
             </div>
           ) : null}
         </div>

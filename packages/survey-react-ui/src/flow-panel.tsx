@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FlowPanelModel, Question } from "survey-core";
+import { FlowPanelModel, Question } from "fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyPanel } from "./panel";
 import { SurveyQuestion } from "./reactquestion";
@@ -82,8 +82,7 @@ export class SurveyFlowPanel extends SurveyPanel {
   protected renderParentNode(node: Node): React.JSX.Element {
     const nodeType = node.nodeName.toLowerCase();
     const children = this.renderNodes(this.getChildDomNodes(node));
-    if (nodeType === "div")
-      return <div key={this.getNodeIndex()}>{children}</div>;
+    if (nodeType === "div") return <div key={this.getNodeIndex()}>{children}</div>;
     return (
       <span key={this.getNodeIndex()} style={this.getStyle(nodeType)}>
         {children}
@@ -99,12 +98,7 @@ export class SurveyFlowPanel extends SurveyPanel {
       const question = this.flowPanel.getQuestionByName(node.textContent as any);
       if (!question) return null;
       const questionBody = (
-        <SurveyQuestion
-          key={question.name}
-          element={question}
-          creator={this.creator}
-          css={this.css}
-        />
+        <SurveyQuestion key={question.name} element={question} creator={this.creator} css={this.css} />
       );
       return <span key={this.getNodeIndex()}>{questionBody}</span>;
     }

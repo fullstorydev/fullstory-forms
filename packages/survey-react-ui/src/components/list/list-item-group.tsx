@@ -1,5 +1,5 @@
 import React from "react";
-import { ListModel } from "survey-core";
+import { ListModel } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { Popup } from "../popup/popup";
@@ -22,14 +22,20 @@ export class ListItemGroup extends SurveyElementBase<IListItemProps, any> {
   render(): React.JSX.Element | null {
     if (!this.item) return null;
 
-    const newElement = ReactElementFactory.Instance.createElement("sv-list-item-content", { item: this.item, key: "content" + this.item.id, model: this.model });
-    return <>
-      {newElement}
-      <Popup model={this.item?.popupModel}></Popup>
-    </>;
+    const newElement = ReactElementFactory.Instance.createElement("sv-list-item-content", {
+      item: this.item,
+      key: "content" + this.item.id,
+      model: this.model
+    });
+    return (
+      <>
+        {newElement}
+        <Popup model={this.item?.popupModel}></Popup>
+      </>
+    );
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-list-item-group", (props) => {
+ReactElementFactory.Instance.registerElement("sv-list-item-group", props => {
   return React.createElement(ListItemGroup, props);
 });

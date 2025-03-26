@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SurveyProgressModel } from "survey-core";
+import { SurveyProgressModel } from "fullstory-form-core";
 import { SurveyNavigationBase } from "./reactSurveyNavigationBase";
 import { ReactElementFactory } from "./element-factory";
 
@@ -18,7 +18,7 @@ export class SurveyProgress extends SurveyNavigationBase {
   }
   render(): React.JSX.Element {
     var progressStyle = {
-      width: this.progress + "%",
+      width: this.progress + "%"
     };
     return (
       <div className={this.survey.getProgressCssClasses(this.props.container)}>
@@ -30,17 +30,9 @@ export class SurveyProgress extends SurveyNavigationBase {
           aria-valuemax={100}
           aria-label="progress"
         >
-          <span
-            className={SurveyProgressModel.getProgressTextInBarCss(this.css)}
-          >
-            {this.progressText}
-          </span>
+          <span className={SurveyProgressModel.getProgressTextInBarCss(this.css)}>{this.progressText}</span>
         </div>
-        <span
-          className={SurveyProgressModel.getProgressTextUnderBarCss(this.css)}
-        >
-          {this.progressText}
-        </span>
+        <span className={SurveyProgressModel.getProgressTextUnderBarCss(this.css)}>{this.progressText}</span>
       </div>
     );
   }
@@ -52,15 +44,9 @@ ReactElementFactory.Instance.registerElement("sv-progress-pages", props => {
 ReactElementFactory.Instance.registerElement("sv-progress-questions", props => {
   return React.createElement(SurveyProgress, props);
 });
-ReactElementFactory.Instance.registerElement(
-  "sv-progress-correctquestions",
-  props => {
-    return React.createElement(SurveyProgress, props);
-  }
-);
-ReactElementFactory.Instance.registerElement(
-  "sv-progress-requiredquestions",
-  props => {
-    return React.createElement(SurveyProgress, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-progress-correctquestions", props => {
+  return React.createElement(SurveyProgress, props);
+});
+ReactElementFactory.Instance.registerElement("sv-progress-requiredquestions", props => {
+  return React.createElement(SurveyProgress, props);
+});

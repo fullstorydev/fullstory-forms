@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionImageModel } from "survey-core";
+import { QuestionImageModel } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 
@@ -16,7 +16,7 @@ export class SurveyQuestionImage extends SurveyQuestionElementBase {
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    this.question.locImageLink.onChanged = () => { };
+    this.question.locImageLink.onChanged = () => {};
   }
 
   protected get question(): QuestionImageModel {
@@ -25,7 +25,11 @@ export class SurveyQuestionImage extends SurveyQuestionElementBase {
 
   protected renderElement(): React.JSX.Element {
     var cssClasses = this.question.getImageCss();
-    var style: any = { objectFit: this.question.imageFit, width: this.question.renderedStyleWidth, height: this.question.renderedStyleHeight };
+    var style: any = {
+      objectFit: this.question.imageFit,
+      width: this.question.renderedStyleWidth,
+      height: this.question.renderedStyleHeight
+    };
     if (!this.question.imageLink || this.question.contentNotLoaded) {
       style["display"] = "none";
     }
@@ -40,21 +44,30 @@ export class SurveyQuestionImage extends SurveyQuestionElementBase {
           height={this.question.renderedHeight}
           //alt={item.text || item.value}
           style={style}
-          onLoad={(event: any) => { this.question.onLoadHandler(); }}
-          onError={(event: any) => { this.question.onErrorHandler(); }}
+          onLoad={(event: any) => {
+            this.question.onLoadHandler();
+          }}
+          onError={(event: any) => {
+            this.question.onErrorHandler();
+          }}
         />
       );
     }
     if (this.question.renderedMode === "video") {
       control = (
-        <video controls
+        <video
+          controls
           className={cssClasses}
           src={this.question.locImageLink.renderedHtml}
           width={this.question.renderedWidth}
           height={this.question.renderedHeight}
           style={style}
-          onLoadedMetadata={(event: any) => { this.question.onLoadHandler(); }}
-          onError={(event: any) => { this.question.onErrorHandler(); }}
+          onLoadedMetadata={(event: any) => {
+            this.question.onLoadHandler();
+          }}
+          onError={(event: any) => {
+            this.question.onErrorHandler();
+          }}
         ></video>
       );
     }
@@ -73,18 +86,19 @@ export class SurveyQuestionImage extends SurveyQuestionElementBase {
     if (!this.question.imageLink || this.question.contentNotLoaded) {
       noImage = (
         <div className={this.question.cssClasses.noImage}>
-          <SvgIcon
-            iconName={this.question.cssClasses.noImageSvgIconId}
-            size={48}
-          >
-          </SvgIcon>
+          <SvgIcon iconName={this.question.cssClasses.noImageSvgIconId} size={48}></SvgIcon>
         </div>
       );
     }
-    return <div className={this.question.cssClasses.root}>{control}{noImage}</div>;
+    return (
+      <div className={this.question.cssClasses.root}>
+        {control}
+        {noImage}
+      </div>
+    );
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("image", (props) => {
+ReactQuestionFactory.Instance.registerQuestion("image", props => {
   return React.createElement(SurveyQuestionImage, props);
 });

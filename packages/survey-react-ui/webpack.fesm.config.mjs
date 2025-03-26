@@ -4,11 +4,11 @@ export default function (options) {
   const config = webpackCommonConfigCreator(options);
   config.optimization.minimize = false;
   config.experiments = {
-    outputModule: true,
+    outputModule: true
   };
   config.output = {
     filename: "[name]" + ".js",
-    path: config.output.path += "/fesm",
+    path: (config.output.path += "/fesm"),
     library: {
       type: "modern-module"
     }
@@ -17,11 +17,11 @@ export default function (options) {
   config.externals = {
     react: "react",
     "react-dom": "react-dom",
-    "survey-core": "survey-core"
+    "fullstory-form-core": "fullstory-form-core"
   };
   const surveyReactUI = config.entry["survey-react-ui"];
   config.entry = {
-    "survey-react-ui": surveyReactUI,
+    "survey-react-ui": surveyReactUI
   };
   return config;
 }

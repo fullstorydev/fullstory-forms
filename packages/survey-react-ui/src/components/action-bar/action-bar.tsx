@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Base,
-  Action,
-  ActionContainer
-} from "survey-core";
+import { Base, Action, ActionContainer } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SurveyAction } from "./action-bar-item";
@@ -36,8 +32,10 @@ export class SurveyActionBar extends SurveyElementBase<IActionBarProps, any> {
     super.componentDidMount();
     if (!this.model.hasActions) return;
     const container: HTMLDivElement | null = this.rootRef.current;
-    if(!!container) {
-      this.model.initResponsivityManager(container, (callback) => { setTimeout(callback, 100); });
+    if (!!container) {
+      this.model.initResponsivityManager(container, callback => {
+        setTimeout(callback, 100);
+      });
     }
   }
   componentWillUnmount() {
@@ -46,13 +44,15 @@ export class SurveyActionBar extends SurveyElementBase<IActionBarProps, any> {
   }
   componentDidUpdate(prevProps: IActionBarProps, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
-    if(prevProps.model != this.props.model) {
+    if (prevProps.model != this.props.model) {
       prevProps.model.resetResponsivityManager();
     }
     if (!!this.model.hasActions) {
       const container: HTMLDivElement | null = this.rootRef.current;
-      if(!!container) {
-        this.model.initResponsivityManager(container, (callback) => { setTimeout(callback, 100); });
+      if (!!container) {
+        this.model.initResponsivityManager(container, callback => {
+          setTimeout(callback, 100);
+        });
       }
     }
   }
@@ -68,28 +68,25 @@ export class SurveyActionBar extends SurveyElementBase<IActionBarProps, any> {
       <div
         ref={this.rootRef}
         className={this.model.getRootCss()}
-        onClick={this.handleClick ? function(event) {
-          event.stopPropagation();
-        } : undefined}
+        onClick={
+          this.handleClick
+            ? function (event) {
+                event.stopPropagation();
+              }
+            : undefined
+        }
       >
         {items}
       </div>
     );
   }
   renderItems() {
-    return this.model.renderedActions.concat([]).map(
-      (item: Action, itemIndex: number) => {
-        return (
-          <SurveyAction item={item} key={item.renderedId}></SurveyAction>
-        );
-      }
-    );
+    return this.model.renderedActions.concat([]).map((item: Action, itemIndex: number) => {
+      return <SurveyAction item={item} key={item.renderedId}></SurveyAction>;
+    });
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-action-bar", (props) => {
-  return React.createElement(
-    SurveyActionBar,
-    (props as any) as IActionBarProps
-  );
+ReactElementFactory.Instance.registerElement("sv-action-bar", props => {
+  return React.createElement(SurveyActionBar, props as any as IActionBarProps);
 });

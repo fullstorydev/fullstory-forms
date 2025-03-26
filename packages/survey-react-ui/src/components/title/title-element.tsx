@@ -1,5 +1,5 @@
 import React from "react";
-import { SurveyElement, SurveyElementCore, doKey2ClickUp } from "survey-core";
+import { SurveyElement, SurveyElementCore, doKey2ClickUp } from "fullstory-form-core";
 import { TitleActions } from "./title-actions";
 import { SvgIcon } from "../svg-icon/svg-icon";
 
@@ -14,11 +14,7 @@ export class TitleElement extends React.Component<any, any> {
     if (!this.element.getCssTitleExpandableSvg()) return null;
     let iconName = this.element.isExpanded ? "icon-collapse-16x16" : "icon-expand-16x16";
 
-    return <SvgIcon
-      className={this.element.getCssTitleExpandableSvg()}
-      iconName={iconName}
-      size={"auto"}
-    ></SvgIcon>;
+    return <SvgIcon className={this.element.getCssTitleExpandableSvg()} iconName={iconName} size={"auto"}></SvgIcon>;
   }
   render(): React.JSX.Element | any {
     const element = this.element;
@@ -27,12 +23,7 @@ export class TitleElement extends React.Component<any, any> {
 
     const titleExpandableSvg = this.renderTitleExpandableSvg();
 
-    const titleContent = (
-      <TitleActions
-        element={element}
-        cssClasses={element.cssClasses}
-      ></TitleActions>
-    );
+    const titleContent = <TitleActions element={element} cssClasses={element.cssClasses}></TitleActions>;
 
     let onClick: undefined | ((e: any) => void) = undefined;
     let onKeyUp: undefined | ((e: any) => void) = undefined;

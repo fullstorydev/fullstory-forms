@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ISurveyCreator } from "./reactquestion";
-import { SurveyModel, Question, QuestionRowModel, IElement, Base } from "survey-core";
+import { SurveyModel, Question, QuestionRowModel, IElement, Base } from "fullstory-form-core";
 import { SurveyElementBase } from "./reactquestion_element";
 import { SurveyRowElement } from "./element";
 import { ReactElementFactory } from "./element-factory";
@@ -47,13 +47,12 @@ export class SurveyRow extends SurveyElementBase<any, any> {
           creator={this.creator}
           css={this.css}
           key={key}
-        >
-        </SurveyRowElement>
+        ></SurveyRowElement>
       );
     });
 
     return (
-      <div ref={this.rootRef} className={this.row.getRowCss()} >
+      <div ref={this.rootRef} className={this.row.getRowCss()}>
         {elements}
       </div>
     );
@@ -109,7 +108,7 @@ export class SurveyRow extends SurveyElementBase<any, any> {
       element: element,
       creator: this.creator,
       survey: this.survey,
-      css: this.css,
+      css: this.css
     });
   }
 }

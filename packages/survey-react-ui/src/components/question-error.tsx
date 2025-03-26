@@ -1,5 +1,5 @@
 import React from "react";
-import { SurveyError } from "survey-core";
+import { SurveyError } from "fullstory-form-core";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyLocStringViewer } from "../string-viewer";
 
@@ -22,6 +22,6 @@ export class QuestionErrorComponent extends React.Component<IQuestionErrorCompon
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-question-error", (props) => {
+ReactElementFactory.Instance.registerElement("sv-question-error", props => {
   return React.createElement(QuestionErrorComponent, props);
 });

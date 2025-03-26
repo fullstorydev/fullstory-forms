@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactSurveyElement } from "./reactquestion_element";
-import { Base, QuestionTagboxModel, ItemValue } from "survey-core";
+import { Base, QuestionTagboxModel, ItemValue } from "fullstory-form-core";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 
 export class SurveyQuestionTagboxItem extends ReactSurveyElement {
@@ -27,10 +27,7 @@ export class SurveyQuestionTagboxItem extends ReactSurveyElement {
     return (
       <div className="sv-tagbox__item">
         <div className="sv-tagbox__item-text">{text}</div>
-        <div
-          className={this.question.cssClasses.cleanItemButton}
-          onClick={removeItem}
-        >
+        <div className={this.question.cssClasses.cleanItemButton} onClick={removeItem}>
           <SvgIcon
             className={this.question.cssClasses.cleanItemButtonSvg}
             iconName={this.question.cssClasses.cleanItemButtonIconId}

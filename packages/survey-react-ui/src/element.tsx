@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ISurveyCreator } from "./reactquestion";
-import { SurveyModel, Question, QuestionRowModel, IElement, Base, PanelModel } from "survey-core";
+import { SurveyModel, Question, QuestionRowModel, IElement, Base, PanelModel } from "fullstory-form-core";
 import { SurveyElementBase } from "./reactquestion_element";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
@@ -37,7 +37,7 @@ export class SurveyRowElement extends SurveyElementBase<any, any> {
   componentDidMount(): void {
     super.componentDidMount();
     if (this.rootRef.current) {
-      (this.element).setWrapperElement(this.rootRef.current);
+      this.element.setWrapperElement(this.rootRef.current);
     }
   }
 
@@ -88,7 +88,11 @@ export class SurveyRowElement extends SurveyElementBase<any, any> {
   protected createElement(element: IElement, elementIndex?: number): React.JSX.Element {
     const index = elementIndex ? "-" + elementIndex : 0;
     if (!this.row.isNeedRender) {
-      return ReactElementFactory.Instance.createElement(element.skeletonComponentName, { key: element.name + index, element: element, css: this.css, })
+      return ReactElementFactory.Instance.createElement(element.skeletonComponentName, {
+        key: element.name + index,
+        element: element,
+        css: this.css
+      });
     }
     let elementType = (element as any).getTemplate();
     if (!ReactElementFactory.Instance.isElementRegistered(elementType)) {
@@ -99,7 +103,7 @@ export class SurveyRowElement extends SurveyElementBase<any, any> {
       element: element,
       creator: this.creator,
       survey: this.survey,
-      css: this.css,
+      css: this.css
     });
   }
 }

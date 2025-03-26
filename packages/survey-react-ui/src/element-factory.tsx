@@ -1,13 +1,10 @@
-import { HashTable } from "survey-core";
+import { HashTable } from "fullstory-form-core";
 
 export class ReactElementFactory {
   public static Instance: ReactElementFactory = new ReactElementFactory();
   private creatorHash: HashTable<(name: string) => React.JSX.Element> = {};
 
-  public registerElement(
-    elementType: string,
-    elementCreator: (props: any) => React.JSX.Element
-  ) {
+  public registerElement(elementType: string, elementCreator: (props: any) => React.JSX.Element) {
     this.creatorHash[elementType] = elementCreator;
   }
   public getAllTypes(): Array<string> {

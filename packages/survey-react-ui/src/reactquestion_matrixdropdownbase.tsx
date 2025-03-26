@@ -9,7 +9,7 @@ import {
   AdaptiveActionContainer,
   Question,
   Base
-} from "survey-core";
+} from "fullstory-form-core";
 import { SurveyQuestionCheckboxItem } from "./reactquestion_checkbox";
 import { SurveyQuestionRadioItem } from "./reactquestion_radiogroup";
 import { SurveyPanel } from "./panel";

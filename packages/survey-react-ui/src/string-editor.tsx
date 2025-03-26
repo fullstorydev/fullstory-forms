@@ -1,5 +1,5 @@
 import React from "react";
-import { LocalizableString } from "survey-core";
+import { LocalizableString } from "fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 
 export class SurveyLocStringEditor extends React.Component<any, any> {
@@ -22,7 +22,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   }
   componentWillUnmount() {
     if (!this.locStr) return;
-    this.locStr.onChanged = function () { };
+    this.locStr.onChanged = function () {};
   }
   onInput = (event: any) => {
     this.locStr.text = event.target.innerText;
@@ -64,9 +64,6 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  LocalizableString.editableRenderer,
-  (props) => {
-    return React.createElement(SurveyLocStringEditor, props);
-  }
-);
+ReactElementFactory.Instance.registerElement(LocalizableString.editableRenderer, props => {
+  return React.createElement(SurveyLocStringEditor, props);
+});

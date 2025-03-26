@@ -1,5 +1,10 @@
 import * as React from "react";
-import { ProgressButtons, PageModel, ProgressButtonsResponsivityManager, IProgressButtonsViewModel } from "survey-core";
+import {
+  ProgressButtons,
+  PageModel,
+  ProgressButtonsResponsivityManager,
+  IProgressButtonsViewModel
+} from "fullstory-form-core";
 import { SurveyNavigationBase } from "./reactSurveyNavigationBase";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyElementBase } from "./reactquestion_element";
@@ -30,37 +35,43 @@ export class SurveyProgressButtons extends SurveyNavigationBase implements IProg
   }
   render(): React.JSX.Element {
     return (
-      <div className={this.model.getRootCss(this.props.container)} style={{ "maxWidth": this.model.progressWidth }} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-label="progress">
-        {this.state.canShowHeader ? <div className={this.css.progressButtonsHeader}>
-          <div className={this.css.progressButtonsPageTitle} title={this.model.headerText}>{this.model.headerText}</div>
-        </div> : null}
+      <div
+        className={this.model.getRootCss(this.props.container)}
+        style={{ "maxWidth": this.model.progressWidth }}
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="progress"
+      >
+        {this.state.canShowHeader ? (
+          <div className={this.css.progressButtonsHeader}>
+            <div className={this.css.progressButtonsPageTitle} title={this.model.headerText}>
+              {this.model.headerText}
+            </div>
+          </div>
+        ) : null}
         <div className={this.css.progressButtonsContainer}>
           <div
             className={this.model.getScrollButtonCss(this.state.hasScroller, true)}
             role="button"
-            onClick={() =>
-              this.clickScrollButton(this.listContainerRef.current, true)
-            }
+            onClick={() => this.clickScrollButton(this.listContainerRef.current, true)}
           ></div>
-          <div
-            className={this.css.progressButtonsListContainer}
-            ref={this.listContainerRef}
-          >
-            <ul className={this.css.progressButtonsList}>
-              {this.getListElements()}
-            </ul>
+          <div className={this.css.progressButtonsListContainer} ref={this.listContainerRef}>
+            <ul className={this.css.progressButtonsList}>{this.getListElements()}</ul>
           </div>
           <div
             className={this.model.getScrollButtonCss(this.state.hasScroller, false)}
             role="button"
-            onClick={() =>
-              this.clickScrollButton(this.listContainerRef.current, false)
-            }
+            onClick={() => this.clickScrollButton(this.listContainerRef.current, false)}
           ></div>
         </div>
-        {this.state.canShowFooter ? <div className={this.css.progressButtonsFooter}>
-          <div className={this.css.progressButtonsPageTitle} title={this.model.footerText}>{this.model.footerText}</div>
-        </div> : null}
+        {this.state.canShowFooter ? (
+          <div className={this.css.progressButtonsFooter}>
+            <div className={this.css.progressButtonsPageTitle} title={this.model.footerText}>
+              {this.model.footerText}
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -77,36 +88,29 @@ export class SurveyProgressButtons extends SurveyNavigationBase implements IProg
       <li
         key={"listelement" + index}
         className={this.model.getListElementCss(index)}
-        onClick={
-          this.model.isListElementClickable(index)
-            ? () => this.model.clickListElement(page)
-            : undefined
-        }
+        onClick={this.model.isListElementClickable(index) ? () => this.model.clickListElement(page) : undefined}
         data-page-number={this.model.getItemNumber(page)}
       >
         <div className={this.css.progressButtonsConnector}></div>
-        {this.state.canShowItemTitles ? <>
-          <div
-            className={this.css.progressButtonsPageTitle}
-            title={page.renderedNavigationTitle}
-          >
-            {text}
-          </div>
-          <div
-            className={this.css.progressButtonsPageDescription}
-            title={page.navigationDescription}
-          >
-            {page.navigationDescription}
-          </div>
-        </> : null}
-        <div className={this.css.progressButtonsButton}><div className={this.css.progressButtonsButtonBackground}></div><div className={this.css.progressButtonsButtonContent}></div><span>{this.model.getItemNumber(page)}</span></div>
+        {this.state.canShowItemTitles ? (
+          <>
+            <div className={this.css.progressButtonsPageTitle} title={page.renderedNavigationTitle}>
+              {text}
+            </div>
+            <div className={this.css.progressButtonsPageDescription} title={page.navigationDescription}>
+              {page.navigationDescription}
+            </div>
+          </>
+        ) : null}
+        <div className={this.css.progressButtonsButton}>
+          <div className={this.css.progressButtonsButtonBackground}></div>
+          <div className={this.css.progressButtonsButtonContent}></div>
+          <span>{this.model.getItemNumber(page)}</span>
+        </div>
       </li>
     );
   }
-  protected clickScrollButton(
-    listContainerElement: Element | null,
-    isLeftScroll: boolean
-  ): void {
+  protected clickScrollButton(listContainerElement: Element | null, isLeftScroll: boolean): void {
     if (!!listContainerElement) {
       listContainerElement.scrollLeft += (isLeftScroll ? -1 : 1) * 70;
     }
@@ -125,6 +129,6 @@ export class SurveyProgressButtons extends SurveyNavigationBase implements IProg
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-progress-buttons", (props) => {
+ReactElementFactory.Instance.registerElement("sv-progress-buttons", props => {
   return React.createElement(SurveyProgressButtons, props);
 });

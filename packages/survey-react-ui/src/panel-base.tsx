@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ISurveyCreator } from "./reactquestion";
-import { Base, SurveyModel, QuestionRowModel, PanelModel, PanelModelBase } from "survey-core";
+import { Base, SurveyModel, QuestionRowModel, PanelModel, PanelModelBase } from "fullstory-form-core";
 import { SurveyElementBase } from "./reactquestion_element";
 import { SurveyRow } from "./row";
 
@@ -32,9 +32,7 @@ export class SurveyPanelBase extends SurveyElementBase<any, any> {
     return this.props.element || this.props.question;
   }
   protected getSurvey(): SurveyModel | null {
-    return (
-      this.props.survey || (!!this.panelBase ? this.panelBase.survey : null)
-    );
+    return this.props.survey || (!!this.panelBase ? this.panelBase.survey : null);
   }
   protected getCss(): any {
     return this.props.css;
@@ -77,22 +75,12 @@ export class SurveyPanelBase extends SurveyElementBase<any, any> {
   }
 
   protected canRender(): boolean {
-    return (
-      super.canRender() && !!this.survey && !!this.panelBase && !!this.panelBase.survey && this.getIsVisible()
-    );
+    return super.canRender() && !!this.survey && !!this.panelBase && !!this.panelBase.survey && this.getIsVisible();
   }
   protected renderRows(css: any): Array<React.JSX.Element> {
-    return this.panelBase.visibleRows.map((row) => this.createRow(row, css));
+    return this.panelBase.visibleRows.map(row => this.createRow(row, css));
   }
   protected createRow(row: QuestionRowModel, css: any): React.JSX.Element {
-    return (
-      <SurveyRow
-        key={row.id}
-        row={row}
-        survey={this.survey}
-        creator={this.creator}
-        css={css}
-      />
-    );
+    return <SurveyRow key={row.id} row={row} survey={this.survey} creator={this.creator} css={css} />;
   }
 }

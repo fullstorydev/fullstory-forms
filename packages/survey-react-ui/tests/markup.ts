@@ -1,9 +1,8 @@
-
 import { testQuestionMarkup } from "../../../tests/markup/helper";
 import { markupTests } from "../../../tests/markup/etalon";
 // eslint-disable-next-line surveyjs/no-imports-from-entries
 import { Survey as SurveyReact } from "../entries/index";
-import { Model } from "survey-core";
+import { Model } from "fullstory-form-core";
 import { act } from "react-dom/test-utils";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -11,20 +10,17 @@ import ReactDOM from "react-dom";
 var platformDescriptor = {
   name: "React",
   survey: null,
-  surveyFactory: (json) => new Model(json),
+  surveyFactory: json => new Model(json),
   render: (survey, element) => {
     var component = React.createElement(SurveyReact, { model: survey }, null);
     act(() => {
-      ReactDOM.render(
-        component,
-        element
-      );
+      ReactDOM.render(component, element);
     });
   },
-  getStrFromHtml: (snapshot) => {
+  getStrFromHtml: snapshot => {
     return require("../../../tests/markup/snapshots/" + snapshot + ".snap.html");
   },
-  finish: (element) => {
+  finish: element => {
     ReactDOM.unmountComponentAtNode(element);
   }
 };
@@ -36,4 +32,3 @@ markupTests.forEach(markupTest => {
     testQuestionMarkup(assert, markupTest, platformDescriptor);
   });
 });
-

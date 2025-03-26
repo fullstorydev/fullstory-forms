@@ -1,5 +1,5 @@
 import React from "react";
-import { Action, MatrixDropdownRowModelBase, QuestionMatrixDropdownModelBase } from "survey-core";
+import { Action, MatrixDropdownRowModelBase, QuestionMatrixDropdownModelBase } from "fullstory-form-core";
 import { ReactElementFactory } from "../../../element-factory";
 import { ReactSurveyElement } from "../../../reactquestion_element";
 import { SvgIcon } from "../../svg-icon/svg-icon";
@@ -40,16 +40,12 @@ export class SurveyQuestionMatrixDetailButton extends ReactSurveyElement {
           className={this.question.getDetailPanelIconCss(this.row)}
           iconName={this.question.getDetailPanelIconId(this.row)}
           size={"auto"}
-        >
-        </SvgIcon>
+        ></SvgIcon>
       </button>
     );
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  "sv-matrix-detail-button",
-  props => {
-    return React.createElement(SurveyQuestionMatrixDetailButton, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-matrix-detail-button", props => {
+  return React.createElement(SurveyQuestionMatrixDetailButton, props);
+});

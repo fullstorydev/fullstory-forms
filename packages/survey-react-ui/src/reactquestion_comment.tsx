@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactSurveyElement, SurveyQuestionUncontrolledElement } from "./reactquestion_element";
-import { QuestionCommentModel, TextAreaModel } from "survey-core";
+import { QuestionCommentModel, TextAreaModel } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { CharacterCounterComponent } from "./components/character-counter";
 import { TextAreaComponent } from "./components/text-area";

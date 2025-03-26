@@ -3,7 +3,7 @@ import { ReactSurveyElement, SurveyQuestionElementBase } from "./reactquestion_e
 import { SurveyQuestionOtherValueItem } from "./reactquestion_comment";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
-import { Base, ItemValue, SurveyModel, QuestionCheckboxModel } from "survey-core";
+import { Base, ItemValue, SurveyModel, QuestionCheckboxModel } from "fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 
 export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {

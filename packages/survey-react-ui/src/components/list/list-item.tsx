@@ -1,5 +1,5 @@
 import React from "react";
-import { ListModel } from "survey-core";
+import { ListModel } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { attachKey2click } from "../../reactSurvey";
@@ -26,17 +26,26 @@ export class ListItem extends SurveyElementBase<IListItemProps, any> {
     if (!this.item) return null;
     const className = this.model.getItemClass(this.item);
     const itemContent = this.item.component || this.model.itemComponent;
-    const newElement = ReactElementFactory.Instance.createElement(itemContent, { item: this.item, key: this.item.id, model: this.model });
-    const contentWrap =
+    const newElement = ReactElementFactory.Instance.createElement(itemContent, {
+      item: this.item,
+      key: this.item.id,
+      model: this.model
+    });
+    const contentWrap = (
       <div
         style={this.model.getItemStyle(this.item) as any}
         className={this.model.cssClasses.itemBody}
         title={this.item.getTooltip()}
-        onMouseOver={(event: any) => { this.model.onItemHover(this.item); }}
-        onMouseLeave={(event: any) => { this.model.onItemLeave(this.item); }}
+        onMouseOver={(event: any) => {
+          this.model.onItemHover(this.item);
+        }}
+        onMouseLeave={(event: any) => {
+          this.model.onItemLeave(this.item);
+        }}
       >
         {newElement}
-      </div>;
+      </div>
+    );
     const separator = this.item.needSeparator ? <div className={this.model.cssClasses.itemSeparator} /> : null;
     const isVisible = this.model.isItemVisible(this.item);
     const style = {
@@ -53,10 +62,12 @@ export class ListItem extends SurveyElementBase<IListItemProps, any> {
           this.model.onItemClick(this.item);
           event.stopPropagation();
         }}
-        onPointerDown={(event: any) => this.model.onPointerDown(event, this.item)}>
+        onPointerDown={(event: any) => this.model.onPointerDown(event, this.item)}
+      >
         {separator}
         {contentWrap}
-      </li>, this.item
+      </li>,
+      this.item
     );
   }
   componentDidMount() {
@@ -66,6 +77,6 @@ export class ListItem extends SurveyElementBase<IListItemProps, any> {
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-list-item", (props) => {
+ReactElementFactory.Instance.registerElement("sv-list-item", props => {
   return React.createElement(ListItem, props);
 });

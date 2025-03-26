@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  QuestionPanelDynamicModel
-} from "survey-core";
+import { QuestionPanelDynamicModel } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { ReactSurveyElement } from "../../reactquestion_element";
 
@@ -20,21 +18,23 @@ export class SurveyQuestionPanelDynamicAction extends ReactSurveyElement {
 export class SurveyQuestionPanelDynamicAddButton extends SurveyQuestionPanelDynamicAction {
   protected handleClick = (event: any) => {
     this.question.addPanelUI();
-  }
+  };
   protected renderElement(): React.JSX.Element | null {
     if (!this.question.canAddPanel) return null;
     const btnText = this.renderLocString(this.question.locAddPanelText);
     return (
-      <button type="button" id={this.question.addButtonId} className={this.question.getAddButtonCss()} onClick={this.handleClick} >
+      <button
+        type="button"
+        id={this.question.addButtonId}
+        className={this.question.getAddButtonCss()}
+        onClick={this.handleClick}
+      >
         <span className={this.question.cssClasses.buttonAddText}>{btnText}</span>
       </button>
     );
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  "sv-paneldynamic-add-btn",
-  (props) => {
-    return React.createElement(SurveyQuestionPanelDynamicAddButton, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-paneldynamic-add-btn", props => {
+  return React.createElement(SurveyQuestionPanelDynamicAddButton, props);
+});

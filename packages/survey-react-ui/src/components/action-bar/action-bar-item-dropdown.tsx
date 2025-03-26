@@ -1,5 +1,5 @@
 import React from "react";
-import { ActionDropdownViewModel, getActionDropdownButtonTarget } from "survey-core";
+import { ActionDropdownViewModel, getActionDropdownButtonTarget } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { Popup } from "../popup/popup";
 import { SurveyActionBarItem } from "./action-bar-item";
@@ -27,6 +27,6 @@ export class SurveyActionBarItemDropdown extends SurveyActionBarItem {
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-action-bar-item-dropdown", (props) => {
+ReactElementFactory.Instance.registerElement("sv-action-bar-item-dropdown", props => {
   return React.createElement(SurveyActionBarItemDropdown, props);
 });

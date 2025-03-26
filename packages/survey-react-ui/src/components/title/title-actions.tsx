@@ -1,5 +1,5 @@
 import React from "react";
-import { SurveyElement, RendererFactory } from "survey-core";
+import { SurveyElement, RendererFactory } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyActionBar } from "../action-bar/action-bar";
 import { TitleContent } from "./title-content";
@@ -13,7 +13,9 @@ export class TitleActions extends React.Component<any, any> {
   }
 
   render(): React.JSX.Element {
-    const titleContent: React.JSX.Element = <TitleContent element={this.element} cssClasses={this.cssClasses}></TitleContent>;
+    const titleContent: React.JSX.Element = (
+      <TitleContent element={this.element} cssClasses={this.cssClasses}></TitleContent>
+    );
     if (!this.element.hasTitleActions) return titleContent;
     return (
       <div className="sv-title-actions">
@@ -24,12 +26,8 @@ export class TitleActions extends React.Component<any, any> {
   }
 }
 
-RendererFactory.Instance.registerRenderer(
-  "element",
-  "title-actions",
-  "sv-title-actions"
-);
+RendererFactory.Instance.registerRenderer("element", "title-actions", "sv-title-actions");
 
-ReactElementFactory.Instance.registerElement("sv-title-actions", (props) => {
+ReactElementFactory.Instance.registerElement("sv-title-actions", props => {
   return React.createElement(TitleActions, props);
 });

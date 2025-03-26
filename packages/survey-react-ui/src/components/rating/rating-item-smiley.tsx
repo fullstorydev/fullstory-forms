@@ -1,5 +1,5 @@
 import React from "react";
-import { QuestionRatingModel, RenderedRatingItem } from "survey-core";
+import { QuestionRatingModel, RenderedRatingItem } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { attachKey2click } from "../../reactSurvey";
@@ -9,7 +9,8 @@ import { IRatingItemProps, RatingItemBase } from "./rating-item";
 export class RatingItemSmiley extends RatingItemBase {
   render(): React.JSX.Element | null {
     return (
-      <label onMouseDown={this.handleOnMouseDown}
+      <label
+        onMouseDown={this.handleOnMouseDown}
         style={this.question.getItemStyle(this.item.itemValue, this.item.highlight) as any}
         className={this.question.getItemClass(this.item.itemValue)}
         onMouseOver={e => this.question.onItemMouseIn(this.item)}
@@ -25,7 +26,7 @@ export class RatingItemSmiley extends RatingItemBase {
           readOnly={this.question.isReadOnlyAttr}
           checked={this.question.value == this.item.value}
           onClick={this.props.handleOnClick}
-          onChange={() => { }}
+          onChange={() => {}}
           aria-required={this.question.ariaRequired}
           aria-label={this.question.ariaLabel}
           aria-invalid={this.question.ariaInvalid}
@@ -41,6 +42,6 @@ export class RatingItemSmiley extends RatingItemBase {
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-rating-item-smiley", (props) => {
+ReactElementFactory.Instance.registerElement("sv-rating-item-smiley", props => {
   return React.createElement(RatingItemSmiley, props);
 });

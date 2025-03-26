@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuestionBooleanModel, CssClassBuilder, Base } from "survey-core";
+import { QuestionBooleanModel, CssClassBuilder, Base } from "fullstory-form-core";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 

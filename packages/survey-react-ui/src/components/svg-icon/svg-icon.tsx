@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactElementFactory } from "../../element-factory";
-import { createSvg } from "survey-core";
+import { createSvg } from "fullstory-form-core";
 
 export class SvgIcon extends React.Component<any, any> {
   private svgIconRef: any;
@@ -10,14 +10,14 @@ export class SvgIcon extends React.Component<any, any> {
   }
 
   updateSvg() {
-    if(this.props.iconName)
+    if (this.props.iconName)
       createSvg(
         this.props.size,
         this.props.width,
         this.props.height,
         this.props.iconName,
         this.svgIconRef.current,
-        this.props.title,
+        this.props.title
       );
   }
   componentDidUpdate() {
@@ -25,20 +25,20 @@ export class SvgIcon extends React.Component<any, any> {
   }
   render() {
     let className = "sv-svg-icon";
-    if(this.props.className) {
+    if (this.props.className) {
       className += " " + this.props.className;
     }
-    return (
-      this.props.iconName ?
-        <svg className={ className } style={this.props.style} onClick={this.props.onClick} ref={this.svgIconRef} role="img"><use></use></svg>
-        : null
-    );
+    return this.props.iconName ? (
+      <svg className={className} style={this.props.style} onClick={this.props.onClick} ref={this.svgIconRef} role="img">
+        <use></use>
+      </svg>
+    ) : null;
   }
   componentDidMount() {
     this.updateSvg();
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-svg-icon", (props) => {
+ReactElementFactory.Instance.registerElement("sv-svg-icon", props => {
   return React.createElement(SvgIcon, props);
 });

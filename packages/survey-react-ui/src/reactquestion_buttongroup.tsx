@@ -3,11 +3,7 @@ import React from "react";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyElementBase } from "./reactquestion_element";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
-import {
-  QuestionButtonGroupModel,
-  ButtonGroupItemValue,
-  ButtonGroupItemModel,
-} from "survey-core";
+import { QuestionButtonGroupModel, ButtonGroupItemValue, ButtonGroupItemModel } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 
 export class SurveyQuestionButtonGroup extends SurveyQuestionElementBase {
@@ -25,18 +21,16 @@ export class SurveyQuestionButtonGroup extends SurveyQuestionElementBase {
     return <div className={this.question.cssClasses.root}>{items}</div>;
   }
   renderItems() {
-    return this.question.visibleChoices.map(
-      (item: ButtonGroupItemValue, index: number) => {
-        return (
-          <SurveyButtonGroupItem
-            key={this.question.inputId + "_" + index}
-            item={item}
-            question={this.question}
-            index={index}
-          ></SurveyButtonGroupItem>
-        );
-      }
-    );
+    return this.question.visibleChoices.map((item: ButtonGroupItemValue, index: number) => {
+      return (
+        <SurveyButtonGroupItem
+          key={this.question.inputId + "_" + index}
+          item={item}
+          question={this.question}
+          index={index}
+        ></SurveyButtonGroupItem>
+      );
+    });
   }
 }
 
@@ -63,11 +57,7 @@ export class SurveyButtonGroupItem extends SurveyElementBase<any, any> {
     const input = this.renderInput();
     const caption = this.renderCaption();
     return (
-      <label
-        role="radio"
-        className={this.model.css.label}
-        title={this.model.caption.renderedHtml}
-      >
+      <label role="radio" className={this.model.css.label} title={this.model.caption.renderedHtml}>
         {input}
         <div className={this.model.css.decorator}>
           {icon}
@@ -113,10 +103,7 @@ export class SurveyButtonGroupItem extends SurveyElementBase<any, any> {
     if (!this.model.showCaption) return null;
     let caption = this.renderLocString(this.model.caption);
     return (
-      <span
-        className={this.model.css.caption}
-        title={this.model.caption.renderedHtml}
-      >
+      <span className={this.model.css.caption} title={this.model.caption.renderedHtml}>
         {caption}
       </span>
     );

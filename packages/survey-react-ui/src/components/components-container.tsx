@@ -1,5 +1,5 @@
 import React from "react";
-import { ISurveyLayoutElement } from "survey-core";
+import { ISurveyLayoutElement } from "fullstory-form-core";
 import { ReactElementFactory } from "../element-factory";
 
 export class ComponentsContainer extends React.Component<any, any> {
@@ -10,17 +10,31 @@ export class ComponentsContainer extends React.Component<any, any> {
       return null;
     }
     if (!needRenderWrapper) {
-      return <>
-        {components.map(component => {
-          return ReactElementFactory.Instance.createElement(component.component as string, { survey: this.props.survey, model: component.data, container: this.props.container, key: component.id });
-        })}
-      </>;
+      return (
+        <>
+          {components.map(component => {
+            return ReactElementFactory.Instance.createElement(component.component as string, {
+              survey: this.props.survey,
+              model: component.data,
+              container: this.props.container,
+              key: component.id
+            });
+          })}
+        </>
+      );
     }
-    return <div className={"sv-components-column" + " sv-components-container-" + this.props.container}>
-      {components.map(component => {
-        return ReactElementFactory.Instance.createElement(component.component as string, { survey: this.props.survey, model: component.data, container: this.props.container, key: component.id });
-      })}
-    </div>;
+    return (
+      <div className={"sv-components-column" + " sv-components-container-" + this.props.container}>
+        {components.map(component => {
+          return ReactElementFactory.Instance.createElement(component.component as string, {
+            survey: this.props.survey,
+            model: component.data,
+            container: this.props.container,
+            key: component.id
+          });
+        })}
+      </div>
+    );
   }
 }
 

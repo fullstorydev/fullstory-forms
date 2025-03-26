@@ -1,6 +1,5 @@
-
 import React from "react";
-import { SvgRegistry } from "survey-core";
+import { SvgRegistry } from "fullstory-form-core";
 
 export class SvgBundleComponent extends React.Component {
   private containerRef: React.RefObject<SVGSVGElement>;
@@ -13,7 +12,7 @@ export class SvgBundleComponent extends React.Component {
     if (!!this.containerRef.current) {
       this.containerRef.current.innerHTML = SvgRegistry.iconsRenderedHtml();
     }
-  }
+  };
   componentDidMount(): void {
     this.onIconsChanged();
     SvgRegistry.onIconsChanged.add(this.onIconsChanged);

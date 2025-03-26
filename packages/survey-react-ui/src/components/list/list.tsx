@@ -1,5 +1,5 @@
 import React from "react";
-import { IAction, ListModel, settings } from "survey-core";
+import { IAction, ListModel, settings } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SvgIcon } from "../svg-icon/svg-icon";
@@ -33,17 +33,17 @@ export class List extends SurveyElementBase<IListProps, any> {
   }
   componentDidMount(): void {
     super.componentDidMount();
-    if(!!this.listContainerRef && !!this.listContainerRef.current) {
+    if (!!this.listContainerRef && !!this.listContainerRef.current) {
       this.model.initListContainerHtmlElement(this.listContainerRef.current);
     }
   }
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
     if (this.model !== prevProps.model) {
-      if(this.model && !!this.listContainerRef?.current) {
+      if (this.model && !!this.listContainerRef?.current) {
         this.model.initListContainerHtmlElement(this.listContainerRef.current);
       }
-      if(prevProps.model) {
+      if (prevProps.model) {
         prevProps.model.initListContainerHtmlElement(undefined as any);
       }
     }
@@ -51,7 +51,7 @@ export class List extends SurveyElementBase<IListProps, any> {
 
   componentWillUnmount(): void {
     super.componentWillUnmount();
-    if(!!this.model) {
+    if (!!this.model) {
       this.model.initListContainerHtmlElement(undefined as any);
     }
   }
@@ -65,7 +65,7 @@ export class List extends SurveyElementBase<IListProps, any> {
     );
   }
   renderList() {
-    if(!this.model.renderElements) return null;
+    if (!this.model.renderElements) return null;
 
     const items = this.renderItems();
     const ulStyle = { display: this.model.isEmpty ? "none" : null };
@@ -76,14 +76,15 @@ export class List extends SurveyElementBase<IListProps, any> {
         style={ulStyle as any}
         role="listbox"
         id={this.model.elementId}
-        onMouseDown={(e) => {
+        onMouseDown={e => {
           e.preventDefault();
         }}
         onKeyDown={this.handleKeydown}
         onMouseMove={this.handleMouseMove}
       >
         {items}
-      </ul>);
+      </ul>
+    );
   }
   renderItems() {
     if (!this.model) {
@@ -94,9 +95,7 @@ export class List extends SurveyElementBase<IListProps, any> {
       return null;
     }
     return items.map((item: IAction, itemIndex: number) => {
-      return (
-        <ListItem model={this.model} item={item} key={"item" + itemIndex}></ListItem>
-      );
+      return <ListItem model={this.model} item={item} key={"item" + itemIndex}></ListItem>;
     });
   }
 
@@ -112,23 +111,22 @@ export class List extends SurveyElementBase<IListProps, any> {
       const onKeyUp = (e: any) => {
         this.model.goToItems(e);
       };
-      const clearButton = this.model.showSearchClearButton && !!this.model.filterString ?
-        <button className={this.model.cssClasses.searchClearButtonIcon} onClick={(event) => { this.model.onClickSearchClearButton(event); }}>
-          <SvgIcon
-            iconName={"icon-searchclear"}
-            size={"auto"}
+      const clearButton =
+        this.model.showSearchClearButton && !!this.model.filterString ? (
+          <button
+            className={this.model.cssClasses.searchClearButtonIcon}
+            onClick={event => {
+              this.model.onClickSearchClearButton(event);
+            }}
           >
-          </SvgIcon>
-        </button> : null;
+            <SvgIcon iconName={"icon-searchclear"} size={"auto"}></SvgIcon>
+          </button>
+        ) : null;
 
       return (
         <div className={this.model.cssClasses.filter}>
           <div className={this.model.cssClasses.filterIcon}>
-            <SvgIcon
-              iconName={"icon-search"}
-              size={"auto"}
-            >
-            </SvgIcon>
+            <SvgIcon iconName={"icon-search"} size={"auto"}></SvgIcon>
           </div>
           <input
             type="text"
@@ -147,12 +145,16 @@ export class List extends SurveyElementBase<IListProps, any> {
   emptyContent() {
     const style = { display: this.model.isEmpty ? null : "none" };
 
-    return (<div className={this.model.cssClasses.emptyContainer} style={style as any}>
-      <div className={this.model.cssClasses.emptyText} aria-label={this.model.emptyMessage}>{this.model.emptyMessage}</div>
-    </div>);
+    return (
+      <div className={this.model.cssClasses.emptyContainer} style={style as any}>
+        <div className={this.model.cssClasses.emptyText} aria-label={this.model.emptyMessage}>
+          {this.model.emptyMessage}
+        </div>
+      </div>
+    );
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-list", (props) => {
+ReactElementFactory.Instance.registerElement("sv-list", props => {
   return React.createElement(List, props);
 });

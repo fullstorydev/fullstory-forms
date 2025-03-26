@@ -1,5 +1,5 @@
 import React from "react";
-import { Base, Notifier } from "survey-core";
+import { Base, Notifier } from "fullstory-form-core";
 import { SurveyElementBase } from "../reactquestion_element";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyActionBar } from "./action-bar/action-bar";
@@ -30,6 +30,6 @@ export class NotifierComponent extends SurveyElementBase<INotifierComponentProps
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-notifier", (props) => {
+ReactElementFactory.Instance.registerElement("sv-notifier", props => {
   return React.createElement(NotifierComponent, props);
 });

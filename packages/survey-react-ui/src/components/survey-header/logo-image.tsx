@@ -1,5 +1,5 @@
 import React from "react";
-import { SurveyModel } from "survey-core";
+import { SurveyModel } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 
 interface ILogoImageProps {
@@ -23,7 +23,11 @@ export class LogoImage extends React.Component<ILogoImageProps, any> {
           alt={this.survey.locTitle.renderedHtml}
           width={this.survey.renderedLogoWidth}
           height={this.survey.renderedLogoHeight}
-          style={{ objectFit: this.survey.logoFit as any, width: this.survey.renderedStyleLogoWidth, height: this.survey.renderedStyleLogoHeight }}
+          style={{
+            objectFit: this.survey.logoFit as any,
+            width: this.survey.renderedStyleLogoWidth,
+            height: this.survey.renderedStyleLogoHeight
+          }}
         />
       </div>
     );

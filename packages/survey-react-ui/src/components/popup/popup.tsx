@@ -1,5 +1,12 @@
 import React from "react";
-import { Base, PopupModel, PopupBaseViewModel, PopupDropdownViewModel, createPopupViewModel, CssClassBuilder } from "survey-core";
+import {
+  Base,
+  PopupModel,
+  PopupBaseViewModel,
+  PopupDropdownViewModel,
+  createPopupViewModel,
+  CssClassBuilder
+} from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SurveyActionBar } from "../action-bar/action-bar";
@@ -62,12 +69,9 @@ export class Popup extends SurveyElementBase<IPopupProps, any> {
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  "sv-popup",
-  (props: IPopupProps) => {
-    return React.createElement(Popup, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-popup", (props: IPopupProps) => {
+  return React.createElement(Popup, props);
+});
 
 export class PopupContainer extends SurveyElementBase<any, any> {
   constructor(props: any) {
@@ -104,7 +108,7 @@ export class PopupContainer extends SurveyElementBase<any, any> {
           top: popupBaseViewModel.top,
           height: popupBaseViewModel.height,
           width: popupBaseViewModel.width,
-          minWidth: popupBaseViewModel.minWidth,
+          minWidth: popupBaseViewModel.minWidth
         }}
         onClick={(ev: any) => {
           this.clickInside(ev);
@@ -113,9 +117,7 @@ export class PopupContainer extends SurveyElementBase<any, any> {
         {headerPopup}
         <div className="sv-popup__body-content">
           {headerContent}
-          <div className="sv-popup__scrolling-content">
-            {content}
-          </div>
+          <div className="sv-popup__scrolling-content">{content}</div>
           {footerContent}
         </div>
       </div>
@@ -144,11 +146,8 @@ export class PopupContainer extends SurveyElementBase<any, any> {
   }
   render(): React.JSX.Element {
     const container = this.renderContainer(this.model);
-    const className = new CssClassBuilder()
-      .append("sv-popup")
-      .append(this.model.styleClass)
-      .toString();
-    const style = { display: this.model.isVisible ? "" : "none", };
+    const className = new CssClassBuilder().append("sv-popup").append(this.model.styleClass).toString();
+    const style = { display: this.model.isVisible ? "" : "none" };
     return (
       <div
         tabIndex={-1}
@@ -171,7 +170,6 @@ export class PopupContainer extends SurveyElementBase<any, any> {
   }
 }
 export class PopupDropdownContainer extends PopupContainer {
-
   protected renderHeaderPopup(popupModel: PopupBaseViewModel): React.JSX.Element | null {
     const popupDropdownModel = popupModel as PopupDropdownViewModel;
     if (!popupDropdownModel) return null;
@@ -180,7 +178,7 @@ export class PopupDropdownContainer extends PopupContainer {
       <span
         style={{
           left: popupDropdownModel.pointerTarget.left,
-          top: popupDropdownModel.pointerTarget.top,
+          top: popupDropdownModel.pointerTarget.top
         }}
         className="sv-popup__pointer"
       ></span>

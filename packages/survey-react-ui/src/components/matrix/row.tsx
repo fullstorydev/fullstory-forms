@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { QuestionMatrixDropdownRenderedRow, QuestionMatrixDropdownModelBase } from "survey-core";
+import { QuestionMatrixDropdownRenderedRow, QuestionMatrixDropdownModelBase } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 

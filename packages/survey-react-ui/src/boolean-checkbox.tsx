@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RendererFactory } from "survey-core";
+import { RendererFactory } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyQuestionBoolean } from "./boolean";
 import { TitleActions } from "./components/title/title-actions";
@@ -12,8 +12,9 @@ export class SurveyQuestionBooleanCheckbox extends SurveyQuestionBoolean {
   protected renderElement(): React.JSX.Element {
     const cssClasses = this.question.cssClasses;
     const itemClass = this.question.getCheckboxItemCss();
-    const description = this.question.canRenderLabelDescription ?
-      SurveyElementBase.renderQuestionDescription(this.question) : null;
+    const description = this.question.canRenderLabelDescription
+      ? SurveyElementBase.renderQuestionDescription(this.question)
+      : null;
     return (
       <div className={cssClasses.rootCheckbox}>
         <div className={itemClass}>
@@ -22,11 +23,7 @@ export class SurveyQuestionBooleanCheckbox extends SurveyQuestionBoolean {
               ref={this.checkRef}
               type="checkbox"
               name={this.question.name}
-              value={
-                this.question.booleanValue === null
-                  ? ""
-                  : this.question.booleanValue
-              }
+              value={this.question.booleanValue === null ? "" : this.question.booleanValue}
               id={this.question.inputId}
               className={cssClasses.controlCheckbox}
               disabled={this.question.isDisabledAttr}
@@ -39,13 +36,11 @@ export class SurveyQuestionBooleanCheckbox extends SurveyQuestionBoolean {
               aria-errormessage={this.question.ariaErrormessage}
             />
             <span className={cssClasses.checkboxMaterialDecorator}>
-              {this.question.svgIcon ?
-                <svg
-                  className={cssClasses.checkboxItemDecorator}
-                >
+              {this.question.svgIcon ? (
+                <svg className={cssClasses.checkboxItemDecorator}>
                   <use xlinkHref={this.question.svgIcon}></use>
-                </svg> : null
-              }
+                </svg>
+              ) : null}
               <span className="check" />
             </span>
             {this.question.isLabelRendered && (
@@ -61,15 +56,8 @@ export class SurveyQuestionBooleanCheckbox extends SurveyQuestionBoolean {
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion(
-  "sv-boolean-checkbox",
-  (props) => {
-    return React.createElement(SurveyQuestionBooleanCheckbox, props);
-  }
-);
+ReactQuestionFactory.Instance.registerQuestion("sv-boolean-checkbox", props => {
+  return React.createElement(SurveyQuestionBooleanCheckbox, props);
+});
 
-RendererFactory.Instance.registerRenderer(
-  "boolean",
-  "checkbox",
-  "sv-boolean-checkbox"
-);
+RendererFactory.Instance.registerRenderer("boolean", "checkbox", "sv-boolean-checkbox");

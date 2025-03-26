@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, PopupSurveyModel } from "survey-core";
+import { Base, PopupSurveyModel } from "fullstory-form-core";
 import { Survey } from "./reactSurvey";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 
@@ -84,12 +84,15 @@ export class PopupSurvey extends Survey {
   }
   protected renderCloseButton(popup: PopupSurveyModel): React.JSX.Element {
     return (
-      <div className={popup.cssHeaderCloseButton} onClick={() => {
-        popup.hide();
-        if (typeof this.props.onClose == "function") {
-          this.props.onClose();
-        }
-      }}>
+      <div
+        className={popup.cssHeaderCloseButton}
+        onClick={() => {
+          popup.hide();
+          if (typeof this.props.onClose == "function") {
+            this.props.onClose();
+          }
+        }}
+      >
         <SvgIcon iconName={"icon-close_16x16"} size={16}></SvgIcon>
       </div>
     );
@@ -104,7 +107,12 @@ export class PopupSurvey extends Survey {
     }
 
     return (
-      <div className={popup.cssHeaderFullScreenButton} onClick={() => { popup.toggleFullScreen(); }}>
+      <div
+        className={popup.cssHeaderFullScreenButton}
+        onClick={() => {
+          popup.toggleFullScreen();
+        }}
+      >
         {Icon}
       </div>
     );
@@ -122,11 +130,10 @@ export class PopupSurvey extends Survey {
     this.popup.allowClose = newProps.allowClose;
     this.popup.allowFullScreen = newProps.allowFullScreen;
     this.popup.isShowing = true;
-    if (!this.popup.isExpanded && (newProps.expanded || newProps.isExpanded))
-      this.popup.expand();
+    if (!this.popup.isExpanded && (newProps.expanded || newProps.isExpanded)) this.popup.expand();
   }
 }
 /**
  * @deprecated Use `PopupSurvey` instead.
  */
-export class SurveyWindow extends PopupSurvey { }
+export class SurveyWindow extends PopupSurvey {}

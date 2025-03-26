@@ -1,5 +1,5 @@
 import React from "react";
-import { Base, QuestionRatingModel, RenderedRatingItem } from "survey-core";
+import { Base, QuestionRatingModel, RenderedRatingItem } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { attachKey2click } from "../../reactSurvey";

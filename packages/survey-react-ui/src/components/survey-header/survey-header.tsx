@@ -1,5 +1,5 @@
 import React from "react";
-import { SurveyModel } from "survey-core";
+import { SurveyModel } from "fullstory-form-core";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { ReactElementFactory } from "../../element-factory";
 import { TitleElement } from "../title/title-element";
@@ -31,19 +31,14 @@ export class SurveyHeader extends React.Component<ISurveyHeaderProps, any> {
     };
   }
   componentWillUnmount() {
-    this.survey.locLogo.onChanged = function () { };
+    this.survey.locLogo.onChanged = function () {};
   }
 
   private renderTitle(): React.JSX.Element | null {
     if (!this.survey.renderedHasTitle) return null;
-    const description = SurveyElementBase.renderLocString(
-      this.survey.locDescription
-    );
+    const description = SurveyElementBase.renderLocString(this.survey.locDescription);
     return (
-      <div
-        className={this.css.headerText}
-        style={{ maxWidth: this.survey.titleMaxWidth }}
-      >
+      <div className={this.css.headerText} style={{ maxWidth: this.survey.titleMaxWidth }}>
         <TitleElement element={this.survey}></TitleElement>
         {this.survey.renderedHasDescription ? <div className={this.css.description}>{description}</div> : null}
       </div>
@@ -52,16 +47,10 @@ export class SurveyHeader extends React.Component<ISurveyHeaderProps, any> {
 
   private renderLogoImage(isRender: boolean): React.JSX.Element | null {
     if (!isRender) return null;
-    const componentName: string = this.survey.getElementWrapperComponentName(
-      this.survey,
-      "logo-image"
-    );
-    const componentData: any = this.survey.getElementWrapperComponentData(
-      this.survey,
-      "logo-image"
-    );
+    const componentName: string = this.survey.getElementWrapperComponentName(this.survey, "logo-image");
+    const componentData: any = this.survey.getElementWrapperComponentData(this.survey, "logo-image");
     return ReactElementFactory.Instance.createElement(componentName, {
-      data: componentData,
+      data: componentData
     });
   }
   public render(): React.JSX.Element | null {
@@ -77,9 +66,6 @@ export class SurveyHeader extends React.Component<ISurveyHeaderProps, any> {
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  "survey-header",
-  (props: ISurveyHeaderProps) => {
-    return React.createElement(SurveyHeader, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("survey-header", (props: ISurveyHeaderProps) => {
+  return React.createElement(SurveyHeader, props);
+});

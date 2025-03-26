@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionEmptyModel } from "survey-core";
+import { QuestionEmptyModel } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 
 export class SurveyQuestionEmpty extends SurveyQuestionElementBase {
@@ -16,6 +16,6 @@ export class SurveyQuestionEmpty extends SurveyQuestionElementBase {
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("empty", (props) => {
+ReactQuestionFactory.Instance.registerQuestion("empty", props => {
   return React.createElement(SurveyQuestionEmpty, props);
 });

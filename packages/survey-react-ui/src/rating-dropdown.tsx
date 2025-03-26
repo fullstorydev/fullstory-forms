@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuestionRatingModel, RendererFactory } from "survey-core";
+import { QuestionRatingModel, RendererFactory } from "fullstory-form-core";
 import { SurveyQuestionDropdownBase } from "./dropdown-base";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 
@@ -12,22 +12,11 @@ export class SurveyQuestionRatingDropdown extends SurveyQuestionDropdownBase<Que
   protected renderElement(): React.JSX.Element {
     var cssClasses = this.question.cssClasses;
     var select = this.renderSelect(cssClasses);
-    return (
-      <div className={this.question.cssClasses.rootDropdown}>
-        {select}
-      </div>
-    );
+    return <div className={this.question.cssClasses.rootDropdown}>{select}</div>;
   }
 }
-ReactQuestionFactory.Instance.registerQuestion(
-  "sv-rating-dropdown",
-  (props) => {
-    return React.createElement(SurveyQuestionRatingDropdown, props);
-  }
-);
+ReactQuestionFactory.Instance.registerQuestion("sv-rating-dropdown", props => {
+  return React.createElement(SurveyQuestionRatingDropdown, props);
+});
 
-RendererFactory.Instance.registerRenderer(
-  "rating",
-  "dropdown",
-  "sv-rating-dropdown"
-);
+RendererFactory.Instance.registerRenderer("rating", "dropdown", "sv-rating-dropdown");

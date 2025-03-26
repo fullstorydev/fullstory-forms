@@ -1,5 +1,5 @@
 import React from "react";
-import { ListModel } from "survey-core";
+import { ListModel } from "fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SvgIcon } from "../svg-icon/svg-icon";
@@ -23,29 +23,33 @@ export class ListItemContent extends SurveyElementBase<IListItemProps, any> {
     if (!this.item) return null;
 
     const text = this.renderLocString(this.item.locTitle, undefined, "locString");
-    const icon = (this.item.iconName) ?
+    const icon = this.item.iconName ? (
       <SvgIcon
         className={this.model.cssClasses.itemIcon}
         iconName={this.item.iconName}
         size={this.item.iconSize}
         aria-label={this.item.title}
-      ></SvgIcon> : null;
+      ></SvgIcon>
+    ) : null;
 
-    const markerIcon = (this.item.markerIconName) ?
+    const markerIcon = this.item.markerIconName ? (
       <SvgIcon
         className={this.item.cssClasses.itemMarkerIcon}
         iconName={this.item.markerIconName}
         size={"auto"}
-      ></SvgIcon> : null;
+      ></SvgIcon>
+    ) : null;
 
-    return <>
-      {icon}
-      {text}
-      {markerIcon}
-    </>;
+    return (
+      <>
+        {icon}
+        {text}
+        {markerIcon}
+      </>
+    );
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-list-item-content", (props) => {
+ReactElementFactory.Instance.registerElement("sv-list-item-content", props => {
   return React.createElement(ListItemContent, props);
 });

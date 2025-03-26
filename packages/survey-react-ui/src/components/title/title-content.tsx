@@ -1,5 +1,5 @@
 import React from "react";
-import { SurveyElementCore, ITitleOwner } from "survey-core";
+import { SurveyElementCore, ITitleOwner } from "fullstory-form-core";
 import { SurveyElementBase } from "../../reactquestion_element";
 
 export class TitleContent extends React.Component<any, any> {
@@ -15,8 +15,7 @@ export class TitleContent extends React.Component<any, any> {
     return this.props.element;
   }
   render(): React.JSX.Element {
-    if (this.element.isTitleRenderedAsString)
-      return SurveyElementBase.renderLocString(this.element.locTitle);
+    if (this.element.isTitleRenderedAsString) return SurveyElementBase.renderLocString(this.element.locTitle);
     var spans = this.renderTitleSpans(this.element.getTitleOwner(), this.cssClasses);
     return <>{spans}</>;
   }
@@ -52,9 +51,7 @@ export class TitleContent extends React.Component<any, any> {
       spans.push(this.renderRequireText(element));
       spans.push(getSpaceSpan("req-sp"));
     }
-    spans.push(
-      SurveyElementBase.renderLocString(element.locTitle, null, "q_title")
-    );
+    spans.push(SurveyElementBase.renderLocString(element.locTitle, null, "q_title"));
     if (element.isRequireTextAfterTitle) {
       spans.push(getSpaceSpan("req-sp"));
       spans.push(this.renderRequireText(element));
@@ -64,12 +61,7 @@ export class TitleContent extends React.Component<any, any> {
 
   private renderRequireText(element: ITitleOwner): React.JSX.Element {
     return (
-      <span
-        data-key={"req-text"}
-        key={"req-text"}
-        className={element.cssRequiredMark}
-        aria-hidden={true}
-      >
+      <span data-key={"req-text"} key={"req-text"} className={element.cssRequiredMark} aria-hidden={true}>
         {element.requiredMark}
       </span>
     );

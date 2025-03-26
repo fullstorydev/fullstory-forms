@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DropdownMultiSelectListModel, QuestionTagboxModel, Helpers, settings } from "survey-core";
+import { DropdownMultiSelectListModel, QuestionTagboxModel, Helpers, settings } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyElementBase } from "./reactquestion_element";
 
@@ -58,21 +58,27 @@ export class TagboxFilterString extends SurveyElementBase<ITagboxFilterProps, an
   render(): React.JSX.Element {
     return (
       <div className={this.question.cssClasses.hint}>
-        {this.model.showHintPrefix ?
-          (<div className={this.question.cssClasses.hintPrefix}>
+        {this.model.showHintPrefix ? (
+          <div className={this.question.cssClasses.hintPrefix}>
             <span>{this.model.hintStringPrefix}</span>
-          </div>) : null}
+          </div>
+        ) : null}
         <div className={this.question.cssClasses.hintSuffixWrapper}>
-          {this.model.showHintString ?
-            (<div className={this.question.cssClasses.hintSuffix}>
-              <span style={{ visibility: "hidden" }} data-bind="text: model.filterString">{this.model.inputStringRendered}</span>
+          {this.model.showHintString ? (
+            <div className={this.question.cssClasses.hintSuffix}>
+              <span style={{ visibility: "hidden" }} data-bind="text: model.filterString">
+                {this.model.inputStringRendered}
+              </span>
               <span>{this.model.hintStringSuffix}</span>
-            </div>) : null}
+            </div>
+          ) : null}
 
-          <input type="text" autoComplete="off"
+          <input
+            type="text"
+            autoComplete="off"
             id={this.question.getInputId()}
             inputMode={this.model.inputMode}
-            ref={(element) => (this.inputElement = element)}
+            ref={element => (this.inputElement = element)}
             className={this.question.cssClasses.filterStringInput}
             disabled={this.question.isInputReadOnly}
             readOnly={this.model.filterReadOnly ? true : undefined}
@@ -85,10 +91,18 @@ export class TagboxFilterString extends SurveyElementBase<ITagboxFilterProps, an
             aria-controls={this.model.listElementId}
             aria-activedescendant={this.model.ariaActivedescendant}
             placeholder={this.model.filterStringPlaceholder}
-            onKeyDown={(e) => { this.keyhandler(e); }}
-            onChange={(e) => { this.onChange(e); }}
-            onBlur={(e) => { this.onBlur(e); }}
-            onFocus={(e) => { this.onFocus(e); }}
+            onKeyDown={e => {
+              this.keyhandler(e);
+            }}
+            onChange={e => {
+              this.onChange(e);
+            }}
+            onBlur={e => {
+              this.onBlur(e);
+            }}
+            onFocus={e => {
+              this.onFocus(e);
+            }}
           ></input>
         </div>
       </div>
@@ -96,6 +110,6 @@ export class TagboxFilterString extends SurveyElementBase<ITagboxFilterProps, an
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("sv-tagbox-filter", (props) => {
+ReactQuestionFactory.Instance.registerQuestion("sv-tagbox-filter", props => {
   return React.createElement(TagboxFilterString, props);
 });

@@ -6,7 +6,7 @@ import {
   Question,
   QuestionMatrixDropdownRenderedCell,
   SurveyModel
-} from "survey-core";
+} from "fullstory-form-core";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyElementBase, ReactSurveyElement } from "./reactquestion_element";

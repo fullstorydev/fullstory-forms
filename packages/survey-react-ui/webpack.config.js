@@ -12,31 +12,24 @@ const year = new Date().getFullYear();
 const banner = [
   "surveyjs - Survey JavaScript library v" + packageJson.version,
   "Copyright (c) 2015-" + year + " Devsoft Baltic OÜ  - http://surveyjs.io/",
-  "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
+  "License: MIT (http://www.opensource.org/licenses/mit-license.php)"
 ].join("\n");
 
 const buildPlatformJson = {
   name: packageJson.name,
   version: packageJson.version,
-  "description": "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
-  "keywords": [
-    "Survey",
-    "JavaScript",
-    "Bootstrap",
-    "Library",
-    "knockout"
-  ],
+  "description":
+    "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
+  "keywords": ["Survey", "JavaScript", "Bootstrap", "Library", "knockout"],
   "homepage": "https://surveyjs.io/",
   "license": "MIT",
-  "files": [
-    "**/*"
-  ],
+  "files": ["**/*"],
   "main": "survey-react-ui.js",
   "module": "fesm/survey-react-ui.js",
   typings: "./typings/entries/index.d.ts",
 
   "peerDependencies": {
-    "survey-core": packageJson.version,
+    "fullstory-form-core": packageJson.version,
     "react": "^16.5.0 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.5.0 || ^17.0.1 || ^18.2.0"
   }
@@ -47,14 +40,8 @@ function getPercentageHandler(emitNonSourceFiles, buildPath) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
     } else if (1 == percentage && emitNonSourceFiles) {
-      fs.createReadStream("./README.md").pipe(
-        fs.createWriteStream(buildPath + "README.md")
-      );
-      fs.writeFileSync(
-        buildPath + "package.json",
-        JSON.stringify(buildPlatformJson, null, 2),
-        "utf8"
-      );
+      fs.createReadStream("./README.md").pipe(fs.createWriteStream(buildPath + "README.md"));
+      fs.writeFileSync(buildPath + "package.json", JSON.stringify(buildPlatformJson, null, 2), "utf8");
     }
   };
 }
@@ -64,17 +51,19 @@ module.exports = function (options) {
   const emitNonSourceFiles = !!options.emitNonSourceFiles;
   const buildPath = __dirname + "/build/";
   const isProductionBuild = options.buildType === "prod";
-  const compilerOptions = emitDeclarations ? {} : {
-    declaration: false,
-    declarationDir: null
-  };
+  const compilerOptions = emitDeclarations
+    ? {}
+    : {
+        declaration: false,
+        declarationDir: null
+      };
   const config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./entries/index.ts")
     },
     resolve: {
-      extensions: [".ts", ".js", ".tsx", ".scss"],
+      extensions: [".ts", ".js", ".tsx", ".scss"]
     },
     optimization: {
       minimize: isProductionBuild
@@ -122,7 +111,7 @@ module.exports = function (options) {
       library: {
         root: options.libraryName || "SurveyReact",
         amd: "[dashedname]",
-        commonjs: "[dashedname]",
+        commonjs: "[dashedname]"
       },
       libraryTarget: "umd",
       globalObject: "this",
@@ -141,12 +130,12 @@ module.exports = function (options) {
         commonjs: "react-dom",
         amd: "react-dom"
       },
-      "survey-core": {
+      "fullstory-form-core": {
         root: "Survey",
-        commonjs2: "survey-core",
-        commonjs: "survey-core",
-        amd: "survey-core"
-      },
+        commonjs2: "fullstory-form-core",
+        commonjs: "fullstory-form-core",
+        amd: "fullstory-form-core"
+      }
     },
     plugins: [
       new DashedNamePlugin(),
@@ -173,11 +162,11 @@ module.exports = function (options) {
         filename: "index.html",
         inject: "body",
         template: "index.html"
-      }),
+      })
     ]);
     config.devServer = {
       static: {
-        directory: path.join(__dirname, "."),
+        directory: path.join(__dirname, ".")
       },
       //host: "0.0.0.0",
       compress: false,

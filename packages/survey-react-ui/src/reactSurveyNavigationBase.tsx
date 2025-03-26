@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SurveyModel } from "survey-core";
+import { SurveyModel } from "fullstory-form-core";
 
 export class SurveyNavigationBase extends React.Component<any, any> {
   constructor(props: any) {

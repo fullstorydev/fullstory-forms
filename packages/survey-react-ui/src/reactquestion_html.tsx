@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionHtmlModel } from "survey-core";
+import { QuestionHtmlModel } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 
 export class SurveyQuestionHtml extends SurveyQuestionElementBase {
@@ -14,7 +14,7 @@ export class SurveyQuestionHtml extends SurveyQuestionElementBase {
     this.reactOnStrChanged();
   }
   componentWillUnmount() {
-    this.question.locHtml.onChanged = function () { };
+    this.question.locHtml.onChanged = function () {};
   }
   componentDidUpdate(prevProps: any, prevState: any) {
     this.reactOnStrChanged();
@@ -29,15 +29,10 @@ export class SurveyQuestionHtml extends SurveyQuestionElementBase {
   }
   protected renderElement(): React.JSX.Element {
     var htmlValue = { __html: this.question.locHtml.renderedHtml };
-    return (
-      <div
-        className={this.question.renderCssRoot}
-        dangerouslySetInnerHTML={htmlValue}
-      />
-    );
+    return <div className={this.question.renderCssRoot} dangerouslySetInnerHTML={htmlValue} />;
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("html", (props) => {
+ReactQuestionFactory.Instance.registerQuestion("html", props => {
   return React.createElement(SurveyQuestionHtml, props);
 });

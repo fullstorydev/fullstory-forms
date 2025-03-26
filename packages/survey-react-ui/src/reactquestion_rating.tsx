@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionRatingModel, RenderedRatingItem } from "survey-core";
+import { QuestionRatingModel, RenderedRatingItem } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { ReactElementFactory } from "./element-factory";
 

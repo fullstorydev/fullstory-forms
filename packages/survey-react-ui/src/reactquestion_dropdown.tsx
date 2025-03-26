@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Question } from "survey-core";
+import { Question } from "fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyQuestionDropdownBase } from "./dropdown-base";
 
@@ -21,6 +21,6 @@ export class SurveyQuestionDropdown extends SurveyQuestionDropdownBase<Question>
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("dropdown", (props) => {
+ReactQuestionFactory.Instance.registerQuestion("dropdown", props => {
   return React.createElement(SurveyQuestionDropdown, props);
 });

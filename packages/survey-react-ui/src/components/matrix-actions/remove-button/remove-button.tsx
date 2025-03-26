@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  MatrixDropdownRowModelBase,
-  QuestionMatrixDropdownModelBase,
-} from "survey-core";
+import { MatrixDropdownRowModelBase, QuestionMatrixDropdownModelBase } from "fullstory-form-core";
 import { ReactElementFactory } from "../../../element-factory";
 import { ReactSurveyElement } from "../../../reactquestion_element";
 
@@ -36,9 +33,6 @@ export class SurveyQuestionMatrixDynamicRemoveButton extends ReactSurveyElement 
   }
 }
 
-ReactElementFactory.Instance.registerElement(
-  "sv-matrix-remove-button",
-  (props) => {
-    return React.createElement(SurveyQuestionMatrixDynamicRemoveButton, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-matrix-remove-button", props => {
+  return React.createElement(SurveyQuestionMatrixDynamicRemoveButton, props);
+});

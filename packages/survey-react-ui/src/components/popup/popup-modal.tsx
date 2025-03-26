@@ -2,9 +2,12 @@ import { createPortal } from "react-dom";
 import React from "react";
 import { PopupContainer } from "./popup";
 import { SurveyElementBase } from "../../reactquestion_element";
-import { createPopupModalViewModel, IDialogOptions, PopupBaseViewModel, settings } from "survey-core";
+import { createPopupModalViewModel, IDialogOptions, PopupBaseViewModel, settings } from "fullstory-form-core";
 
-interface IModalDescriptor { init: () => void, clean: () => void }
+interface IModalDescriptor {
+  init: () => void;
+  clean: () => void;
+}
 
 export class PopupModal extends SurveyElementBase<{}, any> {
   private model: PopupBaseViewModel;
@@ -57,13 +60,13 @@ export class PopupModal extends SurveyElementBase<{}, any> {
       };
       this.isInitialized = true;
     }
-  }
+  };
   clean: () => void = () => {
     if (this.isInitialized) {
       settings.showDialog = undefined as any;
       this.isInitialized = false;
     }
-  }
+  };
   componentDidMount(): void {
     PopupModal.addModalDescriptor(this.descriptor);
   }

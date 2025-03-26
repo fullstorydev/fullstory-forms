@@ -1,5 +1,5 @@
 import React from "react";
-import { Base, CharacterCounter } from "survey-core";
+import { Base, CharacterCounter } from "fullstory-form-core";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyElementBase } from "../reactquestion_element";
 
@@ -14,10 +14,10 @@ export class CharacterCounterComponent extends SurveyElementBase<ICharacterCount
   }
 
   renderElement(): React.JSX.Element | null {
-    return (<div className={this.props.remainingCharacterCounter}>{this.props.counter.remainingCharacterCounter}</div>);
+    return <div className={this.props.remainingCharacterCounter}>{this.props.counter.remainingCharacterCounter}</div>;
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-character-counter", (props) => {
+ReactElementFactory.Instance.registerElement("sv-character-counter", props => {
   return React.createElement(CharacterCounterComponent, props);
 });
