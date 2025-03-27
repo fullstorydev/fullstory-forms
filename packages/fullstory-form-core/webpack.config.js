@@ -36,7 +36,7 @@ var buildPlatformJson = {
   homepage: "https://surveyjs.io/",
   license: "MIT",
   files: ["**/*"],
-  main: "survey-core.js",
+  main: "fullstory-form-core.js",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/surveyjs.git",
