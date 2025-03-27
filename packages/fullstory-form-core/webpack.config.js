@@ -24,7 +24,7 @@ var buildPlatformJson = {
   name: packageJson.name,
   version: packageJson.version,
   description:
-    "FullStory Forms Core is a JavaScript Survey Library powered by Survey.js. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
+    "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
   keywords: [
     "Survey",
     "JavaScript",
@@ -36,48 +36,17 @@ var buildPlatformJson = {
   homepage: "https://surveyjs.io/",
   license: "MIT",
   files: ["**/*"],
-  module: "fesm/survey-core.js",
-  main: "survey.core.js",
-  exports: {
-    ".": {
-      types: "./typings/entries/index.d.ts",
-      import: "./fesm/survey-core.js",
-      require: "./survey.core.js",
-    },
-    "./*.css": "./*.css",
-    "./survey.i18n": {
-      import: "./fesm/survey.i18n.js",
-      require: "./survey.i18n.js",
-    },
-    "./i18n": {
-      import: "./fesm/i18n/index.js",
-      require: "./i18n/index.js",
-    },
-    "./i18n/*": {
-      import: "./fesm/i18n/*.js",
-      require: "./i18n/*.js",
-    },
-    "./themes": {
-      types: "./themes/index.d.ts",
-      import: "./fesm/themes/index.js",
-      require: "./themes/index.js",
-    },
-    "./themes/*": {
-      types: "./themes/*.d.ts",
-      import: "./fesm/themes/*.js",
-      require: "./themes/*.js",
-    },
-    "./icons/*": {
-      types: "./icons/*.d.ts",
-      import: "./fesm/icons/*.js",
-      require: "./icons/*.js",
-    },
-  },
+  main: "survey-core.js",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/surveyjs.git",
   },
   typings: "./typings/entries/index.d.ts",
+  typesVersions: {
+    "<4.2": {
+      "*": ["ts3.4/*"],
+    },
+  },
 };
 
 function getPercentageHandler(emitNonSourceFiles, buildPath) {
@@ -111,14 +80,14 @@ module.exports = function (options) {
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey.core": path.resolve(__dirname, "./entries/index.ts"),
-      "survey-core": path.resolve(
+      [packageJson.name]: path.resolve(__dirname, "./entries/index.ts"),
+      defaultV2: path.resolve(
         __dirname,
-        "./src/default-theme/default.scss"
+        "./src/defaultV2-theme/defaultV2.scss"
       ),
-      "survey-core.fontless": path.resolve(
+      "defaultV2.fontless": path.resolve(
         __dirname,
-        "./src/default-theme/default.fontless.scss"
+        "./src/defaultV2-theme/defaultV2.fontless.scss"
       ),
     },
     resolve: {
@@ -134,7 +103,7 @@ module.exports = function (options) {
           loader: "ts-loader",
           options: {
             configFile: options.tsConfigFile || "tsconfig.json",
-            compilerOptions,
+            transpileOnly: isProductionBuild,
           },
         },
         {
@@ -155,7 +124,6 @@ module.exports = function (options) {
             {
               loader: "sass-loader",
               options: {
-                api: "modern",
                 sourceMap: options.buildType !== "prod",
               },
             },

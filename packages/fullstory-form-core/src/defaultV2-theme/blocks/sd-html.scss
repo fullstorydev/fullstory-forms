@@ -1,0 +1,12 @@
+@import "../mixins.scss";
+.sd-html {
+  white-space: initial;
+}
+
+.sd-html {
+  @include articleHtml;
+}
+
+.sd-html--nested {
+  color: $font-questiontitle-color;
+}

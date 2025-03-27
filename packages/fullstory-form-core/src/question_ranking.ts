@@ -380,8 +380,8 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
     let data;
 
     if (this.value.length > 0) {
-      const rankingData = {};
-      rankingData[`fs-element`] = "ranking";
+      const rankingData: any = {};
+      rankingData["fs-element"] = "ranking";
       rankingData["fs-ranking-name"] = name;
 
       for (let i = 0; i < this.value.length; i++) {
