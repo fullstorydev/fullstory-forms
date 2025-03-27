@@ -24,7 +24,7 @@ const buildPlatformJson = {
   "homepage": "https://surveyjs.io/",
   "license": "MIT",
   "files": ["**/*"],
-  "main": "survey-react-ui.js",
+  "main": "fullstory-form-react.js",
   typings: "./typings/entries/index.d.ts",
 
   "peerDependencies": {
