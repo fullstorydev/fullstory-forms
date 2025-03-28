@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { attachKey2click } from "../../reactSurvey";
 import { ReactSurveyElement } from "../../reactquestion_element";
 import { QuestionFileModel } from "fullstory-form-core";

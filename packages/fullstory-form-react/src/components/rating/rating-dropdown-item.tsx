@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 
@@ -36,6 +36,6 @@ export class RatingDropdownItem extends SurveyElementBase<IRatingItemProps, any>
   }
 }
 
-ReactElementFactory.Instance.registerElement("sv-rating-dropdown-item", (props) => {
+ReactElementFactory.Instance.registerElement("sv-rating-dropdown-item", props => {
   return React.createElement(RatingDropdownItem, props);
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ReactElementFactory } from "../../element-factory";
 
 export class SurveyActionBarSeparator extends React.Component<any, any> {
@@ -10,9 +10,6 @@ export class SurveyActionBarSeparator extends React.Component<any, any> {
     return <div className={className}></div>;
   }
 }
-ReactElementFactory.Instance.registerElement(
-  "sv-action-bar-separator",
-  (props) => {
-    return React.createElement(SurveyActionBarSeparator, props);
-  }
-);
+ReactElementFactory.Instance.registerElement("sv-action-bar-separator", props => {
+  return React.createElement(SurveyActionBarSeparator, props);
+});

@@ -27,11 +27,17 @@ const buildPlatformJson = {
   "main": "fullstory-form-react.js",
   "module": "fesm/fullstory-form-react.js",
   typings: "./typings/entries/index.d.ts",
-
+  "exports": {
+    ".": {
+      "types": "./typings/entries/index.d.ts",
+      "import": "./fesm/fullstory-form-react.js",
+      "require": "./fullstory-form-react.js"
+    }
+  },
   "peerDependencies": {
     "fullstory-form-core": packageJson.version,
-    "react": "^16.5.0 || ^17.0.1 || ^18.2.0",
-    "react-dom": "^16.5.0 || ^17.0.1 || ^18.2.0"
+    "react": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
+    "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0"
   }
 };
 

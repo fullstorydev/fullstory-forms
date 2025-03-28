@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { SurveyElementCore, ITitleOwner } from "fullstory-form-core";
 import { SurveyElementBase } from "../../reactquestion_element";
 

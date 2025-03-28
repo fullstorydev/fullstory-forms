@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { LocalizableString } from "fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 

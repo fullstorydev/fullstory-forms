@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Question, PanelModel, Base } from "fullstory-form-core";
 import { SurveyActionBar } from "./components/action-bar/action-bar";
 import { TitleElement } from "./components/title/title-element";

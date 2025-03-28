@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { SvgRegistry } from "fullstory-form-core";
 
 export class SvgBundleComponent extends React.Component {

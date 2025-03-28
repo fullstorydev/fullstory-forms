@@ -4,7 +4,7 @@ import { markupTests } from "../../../tests/markup/etalon";
 import { Survey as SurveyReact } from "../entries/index";
 import { Model } from "fullstory-form-core";
 import { act } from "react-dom/test-utils";
-import React from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 
 var platformDescriptor = {
