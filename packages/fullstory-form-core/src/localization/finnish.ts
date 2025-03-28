@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var finnishSurveyStrings = {
   pagePrevText: "Edellinen",
@@ -18,9 +18,11 @@ export var finnishSurveyStrings = {
   panelDynamicProgressText: "Osio {0} / {1}",
   panelDynamicTabTextFormat: "Paneeli {panelIndex}",
   questionsProgressText: "Olet vastannut {0} / {1} kysymykseen.",
-  emptySurvey: "Tässä kyselyssä ei ole yhtään näkyvillä olevaa sivua tai kysymystä.",
+  emptySurvey:
+    "Tässä kyselyssä ei ole yhtään näkyvillä olevaa sivua tai kysymystä.",
   completingSurvey: "Kiitos kyselyyn vastaamisesta!",
-  completingSurveyBefore: "Tietojemme mukaan olet jo suorittanut tämän kyselyn.",
+  completingSurveyBefore:
+    "Tietojemme mukaan olet jo suorittanut tämän kyselyn.",
   loadingSurvey: "Kyselyä ladataan palvelimelta...",
   placeholder: "Valitse...",
   ratingOptionsCaption: "Arvioi napauttamalla tätä...",
@@ -45,15 +47,19 @@ export var finnishSurveyStrings = {
   invalidEmail: "Syötä validi sähköpostiosoite.",
   invalidExpression: "Lausekkeen: {0} pitäisi palauttaa 'true'.",
   urlRequestError: "Pyyntö palautti virheen {0}. {1}",
-  urlGetChoicesError: "Pyyntö palautti tyhjän tiedoston tai 'path'-asetus on väärä",
+  urlGetChoicesError:
+    "Pyyntö palautti tyhjän tiedoston tai 'path'-asetus on väärä",
   exceedMaxSize: "Tiedoston koko ei saa olla suurempi kuin {0}.",
-  noUploadFilesHandler: "Tiedostoja ei voi ladata. Lisää käsittelijä onUploadFiles-tapahtumalle.",
+  noUploadFilesHandler:
+    "Tiedostoja ei voi ladata. Lisää käsittelijä onUploadFiles-tapahtumalle.",
   otherRequiredError: "Tarkenna vastaustasi tekstikenttään.",
-  uploadingFile: "Tiedostoa lähetetään. Odota muutama sekunti ja yritä uudelleen.",
+  uploadingFile:
+    "Tiedostoa lähetetään. Odota muutama sekunti ja yritä uudelleen.",
   loadingFile: "Ladataan...",
   chooseFile: "Valitse tiedosto(t)...",
   noFileChosen: "Ei tiedostoa valittuna",
-  filePlaceholder: "Pudota tiedosto tähän tai lataa tiedosto napsauttamalla alla olevaa painiketta.",
+  filePlaceholder:
+    "Pudota tiedosto tähän tai lataa tiedosto napsauttamalla alla olevaa painiketta.",
   confirmDelete: "Haluatko poistaa osion?",
   keyDuplicationError: "Tämä arvo on jo käytössä. Syötä toinen arvo.",
   addColumn: "Lisää sarake",
@@ -71,14 +77,16 @@ export var finnishSurveyStrings = {
   savingData: "Tietoja tallennetaan palvelimelle...",
   savingDataError: "Tapahtui virhe, emmekä voineet tallentaa kyselyn tietoja.",
   savingDataSuccess: "Tiedot tallennettiin onnistuneesti!",
-  savingExceedSize: "Vastauksesi ylittää 64 kt. Pienennä tiedostojesi kokoa ja yritä uudelleen tai ota yhteyttä kyselyn omistajaan.",
+  savingExceedSize:
+    "Vastauksesi ylittää 64 kt. Pienennä tiedostojesi kokoa ja yritä uudelleen tai ota yhteyttä kyselyn omistajaan.",
   saveAgainButton: "Yritä uudelleen",
   timerMin: "min",
   timerSec: "sek",
   timerSpentAll: "Olet käyttänyt {0} tällä sivulla ja yhteensä {1}.",
   timerSpentPage: "Olet käyttänyt {0} tällä sivulla.",
   timerSpentSurvey: "Olet käyttänyt yhteensä {0}.",
-  timerLimitAll: "Olet käyttänyt tällä sivulla {0} / {1} ja yhteensä {2} / {3}.",
+  timerLimitAll:
+    "Olet käyttänyt tällä sivulla {0} / {1} ja yhteensä {2} / {3}.",
   timerLimitPage: "Olet käyttänyt {0} / {1} tällä sivulla.",
   timerLimitSurvey: "Olet käyttänyt yhteensä {0} / {1}.",
   clearCaption: "Tyhjennä",
@@ -86,8 +94,10 @@ export var finnishSurveyStrings = {
   signaturePlaceHolderReadOnly: "Ei allekirjoitusta",
   chooseFileCaption: "Valitse tiedosto",
   takePhotoCaption: "Ota valokuva",
-  photoPlaceholder: "Napsauta alla olevaa painiketta ottaaksesi valokuvan kameralla.",
-  fileOrPhotoPlaceholder: "Vedä ja pudota tai valitse ladattava tiedosto tai ota valokuva kameralla.",
+  photoPlaceholder:
+    "Napsauta alla olevaa painiketta ottaaksesi valokuvan kameralla.",
+  fileOrPhotoPlaceholder:
+    "Vedä ja pudota tai valitse ladattava tiedosto tai ota valokuva kameralla.",
   replaceFileCaption: "Korvaa tiedosto",
   removeFileCaption: "Poista tämä tiedosto",
   booleanCheckedLabel: "Kyllä",
@@ -99,18 +109,26 @@ export var finnishSurveyStrings = {
   modalApplyButtonText: "Käytä",
   filterStringPlaceholder: "Hae kirjoittamalla...",
   emptyMessage: "Ei näytettäviä tietoja",
-  noEntriesText: "Merkintöjä ei ole vielä.\nLisää uusi merkintä napsauttamalla alla olevaa painiketta.",
+  noEntriesText:
+    "Merkintöjä ei ole vielä.\nLisää uusi merkintä napsauttamalla alla olevaa painiketta.",
   noEntriesReadonlyText: "Merkintöjä ei ole.",
   tabTitlePlaceholder: "Uusi paneeli",
   more: "Enemmän",
   tagboxDoneButtonCaption: "OKEI",
-  selectToRankEmptyRankedAreaText: "Kaikki valinnat asetetaan paremmuusjärjestykseen",
-  selectToRankEmptyUnrankedAreaText: "Vedä ja pudota vaihtoehdot tähän luokitellaksesi ne",
+  selectToRankEmptyRankedAreaText:
+    "Kaikki valinnat asetetaan paremmuusjärjestykseen",
+  selectToRankEmptyUnrankedAreaText:
+    "Vedä ja pudota vaihtoehdot tähän luokitellaksesi ne",
   ok: "OKEI",
-  cancel: "Perua"
+  cancel: "Perua",
 };
 
-setupLocale({ localeCode: "fi", strings: finnishSurveyStrings, nativeName: "suomi", englishName: "Finnish" });
+setupLocale({
+  localeCode: "fi",
+  strings: finnishSurveyStrings,
+  nativeName: "suomi",
+  englishName: "Finnish",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

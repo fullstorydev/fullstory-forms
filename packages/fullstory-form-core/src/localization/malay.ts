@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var malaySurveyStrings = {
   pagePrevText: "Sebelumnya",
@@ -20,13 +20,15 @@ export var malaySurveyStrings = {
   questionsProgressText: "{0}/{1} soalan telah dijawab",
   emptySurvey: "Tiada halaman atau soalan boleh dilihat dalam tinjauan.",
   completingSurvey: "Terima kasih kerana melengkapkan tinjauan!",
-  completingSurveyBefore: "Rekod kami menunjukkan yang anda telah melengkapkan tinjauan ini.",
+  completingSurveyBefore:
+    "Rekod kami menunjukkan yang anda telah melengkapkan tinjauan ini.",
   loadingSurvey: "Memuatkan Tinjauan...",
   placeholder: "Pilih...",
   ratingOptionsCaption: "Pilih...",
   value: "nilai",
   requiredError: "Respons diperlukan.",
-  requiredErrorInPanel: "Respons diperlukan: jawab sekurang-kurangnya satu soalan.",
+  requiredErrorInPanel:
+    "Respons diperlukan: jawab sekurang-kurangnya satu soalan.",
   requiredInAllRowsError: "Respons diperlukan: jawab soalan dalam semua baris.",
   eachRowUniqueError: "Setiap baris mesti mempunyai nilai yang unik.",
   numericError: "Nilai mestilah numerik.",
@@ -35,7 +37,8 @@ export var malaySurveyStrings = {
   textNoDigitsAllow: "Nombor tidak dibenarkan.",
   textMinLength: "Sila masukkan sekurang-kurangnya {0} aksara.",
   textMaxLength: "Sila masukkan tidak lebih daripada {0} aksara.",
-  textMinMaxLength: "Sila masukkan sekurang-kurangnya {0} dan tidak lebih daripada {1} aksara.",
+  textMinMaxLength:
+    "Sila masukkan sekurang-kurangnya {0} dan tidak lebih daripada {1} aksara.",
   minRowCountError: "Sila isikan sekurang-kurangnya {0} baris.",
   minSelectError: "Sila pilih sekurang-kurangnya {0} varian.",
   maxSelectError: "Sila pilih tidak lebih daripada {0} varian.",
@@ -45,15 +48,19 @@ export var malaySurveyStrings = {
   invalidEmail: "Sila masukkan alamat e-mel yang sah.",
   invalidExpression: "Ekspresi: {0} hendaklah mengembalikan nilai 'benar'.",
   urlRequestError: "Permintaan mengembalikan ralat '{0}'. {1}",
-  urlGetChoicesError: "Permintaan mengembalikan data kosong atau ciri 'laluan' salah",
+  urlGetChoicesError:
+    "Permintaan mengembalikan data kosong atau ciri 'laluan' salah",
   exceedMaxSize: "Saiz fail hendaklah tidak melebihi {0}.",
-  noUploadFilesHandler: "Fail tidak boleh dimuat naik. Sila tambah pengendali untuk acara 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Fail tidak boleh dimuat naik. Sila tambah pengendali untuk acara 'onUploadFiles'.",
   otherRequiredError: "Respons diperlukan: masukkan nilai lain.",
-  uploadingFile: "Fail anda sedang dimuat naik. Sila tunggu beberapa saat dan cuba lagi.",
+  uploadingFile:
+    "Fail anda sedang dimuat naik. Sila tunggu beberapa saat dan cuba lagi.",
   loadingFile: "Memuat...",
   chooseFile: "Pilih fail...",
   noFileChosen: "Tiada fail dipilih",
-  filePlaceholder: "Letakkan fail di sini atau klik butang di bawah untuk memuatkan fail.",
+  filePlaceholder:
+    "Letakkan fail di sini atau klik butang di bawah untuk memuatkan fail.",
   confirmDelete: "Adakah anda ingin memadamkan rekod?",
   keyDuplicationError: "Nilai ini hendaklah unik.",
   addColumn: "Tambahkan lajur",
@@ -71,23 +78,29 @@ export var malaySurveyStrings = {
   savingData: "Keputusan sedang disimpan pada pelayan...",
   savingDataError: "Ralat berlaku dan kami tidak dapat menyimpan keputusan.",
   savingDataSuccess: "Keputusan berjaya disimpan!",
-  savingExceedSize: "Jawapan anda melebihi 64KB. Sila kurangkan saiz fail anda dan cuba lagi atau hubungi pemilik tinjauan.",
+  savingExceedSize:
+    "Jawapan anda melebihi 64KB. Sila kurangkan saiz fail anda dan cuba lagi atau hubungi pemilik tinjauan.",
   saveAgainButton: "Cuba lagi",
   timerMin: "min",
   timerSec: "saat",
-  timerSpentAll: "Anda telah meluangkan {0} pada halaman ini dan {1} secara keseluruhan.",
+  timerSpentAll:
+    "Anda telah meluangkan {0} pada halaman ini dan {1} secara keseluruhan.",
   timerSpentPage: "Anda telah meluangkan {0} pada halaman ini.",
   timerSpentSurvey: "Anda telah meluangkan {0} secara keseluruhan.",
-  timerLimitAll: "Anda telah meluangkan {0} daripada {1} pada halaman ini dan {2} daripada {3} secara keseluruhan.",
+  timerLimitAll:
+    "Anda telah meluangkan {0} daripada {1} pada halaman ini dan {2} daripada {3} secara keseluruhan.",
   timerLimitPage: "Anda telah meluangkan {0} daripada {1} pada halaman ini.",
-  timerLimitSurvey: "Anda telah meluangkan {0} daripada {1} secara keseluruhan.",
+  timerLimitSurvey:
+    "Anda telah meluangkan {0} daripada {1} secara keseluruhan.",
   clearCaption: "Kosongkan",
   signaturePlaceHolder: "Tandatangan di sini",
   signaturePlaceHolderReadOnly: "Tiada tandatangan",
   chooseFileCaption: "Pilih fail",
   takePhotoCaption: "Ambil gambar",
-  photoPlaceholder: "Klik butang di bawah untuk mengambil gambar menggunakan kamera.",
-  fileOrPhotoPlaceholder: "Seret dan lepas atau pilih fail untuk memuat naik atau mengambil foto menggunakan kamera.",
+  photoPlaceholder:
+    "Klik butang di bawah untuk mengambil gambar menggunakan kamera.",
+  fileOrPhotoPlaceholder:
+    "Seret dan lepas atau pilih fail untuk memuat naik atau mengambil foto menggunakan kamera.",
   replaceFileCaption: "Gantikan fail",
   removeFileCaption: "Alih keluar fail ini",
   booleanCheckedLabel: "Ya",
@@ -99,18 +112,25 @@ export var malaySurveyStrings = {
   modalApplyButtonText: "Guna",
   filterStringPlaceholder: "Taip untuk membuat carian...",
   emptyMessage: "Tiada data untuk dipaparkan",
-  noEntriesText: "Belum ada entri.\nKlik butang di bawah untuk menambahkan entri.",
+  noEntriesText:
+    "Belum ada entri.\nKlik butang di bawah untuk menambahkan entri.",
   noEntriesReadonlyText: "Tiada penyertaan.",
   tabTitlePlaceholder: "Panel Baru",
   more: "Lebih banyak",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Semua pilihan disenaraikan",
-  selectToRankEmptyUnrankedAreaText: "Seret dan lepaskan pilihan di sini untuk meletakkannya",
+  selectToRankEmptyUnrankedAreaText:
+    "Seret dan lepaskan pilihan di sini untuk meletakkannya",
   ok: "OK",
-  cancel: "Batal"
+  cancel: "Batal",
 };
 
-setupLocale({ localeCode: "ms", strings: malaySurveyStrings, nativeName: "melayu", englishName: "Malay" });
+setupLocale({
+  localeCode: "ms",
+  strings: malaySurveyStrings,
+  nativeName: "melayu",
+  englishName: "Malay",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

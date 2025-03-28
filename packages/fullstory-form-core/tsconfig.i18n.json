@@ -5,12 +5,8 @@
     "baseUrl": ".",
     "declarationDir": null,
     "paths": {
-      "survey-core": [
-        "./build"
-      ],
-    },
+      "fullstory-form-core": ["./build"]
+    }
   },
-  "include": [
-    "./entries/i18n.ts"
-  ]
+  "include": ["./entries/i18n.ts"]
 }

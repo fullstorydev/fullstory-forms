@@ -6,19 +6,10 @@
     "declaration": false,
     "declarationDir": null,
     "paths": {
-      "survey-core": [
-        "./entries/index.ts"
-      ],
-      "@legacy/*": [
-        "../../src/*"
-      ]
+      "fullstory-form-core": ["./entries/index.ts"],
+      "@legacy/*": ["../../src/*"]
     },
-    "types": [
-      "qunit"
-    ]
+    "types": ["qunit"]
   },
-  "include": [
-    "./tests/entries/test.ts",
-    "../src/*.ts"
-  ],
+  "include": ["./tests/entries/test.ts", "../src/*.ts"]
 }

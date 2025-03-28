@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var icelandicSurveyStrings = {
   pagePrevText: "Tilbaka",
@@ -20,13 +20,15 @@ export var icelandicSurveyStrings = {
   questionsProgressText: "Svarað {0} / {1} spurningum",
   emptySurvey: "Það er enginn síða eða spurningar í þessari könnun.",
   completingSurvey: "Takk fyrir að fyllja út þessa könnun!",
-  completingSurveyBefore: "Skrár okkar sýna að þú hefur þegar lokið þessari könnun.",
+  completingSurveyBefore:
+    "Skrár okkar sýna að þú hefur þegar lokið þessari könnun.",
   loadingSurvey: "Könnunin er að hlaða...",
   placeholder: "Veldu...",
   ratingOptionsCaption: "Velja...",
   value: "gildi",
   requiredError: "Vinsamlegast svarið spurningunni.",
-  requiredErrorInPanel: "Vinsamlegast svaraðu að minnsta kosti einni spurningu.",
+  requiredErrorInPanel:
+    "Vinsamlegast svaraðu að minnsta kosti einni spurningu.",
   requiredInAllRowsError: "Vinsamlegast svarið spurningum í öllum röðum.",
   eachRowUniqueError: "Hver lína verður að hafa einstakt gildi.",
   numericError: "Þetta gildi verður að vera tala.",
@@ -39,7 +41,8 @@ export var icelandicSurveyStrings = {
   minRowCountError: "Vinsamlegast fyllið úr að minnsta kosti {0} raðir.",
   minSelectError: "Vinsamlegast veljið að minnsta kosti {0} möguleika.",
   maxSelectError: "Vinsamlegast veljið ekki fleiri en {0} möguleika.",
-  numericMinMax: "'{0}' ætti að vera meira en eða jafnt og {1} minna en eða jafnt og {2}",
+  numericMinMax:
+    "'{0}' ætti að vera meira en eða jafnt og {1} minna en eða jafnt og {2}",
   numericMin: "{0}' ætti að vera meira en eða jafnt og {1}",
   numericMax: "'{0}' ætti að vera minna en eða jafnt og {1}",
   invalidEmail: "Vinsamlegast sláið inn gilt netfang.",
@@ -47,13 +50,16 @@ export var icelandicSurveyStrings = {
   urlRequestError: "Beiðninn skilaði eftirfaranadi villu '{0}'. {1}",
   urlGetChoicesError: "Beiðninng skilaði engum gögnum eða slóðinn var röng",
   exceedMaxSize: "Skráinn skal ekki vera stærri en {0}.",
-  noUploadFilesHandler: "Ekki er hægt að hlaða upp skrám. Vinsamlegast bættu við rekli fyrir 'onUploadFiles' atvikið.",
+  noUploadFilesHandler:
+    "Ekki er hægt að hlaða upp skrám. Vinsamlegast bættu við rekli fyrir 'onUploadFiles' atvikið.",
   otherRequiredError: "Vinamlegast fyllið út hitt gildið.",
-  uploadingFile: "Skráinn þín var send. Vinsamlegast bíðið í nokkrar sekúndur og reynið aftur.",
+  uploadingFile:
+    "Skráinn þín var send. Vinsamlegast bíðið í nokkrar sekúndur og reynið aftur.",
   loadingFile: "Hleður ...",
   chooseFile: "Veldu skrár ...",
   noFileChosen: "Engin skrá valin",
-  filePlaceholder: "Dragðu og slepptu skrá hér eða smelltu á hnappinn hér að neðan og veldu skrá til að hlaða upp.",
+  filePlaceholder:
+    "Dragðu og slepptu skrá hér eða smelltu á hnappinn hér að neðan og veldu skrá til að hlaða upp.",
   confirmDelete: "Viltu eyða skránni?",
   keyDuplicationError: "Þetta gildi ætti að vera einstakt.",
   addColumn: "Bæta við dálki",
@@ -71,14 +77,16 @@ export var icelandicSurveyStrings = {
   savingData: "Niðurstöðurnar eru að spara á netþjóninum ... ",
   savingDataError: "Villa kom upp og við gátum ekki vistað niðurstöðurnar.",
   savingDataSuccess: "Árangurinn var vistaður með góðum árangri!",
-  savingExceedSize: "Svar þitt fer yfir 64KB. Vinsamlegast minnkaðu stærð skráa þinna og reyndu aftur eða hafðu samband við eiganda könnunarinnar.",
+  savingExceedSize:
+    "Svar þitt fer yfir 64KB. Vinsamlegast minnkaðu stærð skráa þinna og reyndu aftur eða hafðu samband við eiganda könnunarinnar.",
   saveAgainButton: "Reyndu aftur",
   timerMin: "mín",
   timerSec: "sek",
   timerSpentAll: "Þú hefur eytt {0} á þessari síðu og {1} samtals.",
   timerSpentPage: "Þú hefur eytt {0} á þessari síðu.",
   timerSpentSurvey: "Þú hefur eytt {0} samtals.",
-  timerLimitAll: "Þú hefur eytt {0} af {1} á þessari síðu og {2} af {3} samtals.",
+  timerLimitAll:
+    "Þú hefur eytt {0} af {1} á þessari síðu og {2} af {3} samtals.",
   timerLimitPage: "Þú hefur eytt {0} af {1} á þessari síðu.",
   timerLimitSurvey: "Þú hefur eytt {0} af {1} samtals.",
   clearCaption: "Hreinsa",
@@ -86,8 +94,10 @@ export var icelandicSurveyStrings = {
   signaturePlaceHolderReadOnly: "Engin undirskrift",
   chooseFileCaption: "Veldu skrá",
   takePhotoCaption: "Taka mynd",
-  photoPlaceholder: "Smelltu á hnappinn hér að neðan til að taka mynd með myndavélinni.",
-  fileOrPhotoPlaceholder: "Dragðu og slepptu eða veldu skrá til að hlaða upp eða taka mynd með myndavélinni.",
+  photoPlaceholder:
+    "Smelltu á hnappinn hér að neðan til að taka mynd með myndavélinni.",
+  fileOrPhotoPlaceholder:
+    "Dragðu og slepptu eða veldu skrá til að hlaða upp eða taka mynd með myndavélinni.",
   replaceFileCaption: "Skipta út skrá",
   removeFileCaption: "Fjarlægðu þessa skrá",
   booleanCheckedLabel: "Já",
@@ -99,18 +109,25 @@ export var icelandicSurveyStrings = {
   modalApplyButtonText: "Nota",
   filterStringPlaceholder: "Sláðu inn til að leita...",
   emptyMessage: "Engin gögn til að birta",
-  noEntriesText: "Það eru engar færslur ennþá.\nSmelltu á hnappinn hér að neðan til að bæta við nýrri færslu.",
+  noEntriesText:
+    "Það eru engar færslur ennþá.\nSmelltu á hnappinn hér að neðan til að bæta við nýrri færslu.",
   noEntriesReadonlyText: "Það eru engar færslur.",
   tabTitlePlaceholder: "Nýtt spjald",
   more: "Fleiri",
   tagboxDoneButtonCaption: "ÓKEI",
   selectToRankEmptyRankedAreaText: "Öllum valkostum er raðað",
-  selectToRankEmptyUnrankedAreaText: "Dragðu og slepptu valkostum hér til að raða þeim",
+  selectToRankEmptyUnrankedAreaText:
+    "Dragðu og slepptu valkostum hér til að raða þeim",
   ok: "ÓKEI",
-  cancel: "Afturkalla"
+  cancel: "Afturkalla",
 };
 
-setupLocale({ localeCode: "is", strings: icelandicSurveyStrings, nativeName: "íslenska", englishName: "Icelandic" });
+setupLocale({
+  localeCode: "is",
+  strings: icelandicSurveyStrings,
+  nativeName: "íslenska",
+  englishName: "Icelandic",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

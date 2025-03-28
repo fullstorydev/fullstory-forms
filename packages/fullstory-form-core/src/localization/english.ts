@@ -1,5 +1,5 @@
 // Uncomment the line below if you create a custom dictionary
-// import { setupLocale } from "survey-core";
+// import { setupLocale } from "fullstory-form-core";
 
 export var englishStrings = {
   pagePrevText: "Previous",
@@ -36,7 +36,8 @@ export var englishStrings = {
   textNoDigitsAllow: "Numbers are not allowed.",
   textMinLength: "Please enter at least {0} character(s).",
   textMaxLength: "Please enter no more than {0} character(s).",
-  textMinMaxLength: "Please enter at least {0} and no more than {1} characters.",
+  textMinMaxLength:
+    "Please enter at least {0} and no more than {1} characters.",
   minRowCountError: "Please fill in at least {0} row(s).",
   minSelectError: "Please select at least {0} option(s).",
   maxSelectError: "Please select no more than {0} option(s).",
@@ -46,15 +47,19 @@ export var englishStrings = {
   invalidEmail: "Please enter a valid e-mail address.",
   invalidExpression: "The expression: {0} should return 'true'.",
   urlRequestError: "The request returned error '{0}'. {1}",
-  urlGetChoicesError: "The request returned empty data or the 'path' property is incorrect",
+  urlGetChoicesError:
+    "The request returned empty data or the 'path' property is incorrect",
   exceedMaxSize: "The file size should not exceed {0}.",
-  noUploadFilesHandler: "Files cannot be uploaded. Please add a handler for the 'onUploadFiles' event.",
+  noUploadFilesHandler:
+    "Files cannot be uploaded. Please add a handler for the 'onUploadFiles' event.",
   otherRequiredError: "Response required: enter another value.",
-  uploadingFile: "Your file is uploading. Please wait several seconds and try again.",
+  uploadingFile:
+    "Your file is uploading. Please wait several seconds and try again.",
   loadingFile: "Loading...",
   chooseFile: "Choose file(s)...",
   noFileChosen: "No file selected",
-  filePlaceholder: "Drag and drop a file here or click the button below to select a file to upload.",
+  filePlaceholder:
+    "Drag and drop a file here or click the button below to select a file to upload.",
   confirmDelete: "Are you sure you want to delete this record?",
   keyDuplicationError: "This value should be unique.",
   addColumn: "Add Column",
@@ -72,14 +77,16 @@ export var englishStrings = {
   savingData: "The results are being saved on the server...",
   savingDataError: "An error occurred and we could not save the results.",
   savingDataSuccess: "The results were saved successfully!",
-  savingExceedSize: "Your response exceeds 64KB. Please reduce the size of your file(s) and try again or contact the survey owner.",
+  savingExceedSize:
+    "Your response exceeds 64KB. Please reduce the size of your file(s) and try again or contact the survey owner.",
   saveAgainButton: "Try again",
   timerMin: "min",
   timerSec: "sec",
   timerSpentAll: "You have spent {0} on this page and {1} in total.",
   timerSpentPage: "You have spent {0} on this page.",
   timerSpentSurvey: "You have spent {0} in total.",
-  timerLimitAll: "You have spent {0} of {1} on this page and {2} of {3} in total.",
+  timerLimitAll:
+    "You have spent {0} of {1} on this page and {2} of {3} in total.",
   timerLimitPage: "You have spent {0} of {1} on this page.",
   timerLimitSurvey: "You have spent {0} of {1} in total.",
   clearCaption: "Clear",
@@ -88,7 +95,8 @@ export var englishStrings = {
   chooseFileCaption: "Select File",
   takePhotoCaption: "Take Photo",
   photoPlaceholder: "Click the button below to take a photo using the camera.",
-  fileOrPhotoPlaceholder: "Drag and drop or select a file to upload or take a photo using the camera.",
+  fileOrPhotoPlaceholder:
+    "Drag and drop or select a file to upload or take a photo using the camera.",
   replaceFileCaption: "Replace file",
   removeFileCaption: "Remove this file",
   booleanCheckedLabel: "Yes",

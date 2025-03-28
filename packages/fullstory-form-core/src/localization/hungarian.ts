@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var hungarianSurveyStrings = {
   pagePrevText: "Vissza",
@@ -39,21 +39,27 @@ export var hungarianSurveyStrings = {
   minRowCountError: "Töltsön ki minimum {0} sort!",
   minSelectError: "Válasszon ki legalább {0} lehetőséget!",
   maxSelectError: "Ne válasszon többet, mint {0} lehetőség!",
-  numericMinMax: "'{0}' legyen nagyobb, vagy egyenlő, mint {1} és kisebb, vagy egyenlő, mint {2}!",
+  numericMinMax:
+    "'{0}' legyen nagyobb, vagy egyenlő, mint {1} és kisebb, vagy egyenlő, mint {2}!",
   numericMin: "'{0}' legyen legalább {1}!",
   numericMax: "The '{0}' ne legyen nagyobb, mint {1}!",
   invalidEmail: "Adjon meg egy valós email címet!",
-  invalidExpression: "A következő kifejezés: {0} vissza kell adnia az „igaz” értéket.",
+  invalidExpression:
+    "A következő kifejezés: {0} vissza kell adnia az „igaz” értéket.",
   urlRequestError: "A lekérdezés hibával tért vissza: '{0}'. {1}",
-  urlGetChoicesError: "A lekérdezés üres adattal tért vissza, vagy a 'path' paraméter helytelen.",
+  urlGetChoicesError:
+    "A lekérdezés üres adattal tért vissza, vagy a 'path' paraméter helytelen.",
   exceedMaxSize: "A méret nem lehet nagyobb, mint {0}.",
-  noUploadFilesHandler: "A fájlok nem tölthetők fel. Adjon hozzá egy kezelőt az \"onUploadFiles\" eseményhez.",
+  noUploadFilesHandler:
+    'A fájlok nem tölthetők fel. Adjon hozzá egy kezelőt az "onUploadFiles" eseményhez.',
   otherRequiredError: "Adja meg az egyéb értéket!",
-  uploadingFile: "Feltöltés folyamatban. Várjon pár másodpercet, majd próbálja újra.",
+  uploadingFile:
+    "Feltöltés folyamatban. Várjon pár másodpercet, majd próbálja újra.",
   loadingFile: "Betöltés...",
   chooseFile: "Fájlok kiválasztása ...",
   noFileChosen: "Nincs kiválasztva fájl",
-  filePlaceholder: "Dobjon ide egy fájlt, vagy kattintson az alábbi gombra a fájl betöltéséhez.",
+  filePlaceholder:
+    "Dobjon ide egy fájlt, vagy kattintson az alábbi gombra a fájl betöltéséhez.",
   confirmDelete: "Törli ezt a rekordot?",
   keyDuplicationError: "Az értéknek egyedinek kell lennie.",
   addColumn: "Oszlop hozzáadása",
@@ -71,14 +77,16 @@ export var hungarianSurveyStrings = {
   savingData: "Eredmény mentése a szerverre...",
   savingDataError: "Egy hiba folytán nem tudtuk elmenteni az eredményt.",
   savingDataSuccess: "Eredmény sikeresen mentve!",
-  savingExceedSize: "A válasz meghaladja a 64 KB-ot. Kérjük, csökkentse a fájl(ok) méretét, és próbálja újra, vagy lépjen kapcsolatba egy felmérés tulajdonosával.",
+  savingExceedSize:
+    "A válasz meghaladja a 64 KB-ot. Kérjük, csökkentse a fájl(ok) méretét, és próbálja újra, vagy lépjen kapcsolatba egy felmérés tulajdonosával.",
   saveAgainButton: "Próbálja újra",
   timerMin: "min",
   timerSec: "sec",
   timerSpentAll: "Ön {0} összeget költött ezen az oldalon, és összesen {1}.",
   timerSpentPage: "{0} összeget költött ezen az oldalon.",
   timerSpentSurvey: "Összesen {0} költött.",
-  timerLimitAll: "Ön {0} / {1} összeget költött ezen az oldalon, és összesen {2} / {3}.",
+  timerLimitAll:
+    "Ön {0} / {1} összeget költött ezen az oldalon, és összesen {2} / {3}.",
   timerLimitPage: "Ön {0} / {1} összeget költött ezen az oldalon.",
   timerLimitSurvey: "Összesen {0} / {1} összeget költött el.",
   clearCaption: "Egyértelmű",
@@ -86,8 +94,10 @@ export var hungarianSurveyStrings = {
   signaturePlaceHolderReadOnly: "Nincs aláírás",
   chooseFileCaption: "Válassz fájlt",
   takePhotoCaption: "Fotó készítése",
-  photoPlaceholder: "Kattintson az alábbi gombra, hogy fényképet készítsen a fényképezőgéppel.",
-  fileOrPhotoPlaceholder: "Húzzon át vagy válasszon ki egy fájlt, amelyet fel szeretne tölteni vagy fényképet szeretne készíteni a kamerával.",
+  photoPlaceholder:
+    "Kattintson az alábbi gombra, hogy fényképet készítsen a fényképezőgéppel.",
+  fileOrPhotoPlaceholder:
+    "Húzzon át vagy válasszon ki egy fájlt, amelyet fel szeretne tölteni vagy fényképet szeretne készíteni a kamerával.",
   replaceFileCaption: "Fájl cseréje",
   removeFileCaption: "Távolítsa el ezt a fájlt",
   booleanCheckedLabel: "Igen",
@@ -99,18 +109,26 @@ export var hungarianSurveyStrings = {
   modalApplyButtonText: "Alkalmaz",
   filterStringPlaceholder: "Írja be a kereséshez...",
   emptyMessage: "Nincs megjeleníthető adat",
-  noEntriesText: "Még nincsenek bejegyzések.\nKattintson az alábbi gombra egy új bejegyzés hozzáadásához.",
+  noEntriesText:
+    "Még nincsenek bejegyzések.\nKattintson az alábbi gombra egy új bejegyzés hozzáadásához.",
   noEntriesReadonlyText: "Nincsenek bejegyzések.",
   tabTitlePlaceholder: "Új panel",
   more: "Több",
   tagboxDoneButtonCaption: "OKÉ",
-  selectToRankEmptyRankedAreaText: "Minden választási lehetőség rangsorolva van",
-  selectToRankEmptyUnrankedAreaText: "Húzza ide a választási lehetőségeket a rangsoroláshoz",
+  selectToRankEmptyRankedAreaText:
+    "Minden választási lehetőség rangsorolva van",
+  selectToRankEmptyUnrankedAreaText:
+    "Húzza ide a választási lehetőségeket a rangsoroláshoz",
   ok: "OKÉ",
-  cancel: "Érvénytelenít"
+  cancel: "Érvénytelenít",
 };
 
-setupLocale({ localeCode: "hu", strings: hungarianSurveyStrings, nativeName: "magyar", englishName: "Hungarian" });
+setupLocale({
+  localeCode: "hu",
+  strings: hungarianSurveyStrings,
+  nativeName: "magyar",
+  englishName: "Hungarian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var kazakhStrings = {
   pagePrevText: "Артқа",
@@ -45,15 +45,19 @@ export var kazakhStrings = {
   invalidEmail: "Өтінеміз, жарамды электрондық поштаңызды енгізіңіз.",
   invalidExpression: "{0} өрнегі  'true' қайтару керек.",
   urlRequestError: "Сұратым қателікті қайтарды'{0}'. {1}",
-  urlGetChoicesError: "Сұратымға жауап бос келді немесе 'path' қасиеті қате көрсетілген ",
+  urlGetChoicesError:
+    "Сұратымға жауап бос келді немесе 'path' қасиеті қате көрсетілген ",
   exceedMaxSize: "Файлдың мөлшері {0} аспау керек.",
-  noUploadFilesHandler: "Файлдарды кері жүктеу мүмкін емес. 'OnUploadFiles' оқиғасына өңдеушіні қосуыңызды сұраймыз.",
+  noUploadFilesHandler:
+    "Файлдарды кері жүктеу мүмкін емес. 'OnUploadFiles' оқиғасына өңдеушіні қосуыңызды сұраймыз.",
   otherRequiredError: "Өтінеміз, “Басқа” жолына деректі енгізіңіз",
-  uploadingFile: "Сіздің файлыңыз жүктеліп жатыр. Бірнеше секунд тосып, қайтадан байқап көріңіз.",
+  uploadingFile:
+    "Сіздің файлыңыз жүктеліп жатыр. Бірнеше секунд тосып, қайтадан байқап көріңіз.",
   loadingFile: "Жүктеу...",
   chooseFile: "Файлдарды таңдаңыз...",
   noFileChosen: "Файл таңдалынбады",
-  filePlaceholder: "Файлды осы жерге апарып тастаңыз немесе төмендегі түймені басыңыз және кері жүктеу үшін файлды таңдаңыз.",
+  filePlaceholder:
+    "Файлды осы жерге апарып тастаңыз немесе төмендегі түймені басыңыз және кері жүктеу үшін файлды таңдаңыз.",
   confirmDelete: "Сіз жазбаны жоятыныңызға сенімдісіз бе?",
   keyDuplicationError: "Бұл мән бірегей болу керек.",
   addColumn: "Бағана қосу",
@@ -71,14 +75,16 @@ export var kazakhStrings = {
   savingData: "Нәтижелер серверде сақталады...",
   savingDataError: "Қателік туындады, нәтиже сақталынбады.",
   savingDataSuccess: "Нәтиже ойдағыдай сақталды!",
-  savingExceedSize: "Сіздің жауабыңыз 64КБ-тан асады. Файлдың өлшемін азайтып, қайталап көріңіз немесе сауалнама иесіне хабарласыңыз.",
+  savingExceedSize:
+    "Сіздің жауабыңыз 64КБ-тан асады. Файлдың өлшемін азайтып, қайталап көріңіз немесе сауалнама иесіне хабарласыңыз.",
   saveAgainButton: "Қайтадан байқап көру",
   timerMin: "мин",
   timerSec: "сек",
   timerSpentAll: "Сіз бұл бетте {0} кетірдіңіз және барлығы {1}.",
   timerSpentPage: "Сіз бұл бетте {0} кетірдіңіз.",
   timerSpentSurvey: "Сіз сауалнама кезінде {0} кетірдіңіз.",
-  timerLimitAll: "Сіз бұл бетте {0} ден {1} кетірдіңіз және {2} ден {3} бүкіл сауалнама үшін.",
+  timerLimitAll:
+    "Сіз бұл бетте {0} ден {1} кетірдіңіз және {2} ден {3} бүкіл сауалнама үшін.",
   timerLimitPage: "Сіз бұл бетте {0} ден {1} кетірдіңіз.",
   timerLimitSurvey: "Сіз бүкіл сауалнама үшін {0} ден {1} кетірдіңіз ",
   clearCaption: "Тазалау",
@@ -86,8 +92,10 @@ export var kazakhStrings = {
   signaturePlaceHolderReadOnly: "Қолдың No",
   chooseFileCaption: "Файл таңдаңыз",
   takePhotoCaption: "Фотосуретке түсу",
-  photoPlaceholder: "Камераны пайдаланып суретке түсу үшін төмендегі түймені басыңыз.",
-  fileOrPhotoPlaceholder: "Фотоаппаратты пайдаланып кері жүктеу немесе суретке түсіру үшін файлды апарып тастаыңыз немесе таңдаңыз.",
+  photoPlaceholder:
+    "Камераны пайдаланып суретке түсу үшін төмендегі түймені басыңыз.",
+  fileOrPhotoPlaceholder:
+    "Фотоаппаратты пайдаланып кері жүктеу немесе суретке түсіру үшін файлды апарып тастаыңыз немесе таңдаңыз.",
   replaceFileCaption: "Файлды ауыстыру",
   removeFileCaption: "Файлды жойыңыз",
   booleanCheckedLabel: "Иә",
@@ -99,18 +107,25 @@ export var kazakhStrings = {
   modalApplyButtonText: "Қолдану",
   filterStringPlaceholder: "Іздеу үшін теріңіз...",
   emptyMessage: "Көрсетілетін деректер жоқ",
-  noEntriesText: "Әзірге жазбалар жоқ.\nЖаңа жазбаны қосу үшін төмендегі түймешігіңді басыңыз.",
+  noEntriesText:
+    "Әзірге жазбалар жоқ.\nЖаңа жазбаны қосу үшін төмендегі түймешігіңді басыңыз.",
   noEntriesReadonlyText: "Жазбалар жоқ.",
   tabTitlePlaceholder: "Жаңа панель",
   more: "Қосымша",
   tagboxDoneButtonCaption: "ЖАҚСЫ",
   selectToRankEmptyRankedAreaText: "Барлық таңдаулар ранжирленген",
-  selectToRankEmptyUnrankedAreaText: "Таңдауды рангтеу үшін осында апарып тастау",
+  selectToRankEmptyUnrankedAreaText:
+    "Таңдауды рангтеу үшін осында апарып тастау",
   ok: "ЖАҚСЫ",
-  cancel: "Болдырмау"
+  cancel: "Болдырмау",
 };
 
-setupLocale({ localeCode: "kk", strings: kazakhStrings, nativeName: "kazakh", englishName: "Kazakh" });
+setupLocale({
+  localeCode: "kk",
+  strings: kazakhStrings,
+  nativeName: "kazakh",
+  englishName: "Kazakh",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

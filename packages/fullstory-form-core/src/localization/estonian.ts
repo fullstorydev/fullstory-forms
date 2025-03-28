@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var estonianSurveyStrings = {
   pagePrevText: "Tagasi",
@@ -20,7 +20,8 @@ export var estonianSurveyStrings = {
   questionsProgressText: "Vastatud {0} küsimust {1}-st",
   emptySurvey: "Selles uuringus ei ole ühtki nähtavat lehekülge või küsimust.",
   completingSurvey: "Aitäh, et vastasid ankeedile!",
-  completingSurveyBefore: "Meie andmetel oled sa sellele ankeedile juba vastanud.",
+  completingSurveyBefore:
+    "Meie andmetel oled sa sellele ankeedile juba vastanud.",
   loadingSurvey: "Laen ankeeti...",
   placeholder: "Vali...",
   ratingOptionsCaption: "Valima...",
@@ -39,21 +40,26 @@ export var estonianSurveyStrings = {
   minRowCountError: "Sisesta plaun vähemalt {0} rida.",
   minSelectError: "Palun vali vähemalt {0} varianti.",
   maxSelectError: "Palun vali kõige rohkem {0} varianti.",
-  numericMinMax: "'{0}' peaks olema võrdne või suurem kui {1} ja võrdne või väiksem kui {2}",
+  numericMinMax:
+    "'{0}' peaks olema võrdne või suurem kui {1} ja võrdne või väiksem kui {2}",
   numericMin: "'{0}' peaks olema võrdne või suurem kui {1}",
   numericMax: "'{0}' peaks olema võrnde või väiksem kui {1}",
   invalidEmail: "Sisesta palun korrektne e-posti aadress.",
   invalidExpression: "Avaldis: {0} peaks tagastama tõese.",
   urlRequestError: "Taotlus tagastas vea „{0}”. {1}",
-  urlGetChoicesError: "Taotlus tagastas tühjad andmed või atribuut 'path' on vale",
+  urlGetChoicesError:
+    "Taotlus tagastas tühjad andmed või atribuut 'path' on vale",
   exceedMaxSize: "Faili suurus ei tohi ületada {0}.",
-  noUploadFilesHandler: "Faile ei saa üles laadida. Palun lisage sündmuse \"onUploadFiles\" jaoks käitleja.",
+  noUploadFilesHandler:
+    'Faile ei saa üles laadida. Palun lisage sündmuse "onUploadFiles" jaoks käitleja.',
   otherRequiredError: "Sisesta palun muu vastus.",
-  uploadingFile: "Sinu fail laeb üles. Palun oota mõned sekundid ning proovi seejärel uuesti.",
+  uploadingFile:
+    "Sinu fail laeb üles. Palun oota mõned sekundid ning proovi seejärel uuesti.",
   loadingFile: "Laen...",
   chooseFile: "Vali fail(id)...",
   noFileChosen: "Faili pole valitud",
-  filePlaceholder: "Pukseerige fail siia või klõpsake allolevat nuppu ja valige üleslaaditav fail.",
+  filePlaceholder:
+    "Pukseerige fail siia või klõpsake allolevat nuppu ja valige üleslaaditav fail.",
   confirmDelete: "Kas tahad kirje kustutada?",
   keyDuplicationError: "See väärtus peab olema unikaalne.",
   addColumn: "Lisa veerg",
@@ -71,14 +77,16 @@ export var estonianSurveyStrings = {
   savingData: "Salvestan andmed serveris...",
   savingDataError: "Tekkis viga ning me ei saanud vastuseid salvestada.",
   savingDataSuccess: "Vastuste salvestamine õnnestus!",
-  savingExceedSize: "Teie vastus ületab 64 KB. Vähendage faili(de) mahtu ja proovige uuesti või võtke ühendust uuringu omanikuga.",
+  savingExceedSize:
+    "Teie vastus ületab 64 KB. Vähendage faili(de) mahtu ja proovige uuesti või võtke ühendust uuringu omanikuga.",
   saveAgainButton: "Proovi uuesti",
   timerMin: "min",
   timerSec: "sek",
   timerSpentAll: "Oled veetnud {0} sellel lehel ning kokku {1}.",
   timerSpentPage: "Oled veetnud {0} sellel lehel.",
   timerSpentSurvey: "Oled veetnud {0} kokku.",
-  timerLimitAll: "Oled kulutanud {0} võimalikust {1} sellel lehel ning {2} võimalikust {3} kokku.",
+  timerLimitAll:
+    "Oled kulutanud {0} võimalikust {1} sellel lehel ning {2} võimalikust {3} kokku.",
   timerLimitPage: "Oled kulutanud {0} võimalikust {1} sellel lehel.",
   timerLimitSurvey: "Oled kulutanud {0} võimalikust {1} koguajast.",
   clearCaption: "Puhasta",
@@ -87,7 +95,8 @@ export var estonianSurveyStrings = {
   chooseFileCaption: "Vali fail",
   takePhotoCaption: "Pildistamine",
   photoPlaceholder: "Kaamera abil pildistamiseks klõpsake allolevat nuppu.",
-  fileOrPhotoPlaceholder: "Pukseerige või valige üleslaaditav fail või pildistage seda kaamera abil.",
+  fileOrPhotoPlaceholder:
+    "Pukseerige või valige üleslaaditav fail või pildistage seda kaamera abil.",
   replaceFileCaption: "Asenda fail",
   removeFileCaption: "Eemalda see fail",
   booleanCheckedLabel: "Jah",
@@ -99,18 +108,25 @@ export var estonianSurveyStrings = {
   modalApplyButtonText: "Kohaldata",
   filterStringPlaceholder: "Tippige otsimiseks...",
   emptyMessage: "Kuvatavaid andmeid pole",
-  noEntriesText: "Sissekandeid veel ei ole.\nUue kirje lisamiseks klõpsake allolevat nuppu.",
+  noEntriesText:
+    "Sissekandeid veel ei ole.\nUue kirje lisamiseks klõpsake allolevat nuppu.",
   noEntriesReadonlyText: "Kirjeid ei ole.",
   tabTitlePlaceholder: "Uus paneel",
   more: "Rohkem",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Kõik valikud on järjestatud",
-  selectToRankEmptyUnrankedAreaText: "Lohistage valikuid siia, et neid järjestada",
+  selectToRankEmptyUnrankedAreaText:
+    "Lohistage valikuid siia, et neid järjestada",
   ok: "OK",
-  cancel: "Tühistama"
+  cancel: "Tühistama",
 };
 
-setupLocale({ localeCode: "et", strings: estonianSurveyStrings, nativeName: "eesti keel", englishName: "Estonian" });
+setupLocale({
+  localeCode: "et",
+  strings: estonianSurveyStrings,
+  nativeName: "eesti keel",
+  englishName: "Estonian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var koreanStrings = {
   pagePrevText: "이전",
@@ -47,13 +47,15 @@ export var koreanStrings = {
   urlRequestError: "'{0}'으로 잘못된 요청입니다. {1}",
   urlGetChoicesError: "비어있는 데이터를 요청했거나 잘못된 속성의 경로입니다.",
   exceedMaxSize: "파일 크기가 {0}을 초과 할 수 없습니다.",
-  noUploadFilesHandler: "파일을 업로드할 수 없습니다. 'onUploadFiles'이벤트에 대한 핸들러를 추가하십시오.",
+  noUploadFilesHandler:
+    "파일을 업로드할 수 없습니다. 'onUploadFiles'이벤트에 대한 핸들러를 추가하십시오.",
   otherRequiredError: "다른 질문을 작성하십시오.",
   uploadingFile: "파일 업로드 중입니다. 잠시 후 다시 시도하십시오.",
   loadingFile: "로드 중...",
   chooseFile: "파일 선택...",
   noFileChosen: "선택된 파일이 없습니다.",
-  filePlaceholder: "파일을 여기에 놓거나 아래 버튼을 클릭하여 파일을 불러오세요.",
+  filePlaceholder:
+    "파일을 여기에 놓거나 아래 버튼을 클릭하여 파일을 불러오세요.",
   confirmDelete: "기록을 삭제하시겠습니까?",
   keyDuplicationError: " 이 값은 고유해야합니다.",
   addColumn: "열 추가",
@@ -71,7 +73,8 @@ export var koreanStrings = {
   savingData: "결과가 서버에 저장 중입니다...",
   savingDataError: "오류가 발생하여 결과를 저장할 수 없습니다.",
   savingDataSuccess: "결과가 성공적으로 저장되었습니다.",
-  savingExceedSize: "응답이 64KB를 초과합니다. 파일 크기를 줄인 후 다시 시도하거나 설문조사 소유자에게 문의하세요.",
+  savingExceedSize:
+    "응답이 64KB를 초과합니다. 파일 크기를 줄인 후 다시 시도하거나 설문조사 소유자에게 문의하세요.",
   saveAgainButton: "다시 시도하세요.",
   timerMin: "분",
   timerSec: "초",
@@ -87,7 +90,8 @@ export var koreanStrings = {
   chooseFileCaption: "파일 선택",
   takePhotoCaption: "사진 찍기",
   photoPlaceholder: "아래 버튼을 클릭하여 카메라로 사진을 찍습니다.",
-  fileOrPhotoPlaceholder: "업로드할 파일을 드래그 앤 드롭하거나 선택하거나 카메라를 사용하여 사진을 찍습니다.",
+  fileOrPhotoPlaceholder:
+    "업로드할 파일을 드래그 앤 드롭하거나 선택하거나 카메라를 사용하여 사진을 찍습니다.",
   replaceFileCaption: "파일 바꾸기",
   removeFileCaption: "파일 제거",
   booleanCheckedLabel: "예",
@@ -99,18 +103,25 @@ export var koreanStrings = {
   modalApplyButtonText: "적용",
   filterStringPlaceholder: "검색 유형...",
   emptyMessage: "표시할 데이터가 없습니다.",
-  noEntriesText: "아직 항목이 없습니다.\n새 항목을 추가하려면 아래 버튼을 클릭하세요.",
+  noEntriesText:
+    "아직 항목이 없습니다.\n새 항목을 추가하려면 아래 버튼을 클릭하세요.",
   noEntriesReadonlyText: "항목이 없습니다.",
   tabTitlePlaceholder: "새 패널",
   more: "더보기",
   tagboxDoneButtonCaption: "그래",
   selectToRankEmptyRankedAreaText: "모든 선택 항목이 순위가 매겨집니다.",
-  selectToRankEmptyUnrankedAreaText: "여기에 선택 항목을 끌어다 놓아 순위를 매깁니다.",
+  selectToRankEmptyUnrankedAreaText:
+    "여기에 선택 항목을 끌어다 놓아 순위를 매깁니다.",
   ok: "그래",
-  cancel: "취소"
+  cancel: "취소",
 };
 
-setupLocale({ localeCode: "ko", strings: koreanStrings, nativeName: "한국어", englishName: "Korean" });
+setupLocale({
+  localeCode: "ko",
+  strings: koreanStrings,
+  nativeName: "한국어",
+  englishName: "Korean",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

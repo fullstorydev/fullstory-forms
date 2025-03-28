@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var thaiStrings = {
   pagePrevText: "ก่อนหน้า",
@@ -20,7 +20,8 @@ export var thaiStrings = {
   questionsProgressText: "คำตอบที่ {0}/{1} จำนวนคำถาม",
   emptySurvey: "ไม่มีหน้าเพจที่มองเห็น หรือ คำถามใน survey นี้",
   completingSurvey: "ขอบคุณที่ทำ survey จนเสร็จ",
-  completingSurveyBefore: "รายการของเราแสดงว่าคุณได้ทำ survey เสร็จเรียบร้อยแล้ว",
+  completingSurveyBefore:
+    "รายการของเราแสดงว่าคุณได้ทำ survey เสร็จเรียบร้อยแล้ว",
   loadingSurvey: "กำลังโหลด Survey...",
   placeholder: "เลือก...",
   ratingOptionsCaption: "เลือก   ",
@@ -45,15 +46,19 @@ export var thaiStrings = {
   invalidEmail: "กรุณาใส่อีเมล์แอดเดรสที่ถูกต้อง",
   invalidExpression: "The expression: {0} ต้องรีเทิร์น 'true'.",
   urlRequestError: "รีเควสรีเทิร์น error '{0}'. {1}",
-  urlGetChoicesError: "รีเควสรีเทิร์นข้อมูลว่างเปล่า หรือ 'path' property ไม่ถูกต้อง",
+  urlGetChoicesError:
+    "รีเควสรีเทิร์นข้อมูลว่างเปล่า หรือ 'path' property ไม่ถูกต้อง",
   exceedMaxSize: "ขนาดไฟล์ต้องไม่เกิน {0}.",
-  noUploadFilesHandler: "ไม่สามารถอัปโหลดไฟล์ได้ โปรดเพิ่มตัวจัดการสําหรับเหตุการณ์ 'onUploadFiles'",
+  noUploadFilesHandler:
+    "ไม่สามารถอัปโหลดไฟล์ได้ โปรดเพิ่มตัวจัดการสําหรับเหตุการณ์ 'onUploadFiles'",
   otherRequiredError: "กรุณาใส่ค่าอื่น",
-  uploadingFile: "ไฟล์ของคุณกำลังอัพโหลดอยู่. กรุณารอสักครู่แล้วทำการลองอีกครั้ง",
+  uploadingFile:
+    "ไฟล์ของคุณกำลังอัพโหลดอยู่. กรุณารอสักครู่แล้วทำการลองอีกครั้ง",
   loadingFile: "กำลังโหลด...",
   chooseFile: "เลือกไฟล์...",
   noFileChosen: "ไม่ไฟล์ที่เลือก",
-  filePlaceholder: "ลากและวางไฟล์ที่นี่หรือคลิกปุ่มด้านล่างและเลือกไฟล์ที่จะอัปโหลด",
+  filePlaceholder:
+    "ลากและวางไฟล์ที่นี่หรือคลิกปุ่มด้านล่างและเลือกไฟล์ที่จะอัปโหลด",
   confirmDelete: "คุณต้องการลบรายการนี้จริงหรือไม่?",
   keyDuplicationError: "ข้อมูลนี้ต้องเป็น unique.",
   addColumn: "เพิ่มคอลัมน์",
@@ -71,7 +76,8 @@ export var thaiStrings = {
   savingData: "ผลลัพท์กำลังบันทึกลงที่เซิร์ฟเวอร์...",
   savingDataError: "มีความผิดพลาดเกิดขึ้นส่งผลให้ไม่สามารถบันทึกผลได้",
   savingDataSuccess: "บันทึกสำเร็จแล้ว",
-  savingExceedSize: "คําตอบของคุณเกิน 64KB โปรดลดขนาดไฟล์ของคุณแล้วลองอีกครั้งหรือติดต่อเจ้าของแบบสํารวจ",
+  savingExceedSize:
+    "คําตอบของคุณเกิน 64KB โปรดลดขนาดไฟล์ของคุณแล้วลองอีกครั้งหรือติดต่อเจ้าของแบบสํารวจ",
   saveAgainButton: "รบกวนลองอีกครั้ง",
   timerMin: "นาที",
   timerSec: "วินาที",
@@ -87,7 +93,8 @@ export var thaiStrings = {
   chooseFileCaption: "เลือกไฟล์",
   takePhotoCaption: "ถ่ายรูป",
   photoPlaceholder: "คลิกปุ่มด้านล่างเพื่อถ่ายภาพโดยใช้กล้อง",
-  fileOrPhotoPlaceholder: "ลากและวางหรือเลือกไฟล์ที่จะอัปโหลดหรือถ่ายภาพโดยใช้กล้อง",
+  fileOrPhotoPlaceholder:
+    "ลากและวางหรือเลือกไฟล์ที่จะอัปโหลดหรือถ่ายภาพโดยใช้กล้อง",
   replaceFileCaption: "แทนที่ไฟล์",
   removeFileCaption: "นำไฟล์นี้ออก",
   booleanCheckedLabel: "ใช่",
@@ -107,10 +114,15 @@ export var thaiStrings = {
   selectToRankEmptyRankedAreaText: "ตัวเลือกทั้งหมดจะถูกจัดอันดับ",
   selectToRankEmptyUnrankedAreaText: "ลากและวางตัวเลือกที่นี่เพื่อจัดอันดับ",
   ok: "ตกลง, ได้",
-  cancel: "ยกเลิก"
+  cancel: "ยกเลิก",
 };
 
-setupLocale({ localeCode: "th", strings: thaiStrings, nativeName: "ไทย", englishName: "Thai" });
+setupLocale({
+  localeCode: "th",
+  strings: thaiStrings,
+  nativeName: "ไทย",
+  englishName: "Thai",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

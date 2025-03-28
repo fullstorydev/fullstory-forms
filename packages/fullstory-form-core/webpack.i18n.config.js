@@ -11,22 +11,25 @@ const config = {
     "survey.i18n": path.resolve(__dirname, "./entries/i18n.ts"),
   },
   externals: {
-    "survey-core": {
+    "fullstory-form-core": {
       root: "Survey",
-      commonjs2: "survey-core",
-      commonjs: "survey-core",
-      amd: "survey-core"
-    }
-  }
+      commonjs2: "fullstory-form-core",
+      commonjs: "fullstory-form-core",
+      amd: "fullstory-form-core",
+    },
+  },
 };
 
 function patchEntries() {
-  fs.readdirSync(path.resolve(__dirname, "./src/localization")).forEach(file => {
-    var extension = path.extname(file);
-    if (extension.toLowerCase() === ".ts") {
-      config.entry[`i18n/${path.basename(file, extension)}`] = (path.resolve(__dirname, "./src/localization") + "/" + file);
+  fs.readdirSync(path.resolve(__dirname, "./src/localization")).forEach(
+    (file) => {
+      var extension = path.extname(file);
+      if (extension.toLowerCase() === ".ts") {
+        config.entry[`i18n/${path.basename(file, extension)}`] =
+          path.resolve(__dirname, "./src/localization") + "/" + file;
+      }
     }
-  });
+  );
   config.entry["i18n/index"] = path.resolve(__dirname, "./entries/i18n.ts");
 }
 

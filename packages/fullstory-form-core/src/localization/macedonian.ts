@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var macedonianSurveyStrings = {
   pagePrevText: "Претходна",
@@ -20,7 +20,8 @@ export var macedonianSurveyStrings = {
   questionsProgressText: "Одговорени на {0} / {1} прашања",
   emptySurvey: "Нема видлива страница или прашање во истражувањето.",
   completingSurvey: "Ви благодариме што го завршивте истражувањето!",
-  completingSurveyBefore: "Нашите записи покажуваат дека веќе сте го завршиле ова истражување.",
+  completingSurveyBefore:
+    "Нашите записи покажуваат дека веќе сте го завршиле ова истражување.",
   loadingSurvey: "Анкетата се вчитува ...",
   placeholder: "Изберете ...",
   ratingOptionsCaption: "Изберете...",
@@ -45,15 +46,19 @@ export var macedonianSurveyStrings = {
   invalidEmail: "Ве молиме внесете валидна е-маил адреса.",
   invalidExpression: "Изразот: {0} треба да се врати 'true'.",
   urlRequestError: "Барањето врати грешка '{0}'. {1} ",
-  urlGetChoicesError: "Барањето врати празни податоци или својството 'path' е неточно",
+  urlGetChoicesError:
+    "Барањето врати празни податоци или својството 'path' е неточно",
   exceedMaxSize: "Големината на датотеката не треба да надминува {0}.",
-  noUploadFilesHandler: "Фајловите не можат да се качуваат. Ве молиме додадете раководител за настанот 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Фајловите не можат да се качуваат. Ве молиме додадете раководител за настанот 'onUploadFiles'.",
   otherRequiredError: "Внесете ја другата вредност.",
-  uploadingFile: "Вашата датотека се поставува. Ве молиме почекајте неколку секунди и обидете се повторно.",
+  uploadingFile:
+    "Вашата датотека се поставува. Ве молиме почекајте неколку секунди и обидете се повторно.",
   loadingFile: "Се вчитува ...",
   chooseFile: "Изберете датотека (и) ...",
   noFileChosen: "Не се избрани датотеки",
-  filePlaceholder: "Пуштете датотека овде или кликнете на копчето подолу за да ја вчитате датотеката.",
+  filePlaceholder:
+    "Пуштете датотека овде или кликнете на копчето подолу за да ја вчитате датотеката.",
   confirmDelete: "Дали сакате да го избришете записот?",
   keyDuplicationError: "Оваа вредност треба да биде единствена.",
   addColumn: "Додај колона",
@@ -71,7 +76,8 @@ export var macedonianSurveyStrings = {
   savingData: "Резултатите се зачувуваат на серверот ...",
   savingDataError: "Настана грешка и не можевме да ги зачуваме резултатите.",
   savingDataSuccess: "Резултатите беа успешно зачувани!",
-  savingExceedSize: "Вашиот одговор надминува 64KB. Ве молиме да ја намалите големината на вашата(ите) датотека(и) и обидете се повторно или контактирајте го сопственикот на истражувањето.",
+  savingExceedSize:
+    "Вашиот одговор надминува 64KB. Ве молиме да ја намалите големината на вашата(ите) датотека(и) и обидете се повторно или контактирајте го сопственикот на истражувањето.",
   saveAgainButton: "Обиди се повторно",
   timerMin: "мин",
   timerSec: "сек",
@@ -86,31 +92,42 @@ export var macedonianSurveyStrings = {
   signaturePlaceHolderReadOnly: "Нема потпис",
   chooseFileCaption: "Изберете датотека",
   takePhotoCaption: "Фотографирајте",
-  photoPlaceholder: "Кликнете на копчето подолу за да фотографирате користејќи ја камерата.",
-  fileOrPhotoPlaceholder: "Влечете и фрлајте или изберете датотека за качување или фотографирање користејќи ја камерата.",
+  photoPlaceholder:
+    "Кликнете на копчето подолу за да фотографирате користејќи ја камерата.",
+  fileOrPhotoPlaceholder:
+    "Влечете и фрлајте или изберете датотека за качување или фотографирање користејќи ја камерата.",
   replaceFileCaption: "Заменете го фајлот.",
   removeFileCaption: "Отстранете ја оваа датотека",
   booleanCheckedLabel: "Да",
   booleanUncheckedLabel: "Не",
-  confirmRemoveFile: "Дали сте сигурни дека сакате да ја отстраните оваа датотека: {0}?",
-  confirmRemoveAllFiles: "Дали сте сигурни дека сакате да ги отстраните сите датотеки?",
+  confirmRemoveFile:
+    "Дали сте сигурни дека сакате да ја отстраните оваа датотека: {0}?",
+  confirmRemoveAllFiles:
+    "Дали сте сигурни дека сакате да ги отстраните сите датотеки?",
   questionTitlePatternText: "Наслов на прашањето",
   modalCancelButtonText: "Откажи",
   modalApplyButtonText: "Аплицирај",
   filterStringPlaceholder: "Тип за пребарување...",
   emptyMessage: "Нема податоци за прикажување",
-  noEntriesText: "Сеуште нема влезници.\nКликнете на копчето подолу за да додадете нов влез.",
+  noEntriesText:
+    "Сеуште нема влезници.\nКликнете на копчето подолу за да додадете нов влез.",
   noEntriesReadonlyText: "Нема влезници.",
   tabTitlePlaceholder: "Нов панел",
   more: "Повеќе",
   tagboxDoneButtonCaption: "ДОБРО",
   selectToRankEmptyRankedAreaText: "Сите избори се рангирани",
-  selectToRankEmptyUnrankedAreaText: "Влечете и фрлете го изборот овде за да ги рангирате",
+  selectToRankEmptyUnrankedAreaText:
+    "Влечете и фрлете го изборот овде за да ги рангирате",
   ok: "ДОБРО",
-  cancel: "Откажи"
+  cancel: "Откажи",
 };
 
-setupLocale({ localeCode: "mk", strings: macedonianSurveyStrings, nativeName: "македонски", englishName: "Macedonian" });
+setupLocale({
+  localeCode: "mk",
+  strings: macedonianSurveyStrings,
+  nativeName: "македонски",
+  englishName: "Macedonian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

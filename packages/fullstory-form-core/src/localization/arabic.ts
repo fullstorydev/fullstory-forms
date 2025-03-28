@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var arabicSurveyStrings = {
   pagePrevText: "السابق",
@@ -39,7 +39,8 @@ export var arabicSurveyStrings = {
   minRowCountError: "يرجى ملء ما لا يقل عن {0} الصفوف",
   minSelectError: "يرجى تحديد ما لا يقل عن {0} المتغيرات",
   maxSelectError: "يرجى تحديد ما لا يزيد عن {0} المتغيرات",
-  numericMinMax: "و'{0}' يجب أن تكون مساوية أو أكثر من {1} وتساوي أو أقل من {2}ا",
+  numericMinMax:
+    "و'{0}' يجب أن تكون مساوية أو أكثر من {1} وتساوي أو أقل من {2}ا",
   numericMin: "و'{0}' يجب أن تكون مساوية أو أكثر من {1}ا",
   numericMax: "و'{0}' يجب أن تكون مساوية أو أقل من {1}ا",
   invalidEmail: "الرجاء إدخال بريد الكتروني صحيح",
@@ -47,13 +48,16 @@ export var arabicSurveyStrings = {
   urlRequestError: "طلب إرجاع خطأ '{0}'. {1}ا",
   urlGetChoicesError: "عاد طلب البيانات فارغ أو 'المسار' غير صحيح ",
   exceedMaxSize: "ينبغي ألا يتجاوز حجم الملف {0}ا",
-  noUploadFilesHandler: "لا يمكن تحميل الملفات. يرجى إضافة معالج لحدث \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'لا يمكن تحميل الملفات. يرجى إضافة معالج لحدث "onUploadFiles".',
   otherRequiredError: "الرجاء إدخال قيمة أخرى",
-  uploadingFile: "تحميل الملف الخاص بك. يرجى الانتظار عدة ثوان والمحاولة لاحقًا",
+  uploadingFile:
+    "تحميل الملف الخاص بك. يرجى الانتظار عدة ثوان والمحاولة لاحقًا",
   loadingFile: "جار التحميل...",
   chooseFile: "اختر الملفات...",
   noFileChosen: "لم تقم باختيار ملف",
-  filePlaceholder: "اسحب ملفا وأفلته هنا أو انقر فوق الزر أدناه واختر ملفا لتحميله.",
+  filePlaceholder:
+    "اسحب ملفا وأفلته هنا أو انقر فوق الزر أدناه واختر ملفا لتحميله.",
   confirmDelete: "هل تريد حذف السجل؟",
   keyDuplicationError: "يجب أن تكون هذه القيمة فريدة.",
   addColumn: "أضف العمود",
@@ -71,7 +75,8 @@ export var arabicSurveyStrings = {
   savingData: "يتم حفظ النتائج على الخادم ...",
   savingDataError: "حدث خطأ ولم نتمكن من حفظ النتائج.",
   savingDataSuccess: "تم حفظ النتائج بنجاح!",
-  savingExceedSize: "ردك يتجاوز 64 كيلوبايت. يرجى تقليل حجم الملف (الملفات) والمحاولة مرة أخرى أو الاتصال بمالك الاستطلاع.",
+  savingExceedSize:
+    "ردك يتجاوز 64 كيلوبايت. يرجى تقليل حجم الملف (الملفات) والمحاولة مرة أخرى أو الاتصال بمالك الاستطلاع.",
   saveAgainButton: "حاول مجددا",
   timerMin: "دقيقة",
   timerSec: "ثانية",
@@ -87,7 +92,8 @@ export var arabicSurveyStrings = {
   chooseFileCaption: "اختر ملف",
   takePhotoCaption: "التقاط صورة",
   photoPlaceholder: "انقر فوق الزر أدناه لالتقاط صورة باستخدام الكاميرا.",
-  fileOrPhotoPlaceholder: "قم بسحب ملف وإفلاته أو تحديده لتحميله أو التقاط صورة باستخدام الكاميرا.",
+  fileOrPhotoPlaceholder:
+    "قم بسحب ملف وإفلاته أو تحديده لتحميله أو التقاط صورة باستخدام الكاميرا.",
   replaceFileCaption: "استبدال الملف",
   removeFileCaption: "قم بإزالة هذا الملف",
   booleanCheckedLabel: "نعم",
@@ -99,7 +105,8 @@ export var arabicSurveyStrings = {
   modalApplyButtonText: "طبق",
   filterStringPlaceholder: "اكتب للبحث...",
   emptyMessage: "لا توجد بيانات للعرض",
-  noEntriesText: "لا توجد إدخالات حتى الآن.\nانقر فوق الزر أدناه لإضافة إدخال جديد.",
+  noEntriesText:
+    "لا توجد إدخالات حتى الآن.\nانقر فوق الزر أدناه لإضافة إدخال جديد.",
   noEntriesReadonlyText: "لا توجد إدخالات.",
   tabTitlePlaceholder: "لوحة جديدة",
   more: "أكثر",
@@ -107,10 +114,16 @@ export var arabicSurveyStrings = {
   selectToRankEmptyRankedAreaText: "يتم ترتيب جميع الخيارات",
   selectToRankEmptyUnrankedAreaText: "قم بسحب وإسقاط الخيارات هنا لترتيبها",
   ok: "موافق",
-  cancel: "إلغاء الأمر"
+  cancel: "إلغاء الأمر",
 };
 
-setupLocale({ localeCode: "ar", strings: arabicSurveyStrings, nativeName: "العربية", englishName: "Arabic", rtl: true });
+setupLocale({
+  localeCode: "ar",
+  strings: arabicSurveyStrings,
+  nativeName: "العربية",
+  englishName: "Arabic",
+  rtl: true,
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

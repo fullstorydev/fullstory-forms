@@ -1,6 +1,6 @@
 // This dictionary contains 25 untranslated or inherited localization strings.
 // These strings are commented out. Uncomment and edit them if you want to add your translations.
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var tajikSurveyStrings = {
   pagePrevText: "Бозгашт",
@@ -25,13 +25,15 @@ export var tajikSurveyStrings = {
   value: "қиммат",
   requiredError: "Илтимос, ба савол ҷавоб диҳед.",
   requiredErrorInPanel: "Илтимос, ақалан ба як савол ҷавоб диҳед.",
-  requiredInAllRowsError: "Илтимос, ба ҳамаи саволҳо дар ҳамаи сатрҳо ҷавоб диҳед.",
+  requiredInAllRowsError:
+    "Илтимос, ба ҳамаи саволҳо дар ҳамаи сатрҳо ҷавоб диҳед.",
   numericError: "Ҷавоб бояд рақам бошад.",
   // minError: "The value should not be less than {0}",
   // maxError: "The value should not be greater than {0}",
   textMinLength: "Илтимос, аз {0} зиёдтар рамз ворид кунед.",
   textMaxLength: "Илтимос, аз {0} камтар рамз ворид кунед.",
-  textMinMaxLength: "Илтимос, аз {0} зиёдтар ва аз {1} камтар рамз ворид кунед.",
+  textMinMaxLength:
+    "Илтимос, аз {0} зиёдтар ва аз {1} камтар рамз ворид кунед.",
   minRowCountError: "Илтимос, на камтар аз {0} сатр пур кунед.",
   minSelectError: "Илтимос, ақалан {0} вариант интихоб кунед.",
   maxSelectError: "Илтимос, на зиёдтар аз {0} вариант интихоб кунед.",
@@ -41,10 +43,12 @@ export var tajikSurveyStrings = {
   invalidEmail: "Илтимос, почтаи электронии воқеиро ворид кунед.",
   invalidExpression: "Ифодаи {0} бояд 'true' баргардонад.",
   urlRequestError: "Дархост хатогӣ бозгардонд '{0}'. {1}",
-  urlGetChoicesError: "Ҷавоб ба дархост холӣ омад ё хосияти 'path' нодуруст муайян карда шудааст",
+  urlGetChoicesError:
+    "Ҷавоб ба дархост холӣ омад ё хосияти 'path' нодуруст муайян карда шудааст",
   exceedMaxSize: "Андозаи файл бояд на калон аз {0} бошад.",
   otherRequiredError: "Илтимос, ба майдони 'Дигар' додаҳоро ворид кунед",
-  uploadingFile: "Файли шумо бор шуда истодааст. Якчанд сония интизор шавед ва бори дигар кӯшиш кунед.",
+  uploadingFile:
+    "Файли шумо бор шуда истодааст. Якчанд сония интизор шавед ва бори дигар кӯшиш кунед.",
   loadingFile: "Боркунӣ...",
   chooseFile: "Файл(ҳо)-ро интихоб кунед...",
   // noFileChosen: "No file chosen",
@@ -70,7 +74,8 @@ export var tajikSurveyStrings = {
   timerSpentAll: "Шумо {0} дар ин саҳифа ва {1} дар умум сарф кардед.",
   timerSpentPage: "Шумо {0} дар ин саҳифа сарф кардед.",
   timerSpentSurvey: "Шумо {0} дар ин тест сарф намудед.",
-  timerLimitAll: "Шумо {0} аз {1} дар ин саҳифа ва {2} аз {3} дар умум сарф кардед дар дохили ин тест.",
+  timerLimitAll:
+    "Шумо {0} аз {1} дар ин саҳифа ва {2} аз {3} дар умум сарф кардед дар дохили ин тест.",
   timerLimitPage: "Шумо {0} аз {1} дар ин саҳифа сарф кардед.",
   timerLimitSurvey: "Шумо {0} аз {1} дар ҳамаи тест сарф кардед.",
   clearCaption: "Тоза кардан",
@@ -90,4 +95,9 @@ export var tajikSurveyStrings = {
   // more: "More"
 };
 
-setupLocale({ localeCode: "tg", strings: tajikSurveyStrings, nativeName: "тоҷикӣ", englishName: "Tajik" });
+setupLocale({
+  localeCode: "tg",
+  strings: tajikSurveyStrings,
+  nativeName: "тоҷикӣ",
+  englishName: "Tajik",
+});

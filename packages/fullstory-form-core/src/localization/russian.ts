@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var russianSurveyStrings = {
   pagePrevText: "Назад",
@@ -45,15 +45,19 @@ export var russianSurveyStrings = {
   invalidEmail: "Пожалуйста, введите действительный адрес электронной почты.",
   invalidExpression: "Выражение {0} должно возвращать 'true'.",
   urlRequestError: "Запрос вернул ошибку '{0}'. {1}",
-  urlGetChoicesError: "Ответ на запрос пришел пустой или свойство 'path' указано неверно",
+  urlGetChoicesError:
+    "Ответ на запрос пришел пустой или свойство 'path' указано неверно",
   exceedMaxSize: "Размер файла не должен превышать {0}.",
-  noUploadFilesHandler: "Файлы не могут быть загружены. Пожалуйста, добавьте обработчик для события 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Файлы не могут быть загружены. Пожалуйста, добавьте обработчик для события 'onUploadFiles'.",
   otherRequiredError: "Пожалуйста, введите данные в поле 'Другое'",
-  uploadingFile: "Ваш файл загружается. Подождите несколько секунд и попробуйте снова.",
+  uploadingFile:
+    "Ваш файл загружается. Подождите несколько секунд и попробуйте снова.",
   loadingFile: "Загрузка...",
   chooseFile: "Выберите файл(ы)...",
   noFileChosen: "Файл не выбран",
-  filePlaceholder: "Перетащите файл сюда или нажмите кнопку ниже, чтобы загрузить файл.",
+  filePlaceholder:
+    "Перетащите файл сюда или нажмите кнопку ниже, чтобы загрузить файл.",
   confirmDelete: "Вы точно хотите удалить запись?",
   keyDuplicationError: "Это значение должно быть уникальным.",
   addColumn: "Добавить колонку",
@@ -71,14 +75,16 @@ export var russianSurveyStrings = {
   savingData: "Результаты сохраняются на сервер...",
   savingDataError: "Произошла ошибка, результат не был сохранён.",
   savingDataSuccess: "Результат успешно сохранён!",
-  savingExceedSize: "Ваш ответ превышает 64 КБ. Уменьшите размер файла (файлов) и повторите попытку или обратитесь к владельцу опроса.",
+  savingExceedSize:
+    "Ваш ответ превышает 64 КБ. Уменьшите размер файла (файлов) и повторите попытку или обратитесь к владельцу опроса.",
   saveAgainButton: "Попробовать снова",
   timerMin: "мин",
   timerSec: "сек",
   timerSpentAll: "Вы потратили {0} на этой странице и {1} всего.",
   timerSpentPage: "Вы потратили {0} на этой странице.",
   timerSpentSurvey: "Вы потратили {0} в течение теста.",
-  timerLimitAll: "Вы потратили {0} из {1} на этой странице и {2} из {3} для всего теста.",
+  timerLimitAll:
+    "Вы потратили {0} из {1} на этой странице и {2} из {3} для всего теста.",
   timerLimitPage: "Вы потратили {0} из {1} на этой странице.",
   timerLimitSurvey: "Вы потратили {0} из {1} для всего теста.",
   clearCaption: "Очистить",
@@ -86,8 +92,10 @@ export var russianSurveyStrings = {
   signaturePlaceHolderReadOnly: "Без подписи",
   chooseFileCaption: "Выберите файл",
   takePhotoCaption: "Сделать фото",
-  photoPlaceholder: "Нажмите кнопку ниже, чтобы сделать снимок с помощью камеры.",
-  fileOrPhotoPlaceholder: "Перетащите или выберите файл для загрузки или съемки с помощью камеры.",
+  photoPlaceholder:
+    "Нажмите кнопку ниже, чтобы сделать снимок с помощью камеры.",
+  fileOrPhotoPlaceholder:
+    "Перетащите или выберите файл для загрузки или съемки с помощью камеры.",
   replaceFileCaption: "Заменить файл",
   removeFileCaption: "Удалить файл",
   booleanCheckedLabel: "Да",
@@ -99,18 +107,25 @@ export var russianSurveyStrings = {
   modalApplyButtonText: "Применять",
   filterStringPlaceholder: "Введите для поиска...",
   emptyMessage: "Нет данных для отображения",
-  noEntriesText: "Пока нет записей.\nНажмите кнопку ниже, чтобы добавить новую запись.",
+  noEntriesText:
+    "Пока нет записей.\nНажмите кнопку ниже, чтобы добавить новую запись.",
   noEntriesReadonlyText: "Записей нет.",
   tabTitlePlaceholder: "Новая панель",
   more: "Больше",
   tagboxDoneButtonCaption: "Хорошо",
   selectToRankEmptyRankedAreaText: "Все варианты ранжируются",
-  selectToRankEmptyUnrankedAreaText: "Перетащите сюда варианты, чтобы ранжировать их",
+  selectToRankEmptyUnrankedAreaText:
+    "Перетащите сюда варианты, чтобы ранжировать их",
   ok: "Хорошо",
-  cancel: "Отмена"
+  cancel: "Отмена",
 };
 
-setupLocale({ localeCode: "ru", strings: russianSurveyStrings, nativeName: "русский", englishName: "Russian" });
+setupLocale({
+  localeCode: "ru",
+  strings: russianSurveyStrings,
+  nativeName: "русский",
+  englishName: "Russian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

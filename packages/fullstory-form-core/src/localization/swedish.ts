@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var swedishSurveyStrings = {
   pagePrevText: "Föregående",
@@ -20,7 +20,8 @@ export var swedishSurveyStrings = {
   questionsProgressText: "{0} / {1} frågor besvarade",
   emptySurvey: "Det finns ingen synlig sida eller fråga i enkäten.",
   completingSurvey: "Tack för att du genomfört enkäten!!",
-  completingSurveyBefore: "Våra register visar att du redan har slutfört denna undersökning.",
+  completingSurveyBefore:
+    "Våra register visar att du redan har slutfört denna undersökning.",
   loadingSurvey: "Enkäten laddas...",
   placeholder: "Välj...",
   ratingOptionsCaption: "Tryck här för att betygsätta...",
@@ -39,21 +40,26 @@ export var swedishSurveyStrings = {
   minRowCountError: "Var vänlig fyll i minst {0} rader.",
   minSelectError: "Var vänlig välj åtminstone {0} varianter.",
   maxSelectError: "Var vänlig välj inte fler än {0} varianter.",
-  numericMinMax: "'{0}' ska vara lika med eller mer än {1} samt lika med eller mindre än {2}",
+  numericMinMax:
+    "'{0}' ska vara lika med eller mer än {1} samt lika med eller mindre än {2}",
   numericMin: "'{0}' ska vara lika med eller mer än {1}",
   numericMax: "'{0}' ska vara lika med eller mindre än {1}",
   invalidEmail: "Var vänlig ange en korrekt e-postadress.",
   invalidExpression: "Uttrycket: {0} ska returnera 'true'.",
   urlRequestError: "Förfrågan returnerade felet '{0}'. {1}",
-  urlGetChoicesError: "Antingen returnerade förfrågan ingen data eller så är egenskapen 'path' inte korrekt",
+  urlGetChoicesError:
+    "Antingen returnerade förfrågan ingen data eller så är egenskapen 'path' inte korrekt",
   exceedMaxSize: "Filstorleken får ej överstiga {0}.",
-  noUploadFilesHandler: "Filer kan inte laddas upp. Lägg till en hanterare för händelsen 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Filer kan inte laddas upp. Lägg till en hanterare för händelsen 'onUploadFiles'.",
   otherRequiredError: "Var vänlig ange det andra värdet.",
-  uploadingFile: "Din fil laddas upp. Var vänlig vänta några sekunder och försök sedan igen.",
+  uploadingFile:
+    "Din fil laddas upp. Var vänlig vänta några sekunder och försök sedan igen.",
   loadingFile: "Laddar...",
   chooseFile: "Välj fil(er) ...",
   noFileChosen: "Ingen fil vald",
-  filePlaceholder: "Dra och släpp en fil här eller klicka på knappen nedan och välj en fil att ladda upp.",
+  filePlaceholder:
+    "Dra och släpp en fil här eller klicka på knappen nedan och välj en fil att ladda upp.",
   confirmDelete: "Vill du radera posten?",
   keyDuplicationError: "Detta värde ska vara unikt.",
   addColumn: "Lägg till kolumn",
@@ -71,14 +77,16 @@ export var swedishSurveyStrings = {
   savingData: "Resultaten sparas på servern ...",
   savingDataError: "Ett fel inträffade och vi kunde inte spara resultaten.",
   savingDataSuccess: "Resultaten lyckades sparas!",
-  savingExceedSize: "Ditt svar överskrider 64 kB. Minska storleken på dina filer och försök igen eller kontakta en undersökningsägare.",
+  savingExceedSize:
+    "Ditt svar överskrider 64 kB. Minska storleken på dina filer och försök igen eller kontakta en undersökningsägare.",
   saveAgainButton: "Försök igen",
   timerMin: "min",
   timerSec: "sek",
   timerSpentAll: "Du har spenderat {0} på den här sidan och {1} totalt.",
   timerSpentPage: "Du har spenderat {0} på den här sidan.",
   timerSpentSurvey: "Du har spenderat {0} totalt.",
-  timerLimitAll: "Du har spenderat {0} av {1} på den här sidan och {2} av {3} totalt.",
+  timerLimitAll:
+    "Du har spenderat {0} av {1} på den här sidan och {2} av {3} totalt.",
   timerLimitPage: "Du har spenderat {0} av {1} på den här sidan.",
   timerLimitSurvey: "Du har spenderat {0} av {1} totalt.",
   clearCaption: "Klar",
@@ -87,7 +95,8 @@ export var swedishSurveyStrings = {
   chooseFileCaption: "Välj fil",
   takePhotoCaption: "Ta foto",
   photoPlaceholder: "Klicka på knappen nedan för att ta ett foto med kameran.",
-  fileOrPhotoPlaceholder: "Dra och släpp eller välj en fil att ladda upp eller ta ett foto med kameran.",
+  fileOrPhotoPlaceholder:
+    "Dra och släpp eller välj en fil att ladda upp eller ta ett foto med kameran.",
   replaceFileCaption: "Ersätt fil",
   removeFileCaption: "Ta bort den här filen",
   booleanCheckedLabel: "Ja",
@@ -99,18 +108,25 @@ export var swedishSurveyStrings = {
   modalApplyButtonText: "Spara",
   filterStringPlaceholder: "Skriv för att söka...",
   emptyMessage: "Ingen data finns",
-  noEntriesText: "Det finns inga värden än.\nKlicka på knappen nedan för att lägga till nytt värde.",
+  noEntriesText:
+    "Det finns inga värden än.\nKlicka på knappen nedan för att lägga till nytt värde.",
   noEntriesReadonlyText: "Det finns inga poster.",
   tabTitlePlaceholder: "Ny panel",
   more: "Mer",
   tagboxDoneButtonCaption: "OKEJ",
   selectToRankEmptyRankedAreaText: "Alla val rangordnas",
-  selectToRankEmptyUnrankedAreaText: "Dra och släpp val här för att rangordna dem",
+  selectToRankEmptyUnrankedAreaText:
+    "Dra och släpp val här för att rangordna dem",
   ok: "OKEJ",
-  cancel: "Annullera"
+  cancel: "Annullera",
 };
 
-setupLocale({ localeCode: "sv", strings: swedishSurveyStrings, nativeName: "svenska", englishName: "Swedish" });
+setupLocale({
+  localeCode: "sv",
+  strings: swedishSurveyStrings,
+  nativeName: "svenska",
+  englishName: "Swedish",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

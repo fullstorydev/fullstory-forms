@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var polishSurveyStrings = {
   pagePrevText: "Wstecz",
@@ -20,7 +20,8 @@ export var polishSurveyStrings = {
   questionsProgressText: "Odpowiedzi na {0}/{1} pytania",
   emptySurvey: "Nie ma widocznych pytań.",
   completingSurvey: "Dziękujemy za wypełnienie ankiety!",
-  completingSurveyBefore: "Z naszych zapisów wynika, że wypełniłeś już tę ankietę.",
+  completingSurveyBefore:
+    "Z naszych zapisów wynika, że wypełniłeś już tę ankietę.",
   loadingSurvey: "Trwa wczytywanie ankiety...",
   placeholder: "Wybierz...",
   ratingOptionsCaption: "Kliknij tutaj, aby ocenić...",
@@ -39,21 +40,26 @@ export var polishSurveyStrings = {
   minRowCountError: "Proszę uzupełnić przynajmniej {0} wierszy.",
   minSelectError: "Proszę wybrać co najmniej {0} pozycji.",
   maxSelectError: "Proszę wybrać nie więcej niż {0} pozycji.",
-  numericMinMax: "Odpowiedź '{0}' powinna być większa lub równa {1} oraz mniejsza lub równa {2}",
+  numericMinMax:
+    "Odpowiedź '{0}' powinna być większa lub równa {1} oraz mniejsza lub równa {2}",
   numericMin: "Odpowiedź '{0}' powinna być większa lub równa {1}",
   numericMax: "Odpowiedź '{0}' powinna być mniejsza lub równa {1}",
   invalidEmail: "Proszę podać prawidłowy adres email.",
   invalidExpression: "Wyrażenie: {0} powinno wracać 'prawdziwe'.",
   urlRequestError: "Żądanie zwróciło błąd '{0}'. {1}",
-  urlGetChoicesError: "Żądanie nie zwróciło danych albo ścieżka jest nieprawidłowa",
+  urlGetChoicesError:
+    "Żądanie nie zwróciło danych albo ścieżka jest nieprawidłowa",
   exceedMaxSize: "Rozmiar przesłanego pliku nie może przekraczać {0}.",
-  noUploadFilesHandler: "Nie można przesłać plików. Dodaj moduł obsługi zdarzenia \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'Nie można przesłać plików. Dodaj moduł obsługi zdarzenia "onUploadFiles".',
   otherRequiredError: "Proszę podać inną odpowiedź.",
-  uploadingFile: "Trwa przenoszenie Twojego pliku, proszę spróbować ponownie za kilka sekund.",
+  uploadingFile:
+    "Trwa przenoszenie Twojego pliku, proszę spróbować ponownie za kilka sekund.",
   loadingFile: "Ładowanie...",
   chooseFile: "Wybierz plik(i)...",
   noFileChosen: "Nie wybrano żadnego pliku",
-  filePlaceholder: "Upuść plik tutaj lub kliknij przycisk poniżej, aby załadować plik.",
+  filePlaceholder:
+    "Upuść plik tutaj lub kliknij przycisk poniżej, aby załadować plik.",
   confirmDelete: "Chcesz skasować nagranie?",
   keyDuplicationError: "Ta wartość powinna być wyjątkowa.",
   addColumn: "Dodaj kolumnę",
@@ -71,7 +77,8 @@ export var polishSurveyStrings = {
   savingData: "Zapisuję wyniki ankiety na serwerze...",
   savingDataError: "Wystąpił błąd i wyniki nie mogły zostać zapisane.",
   savingDataSuccess: "Wyniki zostały poprawnie zapisane!",
-  savingExceedSize: "Twoja odpowiedź przekracza 64 KB. Zmniejsz rozmiar plików i spróbuj ponownie lub skontaktuj się z właścicielem ankiety.",
+  savingExceedSize:
+    "Twoja odpowiedź przekracza 64 KB. Zmniejsz rozmiar plików i spróbuj ponownie lub skontaktuj się z właścicielem ankiety.",
   saveAgainButton: "Spróbuj ponownie",
   timerMin: "min",
   timerSec: "sek",
@@ -87,7 +94,8 @@ export var polishSurveyStrings = {
   chooseFileCaption: "Wybierz plik",
   takePhotoCaption: "Zrób zdjęcie",
   photoPlaceholder: "Kliknij przycisk poniżej, aby zrobić zdjęcie aparatem.",
-  fileOrPhotoPlaceholder: "Przeciągnij i upuść lub wybierz plik, który chcesz przesłać lub zrobić zdjęcie za pomocą aparatu.",
+  fileOrPhotoPlaceholder:
+    "Przeciągnij i upuść lub wybierz plik, który chcesz przesłać lub zrobić zdjęcie za pomocą aparatu.",
   replaceFileCaption: "Zastąp plik",
   removeFileCaption: "Usuń ten plik",
   booleanCheckedLabel: "Tak",
@@ -99,18 +107,25 @@ export var polishSurveyStrings = {
   modalApplyButtonText: "Zastosować",
   filterStringPlaceholder: "Wpisz aby wyszukać...",
   emptyMessage: "Brak danych do wyświetlenia",
-  noEntriesText: "Nie ma jeszcze wpisów.\nKliknij przycisk poniżej, aby dodać nowy wpis.",
+  noEntriesText:
+    "Nie ma jeszcze wpisów.\nKliknij przycisk poniżej, aby dodać nowy wpis.",
   noEntriesReadonlyText: "Brak wpisów.",
   tabTitlePlaceholder: "Nowy panel",
   more: "Więcej",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Wszystkie wybory są uszeregowane",
-  selectToRankEmptyUnrankedAreaText: "Przeciągnij i upuść tutaj wybory, aby je uszeregować",
+  selectToRankEmptyUnrankedAreaText:
+    "Przeciągnij i upuść tutaj wybory, aby je uszeregować",
   ok: "OK",
-  cancel: "Anuluj"
+  cancel: "Anuluj",
 };
 
-setupLocale({ localeCode: "pl", strings: polishSurveyStrings, nativeName: "polski", englishName: "Polish" });
+setupLocale({
+  localeCode: "pl",
+  strings: polishSurveyStrings,
+  nativeName: "polski",
+  englishName: "Polish",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

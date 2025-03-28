@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var persianSurveyStrings = {
   pagePrevText: "قبلی",
@@ -20,7 +20,8 @@ export var persianSurveyStrings = {
   questionsProgressText: "تعداد پاسخ {0}/{1} سوال",
   emptySurvey: "صفحه ای یا گزینه ای برای این پرسشنامه موجود نیست.",
   completingSurvey: "از شما بابت تکمیل این پرسشنامه متشکریم",
-  completingSurveyBefore: "به نظر می رسد هم هم اکنون پرسشنامه را تکمیل کرده اید.",
+  completingSurveyBefore:
+    "به نظر می رسد هم هم اکنون پرسشنامه را تکمیل کرده اید.",
   loadingSurvey: "درحال ایجاد پرسشنامه",
   placeholder: "انتخاب کنید...",
   ratingOptionsCaption: "انتخاب...",
@@ -47,13 +48,15 @@ export var persianSurveyStrings = {
   urlRequestError: "درخواست با خطا روبرو شد: '{0}'. {1}",
   urlGetChoicesError: "درخواست مسیری خالی بازگشت داده یا مسیر درست تنظیم نشده",
   exceedMaxSize: "بیشترین حجم مجاز فایل: {0}",
-  noUploadFilesHandler: "پروندهها را نمیتوان بارگذاری کرد. لطفا یک گرداننده برای رویداد \"onUploadFiles\" اضافه کنید.",
+  noUploadFilesHandler:
+    'پروندهها را نمیتوان بارگذاری کرد. لطفا یک گرداننده برای رویداد "onUploadFiles" اضافه کنید.',
   otherRequiredError: "مقدار 'دیگر' را وارد کنید",
   uploadingFile: "فایل در حال آیلود است. لطفا صبر کنید.",
   loadingFile: "بارگیری...",
   chooseFile: "انتخاب فایل(ها)...",
   noFileChosen: "هیچ فایلی انتخاب نشده",
-  filePlaceholder: "کشیدن و رها کردن یک فایل در اینجا و یا کلیک بر روی دکمه زیر و یک فایل برای اپلود را انتخاب کنید.",
+  filePlaceholder:
+    "کشیدن و رها کردن یک فایل در اینجا و یا کلیک بر روی دکمه زیر و یک فایل برای اپلود را انتخاب کنید.",
   confirmDelete: "آیا مایل به حذف این ردیف هستید؟",
   keyDuplicationError: "این مقدار باید غیر تکراری باشد",
   addColumn: "ستون جدید",
@@ -71,14 +74,16 @@ export var persianSurveyStrings = {
   savingData: "نتایج در حال ذخیره سازی در سرور است",
   savingDataError: "خطایی در ذخیره سازی نتایج رخ داده است",
   savingDataSuccess: "نتایج با موفقیت ذخیره شد",
-  savingExceedSize: "پاسخ شما بیش از 64KB است. لطفا اندازه فایل(های) خود را کاهش دهید و دوباره تلاش کنید یا با صاحب نظرسنجی تماس بگیرید.",
+  savingExceedSize:
+    "پاسخ شما بیش از 64KB است. لطفا اندازه فایل(های) خود را کاهش دهید و دوباره تلاش کنید یا با صاحب نظرسنجی تماس بگیرید.",
   saveAgainButton: "مجدد تلاش کنید",
   timerMin: "دقیقه",
   timerSec: "ثانیه",
   timerSpentAll: "شما مدت {0} در این صفحه و مدت {1} را در مجموع سپری کرده اید.",
   timerSpentPage: "شما مدت {0} را در این صفحه سپری کرده اید.",
   timerSpentSurvey: "شما مدت {0} را در مجموع سپری کرده اید.",
-  timerLimitAll: "شما مدت {0} از {1} در این صفحه و مدت {2} از {3} را در مجموع سپری کرده اید.",
+  timerLimitAll:
+    "شما مدت {0} از {1} در این صفحه و مدت {2} از {3} را در مجموع سپری کرده اید.",
   timerLimitPage: "شما مدت {0} از {1} را در این صفحه سپری کرده اید.",
   timerLimitSurvey: "شما مدت {0} از {1} را در مجموع سپری کرده اید.",
   clearCaption: "خالی کردن",
@@ -86,8 +91,10 @@ export var persianSurveyStrings = {
   signaturePlaceHolderReadOnly: "بدون امضا",
   chooseFileCaption: "انتخاب فایل",
   takePhotoCaption: "گرفتن عکس",
-  photoPlaceholder: "روی دکمه زیر کلیک کنید تا با استفاده از دوربین عکس بگیرید.",
-  fileOrPhotoPlaceholder: "کشیدن و رها کردن یا انتخاب یک فایل برای اپلود یا گرفتن عکس با استفاده از دوربین.",
+  photoPlaceholder:
+    "روی دکمه زیر کلیک کنید تا با استفاده از دوربین عکس بگیرید.",
+  fileOrPhotoPlaceholder:
+    "کشیدن و رها کردن یا انتخاب یک فایل برای اپلود یا گرفتن عکس با استفاده از دوربین.",
   replaceFileCaption: "جایگزینی پرونده",
   removeFileCaption: "حذف این فایل",
   booleanCheckedLabel: "بله",
@@ -99,18 +106,26 @@ export var persianSurveyStrings = {
   modalApplyButtonText: "درخواست",
   filterStringPlaceholder: "تایپ برای جستجو...",
   emptyMessage: "داده ای برای نمایش وجود ندارد",
-  noEntriesText: "هنوز هیچ ورودی وجود ندارد.\nروی دکمه زیر کلیک کنید تا یک ورودی جدید اضافه شود.",
+  noEntriesText:
+    "هنوز هیچ ورودی وجود ندارد.\nروی دکمه زیر کلیک کنید تا یک ورودی جدید اضافه شود.",
   noEntriesReadonlyText: "هیچ ورودی وجود ندارد.",
   tabTitlePlaceholder: "پنل جدید",
   more: "بیشتر",
   tagboxDoneButtonCaption: "باشه",
   selectToRankEmptyRankedAreaText: "همه انتخاب ها رتبه بندی می شوند",
-  selectToRankEmptyUnrankedAreaText: "انتخاب های کشیدن و رها کردن در اینجا برای رتبه بندی انها",
+  selectToRankEmptyUnrankedAreaText:
+    "انتخاب های کشیدن و رها کردن در اینجا برای رتبه بندی انها",
   ok: "باشه",
-  cancel: "لغو"
+  cancel: "لغو",
 };
 
-setupLocale({ localeCode: "fa", strings: persianSurveyStrings, nativeName: "فارْسِى", englishName: "Persian", rtl: true });
+setupLocale({
+  localeCode: "fa",
+  strings: persianSurveyStrings,
+  nativeName: "فارْسِى",
+  englishName: "Persian",
+  rtl: true,
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

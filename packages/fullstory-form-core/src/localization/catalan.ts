@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var catalanSurveyStrings = {
   pagePrevText: "Anterior",
@@ -20,7 +20,8 @@ export var catalanSurveyStrings = {
   questionsProgressText: "Respostes {0}/{1} preguntes",
   emptySurvey: "No hi ha cap pàgina visible o pregunta a l'enquesta.",
   completingSurvey: "Gràcies per completar l'enquesta!",
-  completingSurveyBefore: "Els nostres registres mostren que ja heu completat aquesta enquesta.",
+  completingSurveyBefore:
+    "Els nostres registres mostren que ja heu completat aquesta enquesta.",
   loadingSurvey: "L'enquesta s'està carregant ...",
   placeholder: "Selecciona ...",
   ratingOptionsCaption: "Seleccionar...",
@@ -45,15 +46,19 @@ export var catalanSurveyStrings = {
   invalidEmail: "Si us plau afegiu un correu electrònic vàlid.",
   invalidExpression: "L'expressió: {0} ha de tornar 'veritable'.",
   urlRequestError: "La sol·licitud va tornar error '{0}'. {1}",
-  urlGetChoicesError: "La sol·licitud va tornar buida de dates o la propietat 'trajectòria' no és correcta",
+  urlGetChoicesError:
+    "La sol·licitud va tornar buida de dates o la propietat 'trajectòria' no és correcta",
   exceedMaxSize: "La mida de l'arxiu no pot excedir {0}.",
-  noUploadFilesHandler: "No es poden carregar fitxers. Afegiu un controlador per a l'esdeveniment 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "No es poden carregar fitxers. Afegiu un controlador per a l'esdeveniment 'onUploadFiles'.",
   otherRequiredError: "Si us plau afegiu l'altra estimació.",
-  uploadingFile: "El seu arxiu s'està pujant. Si us plau esperi uns segons i intenteu-ho de nou.",
+  uploadingFile:
+    "El seu arxiu s'està pujant. Si us plau esperi uns segons i intenteu-ho de nou.",
   loadingFile: "Càrrega...",
   chooseFile: "Trieu fitxer(s)...",
   noFileChosen: "No s'ha triat cap fitxer",
-  filePlaceholder: "Arrossegueu i deixeu anar un fitxer aquí o feu clic al botó següent i trieu un fitxer per carregar.",
+  filePlaceholder:
+    "Arrossegueu i deixeu anar un fitxer aquí o feu clic al botó següent i trieu un fitxer per carregar.",
   confirmDelete: "Vols eliminar el registre?",
   keyDuplicationError: "Aquest valor ha de ser únic.",
   addColumn: "Afegeix una columna",
@@ -69,16 +74,19 @@ export var catalanSurveyStrings = {
   matrix_row: "Filera",
   multipletext_itemname: "SMS",
   savingData: "Els resultats s'estan guardant al servidor...",
-  savingDataError: "S'ha produït un error i no hem pogut guardar els resultats.",
+  savingDataError:
+    "S'ha produït un error i no hem pogut guardar els resultats.",
   savingDataSuccess: "Els resultats es van salvar amb èxit!",
-  savingExceedSize: "La teva resposta supera els 64KB. Reduïu la mida dels fitxers i torneu-ho a provar o poseu-vos en contacte amb el propietari de l'enquesta.",
+  savingExceedSize:
+    "La teva resposta supera els 64KB. Reduïu la mida dels fitxers i torneu-ho a provar o poseu-vos en contacte amb el propietari de l'enquesta.",
   saveAgainButton: "Prova una altra vegada",
   timerMin: "min",
   timerSec: "Seg",
   timerSpentAll: "Heu passat {0} en aquesta pàgina i {1} en total.",
   timerSpentPage: "Has passat {0} en aquesta pàgina.",
   timerSpentSurvey: "Has gastat {0} en total.",
-  timerLimitAll: "Heu passat {0} de {1} en aquesta pàgina i {2} de {3} en total.",
+  timerLimitAll:
+    "Heu passat {0} de {1} en aquesta pàgina i {2} de {3} en total.",
   timerLimitPage: "Has passat {0} de {1} en aquesta pàgina.",
   timerLimitSurvey: "Has gastat {0} d'{1} en total.",
   clearCaption: "Clar",
@@ -87,7 +95,8 @@ export var catalanSurveyStrings = {
   chooseFileCaption: "Tria un fitxer",
   takePhotoCaption: "Fer foto",
   photoPlaceholder: "Feu clic al botó següent per fer una foto amb la càmera.",
-  fileOrPhotoPlaceholder: "Arrossegueu i deixeu anar o seleccioneu un fitxer per penjar-lo o fer-ne una foto amb la càmera.",
+  fileOrPhotoPlaceholder:
+    "Arrossegueu i deixeu anar o seleccioneu un fitxer per penjar-lo o fer-ne una foto amb la càmera.",
   replaceFileCaption: "Substitueix el fitxer",
   removeFileCaption: "Suprimeix aquest fitxer",
   booleanCheckedLabel: "Sí",
@@ -99,18 +108,25 @@ export var catalanSurveyStrings = {
   modalApplyButtonText: "Aplicar",
   filterStringPlaceholder: "Escriviu per cercar...",
   emptyMessage: "No hi ha dades per mostrar",
-  noEntriesText: "Encara no hi ha entrades.\nFeu clic al botó següent per afegir una entrada nova.",
+  noEntriesText:
+    "Encara no hi ha entrades.\nFeu clic al botó següent per afegir una entrada nova.",
   noEntriesReadonlyText: "No hi ha entrades.",
   tabTitlePlaceholder: "Nou Panell",
   more: "Més",
   tagboxDoneButtonCaption: "D'ACORD",
   selectToRankEmptyRankedAreaText: "Totes les opcions estan classificades",
-  selectToRankEmptyUnrankedAreaText: "Arrossegueu i deixeu anar les opcions aquí per classificar-les",
+  selectToRankEmptyUnrankedAreaText:
+    "Arrossegueu i deixeu anar les opcions aquí per classificar-les",
   ok: "D'ACORD",
-  cancel: "Cancel·lar"
+  cancel: "Cancel·lar",
 };
 
-setupLocale({ localeCode: "ca", strings: catalanSurveyStrings, nativeName: "català", englishName: "Catalan" });
+setupLocale({
+  localeCode: "ca",
+  strings: catalanSurveyStrings,
+  nativeName: "català",
+  englishName: "Catalan",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

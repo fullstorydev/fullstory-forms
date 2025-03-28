@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var danishSurveyStrings = {
   pagePrevText: "Tilbage",
@@ -20,7 +20,8 @@ export var danishSurveyStrings = {
   questionsProgressText: "Besvarede {0} / {1} spørgsmål",
   emptySurvey: "Der er ingen synlige spørgsmål.",
   completingSurvey: "Mange tak for din besvarelse!",
-  completingSurveyBefore: "Vores data viser at du allerede har gennemført dette spørgeskema.",
+  completingSurveyBefore:
+    "Vores data viser at du allerede har gennemført dette spørgeskema.",
   loadingSurvey: "Spørgeskemaet hentes fra serveren...",
   placeholder: "Vælg...",
   ratingOptionsCaption: "Markere...",
@@ -39,21 +40,26 @@ export var danishSurveyStrings = {
   minRowCountError: "Udfyld mindst {0} rækker.",
   minSelectError: "Vælg venligst mindst {0} svarmulighed(er).",
   maxSelectError: "Vælg venligst færre {0} svarmuligheder(er).",
-  numericMinMax: "'{0}' skal være lig med eller større end {1} og lig med eller mindre end {2}",
+  numericMinMax:
+    "'{0}' skal være lig med eller større end {1} og lig med eller mindre end {2}",
   numericMin: "'{0}' skal være lig med eller større end {1}",
   numericMax: "'{0}' skal være lig med eller mindre end {1}",
   invalidEmail: "Angiv venligst en gyldig e-mail adresse.",
   invalidExpression: "Udtrykket: {0} skal returnere 'true'.",
   urlRequestError: "Forespørgslen returnerede fejlen '{0}'. {1}",
-  urlGetChoicesError: "Forespørgslen returnerede ingen data eller 'path' parameteren er forkert",
+  urlGetChoicesError:
+    "Forespørgslen returnerede ingen data eller 'path' parameteren er forkert",
   exceedMaxSize: "Filstørrelsen må ikke overstige {0}.",
-  noUploadFilesHandler: "Filer kan ikke uploades. Tilføj en handler for hændelsen 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Filer kan ikke uploades. Tilføj en handler for hændelsen 'onUploadFiles'.",
   otherRequiredError: "Angiv en værdi for dit valgfrie svar.",
-  uploadingFile: "Din fil bliver uploadet. Vent nogle sekunder og prøv eventuelt igen.",
+  uploadingFile:
+    "Din fil bliver uploadet. Vent nogle sekunder og prøv eventuelt igen.",
   loadingFile: "Indlæser...",
   chooseFile: "Vælg fil(er)...",
   noFileChosen: "Ingen fil er valgt",
-  filePlaceholder: "Træk og slip en fil her, eller klik på knappen nedenfor, og vælg en fil, der skal uploades.",
+  filePlaceholder:
+    "Træk og slip en fil her, eller klik på knappen nedenfor, og vælg en fil, der skal uploades.",
   confirmDelete: "Vil du fjerne den?",
   keyDuplicationError: "Denne værdi skal være unik.",
   addColumn: "Tilføj kolonne",
@@ -71,7 +77,8 @@ export var danishSurveyStrings = {
   savingData: "Resultaterne bliver gemt på serveren...",
   savingDataError: "Der opstod en fejl og vi kunne ikke gemme resultatet.",
   savingDataSuccess: "Resultatet blev gemt!",
-  savingExceedSize: "Dit svar overstiger 64 KB. Reducer størrelsen på din(e) fil(er), og prøv igen, eller kontakt en undersøgelsesejer.",
+  savingExceedSize:
+    "Dit svar overstiger 64 KB. Reducer størrelsen på din(e) fil(er), og prøv igen, eller kontakt en undersøgelsesejer.",
   saveAgainButton: "Prøv igen",
   timerMin: "min",
   timerSec: "sek",
@@ -86,8 +93,10 @@ export var danishSurveyStrings = {
   signaturePlaceHolderReadOnly: "Ingen underskrift",
   chooseFileCaption: "Vælg fil",
   takePhotoCaption: "Tag billede",
-  photoPlaceholder: "Klik på knappen nedenfor for at tage et billede med kameraet.",
-  fileOrPhotoPlaceholder: "Træk og slip, eller vælg en fil, der skal uploades, eller tag et billede med kameraet.",
+  photoPlaceholder:
+    "Klik på knappen nedenfor for at tage et billede med kameraet.",
+  fileOrPhotoPlaceholder:
+    "Træk og slip, eller vælg en fil, der skal uploades, eller tag et billede med kameraet.",
   replaceFileCaption: "Erstat fil",
   removeFileCaption: "Fjern denne fil",
   booleanCheckedLabel: "Ja",
@@ -99,7 +108,8 @@ export var danishSurveyStrings = {
   modalApplyButtonText: "Anvende",
   filterStringPlaceholder: "Skriv for at søge...",
   emptyMessage: "Ingen data at vise",
-  noEntriesText: "Der er endnu ingen tilmeldinger.\nKlik på knappen nedenfor for at tilføje en ny post.",
+  noEntriesText:
+    "Der er endnu ingen tilmeldinger.\nKlik på knappen nedenfor for at tilføje en ny post.",
   noEntriesReadonlyText: "Der er ingen poster.",
   tabTitlePlaceholder: "Nyt panel",
   more: "Mere",
@@ -107,10 +117,15 @@ export var danishSurveyStrings = {
   selectToRankEmptyRankedAreaText: "Alle valg er rangeret",
   selectToRankEmptyUnrankedAreaText: "Træk og slip valg her for at rangere dem",
   ok: "OK",
-  cancel: "Aflyse"
+  cancel: "Aflyse",
 };
 
-setupLocale({ localeCode: "da", strings: danishSurveyStrings, nativeName: "dansk", englishName: "Danish" });
+setupLocale({
+  localeCode: "da",
+  strings: danishSurveyStrings,
+  nativeName: "dansk",
+  englishName: "Danish",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

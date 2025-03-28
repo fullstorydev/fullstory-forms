@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var serbianStrings = {
   pagePrevText: "Nazad",
@@ -47,13 +47,16 @@ export var serbianStrings = {
   urlRequestError: "Zahtev je naišao na grešku '{0}'. {1}",
   urlGetChoicesError: "Zahtev nije pronašao podatke, ili je putanja netačna",
   exceedMaxSize: "Veličina fajla ne bi trebalo da prelazi {0}.",
-  noUploadFilesHandler: "Nije moguće otpremiti datoteke. Dodajte rukovaoca za događaj \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'Nije moguće otpremiti datoteke. Dodajte rukovaoca za događaj "onUploadFiles".',
   otherRequiredError: "Molimo unesite drugu vrednost.",
-  uploadingFile: "Fajl se šalje. Molimo sačekajte neko vreme i pokušajte ponovo.",
+  uploadingFile:
+    "Fajl se šalje. Molimo sačekajte neko vreme i pokušajte ponovo.",
   loadingFile: "Učitavanje...",
   chooseFile: "Izaberite fajlove...",
   noFileChosen: "Nije izabran nijedan fajl",
-  filePlaceholder: "Prevucite i otpustite datoteku ovde ili kliknite na dugme ispod i odaberite datoteku za otpremanje.",
+  filePlaceholder:
+    "Prevucite i otpustite datoteku ovde ili kliknite na dugme ispod i odaberite datoteku za otpremanje.",
   confirmDelete: "Da li želite da izbrišete unos?",
   keyDuplicationError: "Ova vrednost treba da bude jedinstvena.",
   addColumn: "Dodaj kolonu",
@@ -71,7 +74,8 @@ export var serbianStrings = {
   savingData: "U toku je čuvanje podataka na serveru...",
   savingDataError: "Došlo je do greške i rezultati nisu sačuvani.",
   savingDataSuccess: "Rezultati su uspešno sačuvani!",
-  savingExceedSize: "Vaš odgovor premašuje 64KB. Smanjite veličinu datoteka i pokušajte ponovo ili se obratite vlasniku ankete.",
+  savingExceedSize:
+    "Vaš odgovor premašuje 64KB. Smanjite veličinu datoteka i pokušajte ponovo ili se obratite vlasniku ankete.",
   saveAgainButton: "Pokušajte ponovo",
   timerMin: "min",
   timerSec: "sek",
@@ -86,8 +90,10 @@ export var serbianStrings = {
   signaturePlaceHolderReadOnly: "Bez potpisa",
   chooseFileCaption: "Izaberi fajl",
   takePhotoCaption: "Fotografisanje",
-  photoPlaceholder: "Kliknite na dugme ispod da biste snimili fotografiju pomoću fotoaparata.",
-  fileOrPhotoPlaceholder: "Prevucite i otpustite ili izaberite datoteku za otpremanje ili snimanje fotografije pomoću fotoaparata.",
+  photoPlaceholder:
+    "Kliknite na dugme ispod da biste snimili fotografiju pomoću fotoaparata.",
+  fileOrPhotoPlaceholder:
+    "Prevucite i otpustite ili izaberite datoteku za otpremanje ili snimanje fotografije pomoću fotoaparata.",
   replaceFileCaption: "Zameni datoteku",
   removeFileCaption: "Ukloni ovaj fajl",
   booleanCheckedLabel: "Da",
@@ -99,18 +105,25 @@ export var serbianStrings = {
   modalApplyButtonText: "Primeni",
   filterStringPlaceholder: "Otkucajte da biste pretražili...",
   emptyMessage: "Nema podataka za prikazivanje",
-  noEntriesText: "Još uvek nema stavki.\nKliknite na dugme ispod da biste dodali novu stavku.",
+  noEntriesText:
+    "Još uvek nema stavki.\nKliknite na dugme ispod da biste dodali novu stavku.",
   noEntriesReadonlyText: "Nema stavki.",
   tabTitlePlaceholder: "Nova tabla",
   more: "Viљe",
   tagboxDoneButtonCaption: "U redu",
   selectToRankEmptyRankedAreaText: "Svi izbori su rangirani",
-  selectToRankEmptyUnrankedAreaText: "Prevucite i otpustite izbor ovde da biste ih rangirali",
+  selectToRankEmptyUnrankedAreaText:
+    "Prevucite i otpustite izbor ovde da biste ih rangirali",
   ok: "U redu",
-  cancel: "Otkaži"
+  cancel: "Otkaži",
 };
 
-setupLocale({ localeCode: "rs", strings: serbianStrings, nativeName: "srpski", englishName: "Serbian" });
+setupLocale({
+  localeCode: "rs",
+  strings: serbianStrings,
+  nativeName: "srpski",
+  englishName: "Serbian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 /**
  * You don't need to translate strings that have the same value as Portuguese translation
  */
@@ -22,14 +22,16 @@ export var portugueseBrSurveyStrings = {
   questionsProgressText: "Perguntas respondidas {0}/{1}",
   emptySurvey: "Não há página visível ou pergunta na pesquisa.",
   completingSurvey: "Obrigado por finalizar a pesquisa!",
-  completingSurveyBefore: "Nossos registros mostram que você já finalizou a pesquisa.",
+  completingSurveyBefore:
+    "Nossos registros mostram que você já finalizou a pesquisa.",
   loadingSurvey: "A pesquisa está carregando...",
   placeholder: "Selecionar...",
   ratingOptionsCaption: "Selecionar...",
   value: "valor",
   requiredError: "Por favor, responda a pergunta.",
   requiredErrorInPanel: "Por favor, responda pelo menos uma pergunta.",
-  requiredInAllRowsError: "Por favor, responda as perguntas em todas as linhas.",
+  requiredInAllRowsError:
+    "Por favor, responda as perguntas em todas as linhas.",
   eachRowUniqueError: "Cada linha deve ter um valor exclusivo.",
   numericError: "O valor deve ser numérico.",
   minError: "O valor não deve ser inferior a {0}",
@@ -41,21 +43,25 @@ export var portugueseBrSurveyStrings = {
   minRowCountError: "Por favor, preencha pelo menos {0} linha(s).",
   minSelectError: "Selecione pelo menos {0} variante(s).",
   maxSelectError: "Por favor, selecione não mais do que {0} opções.",
-  numericMinMax: "O \"{0}\" deve ser pelo menos {1} e no máximo {2}",
-  numericMin: "O \"{0}\" deve ser pelo menos {1}",
-  numericMax: "O \"{0}\" deve ser no máximo {1}",
+  numericMinMax: 'O "{0}" deve ser pelo menos {1} e no máximo {2}',
+  numericMin: 'O "{0}" deve ser pelo menos {1}',
+  numericMax: 'O "{0}" deve ser no máximo {1}',
   invalidEmail: "Por favor, informe um e-mail válido.",
   invalidExpression: "A expressão: {0} deve retornar 'verdadeiro'.",
   urlRequestError: "A requisição retornou o erro '{0}'. {1}",
-  urlGetChoicesError: "A requisição não retornou dados ou o 'caminho' da requisição não está correto",
+  urlGetChoicesError:
+    "A requisição não retornou dados ou o 'caminho' da requisição não está correto",
   exceedMaxSize: "O tamanho do arquivo não deve exceder {0}.",
-  noUploadFilesHandler: "Os arquivos não podem ser carregados. Adicione um manipulador para o evento 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Os arquivos não podem ser carregados. Adicione um manipulador para o evento 'onUploadFiles'.",
   otherRequiredError: "Por favor, informe o outro valor.",
-  uploadingFile: "Seu arquivo está sendo carregado. Por favor, aguarde alguns segundos e tente novamente.",
+  uploadingFile:
+    "Seu arquivo está sendo carregado. Por favor, aguarde alguns segundos e tente novamente.",
   loadingFile: "Carregando...",
   chooseFile: "Escolha o(s) arquivo(s)...",
   noFileChosen: "Nenhum arquivo escolhido",
-  filePlaceholder: "Arraste e solte um arquivo aqui ou clique no botão abaixo e escolha um arquivo para carregar.",
+  filePlaceholder:
+    "Arraste e solte um arquivo aqui ou clique no botão abaixo e escolha um arquivo para carregar.",
   confirmDelete: "Tem certeza que deseja deletar?",
   keyDuplicationError: "Esse valor deve ser único.",
   addColumn: "Adicionar coluna",
@@ -73,7 +79,8 @@ export var portugueseBrSurveyStrings = {
   savingData: "Os resultados esto sendo salvos no servidor...",
   savingDataError: "Ocorreu um erro e não foi possível salvar os resultados.",
   savingDataSuccess: "Os resultados foram salvos com sucesso!",
-  savingExceedSize: "Sua resposta excede 64KB. Reduza o tamanho do(s) seu(s) arquivo(s) e tente novamente ou entre em contato com o proprietário do questionário.",
+  savingExceedSize:
+    "Sua resposta excede 64KB. Reduza o tamanho do(s) seu(s) arquivo(s) e tente novamente ou entre em contato com o proprietário do questionário.",
   saveAgainButton: "Tentar novamente",
   timerMin: "Min",
   timerSec: "segundo",
@@ -88,8 +95,10 @@ export var portugueseBrSurveyStrings = {
   signaturePlaceHolderReadOnly: "Sem assinatura",
   chooseFileCaption: "Escolher arquivo",
   takePhotoCaption: "Tirar foto",
-  photoPlaceholder: "Clique no botão abaixo para tirar uma foto usando a câmera.",
-  fileOrPhotoPlaceholder: "Arraste e solte ou selecione um arquivo para carregar ou tirar uma foto usando a câmera.",
+  photoPlaceholder:
+    "Clique no botão abaixo para tirar uma foto usando a câmera.",
+  fileOrPhotoPlaceholder:
+    "Arraste e solte ou selecione um arquivo para carregar ou tirar uma foto usando a câmera.",
   replaceFileCaption: "Substituir arquivo",
   removeFileCaption: "Remover este arquivo",
   booleanCheckedLabel: "Sim",
@@ -101,18 +110,25 @@ export var portugueseBrSurveyStrings = {
   modalApplyButtonText: "Aplicar",
   filterStringPlaceholder: "Digite para pesquisar...",
   emptyMessage: "Nenhum dado a ser exibido",
-  noEntriesText: "Ainda não há inscrições.\nClique no botão abaixo para adicionar uma nova entrada.",
+  noEntriesText:
+    "Ainda não há inscrições.\nClique no botão abaixo para adicionar uma nova entrada.",
   noEntriesReadonlyText: "Não há entradas.",
   tabTitlePlaceholder: "Novo Painel",
   more: "Mais",
   tagboxDoneButtonCaption: "OKEY",
   selectToRankEmptyRankedAreaText: "Todas as opções são classificadas",
-  selectToRankEmptyUnrankedAreaText: "Arraste e solte as opções aqui para classificá-las",
+  selectToRankEmptyUnrankedAreaText:
+    "Arraste e solte as opções aqui para classificá-las",
   ok: "OKEY",
-  cancel: "Cancelar"
+  cancel: "Cancelar",
 };
 
-setupLocale({ localeCode: "pt-br", strings: portugueseBrSurveyStrings, nativeName: "português brasileiro", englishName: "Brazilian Portuguese" });
+setupLocale({
+  localeCode: "pt-br",
+  strings: portugueseBrSurveyStrings,
+  nativeName: "português brasileiro",
+  englishName: "Brazilian Portuguese",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

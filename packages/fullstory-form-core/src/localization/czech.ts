@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var czechSurveyStrings = {
   pagePrevText: "Předchozí",
@@ -20,7 +20,8 @@ export var czechSurveyStrings = {
   questionsProgressText: "Zodpovězené otázky: {0} / {1}",
   emptySurvey: "Průzkum neobsahuje žádné otázky.",
   completingSurvey: "Děkujeme za vyplnění průzkumu!",
-  completingSurveyBefore: "Naše záznamy ukazují, že jste tento průzkum již dokončil/a.",
+  completingSurveyBefore:
+    "Naše záznamy ukazují, že jste tento průzkum již dokončil/a.",
   loadingSurvey: "Probíhá načítání průzkumu...",
   placeholder: "Vyberte...",
   ratingOptionsCaption: "Vybrat...",
@@ -39,21 +40,25 @@ export var czechSurveyStrings = {
   minRowCountError: "Vyplňte prosím alespoň {0} řádků.",
   minSelectError: "Vyberte prosím alespoň {0} varianty.",
   maxSelectError: "Nevybírejte prosím více než {0} variant.",
-  numericMinMax: "Odpověď '{0}' by mělo být větší nebo rovno {1} a menší nebo rovno {2}",
+  numericMinMax:
+    "Odpověď '{0}' by mělo být větší nebo rovno {1} a menší nebo rovno {2}",
   numericMin: "Odpověď '{0}' by mělo být větší nebo rovno {1}",
   numericMax: "Odpověď '{0}' by mělo být menší nebo rovno {1}",
   invalidEmail: "Zadejte prosím platnou e-mailovou adresu.",
   invalidExpression: "Výraz: {0} by měl vrátit hodnotu „true“.",
   urlRequestError: "Požadavek vrátil chybu '{0}'. {1}",
-  urlGetChoicesError: "Požadavek nevrátil data nebo je neplatná vlastnost 'path'",
+  urlGetChoicesError:
+    "Požadavek nevrátil data nebo je neplatná vlastnost 'path'",
   exceedMaxSize: "Velikost souboru by neměla být větší než {0}.",
-  noUploadFilesHandler: "Soubory nelze nahrát. Přidejte obslužnou rutinu pro událost 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Soubory nelze nahrát. Přidejte obslužnou rutinu pro událost 'onUploadFiles'.",
   otherRequiredError: "Zadejte prosím jinou hodnotu.",
   uploadingFile: "Váš soubor se nahrává. Zkuste to prosím za několik sekund.",
   loadingFile: "Načítání...",
   chooseFile: "Vyberte soubory...",
   noFileChosen: "Není zvolený žádný soubor",
-  filePlaceholder: "Přetáhněte sem soubor nebo klikněte na tlačítko níže a vyberte soubor, který chcete nahrát.",
+  filePlaceholder:
+    "Přetáhněte sem soubor nebo klikněte na tlačítko níže a vyberte soubor, který chcete nahrát.",
   confirmDelete: "Chcete záznam smazat?",
   keyDuplicationError: "Tato hodnota by měla být unikátní.",
   addColumn: "Přidat sloupec",
@@ -71,7 +76,8 @@ export var czechSurveyStrings = {
   savingData: "Výsledky se ukládají na server...",
   savingDataError: "Došlo k chybě a výsledky jsme nemohli uložit.",
   savingDataSuccess: "Výsledky byly úspěšně uloženy!",
-  savingExceedSize: "Vaše odpověď překračuje 64 kB. Zmenšete prosím velikost svých souborů a zkuste to znovu nebo kontaktujte vlastníka průzkumu.",
+  savingExceedSize:
+    "Vaše odpověď překračuje 64 kB. Zmenšete prosím velikost svých souborů a zkuste to znovu nebo kontaktujte vlastníka průzkumu.",
   saveAgainButton: "Zkuste to znovu",
   timerMin: "min",
   timerSec: "sek",
@@ -86,8 +92,10 @@ export var czechSurveyStrings = {
   signaturePlaceHolderReadOnly: "Bez podpisu",
   chooseFileCaption: "Vyberte soubor",
   takePhotoCaption: "Pořídit fotografii",
-  photoPlaceholder: "Kliknutím na tlačítko níže pořídíte fotografii pomocí fotoaparátu.",
-  fileOrPhotoPlaceholder: "Přetáhněte nebo vyberte soubor, který chcete nahrát nebo pořiďte fotografii pomocí fotoaparátu.",
+  photoPlaceholder:
+    "Kliknutím na tlačítko níže pořídíte fotografii pomocí fotoaparátu.",
+  fileOrPhotoPlaceholder:
+    "Přetáhněte nebo vyberte soubor, který chcete nahrát nebo pořiďte fotografii pomocí fotoaparátu.",
   replaceFileCaption: "Nahradit soubor",
   removeFileCaption: "Odeberte tento soubor",
   booleanCheckedLabel: "Ano",
@@ -99,7 +107,8 @@ export var czechSurveyStrings = {
   modalApplyButtonText: "Použít",
   filterStringPlaceholder: "Zadejte hledaný text...",
   emptyMessage: "Žádná data k zobrazení",
-  noEntriesText: "Zatím nejsou žádné záznamy.\nKliknutím na tlačítko níže přidáte novou položku.",
+  noEntriesText:
+    "Zatím nejsou žádné záznamy.\nKliknutím na tlačítko níže přidáte novou položku.",
   noEntriesReadonlyText: "Nejsou zde žádné položky.",
   tabTitlePlaceholder: "Nový panel",
   more: "Více",
@@ -107,10 +116,15 @@ export var czechSurveyStrings = {
   selectToRankEmptyRankedAreaText: "Všechny možnosti jsou seřazeny",
   selectToRankEmptyUnrankedAreaText: "Přetáhněte volby zde a seřaďte je",
   ok: "OK",
-  cancel: "Zrušit"
+  cancel: "Zrušit",
 };
 
-setupLocale({ localeCode: "cs", strings: czechSurveyStrings, nativeName: "čeština", englishName: "Czech" });
+setupLocale({
+  localeCode: "cs",
+  strings: czechSurveyStrings,
+  nativeName: "čeština",
+  englishName: "Czech",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

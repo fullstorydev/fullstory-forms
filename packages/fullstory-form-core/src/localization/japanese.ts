@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var japaneseSurveyStrings = {
   pagePrevText: "前へ",
@@ -45,15 +45,19 @@ export var japaneseSurveyStrings = {
   invalidEmail: "有効なメールアドレスを入力してください。",
   invalidExpression: "式: {0} は 'true' を返す必要があります。",
   urlRequestError: "リクエストはエラー '{0}' を返しました。{1}",
-  urlGetChoicesError: "リクエストが空のデータを返したか、'path' プロパティが正しくありません。",
+  urlGetChoicesError:
+    "リクエストが空のデータを返したか、'path' プロパティが正しくありません。",
   exceedMaxSize: "ファイルのサイズは{0}を超えてはいけません",
-  noUploadFilesHandler: "ファイルはアップロードできません。「onUploadFiles」イベントのハンドラーを追加してください。",
+  noUploadFilesHandler:
+    "ファイルはアップロードできません。「onUploadFiles」イベントのハンドラーを追加してください。",
   otherRequiredError: "回答が必要です：他の値を入力してください。",
-  uploadingFile: "ファイルをアップロード中です。しばらくしてから再度お試し下さい",
+  uploadingFile:
+    "ファイルをアップロード中です。しばらくしてから再度お試し下さい",
   loadingFile: "読み込み中",
   chooseFile: "ファイルを選択",
   noFileChosen: "選択されたファイルはありません",
-  filePlaceholder: "ここにファイルをドラッグ&ドロップするか、下のボタンをクリックしてアップロードするファイルを選択してください。",
+  filePlaceholder:
+    "ここにファイルをドラッグ&ドロップするか、下のボタンをクリックしてアップロードするファイルを選択してください。",
   confirmDelete: "レコードを削除しますか？",
   keyDuplicationError: "この値は一意でなければなりません。",
   addColumn: "列の追加",
@@ -71,14 +75,16 @@ export var japaneseSurveyStrings = {
   savingData: "結果を保存中...。",
   savingDataError: "エラーが発生し、結果を保存できませんでした。",
   savingDataSuccess: "結果が正常に保存されました",
-  savingExceedSize: "回答は 64 KB を超えています。ファイルのサイズを小さくしてもう一度お試しいただくか、アンケートの作成者にお問い合わせください。",
+  savingExceedSize:
+    "回答は 64 KB を超えています。ファイルのサイズを小さくしてもう一度お試しいただくか、アンケートの作成者にお問い合わせください。",
   saveAgainButton: "もう一度試してみてください。",
   timerMin: "僅少",
   timerSec: "セック",
   timerSpentAll: "あなたはこのページに{0}を費やし、合計で{1}を費やしました。",
   timerSpentPage: "あなたはこのページに{0}を費やしました。",
   timerSpentSurvey: "合計で{0}を使ったことになります。",
-  timerLimitAll: "このページに{1}のうち{0}を費やし、{3}のうち{2}を合計で費やしました。",
+  timerLimitAll:
+    "このページに{1}のうち{0}を費やし、{3}のうち{2}を合計で費やしました。",
   timerLimitPage: "このページで{1}の{0}を使ったことがあります。",
   timerLimitSurvey: "合計で{1}の{0}を使ったことがあります。",
   clearCaption: "空白",
@@ -87,7 +93,8 @@ export var japaneseSurveyStrings = {
   chooseFileCaption: "ファイルを選択",
   takePhotoCaption: "写真を撮る",
   photoPlaceholder: "下のボタンをクリックしてカメラで写真を撮影してください。",
-  fileOrPhotoPlaceholder: "ファイルをドラッグ＆ドロップまたは選択してアップロードするか、カメラで写真を撮影してください。",
+  fileOrPhotoPlaceholder:
+    "ファイルをドラッグ＆ドロップまたは選択してアップロードするか、カメラで写真を撮影してください。",
   replaceFileCaption: "ファイルを置換",
   removeFileCaption: "このファイルを削除",
   booleanCheckedLabel: "はい",
@@ -99,18 +106,25 @@ export var japaneseSurveyStrings = {
   modalApplyButtonText: "申し込む",
   filterStringPlaceholder: "検索するタイプ...",
   emptyMessage: "表示するデータがありません",
-  noEntriesText: "エントリはまだありません。\n下のボタンをクリックして、新しいエントリを追加します。",
+  noEntriesText:
+    "エントリはまだありません。\n下のボタンをクリックして、新しいエントリを追加します。",
   noEntriesReadonlyText: "エントリはありません。",
   tabTitlePlaceholder: "新しいパネル",
   more: "続きを見る",
   tagboxDoneButtonCaption: "わかりました",
   selectToRankEmptyRankedAreaText: "すべての選択肢がランク付けされます",
-  selectToRankEmptyUnrankedAreaText: "ここに選択肢をドラッグアンドドロップしてランク付けします",
+  selectToRankEmptyUnrankedAreaText:
+    "ここに選択肢をドラッグアンドドロップしてランク付けします",
   ok: "わかりました",
-  cancel: "キャンセル"
+  cancel: "キャンセル",
 };
 
-setupLocale({ localeCode: "ja", strings: japaneseSurveyStrings, nativeName: "日本語", englishName: "Japanese" });
+setupLocale({
+  localeCode: "ja",
+  strings: japaneseSurveyStrings,
+  nativeName: "日本語",
+  englishName: "Japanese",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

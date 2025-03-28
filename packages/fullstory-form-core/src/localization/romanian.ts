@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var romanianSurveyStrings: any = {
   pagePrevText: "Precedent",
@@ -20,7 +20,8 @@ export var romanianSurveyStrings: any = {
   questionsProgressText: "Răspunsuri la {0} / {1} întrebări",
   emptySurvey: "Nu sunt întrebări pentru acest chestionar",
   completingSurvey: "Vă mulţumim pentru timpul acordat!",
-  completingSurveyBefore: "Din înregistrările noastre reiese că ați completat deja acest chestionar.",
+  completingSurveyBefore:
+    "Din înregistrările noastre reiese că ați completat deja acest chestionar.",
   loadingSurvey: "Chestionarul se încarcă...",
   placeholder: "Alegeţi...",
   ratingOptionsCaption: "Alege...",
@@ -35,25 +36,31 @@ export var romanianSurveyStrings: any = {
   textNoDigitsAllow: "Numerele nu sunt permise.",
   textMinLength: "Trebuie să introduceți minim {0} caractere.",
   textMaxLength: "Trebuie să introduceți maxim {0} caractere.",
-  textMinMaxLength: "Trebuie să introduceți mai mult de {0} și mai puțin de {1} caractere.",
+  textMinMaxLength:
+    "Trebuie să introduceți mai mult de {0} și mai puțin de {1} caractere.",
   minRowCountError: "Trebuie să completați minim {0} rânduri.",
   minSelectError: "Trebuie să selectați minim {0} opţiuni.",
   maxSelectError: "Trebuie să selectați maxim {0} opţiuni.",
-  numericMinMax: "Răspunsul '{0}' trebuie să fie mai mare sau egal ca {1} şî mai mic sau egal cu {2}",
+  numericMinMax:
+    "Răspunsul '{0}' trebuie să fie mai mare sau egal ca {1} şî mai mic sau egal cu {2}",
   numericMin: "Răspunsul '{0}' trebuie să fie mai mare sau egal ca {1}",
   numericMax: "Răspunsul '{0}' trebuie să fie mai mic sau egal ca {1}",
   invalidEmail: "Trebuie să introduceţi o adresa de email validă.",
   invalidExpression: "Expresia: {0} ar trebui să returneze „adevărat”.",
   urlRequestError: "Request-ul a returnat eroarea '{0}'. {1}",
-  urlGetChoicesError: "Request-ul nu a returnat date sau proprietatea 'path' este incorectă",
+  urlGetChoicesError:
+    "Request-ul nu a returnat date sau proprietatea 'path' este incorectă",
   exceedMaxSize: "Dimensiunea fişierului nu trebuie să depăşească {0}.",
-  noUploadFilesHandler: "Fișierele nu pot fi încărcate. Vă rugăm să adăugați un handler pentru evenimentul \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'Fișierele nu pot fi încărcate. Vă rugăm să adăugați un handler pentru evenimentul "onUploadFiles".',
   otherRequiredError: "Trebuie să completați câmpul 'Altul'.",
-  uploadingFile: "Fișierul dumneavoastră este în curs de încărcare. Vă rugăm așteptați câteva secunde și reveniți apoi.",
+  uploadingFile:
+    "Fișierul dumneavoastră este în curs de încărcare. Vă rugăm așteptați câteva secunde și reveniți apoi.",
   loadingFile: "Se încarcă...",
   chooseFile: "Alege fisierele...",
   noFileChosen: "Niciun fișier ales",
-  filePlaceholder: "Glisați și fixați un fișier aici sau faceți clic pe butonul de mai jos și alegeți un fișier de încărcat.",
+  filePlaceholder:
+    "Glisați și fixați un fișier aici sau faceți clic pe butonul de mai jos și alegeți un fișier de încărcat.",
   confirmDelete: "Sunteți sigur că doriți să ștergeți înregistrarea?",
   keyDuplicationError: "Valoarea trebuie să fie unică.",
   addColumn: "Adăugați coloană",
@@ -71,14 +78,16 @@ export var romanianSurveyStrings: any = {
   savingData: "Rezultatele sunt în curs de salvare...",
   savingDataError: "A intervenit o eroare, rezultatele nu au putut fi salvate.",
   savingDataSuccess: "Rezultatele au fost salvate cu succes!",
-  savingExceedSize: "Răspunsul tău depășește 64KB. Reduceți dimensiunea fișierelor și încercați din nou sau contactați un proprietar de sondaj.",
+  savingExceedSize:
+    "Răspunsul tău depășește 64KB. Reduceți dimensiunea fișierelor și încercați din nou sau contactați un proprietar de sondaj.",
   saveAgainButton: "Încercați din nou",
   timerMin: "min",
   timerSec: "sec",
   timerSpentAll: "Ați petrecut {0} pe această pagină și {1} în total.",
   timerSpentPage: "Ați petrecut {0} pe această pagină.",
   timerSpentSurvey: "Ați petrecut {0} în total.",
-  timerLimitAll: "Ați petrecut {0} din {1} pe această pagină și {2} din {3} în total.",
+  timerLimitAll:
+    "Ați petrecut {0} din {1} pe această pagină și {2} din {3} în total.",
   timerLimitPage: "Ați petrecut {0} din {1} pe această pagină.",
   timerLimitSurvey: "Ați petrecut {0} din {1} în total.",
   clearCaption: "clar",
@@ -86,8 +95,10 @@ export var romanianSurveyStrings: any = {
   signaturePlaceHolderReadOnly: "Fără semnătură",
   chooseFileCaption: "Alege fișierul",
   takePhotoCaption: "Faceți o fotografie",
-  photoPlaceholder: "Faceți clic pe butonul de mai jos pentru a face o fotografie folosind camera.",
-  fileOrPhotoPlaceholder: "Glisați și fixați sau selectați un fișier pentru a încărca sau a face o fotografie folosind camera.",
+  photoPlaceholder:
+    "Faceți clic pe butonul de mai jos pentru a face o fotografie folosind camera.",
+  fileOrPhotoPlaceholder:
+    "Glisați și fixați sau selectați un fișier pentru a încărca sau a face o fotografie folosind camera.",
   replaceFileCaption: "Înlocuire fișier",
   removeFileCaption: "Eliminați acest fișier",
   booleanCheckedLabel: "da",
@@ -99,18 +110,25 @@ export var romanianSurveyStrings: any = {
   modalApplyButtonText: "Aplica",
   filterStringPlaceholder: "Tastați pentru a căuta...",
   emptyMessage: "Nu există date de afișat",
-  noEntriesText: "Nu există încă intrări.\nFaceți clic pe butonul de mai jos pentru a adăuga o intrare nouă.",
+  noEntriesText:
+    "Nu există încă intrări.\nFaceți clic pe butonul de mai jos pentru a adăuga o intrare nouă.",
   noEntriesReadonlyText: "Nu există intrări.",
   tabTitlePlaceholder: "Panou nou",
   more: "Mai mult",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Toate opțiunile sunt clasificate",
-  selectToRankEmptyUnrankedAreaText: "Glisați și fixați opțiunile aici pentru a le clasifica",
+  selectToRankEmptyUnrankedAreaText:
+    "Glisați și fixați opțiunile aici pentru a le clasifica",
   ok: "OK",
-  cancel: "Anula"
+  cancel: "Anula",
 };
 
-setupLocale({ localeCode: "ro", strings: romanianSurveyStrings, nativeName: "română", englishName: "Romanian" });
+setupLocale({
+  localeCode: "ro",
+  strings: romanianSurveyStrings,
+  nativeName: "română",
+  englishName: "Romanian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

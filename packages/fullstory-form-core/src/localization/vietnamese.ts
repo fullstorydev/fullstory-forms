@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var vietnameseSurveyStrings = {
   pagePrevText: "Trở về",
@@ -18,9 +18,11 @@ export var vietnameseSurveyStrings = {
   panelDynamicProgressText: "Dòng {0} / {1}",
   panelDynamicTabTextFormat: "Bảng điều khiển {panelIndex}",
   questionsProgressText: "Đã trả lời {0}/{1} câu hỏi",
-  emptySurvey: "Không có trang hoặc câu hỏi nào được hiển thị trong cuộc khảo sát này.",
+  emptySurvey:
+    "Không có trang hoặc câu hỏi nào được hiển thị trong cuộc khảo sát này.",
   completingSurvey: "Cảm ơn đã hoàn thành khảo sát!",
-  completingSurveyBefore: "Hồ sơ chúng tôi cho thấy rằng bạn đã hoàn thành cuộc khảo sát này.",
+  completingSurveyBefore:
+    "Hồ sơ chúng tôi cho thấy rằng bạn đã hoàn thành cuộc khảo sát này.",
   loadingSurvey: "Đang tải khảo sát...",
   placeholder: "Chọn...",
   ratingOptionsCaption: "Lựa...",
@@ -39,21 +41,25 @@ export var vietnameseSurveyStrings = {
   minRowCountError: "Vui lòng nhập ít nhất {0} dòng.",
   minSelectError: "Vui lòng chọn ít nhất {0} loại.",
   maxSelectError: "Vui lòng không chọn nhiều hơn {0} loại.",
-  numericMinMax: "Giá trị '{0}' nên bằng hoặc lớn hơn {1} và bằng hoặc nhỏ hơn {2}",
+  numericMinMax:
+    "Giá trị '{0}' nên bằng hoặc lớn hơn {1} và bằng hoặc nhỏ hơn {2}",
   numericMin: "Giá trị '{0}' nên bằng hoặc lớn hơn {1}",
   numericMax: "Giá trị '{0}' nên bằng hoặc nhỏ hơn {1}",
   invalidEmail: "Vui lòng điền địa chỉ email hợp lệ.",
   invalidExpression: "Biểu thức: {0} nên trả về 'true'.",
   urlRequestError: "Yêu cầu trả về lỗi '{0}'. {1}",
-  urlGetChoicesError: "Yêu cầu trả về dữ liệu trống hoặc thuộc tính 'path' không đúng",
+  urlGetChoicesError:
+    "Yêu cầu trả về dữ liệu trống hoặc thuộc tính 'path' không đúng",
   exceedMaxSize: "Kích thước tập tin không nên vượt quá {0}.",
-  noUploadFilesHandler: "Không thể tải tệp lên. Vui lòng thêm trình xử lý cho sự kiện 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Không thể tải tệp lên. Vui lòng thêm trình xử lý cho sự kiện 'onUploadFiles'.",
   otherRequiredError: "Vui lòng điền giá trị khác.",
   uploadingFile: "Tập tin đang được tải lên. Vui lòng chờ một lúc và thử lại.",
   loadingFile: "Đang tải...",
   chooseFile: "Chọn các tập tin...",
   noFileChosen: "Không có tập tin nào được chọn",
-  filePlaceholder: "Kéo và thả tệp vào đây hoặc nhấp vào nút bên dưới và chọn tệp để tải lên.",
+  filePlaceholder:
+    "Kéo và thả tệp vào đây hoặc nhấp vào nút bên dưới và chọn tệp để tải lên.",
   confirmDelete: "Bạn muốn xóa dòng này?",
   keyDuplicationError: "Giá trị này không nên bị trùng lặp.",
   addColumn: "Thêm cột",
@@ -71,14 +77,16 @@ export var vietnameseSurveyStrings = {
   savingData: "Kết quả đang lưu lại trên hệ thống...",
   savingDataError: "Có lỗi xảy ra và chúng ta không thể lưu kết quả.",
   savingDataSuccess: "Kết quả đã được lưu thành công!",
-  savingExceedSize: "Phản hồi của bạn vượt quá 64KB. Vui lòng giảm kích thước (các) tệp của bạn và thử lại hoặc liên hệ với chủ sở hữu khảo sát.",
+  savingExceedSize:
+    "Phản hồi của bạn vượt quá 64KB. Vui lòng giảm kích thước (các) tệp của bạn và thử lại hoặc liên hệ với chủ sở hữu khảo sát.",
   saveAgainButton: "Thử lại",
   timerMin: "phút",
   timerSec: "giây",
   timerSpentAll: "Bạn đã sử dụng {0} trên trang này và {1} trên toàn bộ.",
   timerSpentPage: "Bạn đã sử dụng {0} trên trang.",
   timerSpentSurvey: "Bạn đã sử dụng {0} trên toàn bộ.",
-  timerLimitAll: "Bạn đã sử dụng {0} / {1} trên trang này và {2} / {3} trên toàn bộ.",
+  timerLimitAll:
+    "Bạn đã sử dụng {0} / {1} trên trang này và {2} / {3} trên toàn bộ.",
   timerLimitPage: "Bạn đã sử dụng {0} / {1} trên trang này.",
   timerLimitSurvey: "Bạn đã sử dụng {0} / {1} trên toàn bộ.",
   clearCaption: "Xóa",
@@ -87,7 +95,8 @@ export var vietnameseSurveyStrings = {
   chooseFileCaption: "Chọn tập tin",
   takePhotoCaption: "Chụp ảnh",
   photoPlaceholder: "Nhấp vào nút bên dưới để chụp ảnh bằng máy ảnh.",
-  fileOrPhotoPlaceholder: "Kéo và thả hoặc chọn tệp để tải lên hoặc chụp ảnh bằng máy ảnh.",
+  fileOrPhotoPlaceholder:
+    "Kéo và thả hoặc chọn tệp để tải lên hoặc chụp ảnh bằng máy ảnh.",
   replaceFileCaption: "Thay thế tập tin",
   removeFileCaption: "Xóa tập tin",
   booleanCheckedLabel: "Có",
@@ -99,18 +108,25 @@ export var vietnameseSurveyStrings = {
   modalApplyButtonText: "Áp dụng",
   filterStringPlaceholder: "Nhập để tìm kiếm...",
   emptyMessage: "Không có dữ liệu để hiển thị",
-  noEntriesText: "Chưa có mục nào.\nNhấp vào nút bên dưới để thêm mục nhập mới.",
+  noEntriesText:
+    "Chưa có mục nào.\nNhấp vào nút bên dưới để thêm mục nhập mới.",
   noEntriesReadonlyText: "Không có mục.",
   tabTitlePlaceholder: "Bảng điều khiển mới",
   more: "Nhiều hơn",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Tất cả các lựa chọn được xếp hạng",
-  selectToRankEmptyUnrankedAreaText: "Kéo và thả các lựa chọn vào đây để xếp hạng chúng",
+  selectToRankEmptyUnrankedAreaText:
+    "Kéo và thả các lựa chọn vào đây để xếp hạng chúng",
   ok: "OK",
-  cancel: "Hủy"
+  cancel: "Hủy",
 };
 
-setupLocale({ localeCode: "vi", strings: vietnameseSurveyStrings, nativeName: "việt nam", englishName: "Vietnamese" });
+setupLocale({
+  localeCode: "vi",
+  strings: vietnameseSurveyStrings,
+  nativeName: "việt nam",
+  englishName: "Vietnamese",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

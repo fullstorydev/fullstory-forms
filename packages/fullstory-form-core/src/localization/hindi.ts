@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var hindiStrings = {
   pagePrevText: "पिछला",
@@ -20,7 +20,8 @@ export var hindiStrings = {
   questionsProgressText: "{1} सवालों में से {0} के जवाब दिए",
   emptySurvey: "सर्वेक्षण में कोई दृश्यमान पृष्ठ या प्रश्न नहीं है",
   completingSurvey: "सर्वेक्षण को पूरा करने के लिए धन्यवाद",
-  completingSurveyBefore: " हमारे रिकॉर्ड बताते हैं कि आप पहले ही इस सर्वेक्षण को पूरा कर चुके हैं",
+  completingSurveyBefore:
+    " हमारे रिकॉर्ड बताते हैं कि आप पहले ही इस सर्वेक्षण को पूरा कर चुके हैं",
   loadingSurvey: "सर्वेक्षण खुल रहा है.…",
   placeholder: "चुनें",
   ratingOptionsCaption: "चुनना।।।",
@@ -46,14 +47,18 @@ export var hindiStrings = {
   invalidExpression: "अभिव्यक्ति: {0} को ' सच ' लौटना चाहिए",
   urlRequestError: "अनुरोध लौटाया त्रुटि '{0}' . {1}",
   urlGetChoicesError: "अनुरोध ने खाली डेटा वापस कर दिया है ",
-  exceedMaxSize: "फ़ाइल का आकार {0} से अधिक नहीं होना चाहिए  या फिर 'पाथ' प्रॉपर्टी गलत है",
-  noUploadFilesHandler: "फ़ाइलें अपलोड नहीं की जा सकती. कृपया 'onloadFiles' ईवेंट के लिए एक हैंडलर जोड़ें.",
+  exceedMaxSize:
+    "फ़ाइल का आकार {0} से अधिक नहीं होना चाहिए  या फिर 'पाथ' प्रॉपर्टी गलत है",
+  noUploadFilesHandler:
+    "फ़ाइलें अपलोड नहीं की जा सकती. कृपया 'onloadFiles' ईवेंट के लिए एक हैंडलर जोड़ें.",
   otherRequiredError: "कृपया दूसरा मूल्य दर्ज करें",
-  uploadingFile: "आपकी फाइल अपलोड हो रही है। कृपया कई सेकंड इंतजार करें और फिर से प्रयास करें।",
+  uploadingFile:
+    "आपकी फाइल अपलोड हो रही है। कृपया कई सेकंड इंतजार करें और फिर से प्रयास करें।",
   loadingFile: "लोडिंग",
   chooseFile: "फ़ाइल चुनें",
   noFileChosen: "कोई फाइल नहीं चुनी गई",
-  filePlaceholder: "यहां एक फ़ाइल खींचें और छोड़ें या नीचे दिए गए बटन पर क्लिक करें और अपलोड करने के लिए एक फ़ाइल चुनें।",
+  filePlaceholder:
+    "यहां एक फ़ाइल खींचें और छोड़ें या नीचे दिए गए बटन पर क्लिक करें और अपलोड करने के लिए एक फ़ाइल चुनें।",
   confirmDelete: "क्या आप रिकॉर्ड हटाना चाहते हैं",
   keyDuplicationError: "यह मान अनोखा होना चाहिए",
   addColumn: "कॉलम जोड़ें",
@@ -71,7 +76,8 @@ export var hindiStrings = {
   savingData: "परिणाम सर्वर पर सेव हो रहे हैं",
   savingDataError: "एक त्रुटि हुई और हम परिणामों को नहीं सेव कर सके",
   savingDataSuccess: "परिणाम सफलतापूर्वक सेव हो गए",
-  savingExceedSize: "आपकी प्रतिक्रिया 64KB से अधिक है। कृपया अपनी फ़ाइल(फ़ाइलों) का आकार घटाएँ और पुन: प्रयास करें या सर्वेक्षण स्वामी से संपर्क करें.",
+  savingExceedSize:
+    "आपकी प्रतिक्रिया 64KB से अधिक है। कृपया अपनी फ़ाइल(फ़ाइलों) का आकार घटाएँ और पुन: प्रयास करें या सर्वेक्षण स्वामी से संपर्क करें.",
   saveAgainButton: "फिर कोशिश करो",
   timerMin: "मिनट",
   timerSec: "सेकंड",
@@ -86,31 +92,42 @@ export var hindiStrings = {
   signaturePlaceHolderReadOnly: "कोई हस्ताक्षर नहीं",
   chooseFileCaption: "फ़ाइल चुनें",
   takePhotoCaption: "फोटो ले लो",
-  photoPlaceholder: "कैमरे का उपयोग करके फोटो लेने के लिए नीचे दिए गए बटन पर क्लिक करें।",
-  fileOrPhotoPlaceholder: "कैमरे का उपयोग करके फ़ोटो अपलोड करने या फ़ोटो लेने के लिए किसी फ़ाइल को खींचें और छोड़ें या चुनें.",
+  photoPlaceholder:
+    "कैमरे का उपयोग करके फोटो लेने के लिए नीचे दिए गए बटन पर क्लिक करें।",
+  fileOrPhotoPlaceholder:
+    "कैमरे का उपयोग करके फ़ोटो अपलोड करने या फ़ोटो लेने के लिए किसी फ़ाइल को खींचें और छोड़ें या चुनें.",
   replaceFileCaption: "फ़ाइल बदलें",
   removeFileCaption: "इस फाइल को निकालें",
   booleanCheckedLabel: "हाँ",
   booleanUncheckedLabel: "नहीं",
-  confirmRemoveFile: "क्या आप सुनिश्चित हैं कि आप इस फ़ाइल को हटाना चाहते हैं: {0}",
-  confirmRemoveAllFiles: "क्या आप सुनिश्चित हैं कि आप सभी फ़ाइलों को हटाना चाहते हैं",
+  confirmRemoveFile:
+    "क्या आप सुनिश्चित हैं कि आप इस फ़ाइल को हटाना चाहते हैं: {0}",
+  confirmRemoveAllFiles:
+    "क्या आप सुनिश्चित हैं कि आप सभी फ़ाइलों को हटाना चाहते हैं",
   questionTitlePatternText: "प्रश्न का शीर्षक",
   modalCancelButtonText: "रद्द करना",
   modalApplyButtonText: "लागू करना",
   filterStringPlaceholder: "खोज करने के लिए टाइप करें...",
   emptyMessage: "प्रदर्शित करने के लिए कोई डेटा नहीं",
-  noEntriesText: "अभी तक कोई प्रविष्टियां नहीं हैं।\nनई प्रविष्टि जोड़ने के लिए नीचे दिए गए बटन पर क्लिक करें.",
+  noEntriesText:
+    "अभी तक कोई प्रविष्टियां नहीं हैं।\nनई प्रविष्टि जोड़ने के लिए नीचे दिए गए बटन पर क्लिक करें.",
   noEntriesReadonlyText: "कोई प्रविष्टियाँ नहीं हैं.",
   tabTitlePlaceholder: "नया पैनल",
   more: "अधिक",
   tagboxDoneButtonCaption: "ठीक है",
   selectToRankEmptyRankedAreaText: "सभी विकल्पों को रैंक किया गया है",
-  selectToRankEmptyUnrankedAreaText: "विकल्पों को रैंक करने के लिए उन्हें यहां खींचें और छोड़ दें",
+  selectToRankEmptyUnrankedAreaText:
+    "विकल्पों को रैंक करने के लिए उन्हें यहां खींचें और छोड़ दें",
   ok: "ठीक है",
-  cancel: "रद्द करना"
+  cancel: "रद्द करना",
 };
 
-setupLocale({ localeCode: "hi", strings: hindiStrings, nativeName: "hindi", englishName: "Hindi" });
+setupLocale({
+  localeCode: "hi",
+  strings: hindiStrings,
+  nativeName: "hindi",
+  englishName: "Hindi",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

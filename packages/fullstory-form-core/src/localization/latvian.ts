@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var latvianSurveyStrings = {
   pagePrevText: "Iepriekšēja lapa",
@@ -20,7 +20,8 @@ export var latvianSurveyStrings = {
   questionsProgressText: "Atbildēts uz {0} / {1} jautājumiem",
   emptySurvey: "Nav neviena jautājuma.",
   completingSurvey: "Pateicamies Jums par anketas aizpildīšanu!",
-  completingSurveyBefore: "Mūsu ieraksti liecina, ka Jūs jau esat aizpildījis šo aptauju.",
+  completingSurveyBefore:
+    "Mūsu ieraksti liecina, ka Jūs jau esat aizpildījis šo aptauju.",
   loadingSurvey: "Ielāde no servera...",
   placeholder: "Izvēlēties...",
   ratingOptionsCaption: "Nospiediet šeit, lai novērtētu...",
@@ -35,25 +36,31 @@ export var latvianSurveyStrings = {
   textNoDigitsAllow: "Numuri nav atļauti.",
   textMinLength: "Lūdzu, ievadiet vismaz {0} simbolus.",
   textMaxLength: "Lūdzu, ievadiet mazāk nekā {0} rakstzīmes.",
-  textMinMaxLength: "Lūdzu, ievadiet vairāk nekā {0} rakstzīmes un mazāk nekā {1} rakstzīmes.",
+  textMinMaxLength:
+    "Lūdzu, ievadiet vairāk nekā {0} rakstzīmes un mazāk nekā {1} rakstzīmes.",
   minRowCountError: "Lūdzu, aizpildiet vismaz {0} rindas.",
   minSelectError: "Lūdzu, izvēlieties vismaz {0} variantu.",
   maxSelectError: "Lūdzu, izvēlieties ne vairak par {0} variantiem.",
-  numericMinMax: "'{0}' jābūt vienādam vai lielākam nekā {1}, un vienādam vai mazākam, nekā {2}",
+  numericMinMax:
+    "'{0}' jābūt vienādam vai lielākam nekā {1}, un vienādam vai mazākam, nekā {2}",
   numericMin: "'{0}' jābūt vienādam vai lielākam {1}",
   numericMax: "'{0}' jābūt vienādam vai lielākam {1}",
   invalidEmail: "Lūdzu, ievadiet pareizu e-pasta adresi!",
   invalidExpression: "Izteicienam: {0} jāatgriež “true”.",
   urlRequestError: "Pieprasījumā tika atgriezta kļūda “{0}”. {1}",
-  urlGetChoicesError: "Pieprasījums atgrieza tukšus datus vai rekvizīts “path” ir nepareizs",
+  urlGetChoicesError:
+    "Pieprasījums atgrieza tukšus datus vai rekvizīts “path” ir nepareizs",
   exceedMaxSize: "Faila lielums nedrīkst pārsniegt {0}.",
-  noUploadFilesHandler: "Failus nevar augšupielādēt. Lūdzu, pievienojiet apdarinātāju notikumam \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'Failus nevar augšupielādēt. Lūdzu, pievienojiet apdarinātāju notikumam "onUploadFiles".',
   otherRequiredError: "Lūdzu, ievadiet datus laukā 'Cits'",
-  uploadingFile: "Jūsu fails tiek augšupielādēts. Lūdzu, uzgaidiet dažas sekundes un mēģiniet vēlreiz.",
+  uploadingFile:
+    "Jūsu fails tiek augšupielādēts. Lūdzu, uzgaidiet dažas sekundes un mēģiniet vēlreiz.",
   loadingFile: "Notiek ielāde ...",
   chooseFile: "Izvēlieties failus ...",
   noFileChosen: "Nav izvēlēts neviens fails",
-  filePlaceholder: "Lai pievienotu, ievelciet failu šeit vai arī klikšķiniet uz zemāk redzamās pogas",
+  filePlaceholder:
+    "Lai pievienotu, ievelciet failu šeit vai arī klikšķiniet uz zemāk redzamās pogas",
   confirmDelete: "Vai vēlaties izdzēst ierakstu?",
   keyDuplicationError: "Šai vērtībai jābūt unikālai.",
   addColumn: "Pievienot kolonnu",
@@ -71,7 +78,8 @@ export var latvianSurveyStrings = {
   savingData: "Rezultāti tiek saglabāti serverī ...",
   savingDataError: "Radās kļūda, un mēs nevarējām saglabāt rezultātus.",
   savingDataSuccess: "Rezultāti tika veiksmīgi saglabāti!",
-  savingExceedSize: "Jūsu atbilde pārsniedz 64 KB. Lūdzu, samaziniet sava(-u) faila(-u) lielumu un mēģiniet vēlreiz vai sazinieties ar aptaujas īpašnieku.",
+  savingExceedSize:
+    "Jūsu atbilde pārsniedz 64 KB. Lūdzu, samaziniet sava(-u) faila(-u) lielumu un mēģiniet vēlreiz vai sazinieties ar aptaujas īpašnieku.",
   saveAgainButton: "Mēģiniet vēlreiz",
   timerMin: "min",
   timerSec: "sek",
@@ -86,8 +94,10 @@ export var latvianSurveyStrings = {
   signaturePlaceHolderReadOnly: "Nav paraksta",
   chooseFileCaption: "Izvēlēties failu",
   takePhotoCaption: "Uzņemt fotoattēlu",
-  photoPlaceholder: "Noklikšķiniet uz pogas zemāk, lai uzņemtu fotoattēlu, izmantojot kameru.",
-  fileOrPhotoPlaceholder: "Velciet un nometiet vai atlasiet failu, ko augšupielādēt vai uzņemt fotoattēlu, izmantojot kameru.",
+  photoPlaceholder:
+    "Noklikšķiniet uz pogas zemāk, lai uzņemtu fotoattēlu, izmantojot kameru.",
+  fileOrPhotoPlaceholder:
+    "Velciet un nometiet vai atlasiet failu, ko augšupielādēt vai uzņemt fotoattēlu, izmantojot kameru.",
   replaceFileCaption: "Aizstāt failu",
   removeFileCaption: "Noņemiet šo failu",
   booleanCheckedLabel: "Jā",
@@ -99,18 +109,25 @@ export var latvianSurveyStrings = {
   modalApplyButtonText: "Pielietot",
   filterStringPlaceholder: "Ierakstiet, lai meklētu...",
   emptyMessage: "Nav datu, ko rādīt",
-  noEntriesText: "Vēl nav neviena ieraksta.\nNoklikšķiniet uz zemāk esošās pogas, lai pievienotu jaunu ierakstu.",
+  noEntriesText:
+    "Vēl nav neviena ieraksta.\nNoklikšķiniet uz zemāk esošās pogas, lai pievienotu jaunu ierakstu.",
   noEntriesReadonlyText: "Ierakstu nav.",
   tabTitlePlaceholder: "Jauns panelis",
   more: "Vairāk",
   tagboxDoneButtonCaption: "LABI",
   selectToRankEmptyRankedAreaText: "Visas izvēles ir sarindotas",
-  selectToRankEmptyUnrankedAreaText: "Velciet un nometiet izvēles iespējas šeit, lai tās sarindotu",
+  selectToRankEmptyUnrankedAreaText:
+    "Velciet un nometiet izvēles iespējas šeit, lai tās sarindotu",
   ok: "LABI",
-  cancel: "Atcelt"
+  cancel: "Atcelt",
 };
 
-setupLocale({ localeCode: "lv", strings: latvianSurveyStrings, nativeName: "latviešu", englishName: "Latvian" });
+setupLocale({
+  localeCode: "lv",
+  strings: latvianSurveyStrings,
+  nativeName: "latviešu",
+  englishName: "Latvian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

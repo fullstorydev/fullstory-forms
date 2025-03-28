@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var dutchSurveyStrings = {
   pagePrevText: "Vorige",
@@ -20,7 +20,8 @@ export var dutchSurveyStrings = {
   questionsProgressText: "Geantwoord {0}/{1} vragen",
   emptySurvey: "Er is geen zichtbare pagina of vraag in deze vragenlijst",
   completingSurvey: "Bedankt voor het invullen van de vragenlijst",
-  completingSurveyBefore: "Onze gegevens tonen aan dat je deze vragenlijst reeds beantwoord hebt.",
+  completingSurveyBefore:
+    "Onze gegevens tonen aan dat je deze vragenlijst reeds beantwoord hebt.",
   loadingSurvey: "De vragenlijst is aan het laden...",
   placeholder: "Kies...",
   ratingOptionsCaption: "Selecteren...",
@@ -35,21 +36,26 @@ export var dutchSurveyStrings = {
   textNoDigitsAllow: "Nummers zijn niet toegestaan.",
   textMinLength: "Vul minstens {0} karakters in",
   textMaxLength: "Gelieve minder dan {0} karakters in te vullen.",
-  textMinMaxLength: "Gelieve meer dan {0} en minder dan {1} karakters in te vullen.",
+  textMinMaxLength:
+    "Gelieve meer dan {0} en minder dan {1} karakters in te vullen.",
   minRowCountError: "Gelieve ten minste {0} rijen in te vullen.",
   minSelectError: "Selecteer minimum {0} antwoorden",
   maxSelectError: "Selecteer niet meer dan {0} antwoorden",
-  numericMinMax: "Uw antwoord '{0}' moet groter of gelijk zijn aan {1} en kleiner of gelijk aan {2}",
+  numericMinMax:
+    "Uw antwoord '{0}' moet groter of gelijk zijn aan {1} en kleiner of gelijk aan {2}",
   numericMin: "Uw antwoord '{0}' moet groter of gelijk zijn aan {1}",
   numericMax: "Uw antwoord '{0}' moet groter of gelijk zijn aan {1}",
   invalidEmail: "Vul een geldig e-mailadres in",
   invalidExpression: "De uitdrukking: {0} moet 'waar' teruggeven.",
   urlRequestError: "De vraag keerde een fout terug '{0}'. {1}",
-  urlGetChoicesError: "De vraag gaf een leeg antwoord terug of de 'pad' eigenschap is niet correct",
+  urlGetChoicesError:
+    "De vraag gaf een leeg antwoord terug of de 'pad' eigenschap is niet correct",
   exceedMaxSize: "De grootte van het bestand mag niet groter zijn dan {0}",
-  noUploadFilesHandler: "Bestanden kunnen niet worden geüpload. Voeg een handler toe voor de gebeurtenis 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Bestanden kunnen niet worden geüpload. Voeg een handler toe voor de gebeurtenis 'onUploadFiles'.",
   otherRequiredError: "Vul het veld 'Anders, nl.' in",
-  uploadingFile: "Uw bestand wordt geüpload. Gelieve enkele seconden te wachten en opnieuw te proberen.",
+  uploadingFile:
+    "Uw bestand wordt geüpload. Gelieve enkele seconden te wachten en opnieuw te proberen.",
   loadingFile: "Laden...",
   chooseFile: "Kies uw bestand(en)...",
   noFileChosen: "Geen bestand gekozen",
@@ -69,16 +75,19 @@ export var dutchSurveyStrings = {
   matrix_row: "Rij",
   multipletext_itemname: "Tekst",
   savingData: "De resultaten worden bewaard op de server...",
-  savingDataError: "Er was een probleem en we konden de resultaten niet bewaren.",
+  savingDataError:
+    "Er was een probleem en we konden de resultaten niet bewaren.",
   savingDataSuccess: "De resultaten werden succesvol bewaard!",
-  savingExceedSize: "Uw antwoord is groter dan 64 kB. Verklein de grootte van uw bestand(en) en probeer het opnieuw of neem contact op met een enquête-eigenaar.",
+  savingExceedSize:
+    "Uw antwoord is groter dan 64 kB. Verklein de grootte van uw bestand(en) en probeer het opnieuw of neem contact op met een enquête-eigenaar.",
   saveAgainButton: "Probeer opnieuw",
   timerMin: "minimum",
   timerSec: "sec",
   timerSpentAll: "U heeft {0} gespendeerd op deze pagina en {1} in totaal.",
   timerSpentPage: "U heeft {0} op deze pagina gespendeerd.",
   timerSpentSurvey: "U heeft in totaal {0} gespendeerd.",
-  timerLimitAll: "U heeft {0} van {1} op deze pagina gespendeerd en {2} van {3} in totaal.",
+  timerLimitAll:
+    "U heeft {0} van {1} op deze pagina gespendeerd en {2} van {3} in totaal.",
   timerLimitPage: "U heeft {0} van {1} gespendeerd op deze pagina.",
   timerLimitSurvey: "U heeft {0} van {1} in het totaal.",
   clearCaption: "Verwijder",
@@ -86,8 +95,10 @@ export var dutchSurveyStrings = {
   signaturePlaceHolderReadOnly: "Geen handtekening",
   chooseFileCaption: "Gekozen bestand",
   takePhotoCaption: "Foto maken",
-  photoPlaceholder: "Klik op de onderstaande knop om een foto te maken met de camera.",
-  fileOrPhotoPlaceholder: "Sleep en zet neer of selecteer een bestand om te uploaden of maak een foto met de camera.",
+  photoPlaceholder:
+    "Klik op de onderstaande knop om een foto te maken met de camera.",
+  fileOrPhotoPlaceholder:
+    "Sleep en zet neer of selecteer een bestand om te uploaden of maak een foto met de camera.",
   replaceFileCaption: "Bestand vervangen",
   removeFileCaption: "Verwijder dit bestand",
   booleanCheckedLabel: "Ja",
@@ -99,18 +110,25 @@ export var dutchSurveyStrings = {
   modalApplyButtonText: "Toepassen",
   filterStringPlaceholder: "Typ om te zoeken...",
   emptyMessage: "Geen gegevens om weer te geven",
-  noEntriesText: "Er zijn nog geen inzendingen.\nKlik op de onderstaande knop om een nieuw item toe te voegen.",
+  noEntriesText:
+    "Er zijn nog geen inzendingen.\nKlik op de onderstaande knop om een nieuw item toe te voegen.",
   noEntriesReadonlyText: "Er zijn geen inzendingen.",
   tabTitlePlaceholder: "Nieuw paneel",
   more: "Meer",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Alle keuzes zijn gerangschikt",
-  selectToRankEmptyUnrankedAreaText: "Drag en drop keuzes hier om ze te rangschikken",
+  selectToRankEmptyUnrankedAreaText:
+    "Drag en drop keuzes hier om ze te rangschikken",
   ok: "OK",
-  cancel: "Annuleren"
+  cancel: "Annuleren",
 };
 
-setupLocale({ localeCode: "nl", strings: dutchSurveyStrings, nativeName: "nederlands", englishName: "Dutch" });
+setupLocale({
+  localeCode: "nl",
+  strings: dutchSurveyStrings,
+  nativeName: "nederlands",
+  englishName: "Dutch",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

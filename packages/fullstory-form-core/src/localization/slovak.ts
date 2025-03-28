@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var slovakSurveyStrings = {
   pagePrevText: "Predchádzajúca",
@@ -20,14 +20,16 @@ export var slovakSurveyStrings = {
   questionsProgressText: "Zodpovedané otázky {0}/{1}",
   emptySurvey: "V prieskume nie je žiadna vidieľná stránka ani otázka.",
   completingSurvey: "Ďakujeme vám za dokončenie prieskumu.",
-  completingSurveyBefore: "Podľa našich záznamov ste už tento prieskum dokončili.",
+  completingSurveyBefore:
+    "Podľa našich záznamov ste už tento prieskum dokončili.",
   loadingSurvey: "Načítanie prieskumu...",
   placeholder: "Vybrať...",
   ratingOptionsCaption: "Vybrať...",
   value: "hodnota",
   requiredError: "Požaduje sa odozva.",
   requiredErrorInPanel: "Požaduje sa odozva: zodpovedajte aspoň jednu otázku.",
-  requiredInAllRowsError: "Požaduje sa odozva: zodpovedajte otázky vo všetkých riadkoch.",
+  requiredInAllRowsError:
+    "Požaduje sa odozva: zodpovedajte otázky vo všetkých riadkoch.",
   eachRowUniqueError: "Každý riadok musí mať jedinečnú hodnotu.",
   numericError: "Hodnota má byť číselná.",
   minError: "Hodnota nemá byť nižšia než {0}",
@@ -45,15 +47,19 @@ export var slovakSurveyStrings = {
   invalidEmail: "Zadajte platnú e-mailovú adresu.",
   invalidExpression: "Výraz: {0} má vrátiť hodnotu „true“.",
   urlRequestError: "Požiadavky vrátila hodnotu „{0}“. {1}",
-  urlGetChoicesError: "Požiadavka vrátila prázdne údaje alebo je vlastnosť „cesta“ nesprávna",
+  urlGetChoicesError:
+    "Požiadavka vrátila prázdne údaje alebo je vlastnosť „cesta“ nesprávna",
   exceedMaxSize: "Veľkosť súboru nemá prekročiť {0}.",
-  noUploadFilesHandler: "Súbory nie je možné nahrať. Pridajte obslužný program pre udalosť \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'Súbory nie je možné nahrať. Pridajte obslužný program pre udalosť "onUploadFiles".',
   otherRequiredError: "Požaduje sa odozva: zadajte inú hodnotu.",
-  uploadingFile: "Súbor sa odovzdáva. Počkajte niekoľko sekúnd a skúste to znova.",
+  uploadingFile:
+    "Súbor sa odovzdáva. Počkajte niekoľko sekúnd a skúste to znova.",
   loadingFile: "Načítanie...",
   chooseFile: "Vyberte súbor(-y)...",
   noFileChosen: "Žiadny vybratý súbor",
-  filePlaceholder: "Presuňte súbor sem alebo kliknite na nasledujúce tlačidlo a načítajte súbor.",
+  filePlaceholder:
+    "Presuňte súbor sem alebo kliknite na nasledujúce tlačidlo a načítajte súbor.",
   confirmDelete: "Chcete záznam odstrániť?",
   keyDuplicationError: "Táto hodnota má byť jedinečná.",
   addColumn: "Pridať stĺpec",
@@ -71,7 +77,8 @@ export var slovakSurveyStrings = {
   savingData: "Výsledky sa ukladajú na server...",
   savingDataError: "V dôsledku chyby sa nepodarilo výsledky uložiť.",
   savingDataSuccess: "Výsledky sa úspešne uložili.",
-  savingExceedSize: "Vaša odpoveď presahuje 64 kB. Zmenšite veľkosť svojich súborov a skúste to znova alebo kontaktujte vlastníka prieskumu.",
+  savingExceedSize:
+    "Vaša odpoveď presahuje 64 kB. Zmenšite veľkosť svojich súborov a skúste to znova alebo kontaktujte vlastníka prieskumu.",
   saveAgainButton: "Skúste to znova",
   timerMin: "min",
   timerSec: "s",
@@ -86,8 +93,10 @@ export var slovakSurveyStrings = {
   signaturePlaceHolderReadOnly: "Bez podpisu",
   chooseFileCaption: "Vybrať súbor",
   takePhotoCaption: "Odfotiť",
-  photoPlaceholder: "Kliknutím na tlačidlo nižšie nasnímate fotografiu pomocou fotoaparátu.",
-  fileOrPhotoPlaceholder: "Presuňte myšou alebo vyberte súbor, ktorý chcete nahrať alebo nasnímať fotografiu pomocou fotoaparátu.",
+  photoPlaceholder:
+    "Kliknutím na tlačidlo nižšie nasnímate fotografiu pomocou fotoaparátu.",
+  fileOrPhotoPlaceholder:
+    "Presuňte myšou alebo vyberte súbor, ktorý chcete nahrať alebo nasnímať fotografiu pomocou fotoaparátu.",
   replaceFileCaption: "Nahradenie súboru",
   removeFileCaption: "Odstrániť tento súbor",
   booleanCheckedLabel: "Áno",
@@ -99,7 +108,8 @@ export var slovakSurveyStrings = {
   modalApplyButtonText: "Použiť",
   filterStringPlaceholder: "Vyhľadávanie písaním...",
   emptyMessage: "Žiadne údaje na zobrazenie",
-  noEntriesText: "K dispozícii ešte nie sú žiadne zadania.\nKliknutím na nasledujúce tlačidlo pridajte nové zadanie.",
+  noEntriesText:
+    "K dispozícii ešte nie sú žiadne zadania.\nKliknutím na nasledujúce tlačidlo pridajte nové zadanie.",
   noEntriesReadonlyText: "Nie sú k dispozícii žiadne záznamy.",
   tabTitlePlaceholder: "Nový panel",
   more: "Viacej",
@@ -107,10 +117,15 @@ export var slovakSurveyStrings = {
   selectToRankEmptyRankedAreaText: "Všetky možnosti sú zoradené",
   selectToRankEmptyUnrankedAreaText: "Presuňte sem voľby, aby ste ich zoradili",
   ok: "OK",
-  cancel: "Zrušiť"
+  cancel: "Zrušiť",
 };
 
-setupLocale({ localeCode: "sk", strings: slovakSurveyStrings, nativeName: "slovak", englishName: "Slovak" });
+setupLocale({
+  localeCode: "sk",
+  strings: slovakSurveyStrings,
+  nativeName: "slovak",
+  englishName: "Slovak",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

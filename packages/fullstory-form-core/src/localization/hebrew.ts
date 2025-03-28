@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var hebrewSurveyStrings = {
   pagePrevText: "אחורה",
@@ -39,21 +39,24 @@ export var hebrewSurveyStrings = {
   minRowCountError: "אנא מלא לפחות {0} שורות.",
   minSelectError: "בחר לפחות {0} אפשרויות.",
   maxSelectError: "בחר עד {0} אפשרויות.",
-  numericMinMax: "'{0}' חייב להיות שווה או גדול מ {1}, ושווה ל- {2} או פחות מ- {}}",
+  numericMinMax:
+    "'{0}' חייב להיות שווה או גדול מ {1}, ושווה ל- {2} או פחות מ- {}}",
   numericMin: "'{0}' חייב להיות שווה או גדול מ {1}",
   numericMax: "'{0}' חייב להיות שווה או קטן מ {1}",
-  invalidEmail: "הזן כתובת דוא\"ל חוקית.",
+  invalidEmail: 'הזן כתובת דוא"ל חוקית.',
   invalidExpression: "הביטוי: {0} צריך להחזיר 'אמת'.",
   urlRequestError: "הבקשה החזירה את השגיאה '{0}'. {1}",
   urlGetChoicesError: "הבקשה החזירה נתונים ריקים או שהמאפיין 'נתיב' שגוי",
   exceedMaxSize: "גודל הקובץ לא יעלה על {0}.",
-  noUploadFilesHandler: "לא ניתן להעלות קבצים. אנא הוסף מטפל לאירוע 'onUploadFiles'.",
-  otherRequiredError: "נא להזין נתונים בשדה \"אחר\"",
+  noUploadFilesHandler:
+    "לא ניתן להעלות קבצים. אנא הוסף מטפל לאירוע 'onUploadFiles'.",
+  otherRequiredError: 'נא להזין נתונים בשדה "אחר"',
   uploadingFile: "הקובץ שלך נטען. המתן מספר שניות ונסה שוב.",
   loadingFile: "טוען...",
   chooseFile: "לבחור קבצים...",
   noFileChosen: "לא נבחר קובץ",
-  filePlaceholder: "גרור ושחרר קובץ לכאן או לחץ על הלחצן למטה ובחר קובץ להעלאה.",
+  filePlaceholder:
+    "גרור ושחרר קובץ לכאן או לחץ על הלחצן למטה ובחר קובץ להעלאה.",
   confirmDelete: "האם אתה רוצה למחוק את הרשומה?",
   keyDuplicationError: "ערך זה צריך להיות ייחודי.",
   addColumn: "הוסף עמודה",
@@ -71,7 +74,8 @@ export var hebrewSurveyStrings = {
   savingData: "התוצאות נשמרות בשרת ...",
   savingDataError: "אירעה שגיאה ולא הצלחנו לשמור את התוצאות.",
   savingDataSuccess: "התוצאות נשמרו בהצלחה!",
-  savingExceedSize: "תגובתך עולה על 64KB. הקטן את גודל הקבצים שלך ונסה שוב או פנה לבעלים של סקר.",
+  savingExceedSize:
+    "תגובתך עולה על 64KB. הקטן את גודל הקבצים שלך ונסה שוב או פנה לבעלים של סקר.",
   saveAgainButton: "נסה שוב",
   timerMin: "דקה",
   timerSec: "שניות",
@@ -87,7 +91,8 @@ export var hebrewSurveyStrings = {
   chooseFileCaption: "בחר קובץ",
   takePhotoCaption: "צלם תמונה",
   photoPlaceholder: "לחץ על הלחצן למטה כדי לצלם תמונה באמצעות המצלמה.",
-  fileOrPhotoPlaceholder: "גרור ושחרר או בחר קובץ כדי להעלות או לצלם תמונה באמצעות המצלמה.",
+  fileOrPhotoPlaceholder:
+    "גרור ושחרר או בחר קובץ כדי להעלות או לצלם תמונה באמצעות המצלמה.",
   replaceFileCaption: "החלפת קובץ",
   removeFileCaption: "הסר קובץ זה",
   booleanCheckedLabel: "כן",
@@ -107,10 +112,16 @@ export var hebrewSurveyStrings = {
   selectToRankEmptyRankedAreaText: "כל האפשרויות מדורגות",
   selectToRankEmptyUnrankedAreaText: "גרור ושחרר אפשרויות לכאן כדי לדרג אותן",
   ok: "אוקיי",
-  cancel: "ביטל"
+  cancel: "ביטל",
 };
 
-setupLocale({ localeCode: "he", strings: hebrewSurveyStrings, nativeName: "עברית", englishName: "Hebrew", rtl: true });
+setupLocale({
+  localeCode: "he",
+  strings: hebrewSurveyStrings,
+  nativeName: "עברית",
+  englishName: "Hebrew",
+  rtl: true,
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

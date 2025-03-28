@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var italianSurveyStrings = {
   pagePrevText: "Precedente",
@@ -20,7 +20,8 @@ export var italianSurveyStrings = {
   questionsProgressText: "Risposte a {0}/{1} domande",
   emptySurvey: "Non ci sono pagine o domande visibili nel questionario.",
   completingSurvey: "Grazie per aver completato il questionario!",
-  completingSurveyBefore: "I nostri records mostrano che hai già completato questo questionario.",
+  completingSurveyBefore:
+    "I nostri records mostrano che hai già completato questo questionario.",
   loadingSurvey: "Caricamento del questionario in corso...",
   placeholder: "Scegli...",
   ratingOptionsCaption: "Tocca qui per valutare...",
@@ -35,25 +36,30 @@ export var italianSurveyStrings = {
   textNoDigitsAllow: "I numeri non sono ammessi.",
   textMinLength: "Inserire almeno {0} caratteri",
   textMaxLength: "Lunghezza massima consentita {0} caratteri",
-  textMinMaxLength: "Inserire una stringa con minimo {0} e massimo {1} caratteri",
+  textMinMaxLength:
+    "Inserire una stringa con minimo {0} e massimo {1} caratteri",
   minRowCountError: "Completare almeno {0} righe.",
   minSelectError: "Selezionare almeno {0} varianti.",
   maxSelectError: "Selezionare massimo {0} varianti.",
-  numericMinMax: "'{0}' deve essere uguale o superiore a {1} e uguale o inferiore a {2}",
+  numericMinMax:
+    "'{0}' deve essere uguale o superiore a {1} e uguale o inferiore a {2}",
   numericMin: "'{0}' deve essere uguale o superiore a {1}",
   numericMax: "'{0}' deve essere uguale o inferiore a {1}",
   invalidEmail: "Inserire indirizzo mail valido",
   invalidExpression: "L'espressione: {0} dovrebbe tornare 'vero'.",
   urlRequestError: "La richiesta ha risposto con un errore '{0}'. {1}",
-  urlGetChoicesError: "La richiesta ha risposto null oppure il percorso non è corretto",
+  urlGetChoicesError:
+    "La richiesta ha risposto null oppure il percorso non è corretto",
   exceedMaxSize: "Il file non può eccedere {0}",
-  noUploadFilesHandler: "I file non possono essere caricati. Aggiungere un gestore per l'evento 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "I file non possono essere caricati. Aggiungere un gestore per l'evento 'onUploadFiles'.",
   otherRequiredError: "Inserire il valore 'altro'",
   uploadingFile: "File in caricamento. Attendi alcuni secondi e riprova",
   loadingFile: "Caricamento...",
   chooseFile: "Selezionare file(s)...",
   noFileChosen: "Nessun file selezionato",
-  filePlaceholder: "Trascina un file qui o fai clic sul pulsante in basso per caricare il file.",
+  filePlaceholder:
+    "Trascina un file qui o fai clic sul pulsante in basso per caricare il file.",
   confirmDelete: "Sei sicuro di voler elminare il record?",
   keyDuplicationError: "Questo valore deve essere univoco.",
   addColumn: "Aggiungi colonna",
@@ -69,16 +75,19 @@ export var italianSurveyStrings = {
   matrix_row: "Riga",
   multipletext_itemname: "testo",
   savingData: "Salvataggio dati sul server...",
-  savingDataError: "Si è verificato un errore e non è stato possibile salvare i risultati.",
+  savingDataError:
+    "Si è verificato un errore e non è stato possibile salvare i risultati.",
   savingDataSuccess: "I risultati sono stati salvati con successo!",
-  savingExceedSize: "La tua risposta supera i 64 KB. Riduci le dimensioni dei tuoi file e riprova o contatta il proprietario di un'indagine.",
+  savingExceedSize:
+    "La tua risposta supera i 64 KB. Riduci le dimensioni dei tuoi file e riprova o contatta il proprietario di un'indagine.",
   saveAgainButton: "Riprova",
   timerMin: "min",
   timerSec: "sec",
   timerSpentAll: "Hai impiegato {0} su questa pagina e {1} in totale.",
   timerSpentPage: "Hai impiegato {0} su questa pagina.",
   timerSpentSurvey: "Hai impiegato {0} in totale.",
-  timerLimitAll: "Hai impiegato {0} di {1} su questa pagina e {2} di {3} in totale.",
+  timerLimitAll:
+    "Hai impiegato {0} di {1} su questa pagina e {2} di {3} in totale.",
   timerLimitPage: "Hai impiegato {0} di {1} su questa pagina.",
   timerLimitSurvey: "Hai impiegato {0} di {1} in totale.",
   clearCaption: "Cancella",
@@ -86,8 +95,10 @@ export var italianSurveyStrings = {
   signaturePlaceHolderReadOnly: "Nessuna firma",
   chooseFileCaption: "Scegliere il file",
   takePhotoCaption: "Scatta foto",
-  photoPlaceholder: "Fai clic sul pulsante qui sotto per scattare una foto utilizzando la fotocamera.",
-  fileOrPhotoPlaceholder: "Trascina e rilascia o seleziona un file da caricare o scattare una foto utilizzando la fotocamera.",
+  photoPlaceholder:
+    "Fai clic sul pulsante qui sotto per scattare una foto utilizzando la fotocamera.",
+  fileOrPhotoPlaceholder:
+    "Trascina e rilascia o seleziona un file da caricare o scattare una foto utilizzando la fotocamera.",
   replaceFileCaption: "Sostituisci file",
   removeFileCaption: "Rimuovere questo file",
   booleanCheckedLabel: "Sì",
@@ -99,18 +110,25 @@ export var italianSurveyStrings = {
   modalApplyButtonText: "Applicare",
   filterStringPlaceholder: "Digita per cercare...",
   emptyMessage: "Nessun dato da visualizzare",
-  noEntriesText: "Non ci sono ancora voci.\nFai clic sul pulsante qui sotto per aggiungere una nuova voce.",
+  noEntriesText:
+    "Non ci sono ancora voci.\nFai clic sul pulsante qui sotto per aggiungere una nuova voce.",
   noEntriesReadonlyText: "Non ci sono voci.",
   tabTitlePlaceholder: "Nuovo pannello",
   more: "Più",
   tagboxDoneButtonCaption: "OK",
   selectToRankEmptyRankedAreaText: "Tutte le scelte sono classificate",
-  selectToRankEmptyUnrankedAreaText: "Trascina e rilascia le scelte qui per classificarle",
+  selectToRankEmptyUnrankedAreaText:
+    "Trascina e rilascia le scelte qui per classificarle",
   ok: "OK",
-  cancel: "Annulla"
+  cancel: "Annulla",
 };
 
-setupLocale({ localeCode: "it", strings: italianSurveyStrings, nativeName: "italiano", englishName: "Italian" });
+setupLocale({
+  localeCode: "it",
+  strings: italianSurveyStrings,
+  nativeName: "italiano",
+  englishName: "Italian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

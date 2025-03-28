@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var bulgarianStrings = {
   pagePrevText: "Назад",
@@ -35,25 +35,31 @@ export var bulgarianStrings = {
   textNoDigitsAllow: "Номерата не са позволени.",
   textMinLength: "Моля, използвайте поне {0} символа.",
   textMaxLength: "Моля, използвайте не повече от {0} символа.",
-  textMinMaxLength: "Моля, използвайте повече от {0} и по-малко от {1} символа.",
+  textMinMaxLength:
+    "Моля, използвайте повече от {0} и по-малко от {1} символа.",
   minRowCountError: "Моля, попълнете поне {0} реда.",
   minSelectError: "Моля, изберете поне {0} варианта.",
   maxSelectError: "Моля, изберете не повече от {0} варианта.",
-  numericMinMax: "Стойността '{0}' следва да бъде равна или по-голяма от {1} и равна или по-малка от {2}",
+  numericMinMax:
+    "Стойността '{0}' следва да бъде равна или по-голяма от {1} и равна или по-малка от {2}",
   numericMin: "Стойността '{0}' следва да бъде равна или по-голяма от {1}",
   numericMax: "Стойността '{0}' следва да бъде равна или по-малка от {1}",
   invalidEmail: "Моля, въведете валиден адрес на електронна поща.",
   invalidExpression: "Изразът: {0} трябва да дава резултат 'true' (истина).",
   urlRequestError: "Заявката води до грешка '{0}'. {1}",
-  urlGetChoicesError: "Заявката не връща данни или частта 'path' (път до търсения ресурс на сървъра) е неправилно зададена",
+  urlGetChoicesError:
+    "Заявката не връща данни или частта 'path' (път до търсения ресурс на сървъра) е неправилно зададена",
   exceedMaxSize: "Размерът на файла следва да не превишава {0}.",
-  noUploadFilesHandler: "Файловете не могат да бъдат качени. Моля, добавете манипулатор за събитието \"onUploadFiles\".",
+  noUploadFilesHandler:
+    'Файловете не могат да бъдат качени. Моля, добавете манипулатор за събитието "onUploadFiles".',
   otherRequiredError: "Моля, въведете другата стойност.",
-  uploadingFile: "Вашит файл се зарежда на сървъра. Моля, изчакайте няколко секунди и тогава опитвайте отново.",
+  uploadingFile:
+    "Вашит файл се зарежда на сървъра. Моля, изчакайте няколко секунди и тогава опитвайте отново.",
   loadingFile: "Зареждане...",
   chooseFile: "Изберете файл(ове)...",
   noFileChosen: "Няма избран файл",
-  filePlaceholder: "Плъзнете и пуснете файл тук или щракнете върху бутона по-долу и изберете файл за качване.",
+  filePlaceholder:
+    "Плъзнете и пуснете файл тук или щракнете върху бутона по-долу и изберете файл за качване.",
   confirmDelete: "Желаете ли да изтриете записа?",
   keyDuplicationError: "Стойността следва да бъде уникална.",
   addColumn: "Добавяне на колона",
@@ -69,16 +75,19 @@ export var bulgarianStrings = {
   matrix_row: "Ред",
   multipletext_itemname: "Текст",
   savingData: "Резултатите се запазват на сървъра...",
-  savingDataError: "Поради възникнала грешка резултатите не можаха да бъдат запазени.",
+  savingDataError:
+    "Поради възникнала грешка резултатите не можаха да бъдат запазени.",
   savingDataSuccess: "Резултатите бяха запазени успешно!",
-  savingExceedSize: "Вашият отговор надхвърля 64KB. Намалете размера на вашите файлове и опитайте отново или се свържете със собственика на проучването.",
+  savingExceedSize:
+    "Вашият отговор надхвърля 64KB. Намалете размера на вашите файлове и опитайте отново или се свържете със собственика на проучването.",
   saveAgainButton: "Нов опит",
   timerMin: "мин",
   timerSec: "сек",
   timerSpentAll: "Вие използвахте {0} на тази страница и общо {1}.",
   timerSpentPage: "Вие използвахте {0} на тази страница.",
   timerSpentSurvey: "Вие използвахте общо {0}.",
-  timerLimitAll: "Вие изпозвахте {0} от {1} на тази страница и общо {2} от {3}.",
+  timerLimitAll:
+    "Вие изпозвахте {0} от {1} на тази страница и общо {2} от {3}.",
   timerLimitPage: "Вие използвахте {0} от {1} на тази страница.",
   timerLimitSurvey: "Вие използвахте общо {0} от {1}.",
   clearCaption: "Начално състояние",
@@ -86,8 +95,10 @@ export var bulgarianStrings = {
   signaturePlaceHolderReadOnly: "Няма подпис",
   chooseFileCaption: "Изберете файл",
   takePhotoCaption: "Направете снимка",
-  photoPlaceholder: "Кликнете върху бутона по-долу, за да направите снимка с помощта на камерата.",
-  fileOrPhotoPlaceholder: "Плъзнете и пуснете или изберете файл за качване или правене на снимка с помощта на камерата.",
+  photoPlaceholder:
+    "Кликнете върху бутона по-долу, за да направите снимка с помощта на камерата.",
+  fileOrPhotoPlaceholder:
+    "Плъзнете и пуснете или изберете файл за качване или правене на снимка с помощта на камерата.",
   replaceFileCaption: "Заместване на файл",
   removeFileCaption: "Премахване на файла",
   booleanCheckedLabel: "Да",
@@ -99,18 +110,25 @@ export var bulgarianStrings = {
   modalApplyButtonText: "Прилагам",
   filterStringPlaceholder: "Въведете за търсене...",
   emptyMessage: "Няма данни за показване",
-  noEntriesText: "Все още няма записи.\nЩракнете върху бутона по-долу, за да добавите нов запис.",
+  noEntriesText:
+    "Все още няма записи.\nЩракнете върху бутона по-долу, за да добавите нов запис.",
   noEntriesReadonlyText: "Няма записи.",
   tabTitlePlaceholder: "Нов панел",
   more: "Още",
   tagboxDoneButtonCaption: "Добре",
   selectToRankEmptyRankedAreaText: "Всички възможности за избор са класирани",
-  selectToRankEmptyUnrankedAreaText: "Плъзнете и пуснете опции тук, за да ги класирате",
+  selectToRankEmptyUnrankedAreaText:
+    "Плъзнете и пуснете опции тук, за да ги класирате",
   ok: "Добре",
-  cancel: "Отмени"
+  cancel: "Отмени",
 };
 
-setupLocale({ localeCode: "bg", strings: bulgarianStrings, nativeName: "български", englishName: "Bulgarian" });
+setupLocale({
+  localeCode: "bg",
+  strings: bulgarianStrings,
+  nativeName: "български",
+  englishName: "Bulgarian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

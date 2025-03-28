@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var burmeseStrings = {
   pagePrevText: "နောက်သို့",
@@ -19,7 +19,8 @@ export var burmeseStrings = {
   panelDynamicTabTextFormat: "ပန်းနယ် {panelIndex}",
   questionsProgressText: "မေးခွန်းများ {0}/{1} ဖြေဆိုပြီးပြီ",
   emptySurvey: "ဒီစစ်တမ်းတွင် မြင်သာမေးခွန်းများမရှိပါ။",
-  completingSurvey: "စစ်တမ်းကိုပြီးမြောက်စွာဖြေဆိုပေးခဲ့သည့်အတွက်ကျေးဇူးတင်ပါသည်။",
+  completingSurvey:
+    "စစ်တမ်းကိုပြီးမြောက်စွာဖြေဆိုပေးခဲ့သည့်အတွက်ကျေးဇူးတင်ပါသည်။",
   completingSurveyBefore: "ဒီစစ်တမ်းကို မျှဝေပြီးသားဖြေဆိုထားပါသည်။",
   loadingSurvey: "စစ်တမ်းကိုလုပ်ဆောင်နေသည်...",
   placeholder: "ရွေးချယ်ပါ...",
@@ -45,7 +46,8 @@ export var burmeseStrings = {
   invalidEmail: "တရားဝင်သော အီးမေးလ်လိပ်စာကိုရိုက်ထည့်ပါ။",
   invalidExpression: "အထောက်အထား {0} သည် 'true' ပြန်သင့်သည်။",
   urlRequestError: "တောင်းဆိုမှုတွင် အမှား '{0}' ဖြစ်ခဲ့သည်။ {1}",
-  urlGetChoicesError: "တောင်းဆိုမှုတွင်ဒေတာမရှိပါ။ သို့မဟုတ် 'path' ပိုင်ဆိုင်မှုမှာမှားနေပါသည်။",
+  urlGetChoicesError:
+    "တောင်းဆိုမှုတွင်ဒေတာမရှိပါ။ သို့မဟုတ် 'path' ပိုင်ဆိုင်မှုမှာမှားနေပါသည်။",
   exceedMaxSize: "ဖိုင်အရွယ်အစားသည် {0} ထက်မကျော်ရပါ။",
   noUploadFilesHandler: "ဖိုင်များကိုအပ်လုဒ်လုပ်၍မရနိုင်ပါ။",
   otherRequiredError: "ဖြေဆိုရန်လိုအပ်ပါသည်။ တန်ဖိုးတစ်ခုရိုက်ထည့်ပါ။",
@@ -53,7 +55,8 @@ export var burmeseStrings = {
   loadingFile: "တင်နေသည်...",
   chooseFile: "ဖိုင်(များ) ရွေးချယ်ပါ...",
   noFileChosen: "ဖိုင်မရွေးရသေးပါ",
-  filePlaceholder: "ဖိုင်တစ်ခုအားဤနေရာတွင်ဆွဲချပြီးအောက်တွင်ရှိသောခလုတ်ကိုနှိပ်ပါ။",
+  filePlaceholder:
+    "ဖိုင်တစ်ခုအားဤနေရာတွင်ဆွဲချပြီးအောက်တွင်ရှိသောခလုတ်ကိုနှိပ်ပါ။",
   confirmDelete: "ဤမှတ်တမ်းကိုဖျက်မည်မှာ သေချာပါသလား?",
   keyDuplicationError: "ဤတန်ဖိုးသည်ထူးခြားဖြစ်ရပါမည်။",
   addColumn: "ကော်လံထည့်ရန်",
@@ -79,7 +82,12 @@ export var burmeseStrings = {
   signaturePlaceHolder: "ဤနေရာတွင်လက်မှတ်ရေးပါ",
   confirmRemoveFile: "ဤဖိုင်အားဖယ်ရှားမည်မှာ သေချာပါသလား: {0}?",
   ok: "အိုကေ",
-  cancel: "ပယ်ဖျက်ပါ"
+  cancel: "ပယ်ဖျက်ပါ",
 };
 
-setupLocale({ localeCode: "mm", strings: burmeseStrings, nativeName: "မြန်မာ", englishName: "Burmese" });
+setupLocale({
+  localeCode: "mm",
+  strings: burmeseStrings,
+  nativeName: "မြန်မာ",
+  englishName: "Burmese",
+});

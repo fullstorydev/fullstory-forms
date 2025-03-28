@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var simplifiedChineseSurveyStrings = {
   pagePrevText: "上一页",
@@ -71,7 +71,8 @@ export var simplifiedChineseSurveyStrings = {
   savingData: "正在将结果保存到服务器...",
   savingDataError: "在保存结果过程中发生了错误，结果未能保存",
   savingDataSuccess: "结果保存成功!",
-  savingExceedSize: "您的回复超过 64KB。请减小文件的大小，然后重试或联系调查所有者。",
+  savingExceedSize:
+    "您的回复超过 64KB。请减小文件的大小，然后重试或联系调查所有者。",
   saveAgainButton: "请重试",
   timerMin: "分",
   timerSec: "秒",
@@ -107,10 +108,15 @@ export var simplifiedChineseSurveyStrings = {
   selectToRankEmptyRankedAreaText: "所有选择均已排名",
   selectToRankEmptyUnrankedAreaText: "将选项拖放到此处进行排名",
   ok: "还行",
-  cancel: "取消"
+  cancel: "取消",
 };
 
-setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseSurveyStrings, nativeName: "简体中文", englishName: "Simplified Chinese" });
+setupLocale({
+  localeCode: "zh-cn",
+  strings: simplifiedChineseSurveyStrings,
+  nativeName: "简体中文",
+  englishName: "Simplified Chinese",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

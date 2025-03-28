@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var swahiliStrings = {
   pagePrevText: "Iliyotangulia",
@@ -20,7 +20,8 @@ export var swahiliStrings = {
   questionsProgressText: "Yaliyojibiwa {0}/{1} maswali",
   emptySurvey: "Hakuna ukurasa unaoonekana au swali katika utafiti.",
   completingSurvey: "Asanti kwa kukamilisha utafiti!",
-  completingSurveyBefore: "Recodi zetu zinatuonyesha tayari umekamilisha utafiti.",
+  completingSurveyBefore:
+    "Recodi zetu zinatuonyesha tayari umekamilisha utafiti.",
   loadingSurvey: "Tunaandaa utafiti...",
   placeholder: "Chagua...",
   ratingOptionsCaption: "Teua...",
@@ -35,25 +36,31 @@ export var swahiliStrings = {
   textNoDigitsAllow: "Hesabu haziruhusiwi.",
   textMinLength: "Tafadhali ingiza angalau{0} husika.",
   textMaxLength: "Tafadhali ingiza isiozidi {0} husika.",
-  textMinMaxLength: "Tafadhali ingiza kiwango zaidi ya {0} na kisichopungua {1} husika.",
+  textMinMaxLength:
+    "Tafadhali ingiza kiwango zaidi ya {0} na kisichopungua {1} husika.",
   minRowCountError: "Tafadhali jaza isiopungua {0} safu.",
   minSelectError: "Tafadhali chagua angalau {0} lahaja.",
   maxSelectError: "Tafadhali changua isiozidi {0} lahaja.",
-  numericMinMax: " '{0}' inapaswa kuwa sawa au zaidi ya {1} na sawa au chini ya {2}",
+  numericMinMax:
+    " '{0}' inapaswa kuwa sawa au zaidi ya {1} na sawa au chini ya {2}",
   numericMin: " '{0}'inapaswa kuwa sawa au zaidi ya {1}",
   numericMax: " '{0}'inapaswa kuwa sawa au chini ya {1}",
   invalidEmail: "Tafadhali ingiza anwani halali ya barua-pepe.",
   invalidExpression: "Usemi:{0} inapaswa kurudi 'kweli'.",
   urlRequestError: "Ombi lina kosa '{0}'. {1}",
-  urlGetChoicesError: "Ombi lilirudisha data tupu au the 'path' mali ya njia sio sahihi",
+  urlGetChoicesError:
+    "Ombi lilirudisha data tupu au the 'path' mali ya njia sio sahihi",
   exceedMaxSize: "Saizi ya faili haipaswi kuzidi {0}.",
-  noUploadFilesHandler: "Faili haziwezi kupakiwa. Tafadhali ongeza kishiko kwa tukio la 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Faili haziwezi kupakiwa. Tafadhali ongeza kishiko kwa tukio la 'onUploadFiles'.",
   otherRequiredError: "Tafadhali ingiza thamani nyingine.",
-  uploadingFile: "Faili yako inapakia.Tafadhali subiri sekunde kadhaa na ujaribu tena.",
+  uploadingFile:
+    "Faili yako inapakia.Tafadhali subiri sekunde kadhaa na ujaribu tena.",
   loadingFile: "Inapakia...",
   chooseFile: "Chagua faili...",
   noFileChosen: "Hujachagua faili",
-  filePlaceholder: "Buruta na udondoshe faili hapa au bofya kitufe hapa chini na uchague faili ya kupakia.",
+  filePlaceholder:
+    "Buruta na udondoshe faili hapa au bofya kitufe hapa chini na uchague faili ya kupakia.",
   confirmDelete: "Je! Unataka kufuta rekodi?",
   keyDuplicationError: "Thamani hii inapaswa kuwa ya kipekee.",
   addColumn: "Ongeza Kolamu",
@@ -71,7 +78,8 @@ export var swahiliStrings = {
   savingData: "Matokeo yamehifadhiwa kwa seva...",
   savingDataError: "Kosa limetokea na hatukuweza kuhifadhi matokeo.",
   savingDataSuccess: "Matokeo yamehifadhiwa!",
-  savingExceedSize: "Jibu lako ni zaidi ya 64KB. Tafadhali punguza ukubwa wa faili yako na jaribu tena au wasiliana na mmiliki wa utafiti.",
+  savingExceedSize:
+    "Jibu lako ni zaidi ya 64KB. Tafadhali punguza ukubwa wa faili yako na jaribu tena au wasiliana na mmiliki wa utafiti.",
   saveAgainButton: "Jaribu tena",
   timerMin: "dakika",
   timerSec: "sekunde",
@@ -86,8 +94,10 @@ export var swahiliStrings = {
   signaturePlaceHolderReadOnly: "Hakuna saini",
   chooseFileCaption: "Chagua faili",
   takePhotoCaption: "Chukua Picha",
-  photoPlaceholder: "Bonyeza kitufe hapa chini ili kupiga picha kwa kutumia kamera.",
-  fileOrPhotoPlaceholder: "Drag na kuacha au kuchagua faili kupakia au kuchukua picha kwa kutumia kamera.",
+  photoPlaceholder:
+    "Bonyeza kitufe hapa chini ili kupiga picha kwa kutumia kamera.",
+  fileOrPhotoPlaceholder:
+    "Drag na kuacha au kuchagua faili kupakia au kuchukua picha kwa kutumia kamera.",
   replaceFileCaption: "Badilisha faili",
   removeFileCaption: "Ondoa faili",
   booleanCheckedLabel: "Ndio",
@@ -99,18 +109,25 @@ export var swahiliStrings = {
   modalApplyButtonText: "Tekeleza",
   filterStringPlaceholder: "Andika ili kutafuta...",
   emptyMessage: "Hakuna data ya kuonyesha",
-  noEntriesText: "Hakuna maingizo kwa sasa.\nBofya kitufe hapa chini ili kuongeza ingizo jipya.",
+  noEntriesText:
+    "Hakuna maingizo kwa sasa.\nBofya kitufe hapa chini ili kuongeza ingizo jipya.",
   noEntriesReadonlyText: "Hakuna viingilio.",
   tabTitlePlaceholder: "Jopo Jipya",
   more: "Zaidi",
   tagboxDoneButtonCaption: "Sawa kabisa",
   selectToRankEmptyRankedAreaText: "Chaguzi zote zimeorodheshwa",
-  selectToRankEmptyUnrankedAreaText: "Buruta na uache uchaguzi hapa ili kuziorodhesha",
+  selectToRankEmptyUnrankedAreaText:
+    "Buruta na uache uchaguzi hapa ili kuziorodhesha",
   ok: "Sawa kabisa",
-  cancel: "Katisha"
+  cancel: "Katisha",
 };
 
-setupLocale({ localeCode: "sw", strings: swahiliStrings, nativeName: "swahili", englishName: "Swahili" });
+setupLocale({
+  localeCode: "sw",
+  strings: swahiliStrings,
+  nativeName: "swahili",
+  englishName: "Swahili",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var indonesianStrings = {
   pagePrevText: "Sebelumnya",
@@ -20,7 +20,8 @@ export var indonesianStrings = {
   questionsProgressText: "Menjawab pertanyaan {0} / {1}",
   emptySurvey: "Tidak ada halaman atau pertanyaan dalam survei.",
   completingSurvey: "Terima kasih telah menyelesaikan survei!",
-  completingSurveyBefore: "Catatan kami menunjukkan bahwa Anda telah menyelesaikan survei ini.",
+  completingSurveyBefore:
+    "Catatan kami menunjukkan bahwa Anda telah menyelesaikan survei ini.",
   loadingSurvey: "Memuat survei...",
   placeholder: "Pilih...",
   ratingOptionsCaption: "Pilih...",
@@ -35,25 +36,31 @@ export var indonesianStrings = {
   textNoDigitsAllow: "Nomor tidak diperbolehkan.",
   textMinLength: "Silahkan masukkan setidaknya {0} karakter.",
   textMaxLength: "Silahkan masukkan kurang {0} karakter.",
-  textMinMaxLength: "PSilahkan masukkan lebih dari {0} dan kurang dari {1} karakter.",
+  textMinMaxLength:
+    "PSilahkan masukkan lebih dari {0} dan kurang dari {1} karakter.",
   minRowCountError: "Silahkan isi setidaknya {0} baris.",
   minSelectError: "Silahkan pilih setidaknya {0} varian.",
   maxSelectError: "Silahkan pilih tidak lebih dari {0} varian.",
-  numericMinMax: "'{0}' harus sama dengan atau lebih dari {1} dan harus sama dengan atau kurang dari {2}",
+  numericMinMax:
+    "'{0}' harus sama dengan atau lebih dari {1} dan harus sama dengan atau kurang dari {2}",
   numericMin: "'{0}' harus sama dengan atau lebih dari {1}",
   numericMax: "'{0}' harus sama dengan atau kurang dari {1}",
   invalidEmail: "Silahkan masukkan e-mail yang benar.",
   invalidExpression: "Ekspresi: {0} harus mengembalikan 'benar'.",
   urlRequestError: "Permintaan mengembalikan kesalahan '{0}'. {1}",
-  urlGetChoicesError: "Permintaan mengembalikan data kosong atau properti 'path' salah.",
+  urlGetChoicesError:
+    "Permintaan mengembalikan data kosong atau properti 'path' salah.",
   exceedMaxSize: "Ukuran berkas tidak boleh melebihi {0}.",
-  noUploadFilesHandler: "File tidak dapat diunggah. Harap tambahkan handler untuk acara 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "File tidak dapat diunggah. Harap tambahkan handler untuk acara 'onUploadFiles'.",
   otherRequiredError: "Silahkan masukkan nilai lainnnya.",
-  uploadingFile: "Berkas Anda sedang diunggah. Silahkan tunggu beberapa saat atau coba lagi.",
+  uploadingFile:
+    "Berkas Anda sedang diunggah. Silahkan tunggu beberapa saat atau coba lagi.",
   loadingFile: "Memuat...",
   chooseFile: "Pilih berkas...",
   noFileChosen: "Tidak ada file yang dipilih",
-  filePlaceholder: "Seret dan jatuhkan file di sini atau klik tombol di bawah ini dan pilih file yang akan diunggah.",
+  filePlaceholder:
+    "Seret dan jatuhkan file di sini atau klik tombol di bawah ini dan pilih file yang akan diunggah.",
   confirmDelete: "Apakah Anda ingin menghapus catatan?",
   keyDuplicationError: "Nilai harus unik.",
   addColumn: "Tambah kolom",
@@ -71,14 +78,17 @@ export var indonesianStrings = {
   savingData: "Hasil sedang disimpan pada server...",
   savingDataError: "Kesalahan terjadi dan kami tidak dapat menyimpan hasil.",
   savingDataSuccess: "Hasil telah sukses disimpan!",
-  savingExceedSize: "Respons Anda melebihi 64 KB. Harap kurangi ukuran file Anda dan coba lagi atau hubungi pemilik survei.",
+  savingExceedSize:
+    "Respons Anda melebihi 64 KB. Harap kurangi ukuran file Anda dan coba lagi atau hubungi pemilik survei.",
   saveAgainButton: "Coba lagi",
   timerMin: "menit",
   timerSec: "detik",
-  timerSpentAll: "Anda telah menghabiskan {0} pada halaman ini dan {1} secara keseluruhan.",
+  timerSpentAll:
+    "Anda telah menghabiskan {0} pada halaman ini dan {1} secara keseluruhan.",
   timerSpentPage: "YAnda telah menghabiskan {0} pada halaman ini.",
   timerSpentSurvey: "Anda telah menghabiskan {0} secara keseluruhan.",
-  timerLimitAll: "Anda telah menghabiskan {0} dari {1} pada halaman ini dan {2} dari {3} secara keseluruhan.",
+  timerLimitAll:
+    "Anda telah menghabiskan {0} dari {1} pada halaman ini dan {2} dari {3} secara keseluruhan.",
   timerLimitPage: "Anda telah menghabiskan {0} dari {1} pada halaman ini.",
   timerLimitSurvey: "Anda telah menghabiskan {0} dari {1} secara keseluruhan.",
   clearCaption: "Bersihkan",
@@ -86,8 +96,10 @@ export var indonesianStrings = {
   signaturePlaceHolderReadOnly: "Tidak ada tanda tangan",
   chooseFileCaption: "Pilih File",
   takePhotoCaption: "Ambil Foto",
-  photoPlaceholder: "Klik tombol di bawah ini untuk mengambil foto menggunakan kamera.",
-  fileOrPhotoPlaceholder: "Seret dan lepas atau pilih file untuk diunggah atau mengambil foto menggunakan kamera.",
+  photoPlaceholder:
+    "Klik tombol di bawah ini untuk mengambil foto menggunakan kamera.",
+  fileOrPhotoPlaceholder:
+    "Seret dan lepas atau pilih file untuk diunggah atau mengambil foto menggunakan kamera.",
   replaceFileCaption: "Ganti file",
   removeFileCaption: "Hapus berkas ini",
   booleanCheckedLabel: "Iya",
@@ -99,18 +111,25 @@ export var indonesianStrings = {
   modalApplyButtonText: "Berlaku",
   filterStringPlaceholder: "Ketik untuk mencari...",
   emptyMessage: "Tidak ada data untuk ditampilkan",
-  noEntriesText: "Belum ada entri.\nKlik tombol di bawah ini untuk menambahkan entri baru.",
+  noEntriesText:
+    "Belum ada entri.\nKlik tombol di bawah ini untuk menambahkan entri baru.",
   noEntriesReadonlyText: "Tidak ada entri.",
   tabTitlePlaceholder: "Panel Baru",
   more: "Lebih",
   tagboxDoneButtonCaption: "OKE",
   selectToRankEmptyRankedAreaText: "Semua pilihan diberi peringkat",
-  selectToRankEmptyUnrankedAreaText: "Seret dan lepas pilihan di sini untuk memberi peringkat",
+  selectToRankEmptyUnrankedAreaText:
+    "Seret dan lepas pilihan di sini untuk memberi peringkat",
   ok: "OKE",
-  cancel: "Membatalkan"
+  cancel: "Membatalkan",
 };
 
-setupLocale({ localeCode: "id", strings: indonesianStrings, nativeName: "bahasa indonesia", englishName: "Indonesian" });
+setupLocale({
+  localeCode: "id",
+  strings: indonesianStrings,
+  nativeName: "bahasa indonesia",
+  englishName: "Indonesian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

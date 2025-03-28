@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var norwegianSurveyStrings = {
   pagePrevText: "Forrige",
@@ -20,7 +20,8 @@ export var norwegianSurveyStrings = {
   questionsProgressText: "Besvarte {0} / {1} spørsmål",
   emptySurvey: "Det er ingen synlig side eller spørsmål i undersøkelsen.",
   completingSurvey: "Takk for at du fullførte undersøkelsen!",
-  completingSurveyBefore: "Våre data viser at du allerede har gjennomført denne undersøkelsen.",
+  completingSurveyBefore:
+    "Våre data viser at du allerede har gjennomført denne undersøkelsen.",
   loadingSurvey: "Undersøkelsen laster...",
   placeholder: "Velg...",
   ratingOptionsCaption: "Velge...",
@@ -39,21 +40,26 @@ export var norwegianSurveyStrings = {
   minRowCountError: "Vennligst fyll inn minst {0} rader.",
   minSelectError: "Vennligst velg minst {0} varianter.",
   maxSelectError: "Vennligst ikke velg mer enn {0} varianter.",
-  numericMinMax: "'{0}' bør være lik eller mer enn {1} og lik eller mindre enn {2}",
+  numericMinMax:
+    "'{0}' bør være lik eller mer enn {1} og lik eller mindre enn {2}",
   numericMin: "'{0}' bør være lik eller mer enn {1}",
   numericMax: "'{0}' bør være lik eller mindre enn {1}",
   invalidEmail: "Vennligst skriv inn en gyldig e-post adresse.",
   invalidExpression: "Uttrykket: {0} skal returnere 'sant'.",
   urlRequestError: "Forespørselen returnerte feilen '{0}'. {1}",
-  urlGetChoicesError: "Forespørselen returnerte tomme data, eller 'sti' -egenskapen er feil",
+  urlGetChoicesError:
+    "Forespørselen returnerte tomme data, eller 'sti' -egenskapen er feil",
   exceedMaxSize: "Filstørrelsen bør ikke overstige {0}.",
-  noUploadFilesHandler: "Filer kan ikke lastes opp. Legg til et behandlingsprogram for onUploadFiles-hendelsen.",
+  noUploadFilesHandler:
+    "Filer kan ikke lastes opp. Legg til et behandlingsprogram for onUploadFiles-hendelsen.",
   otherRequiredError: "Vennligst skriv inn den andre verdien.",
-  uploadingFile: "Filen din lastes opp. Vennligst vent noen sekunder og prøv igjen.",
+  uploadingFile:
+    "Filen din lastes opp. Vennligst vent noen sekunder og prøv igjen.",
   loadingFile: "Laster inn ...",
   chooseFile: "Velg fil (er) ...",
   noFileChosen: "Ingen fil valgt",
-  filePlaceholder: "Dra og slipp en fil her, eller klikk på knappen nedenfor og velg en fil du vil laste opp.",
+  filePlaceholder:
+    "Dra og slipp en fil her, eller klikk på knappen nedenfor og velg en fil du vil laste opp.",
   confirmDelete: "Ønsker du å slette posten?",
   keyDuplicationError: "Denne verdien skal være unik.",
   addColumn: "Legg til kolonne",
@@ -71,14 +77,16 @@ export var norwegianSurveyStrings = {
   savingData: "Resultatene lagres på serveren ...",
   savingDataError: "Det oppsto en feil, og vi kunne ikke lagre resultatene.",
   savingDataSuccess: "Resultatene ble lagret!",
-  savingExceedSize: "Svaret ditt overstiger 64 kB. Reduser størrelsen på filen(e) din(e), og prøv på nytt, eller kontakt eieren av en spørreundersøkelse.",
+  savingExceedSize:
+    "Svaret ditt overstiger 64 kB. Reduser størrelsen på filen(e) din(e), og prøv på nytt, eller kontakt eieren av en spørreundersøkelse.",
   saveAgainButton: "Prøv igjen",
   timerMin: "min",
   timerSec: "sek",
   timerSpentAll: "Du har tilbrakt {0} på denne siden og {1} totalt.",
   timerSpentPage: "Du har tilbrakt {0} på denne siden.",
   timerSpentSurvey: "Du har tilbrakt {0} totalt.",
-  timerLimitAll: "Du har tilbrakt {0} av {1} på denne siden og totalt {2} av {3}.",
+  timerLimitAll:
+    "Du har tilbrakt {0} av {1} på denne siden og totalt {2} av {3}.",
   timerLimitPage: "Du har tilbrakt {0} av {1} på denne siden.",
   timerLimitSurvey: "Du har tilbrakt {0} av {1} totalt.",
   clearCaption: "Klar",
@@ -87,7 +95,8 @@ export var norwegianSurveyStrings = {
   chooseFileCaption: "Velg Fil",
   takePhotoCaption: "Ta bilde",
   photoPlaceholder: "Klikk på knappen nedenfor for å ta et bilde med kameraet.",
-  fileOrPhotoPlaceholder: "Dra og slipp eller velg en fil for å laste opp eller ta et bilde med kameraet.",
+  fileOrPhotoPlaceholder:
+    "Dra og slipp eller velg en fil for å laste opp eller ta et bilde med kameraet.",
   replaceFileCaption: "Erstatt fil",
   removeFileCaption: "Fjern denne filen",
   booleanCheckedLabel: "Ja",
@@ -99,7 +108,8 @@ export var norwegianSurveyStrings = {
   modalApplyButtonText: "Bruke",
   filterStringPlaceholder: "Skriv for å søke ...",
   emptyMessage: "Ingen data å vise",
-  noEntriesText: "Det er ingen oppføringer ennå.\nKlikk på knappen nedenfor for å legge til en ny oppføring.",
+  noEntriesText:
+    "Det er ingen oppføringer ennå.\nKlikk på knappen nedenfor for å legge til en ny oppføring.",
   noEntriesReadonlyText: "Det er ingen oppføringer.",
   tabTitlePlaceholder: "Nytt panel",
   more: "Mer",
@@ -107,10 +117,15 @@ export var norwegianSurveyStrings = {
   selectToRankEmptyRankedAreaText: "Alle valg er rangert",
   selectToRankEmptyUnrankedAreaText: "Dra og slipp valg her for å rangere dem",
   ok: "OK",
-  cancel: "Annullere"
+  cancel: "Annullere",
 };
 
-setupLocale({ localeCode: "no", strings: norwegianSurveyStrings, nativeName: "norsk", englishName: "Norwegian" });
+setupLocale({
+  localeCode: "no",
+  strings: norwegianSurveyStrings,
+  nativeName: "norsk",
+  englishName: "Norwegian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

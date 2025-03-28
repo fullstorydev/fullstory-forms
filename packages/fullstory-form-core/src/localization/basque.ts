@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var basqueSurveyStrings = {
   pagePrevText: "Aurrekoa",
@@ -20,7 +20,8 @@ export var basqueSurveyStrings = {
   questionsProgressText: "Erantzundako galderak {0}/{1}",
   emptySurvey: "Ez dago orrialde bistaragarririk edo ez dago galderarik.",
   completingSurvey: "Eskerrik asko galdetegia erantzuteagatik!",
-  completingSurveyBefore: "Gure datuek diote dagoeneko galdetegia erantzun duzula.",
+  completingSurveyBefore:
+    "Gure datuek diote dagoeneko galdetegia erantzun duzula.",
   loadingSurvey: "Galdetegia kargatzen...",
   placeholder: "Hautatu...",
   ratingOptionsCaption: "Aukeratu...",
@@ -35,25 +36,31 @@ export var basqueSurveyStrings = {
   textNoDigitsAllow: "Ezin da zenbakirik egin.",
   textMinLength: "Mesedez, gutxienez {0} karaktere erabili behar dira.",
   textMaxLength: "Mesedez, gehienez {0} karaktere erabili behar dira.",
-  textMinMaxLength: "Mesedez, gehienez {0} eta gutxienez {1} karaktere erabili behar dira.",
+  textMinMaxLength:
+    "Mesedez, gehienez {0} eta gutxienez {1} karaktere erabili behar dira.",
   minRowCountError: "Mesedez, gutxienez {0} errenkada bete.",
   minSelectError: "Mesedez, gutxienez {0} aukera hautatu.",
   maxSelectError: "Mesedez, {0} aukera baino gehiago ez hautatu.",
-  numericMinMax: "El '{0}' debe de ser igual o más de {1} y igual o menos de {2}",
+  numericMinMax:
+    "El '{0}' debe de ser igual o más de {1} y igual o menos de {2}",
   numericMin: "'{0}' {1} baino handiagoa edo berdin izan behar da",
   numericMax: "'{0}' {1} baino txikiago edo berdin izan behar da",
   invalidEmail: "Mesedez, baliozko emaila idatz ezazu.",
   invalidExpression: "{0} adierazpenak 'egiazkoa' itzuli beharko luke.",
   urlRequestError: "Eskaerak '{0}' errorea itzuli du. {1}",
-  urlGetChoicesError: "La solicitud regresó vacío de data o la propiedad 'trayectoria' no es correcta",
+  urlGetChoicesError:
+    "La solicitud regresó vacío de data o la propiedad 'trayectoria' no es correcta",
   exceedMaxSize: "Fitxategiaren tamaina ez da {0} baino handiagoa izan behar.",
-  noUploadFilesHandler: "Artxiboak ezin dira kargatu. Gaineratu kontrolatzaile bat 'onUploadFiles' ekitaldirako.",
+  noUploadFilesHandler:
+    "Artxiboak ezin dira kargatu. Gaineratu kontrolatzaile bat 'onUploadFiles' ekitaldirako.",
   otherRequiredError: "Mesedez, beste estimazioa gehitu.",
-  uploadingFile: "Zure fitxategia igotzen ari da. Mesedez, segundo batzuk itxaron eta saiatu berriro.",
+  uploadingFile:
+    "Zure fitxategia igotzen ari da. Mesedez, segundo batzuk itxaron eta saiatu berriro.",
   loadingFile: "Kargatzen...",
   chooseFile: "Fitxategia(k) hautatu...",
   noFileChosen: "Ez da inolako fitxategirik hautatu",
-  filePlaceholder: "Arrastatu eta askatu artxibo bat hemen edo klik egin beheko botoian eta aukeratu artxibo bat kargatzeko.",
+  filePlaceholder:
+    "Arrastatu eta askatu artxibo bat hemen edo klik egin beheko botoian eta aukeratu artxibo bat kargatzeko.",
   confirmDelete: "¿Erregistroa borratu nahi al duzu?",
   keyDuplicationError: "Balio hau bakarra izan behar du.",
   addColumn: "Zutabe bat gehitu",
@@ -69,16 +76,19 @@ export var basqueSurveyStrings = {
   matrix_row: "Errenkada",
   multipletext_itemname: "testua",
   savingData: "Erantzunak zerbitzarian gordetzen ari dira...",
-  savingDataError: "Erroreren bat gertatu eta erantzunak ez dira zerbitzarian gorde ahal izan.",
+  savingDataError:
+    "Erroreren bat gertatu eta erantzunak ez dira zerbitzarian gorde ahal izan.",
   savingDataSuccess: "Erantzunak egoki gorde dira!",
-  savingExceedSize: "Erantzuna 64 KB-tik gorakoa da. Murriztu artxiboaren tamaina, eta berriro saiatu edo jarri harremanetan inkesta baten jabearekin.",
+  savingExceedSize:
+    "Erantzuna 64 KB-tik gorakoa da. Murriztu artxiboaren tamaina, eta berriro saiatu edo jarri harremanetan inkesta baten jabearekin.",
   saveAgainButton: "Berriro saiatu.",
   timerMin: "min",
   timerSec: "seg",
   timerSpentAll: "{0} erabili duzu orrialde honetan eta orotara {1}.",
   timerSpentPage: "Zuk {0} erabili duzu.",
   timerSpentSurvey: "Orotara gastatu duzu.",
-  timerLimitAll: "{0} gastatu duzu {1}-(e)tik orrialde honetan eta orotara {2} {3}-(e)tik.",
+  timerLimitAll:
+    "{0} gastatu duzu {1}-(e)tik orrialde honetan eta orotara {2} {3}-(e)tik.",
   timerLimitPage: "{0} gastatu duzu orrialde honetan {1}-(e)tik.",
   timerLimitSurvey: "Zuk orotara {0} gastatu duzu {1}-(e)tik.",
   clearCaption: "Hustu",
@@ -86,31 +96,41 @@ export var basqueSurveyStrings = {
   signaturePlaceHolderReadOnly: "Sinadurarik gabe",
   chooseFileCaption: "Fitxategia hautatu",
   takePhotoCaption: "Argazkia hartu",
-  photoPlaceholder: "Egin klik beheko botoian, kamerarekin argazki bat hartzeko.",
-  fileOrPhotoPlaceholder: "Arrastatu eta askatu artxibo bat kamerarekin argazki bat kargatzeko edo hartzeko.",
+  photoPlaceholder:
+    "Egin klik beheko botoian, kamerarekin argazki bat hartzeko.",
+  fileOrPhotoPlaceholder:
+    "Arrastatu eta askatu artxibo bat kamerarekin argazki bat kargatzeko edo hartzeko.",
   replaceFileCaption: "Artxiboa ordeztu",
   removeFileCaption: "Fitxategi hau ezabatu",
   booleanCheckedLabel: "Bai",
   booleanUncheckedLabel: "Ez",
   confirmRemoveFile: "Ziur zaude hurrengo fitxategia ezabatu nahi duzula: {0}?",
-  confirmRemoveAllFiles: "Ziur al zaude fitxategi guztiak ezabatu nahi dituzula?",
+  confirmRemoveAllFiles:
+    "Ziur al zaude fitxategi guztiak ezabatu nahi dituzula?",
   questionTitlePatternText: "Galderaren izenburua",
   modalCancelButtonText: "Ezeztatu",
   modalApplyButtonText: "Ezarri",
   filterStringPlaceholder: "Idatzi bila...",
   emptyMessage: "Ez daturik erakusteko",
-  noEntriesText: "Oraindik ez sarrerarik.\nKlik beheko botoian klik egin sarrera berri bat eransteko.",
+  noEntriesText:
+    "Oraindik ez sarrerarik.\nKlik beheko botoian klik egin sarrera berri bat eransteko.",
   noEntriesReadonlyText: "Ez sarrerarik.",
   tabTitlePlaceholder: "Panel berria",
   more: "Gehiago",
   tagboxDoneButtonCaption: "Ados",
   selectToRankEmptyRankedAreaText: "Aukera guztiak sailkatuta daude",
-  selectToRankEmptyUnrankedAreaText: "Arrastaka eta askatzen ditu hemen sailkatzeko",
+  selectToRankEmptyUnrankedAreaText:
+    "Arrastaka eta askatzen ditu hemen sailkatzeko",
   ok: "Ados",
-  cancel: "Ezeztatu"
+  cancel: "Ezeztatu",
 };
 
-setupLocale({ localeCode: "eu", strings: basqueSurveyStrings, nativeName: "euskara", englishName: "Basque" });
+setupLocale({
+  localeCode: "eu",
+  strings: basqueSurveyStrings,
+  nativeName: "euskara",
+  englishName: "Basque",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

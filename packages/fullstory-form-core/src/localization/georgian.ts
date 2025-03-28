@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var georgianSurveyStrings = {
   pagePrevText: "უკან",
@@ -20,7 +20,8 @@ export var georgianSurveyStrings = {
   questionsProgressText: "უპასუხეთ {0}/{1} კითხვებს",
   emptySurvey: "არცერთი კითხვა არ არის.",
   completingSurvey: "გმადლობთ კითხვარის შევსებისთვის!",
-  completingSurveyBefore: "ჩვენი ჩანაწერები აჩვენებს, რომ თქვენ უკვე დაასრულეთ ეს გამოკითხვა.",
+  completingSurveyBefore:
+    "ჩვენი ჩანაწერები აჩვენებს, რომ თქვენ უკვე დაასრულეთ ეს გამოკითხვა.",
   loadingSurvey: "ჩატვირთვა სერვერიდან...",
   placeholder: "არჩევა...",
   ratingOptionsCaption: "აირჩიეთ...",
@@ -39,21 +40,26 @@ export var georgianSurveyStrings = {
   minRowCountError: "გთხოვთ შეავსოთ მინიმუმ {0} რიგი( ებ)ი.",
   minSelectError: "გთხოვთ აირჩიეთ არანაკლებ {0} ვარიანტი.",
   maxSelectError: "გთხოვთ აირჩიეთ არაუმეტეს {0} ვარიანტი.",
-  numericMinMax: "'{0}' უნდა იყოს მეტი ან ტოლი, ვიდრე {1}, და ნაკლები ან ტოლი ვიდრე {2}",
+  numericMinMax:
+    "'{0}' უნდა იყოს მეტი ან ტოლი, ვიდრე {1}, და ნაკლები ან ტოლი ვიდრე {2}",
   numericMin: "'{0}' უნდა იყოს მეტი ან ტოლი ვიდრე {1}",
   numericMax: "'{0}' უნდა იყოს ნაკლები ან ტოლი ვიდრე {1}",
   invalidEmail: "გთხოვთ შეიყვანოთ ელ. ფოსტის რეალური მისამართი.",
-  invalidExpression: "გამოთქმა: {0} უნდა დაბრუნდეს \"ჭეშმარიტი\".",
+  invalidExpression: 'გამოთქმა: {0} უნდა დაბრუნდეს "ჭეშმარიტი".',
   urlRequestError: "მოთხოვნა დაუბრუნდა შეცდომას '{0}'. {1}",
-  urlGetChoicesError: "მოთხოვნამ დაუბრუნა ცარიელი მონაცემები ან \"ბილიკის\" ქონება არასწორია",
+  urlGetChoicesError:
+    'მოთხოვნამ დაუბრუნა ცარიელი მონაცემები ან "ბილიკის" ქონება არასწორია',
   exceedMaxSize: "ფაილის ზომა არ უნდა აღემატებოდეს {0}.",
-  noUploadFilesHandler: "ფაილების ატვირთვა შეუძლებელია. გთხოვთ, დაამატოთ დამმუშავებელი 'onUploadFiles' ღონისძიებისთვის.",
+  noUploadFilesHandler:
+    "ფაილების ატვირთვა შეუძლებელია. გთხოვთ, დაამატოთ დამმუშავებელი 'onUploadFiles' ღონისძიებისთვის.",
   otherRequiredError: "საჭიროა პასუხი: შეიყვანეთ სხვა მნიშვნელობა.",
-  uploadingFile: "თქვენი ფაილი ატვირთვაა. გთხოვთ დაელოდოთ რამდენიმე წამს და კიდევ სცადოთ.",
+  uploadingFile:
+    "თქვენი ფაილი ატვირთვაა. გთხოვთ დაელოდოთ რამდენიმე წამს და კიდევ სცადოთ.",
   loadingFile: "იტვირთება...",
   chooseFile: "აირჩიეთ ფაილი...",
   noFileChosen: "ფაილის არჩევა არ არის",
-  filePlaceholder: "გადაიტანეთ და ჩამოაგდეთ ფაილი აქ ან დააჭირეთ ქვემოთ მოცემულ ღილაკს და აირჩიეთ ფაილი ასატვირთად.",
+  filePlaceholder:
+    "გადაიტანეთ და ჩამოაგდეთ ფაილი აქ ან დააჭირეთ ქვემოთ მოცემულ ღილაკს და აირჩიეთ ფაილი ასატვირთად.",
   confirmDelete: "გსურთ ჩანაწერის წაშლა?",
   keyDuplicationError: "ეს მნიშვნელობა უნდა იყოს უნიკალური.",
   addColumn: "სვეტის დამატება",
@@ -71,7 +77,8 @@ export var georgianSurveyStrings = {
   savingData: "შედეგები ინახება სერვერზე...",
   savingDataError: "დაფიქსირდა შეცდომა და შედეგი ვერ შევინახავდით.",
   savingDataSuccess: "შედეგები წარმატებით გადაარჩინეს!",
-  savingExceedSize: "თქვენი პასუხი აღემატება 64KB. გთხოვთ, შეამციროთ თქვენი ფაილ(ებ)ის ზომა და სცადოთ ხელახლა ან დაუკავშირდეთ გამოკითხვის მფლობელს.",
+  savingExceedSize:
+    "თქვენი პასუხი აღემატება 64KB. გთხოვთ, შეამციროთ თქვენი ფაილ(ებ)ის ზომა და სცადოთ ხელახლა ან დაუკავშირდეთ გამოკითხვის მფლობელს.",
   saveAgainButton: "კიდევ სცადე",
   timerMin: "წთ",
   timerSec: "წმ",
@@ -86,8 +93,10 @@ export var georgianSurveyStrings = {
   signaturePlaceHolderReadOnly: "ხელმოწერა არ არის",
   chooseFileCaption: "ვაუჩერის ნახვა",
   takePhotoCaption: "გადაიღეთ ფოტო",
-  photoPlaceholder: "დააჭირეთ ქვემოთ მოცემულ ღილაკს, რომ გადაიღოთ ფოტო კამერის გამოყენებით.",
-  fileOrPhotoPlaceholder: "გადაიტანეთ და ჩამოაგდეთ ან შეარჩიეთ ფაილი კამერის გამოყენებით ფოტოს ასატვირთად ან გადასაღებად.",
+  photoPlaceholder:
+    "დააჭირეთ ქვემოთ მოცემულ ღილაკს, რომ გადაიღოთ ფოტო კამერის გამოყენებით.",
+  fileOrPhotoPlaceholder:
+    "გადაიტანეთ და ჩამოაგდეთ ან შეარჩიეთ ფაილი კამერის გამოყენებით ფოტოს ასატვირთად ან გადასაღებად.",
   replaceFileCaption: "ფაილის შეცვლა",
   removeFileCaption: "ამ ფაილის წაშლა",
   booleanCheckedLabel: "დიახ",
@@ -99,18 +108,25 @@ export var georgianSurveyStrings = {
   modalApplyButtonText: "მიღება",
   filterStringPlaceholder: "ჩაწერეთ ძებნა...",
   emptyMessage: "მონაცემები არ არის საჩვენებლად",
-  noEntriesText: "ჯერ არ არის ჩანაწერები.\nდააჭირეთ ქვემოთ მოცემულ ღილაკს, რომ დაამატოთ ახალი ჩანაწერი.",
+  noEntriesText:
+    "ჯერ არ არის ჩანაწერები.\nდააჭირეთ ქვემოთ მოცემულ ღილაკს, რომ დაამატოთ ახალი ჩანაწერი.",
   noEntriesReadonlyText: "არ არსებობს ჩანაწერები.",
   tabTitlePlaceholder: "ახალი პანელი",
   more: "სრულად",
   tagboxDoneButtonCaption: "კარგი",
   selectToRankEmptyRankedAreaText: "ყველა არჩევანი რანჟირებულია",
-  selectToRankEmptyUnrankedAreaText: "გადაიტანეთ და ჩამოაგდეთ არჩევანი აქ, რომ დაასახელოთ ისინი",
+  selectToRankEmptyUnrankedAreaText:
+    "გადაიტანეთ და ჩამოაგდეთ არჩევანი აქ, რომ დაასახელოთ ისინი",
   ok: "კარგი",
-  cancel: "გაუქმება"
+  cancel: "გაუქმება",
 };
 
-setupLocale({ localeCode: "ka", strings: georgianSurveyStrings, nativeName: "ქართული", englishName: "Georgian" });
+setupLocale({
+  localeCode: "ka",
+  strings: georgianSurveyStrings,
+  nativeName: "ქართული",
+  englishName: "Georgian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

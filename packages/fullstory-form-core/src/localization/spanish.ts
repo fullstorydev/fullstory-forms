@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var spanishSurveyStrings = {
   pagePrevText: "Anterior",
@@ -20,7 +20,8 @@ export var spanishSurveyStrings = {
   questionsProgressText: "Respondió a {0}/{1} preguntas",
   emptySurvey: "No hay página visible o pregunta en la encuesta.",
   completingSurvey: "¡Gracias por completar la encuesta!",
-  completingSurveyBefore: "Nuestros registros muestran que ya ha completado esta encuesta.",
+  completingSurveyBefore:
+    "Nuestros registros muestran que ya ha completado esta encuesta.",
   loadingSurvey: "La encuesta está cargando...",
   placeholder: "Seleccione...",
   ratingOptionsCaption: "Toca aquí para calificar...",
@@ -39,21 +40,26 @@ export var spanishSurveyStrings = {
   minRowCountError: "Por favor llene por lo menos {0} hileras.",
   minSelectError: "Por favor seleccione por lo menos {0} variantes.",
   maxSelectError: "Por favor seleccione no más de {0} variantes.",
-  numericMinMax: "El '{0}' debe de ser igual o más de {1} y igual o menos de {2}",
+  numericMinMax:
+    "El '{0}' debe de ser igual o más de {1} y igual o menos de {2}",
   numericMin: "El '{0}' debe ser igual o más de {1}",
   numericMax: "El '{0}' debe ser igual o menos de {1}",
   invalidEmail: "Por favor agregue un correo electrónico válido.",
   invalidExpression: "La expresión: {0} debería devolver 'verdadero'.",
   urlRequestError: "La solicitud regresó error '{0}'. {1}",
-  urlGetChoicesError: "La solicitud regresó vacío de data o la propiedad 'trayectoria' no es correcta",
+  urlGetChoicesError:
+    "La solicitud regresó vacío de data o la propiedad 'trayectoria' no es correcta",
   exceedMaxSize: "El tamaño del archivo no debe de exceder {0}.",
-  noUploadFilesHandler: "Los archivos no se pueden cargar. Agregue un controlador para el evento 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Los archivos no se pueden cargar. Agregue un controlador para el evento 'onUploadFiles'.",
   otherRequiredError: "Por favor agregue la otra estimación.",
-  uploadingFile: "Su archivo se está subiendo. Por favor espere unos segundos e intente de nuevo.",
+  uploadingFile:
+    "Su archivo se está subiendo. Por favor espere unos segundos e intente de nuevo.",
   loadingFile: "Cargando...",
   chooseFile: "Elija archivo(s)...",
   noFileChosen: "No se ha elegido ningún archivo",
-  filePlaceholder: "Suelte un archivo aquí o haga clic en el botón de abajo para cargar el archivo",
+  filePlaceholder:
+    "Suelte un archivo aquí o haga clic en el botón de abajo para cargar el archivo",
   confirmDelete: "¿Quieres borrar el registro?",
   keyDuplicationError: "Este valor debe ser único.",
   addColumn: "Añadir columna",
@@ -71,7 +77,8 @@ export var spanishSurveyStrings = {
   savingData: "Los resultados se están guardando en el servidor...",
   savingDataError: "Los resultados se están guardando en el servidor...",
   savingDataSuccess: "¡Los resultados se guardaron con éxito!",
-  savingExceedSize: "Su respuesta supera los 64 KB. Reduzca el tamaño de su(s) archivo(s) e inténtelo de nuevo o póngase en contacto con el propietario de una encuesta.",
+  savingExceedSize:
+    "Su respuesta supera los 64 KB. Reduzca el tamaño de su(s) archivo(s) e inténtelo de nuevo o póngase en contacto con el propietario de una encuesta.",
   saveAgainButton: "Inténtalo de nuevo.",
   timerMin: "min",
   timerSec: "sec",
@@ -86,31 +93,41 @@ export var spanishSurveyStrings = {
   signaturePlaceHolderReadOnly: "Sin firma",
   chooseFileCaption: "Elija el archivo",
   takePhotoCaption: "Tomar foto",
-  photoPlaceholder: "Haga clic en el botón de abajo para tomar una foto con la cámara.",
-  fileOrPhotoPlaceholder: "Arrastre y suelte o seleccione un archivo para cargar o tomar una foto con la cámara.",
+  photoPlaceholder:
+    "Haga clic en el botón de abajo para tomar una foto con la cámara.",
+  fileOrPhotoPlaceholder:
+    "Arrastre y suelte o seleccione un archivo para cargar o tomar una foto con la cámara.",
   replaceFileCaption: "Reemplazar archivo",
   removeFileCaption: "Elimina este archivo",
   booleanCheckedLabel: "Sí",
   booleanUncheckedLabel: "No",
   confirmRemoveFile: "¿Estás seguro de que quieres eliminar este archivo: {0}?",
-  confirmRemoveAllFiles: "¿Estás seguro de que quieres eliminar todos los archivos?",
+  confirmRemoveAllFiles:
+    "¿Estás seguro de que quieres eliminar todos los archivos?",
   questionTitlePatternText: "Título de la pregunta",
   modalCancelButtonText: "Anular",
   modalApplyButtonText: "Aplicar",
   filterStringPlaceholder: "Escribe para buscar...",
   emptyMessage: "No hay datos para mostrar",
-  noEntriesText: "Aún no hay entradas.\nHaga clic en el botón de abajo para agregar una nueva entrada.",
+  noEntriesText:
+    "Aún no hay entradas.\nHaga clic en el botón de abajo para agregar una nueva entrada.",
   noEntriesReadonlyText: "No hay entradas.",
   tabTitlePlaceholder: "Nuevo panel",
   more: "Más",
   tagboxDoneButtonCaption: "De acuerdo",
   selectToRankEmptyRankedAreaText: "Todas las opciones están clasificadas",
-  selectToRankEmptyUnrankedAreaText: "Arrastra y suelta opciones aquí para clasificarlas",
+  selectToRankEmptyUnrankedAreaText:
+    "Arrastra y suelta opciones aquí para clasificarlas",
   ok: "De acuerdo",
-  cancel: "Cancelar"
+  cancel: "Cancelar",
 };
 
-setupLocale({ localeCode: "es", strings: spanishSurveyStrings, nativeName: "español", englishName: "Spanish" });
+setupLocale({
+  localeCode: "es",
+  strings: spanishSurveyStrings,
+  nativeName: "español",
+  englishName: "Spanish",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

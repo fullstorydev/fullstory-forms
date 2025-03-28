@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var turkishSurveyStrings = {
   pagePrevText: "Önceki",
@@ -20,7 +20,8 @@ export var turkishSurveyStrings = {
   questionsProgressText: "{0}/{1} soru yanıtlandı",
   emptySurvey: "Ankette görüntülenecek sayfa ya da soru mevcut değil.",
   completingSurvey: "Anketi tamamladığınız için teşekkür ederiz",
-  completingSurveyBefore: "Kayıtlarımız bu anketi zaten tamamladığınızı gösteriyor.",
+  completingSurveyBefore:
+    "Kayıtlarımız bu anketi zaten tamamladığınızı gösteriyor.",
   loadingSurvey: "Anket Yükleniyor...",
   placeholder: "Seçiniz...",
   ratingOptionsCaption: "Seçiniz...",
@@ -39,7 +40,8 @@ export var turkishSurveyStrings = {
   minRowCountError: "Lütfen en az {0} satırı doldurun.",
   minSelectError: "Lütfen en az {0} seçeneği seçin.",
   maxSelectError: "Lütfen en fazla {0} seçeneği seçin.",
-  numericMinMax: "'{0}', {1}'e eşit veya daha büyük ve {2}'ye eşit veya daha küçük olmalıdır",
+  numericMinMax:
+    "'{0}', {1}'e eşit veya daha büyük ve {2}'ye eşit veya daha küçük olmalıdır",
   numericMin: "'{0}' değeri {1} değerine eşit veya büyük olmalıdır",
   numericMax: "'{0}' değeri {1} değerine eşit ya da küçük olmalıdır.",
   invalidEmail: "Lütfen geçerli bir e-posta adresi girin.",
@@ -47,13 +49,16 @@ export var turkishSurveyStrings = {
   urlRequestError: "İstek '{0}' hatasını döndürdü. {1}",
   urlGetChoicesError: "İstek boş veri döndürdü veya 'path' özelliği yanlış",
   exceedMaxSize: "Dosya boyutu {0} değerini geçemez.",
-  noUploadFilesHandler: "Dosyalar yüklenemiyor. Lütfen 'onUploadFiles' olayı için bir işleyici ekleyin.",
+  noUploadFilesHandler:
+    "Dosyalar yüklenemiyor. Lütfen 'onUploadFiles' olayı için bir işleyici ekleyin.",
   otherRequiredError: "Lütfen diğer değerleri girin.",
-  uploadingFile: "Dosyanız yükleniyor. Lütfen birkaç saniye bekleyin ve tekrar deneyin.",
+  uploadingFile:
+    "Dosyanız yükleniyor. Lütfen birkaç saniye bekleyin ve tekrar deneyin.",
   loadingFile: "Yükleniyor...",
   chooseFile: "Dosyaları seçin...",
   noFileChosen: "Dosya seçili değil",
-  filePlaceholder: "Buraya bir dosya bırakın veya dosyayı yüklemek için aşağıdaki düğmeyi tıklayın.",
+  filePlaceholder:
+    "Buraya bir dosya bırakın veya dosyayı yüklemek için aşağıdaki düğmeyi tıklayın.",
   confirmDelete: "Kaydı silmek istiyor musunuz?",
   keyDuplicationError: "Bu değer benzersiz olmalıdır.",
   addColumn: "Sütun Ekle",
@@ -71,7 +76,8 @@ export var turkishSurveyStrings = {
   savingData: "Sonuçlar sunucuya kaydediliyor...",
   savingDataError: "Bir hata oluştu ve sonuçlar kaydedilemedi.",
   savingDataSuccess: "Sonuçlar başarıyla kaydedildi!",
-  savingExceedSize: "Yanıtınız 64 KB'ı aşıyor. Lütfen dosyalarınızın boyutunu küçültün ve tekrar deneyin veya bir anket sahibiyle iletişime geçin.",
+  savingExceedSize:
+    "Yanıtınız 64 KB'ı aşıyor. Lütfen dosyalarınızın boyutunu küçültün ve tekrar deneyin veya bir anket sahibiyle iletişime geçin.",
   saveAgainButton: "Tekrar deneyin",
   timerMin: "dakika",
   timerSec: "saniye",
@@ -86,8 +92,10 @@ export var turkishSurveyStrings = {
   signaturePlaceHolderReadOnly: "İmza yok",
   chooseFileCaption: "Dosya seçin",
   takePhotoCaption: "Fotoğraf Çekin",
-  photoPlaceholder: "Kamerayı kullanarak fotoğraf çekmek için aşağıdaki düğmeyi tıklayın.",
-  fileOrPhotoPlaceholder: "Kamerayı kullanarak fotoğraf yüklemek veya fotoğraf çekmek için bir dosyayı sürükleyip bırakın veya seçin.",
+  photoPlaceholder:
+    "Kamerayı kullanarak fotoğraf çekmek için aşağıdaki düğmeyi tıklayın.",
+  fileOrPhotoPlaceholder:
+    "Kamerayı kullanarak fotoğraf yüklemek veya fotoğraf çekmek için bir dosyayı sürükleyip bırakın veya seçin.",
   replaceFileCaption: "Dosyayı değiştir",
   removeFileCaption: "Bu dosyayı kaldır",
   booleanCheckedLabel: "Evet",
@@ -99,18 +107,25 @@ export var turkishSurveyStrings = {
   modalApplyButtonText: "Uygula",
   filterStringPlaceholder: "Aramak için yazın...",
   emptyMessage: "Görüntülenecek veri yok",
-  noEntriesText: "Henüz giriş yok.\nYeni bir giriş eklemek için aşağıdaki düğmeyi tıklayın.",
+  noEntriesText:
+    "Henüz giriş yok.\nYeni bir giriş eklemek için aşağıdaki düğmeyi tıklayın.",
   noEntriesReadonlyText: "Giriş yok.",
   tabTitlePlaceholder: "Yeni Panel",
   more: "Daha fazla",
   tagboxDoneButtonCaption: "TAMAM",
   selectToRankEmptyRankedAreaText: "Tüm seçenekler sıralanmıştır",
-  selectToRankEmptyUnrankedAreaText: "Seçimleri sıralamak için buraya sürükleyip bırakın",
+  selectToRankEmptyUnrankedAreaText:
+    "Seçimleri sıralamak için buraya sürükleyip bırakın",
   ok: "TAMAM",
-  cancel: "İptal"
+  cancel: "İptal",
 };
 
-setupLocale({ localeCode: "tr", strings: turkishSurveyStrings, nativeName: "türkçe", englishName: "Turkish" });
+setupLocale({
+  localeCode: "tr",
+  strings: turkishSurveyStrings,
+  nativeName: "türkçe",
+  englishName: "Turkish",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var teluguStrings = {
   pagePrevText: "వెనకటి",
@@ -20,7 +20,8 @@ export var teluguStrings = {
   questionsProgressText: "{0}/{1} ప్రశ్నలకు జవాబు ఇవ్వడం అయినది",
   emptySurvey: "ఈ సర్వేలో పేజీలు గాని ప్రశ్నలు గాని కనబడుట లేదు",
   completingSurvey: "సర్వేను ముగించి నందుకు ధన్యవాదములు",
-  completingSurveyBefore: " మీరు ఇప్పటికే సర్వేను ముగించినట్లు మా రికార్డులు చూపిస్తున్నాయి",
+  completingSurveyBefore:
+    " మీరు ఇప్పటికే సర్వేను ముగించినట్లు మా రికార్డులు చూపిస్తున్నాయి",
   loadingSurvey: "సర్వే లోడ్ అవుతుంది",
   placeholder: "ఎన్నుకోండి",
   ratingOptionsCaption: "ఎంచు...",
@@ -35,11 +36,13 @@ export var teluguStrings = {
   textNoDigitsAllow: "అంకెలు అనుమతించబడవు.",
   textMinLength: "దయచేసి కనీసం {0} అక్షరాలను నమోదు చేయండి",
   textMaxLength: "దయచేసి {0} కన్నా తక్కువ అక్షరాలను నమోదు చేయండి",
-  textMinMaxLength: "దయచేసి {0} కన్నా ఎక్కువ మరియు{1} కన్నా తక్కువ అక్షరాలను నమోదు చేయండి",
+  textMinMaxLength:
+    "దయచేసి {0} కన్నా ఎక్కువ మరియు{1} కన్నా తక్కువ అక్షరాలను నమోదు చేయండి",
   minRowCountError: "దయచేసి కనీసం {0}వరుసలను పూరించండి",
   minSelectError: "దయచేసి కనీసం{0} రకాలను ఎన్నుకోండి",
   maxSelectError: "దయచేసి {0} కన్నా ఎక్కువ రకాలను ఎన్నుకో కండి",
-  numericMinMax: "'{0}' {1}తొ సమానంగా లేదా {1} కన్నా ఎక్కువ గా మరియు  {2}కన్నా తక్కువ ఉండాలి లెదా {2}తొ సమానంగా ఉండాలి",
+  numericMinMax:
+    "'{0}' {1}తొ సమానంగా లేదా {1} కన్నా ఎక్కువ గా మరియు  {2}కన్నా తక్కువ ఉండాలి లెదా {2}తొ సమానంగా ఉండాలి",
   numericMin: "''{0}' {1}తొ  సమానంగా లేదా  {1}కన్నా ఎక్కువగా ఉండాలి",
   numericMax: "'{0}'  {1}  తక్కువ లేదా సమానంగా ఉండాలి",
   invalidEmail: "దయచేసి సరైన ఈమెయిల్  నమోదు చేయండి",
@@ -47,13 +50,16 @@ export var teluguStrings = {
   urlRequestError: "విన్నపము {0} ని తప్పుగా గుర్తించింది {1}",
   urlGetChoicesError: "విన్నపము ఖాళీ డేటాని తిరిగిచ్చింది, లేదా path తప్పైన ది",
   exceedMaxSize: "ఫైల్ పరిమాణం{0} కంటే పెద్దదిగా ఉండకూడదు",
-  noUploadFilesHandler: "ఫైళ్లను అప్ లోడ్ చేయలేం. దయచేసి 'ఆన్ అప్ లోడ్ ఫైల్స్' ఈవెంట్ కొరకు ఒక హ్యాండ్లర్ ని జోడించండి.",
+  noUploadFilesHandler:
+    "ఫైళ్లను అప్ లోడ్ చేయలేం. దయచేసి 'ఆన్ అప్ లోడ్ ఫైల్స్' ఈవెంట్ కొరకు ఒక హ్యాండ్లర్ ని జోడించండి.",
   otherRequiredError: "దయచేసి ఇతర విలువలను నమో దించండి",
-  uploadingFile: "మీ ఫైల్ అప్లోడ్ అవుతున్నది దయచేసి కొన్ని సెకండ్లు వేచి ఉండండి మరియు మళ్లీ ప్రయత్నించండి",
+  uploadingFile:
+    "మీ ఫైల్ అప్లోడ్ అవుతున్నది దయచేసి కొన్ని సెకండ్లు వేచి ఉండండి మరియు మళ్లీ ప్రయత్నించండి",
   loadingFile: "లోడ్ అవుతున్నది",
   chooseFile: "ఫైళ్లను ఎన్నుకోండి",
   noFileChosen: "ఏ ఫైల్ ఎన్నుకో లేదు",
-  filePlaceholder: "ఇక్కడ ఒక ఫైల్ ను డ్రాగ్ చేసి డ్రాప్ చేయండి లేదా దిగువ బటన్ క్లిక్ చేయండి మరియు అప్ లోడ్ చేయడానికి ఫైల్ ఎంచుకోండి.",
+  filePlaceholder:
+    "ఇక్కడ ఒక ఫైల్ ను డ్రాగ్ చేసి డ్రాప్ చేయండి లేదా దిగువ బటన్ క్లిక్ చేయండి మరియు అప్ లోడ్ చేయడానికి ఫైల్ ఎంచుకోండి.",
   confirmDelete: "మీరు రికార్డులను తొలగించాలని అనుకుంటున్నారా",
   keyDuplicationError: "విలువ ప్రత్యేకంగా ఉండాలి",
   addColumn: "కాలం చేర్పించండి",
@@ -69,16 +75,19 @@ export var teluguStrings = {
   matrix_row: "వరుస",
   multipletext_itemname: "వచనం",
   savingData: "ఫలితాంశాలు సర్వర్లో సేవ్ అవుతున్నాయి",
-  savingDataError: "ఒక లోపము సంభవించినది అందుకని ఫలితాంశాలను సేవ్ చేయలేకపోయాము  ",
+  savingDataError:
+    "ఒక లోపము సంభవించినది అందుకని ఫలితాంశాలను సేవ్ చేయలేకపోయాము  ",
   savingDataSuccess: "ఫలితాంశాలను విజయవంతంగా సేవ్ చేసాము",
-  savingExceedSize: "మీ ప్రతిస్పందన 64KBని మించిపోయింది. దయచేసి మీ ఫైల్(లు) పరిమాణాన్ని తగ్గించండి మరియు మళ్లీ ప్రయత్నించండి లేదా సర్వే యజమానిని సంప్రదించండి.",
+  savingExceedSize:
+    "మీ ప్రతిస్పందన 64KBని మించిపోయింది. దయచేసి మీ ఫైల్(లు) పరిమాణాన్ని తగ్గించండి మరియు మళ్లీ ప్రయత్నించండి లేదా సర్వే యజమానిని సంప్రదించండి.",
   saveAgainButton: "మళ్లీ ప్రయత్నించు",
   timerMin: "నిమిషాలు ",
   timerSec: "సెకండ్లు",
   timerSpentAll: "ఈ పేజీ పైన మీరు{0}  ఉపయోగించారు మొత్తంగా  {1} ఉపయోగించారు",
   timerSpentPage: "ఈ పేజీ పైన మీరు{0} ఉపయోగించారు",
   timerSpentSurvey: "మీరు మొత్తంగా {0}  ఉపయోగించారు",
-  timerLimitAll: "ఈ పేజీ పైన మీరు {1}లో {0} భాగాన్ని ఉపయోగించారు. మోతంగా {3}లో {2} భాగాన్ని ఉపయోగించారు.",
+  timerLimitAll:
+    "ఈ పేజీ పైన మీరు {1}లో {0} భాగాన్ని ఉపయోగించారు. మోతంగా {3}లో {2} భాగాన్ని ఉపయోగించారు.",
   timerLimitPage: "ఈ పేజీలో మీరు {1}లోని{0} ని ఉపయోగించారు",
   timerLimitSurvey: " మొత్తంగా మీరు {1} లో {0} ని ఉపయోగించారు ",
   clearCaption: "స్పష్టమ్",
@@ -86,31 +95,41 @@ export var teluguStrings = {
   signaturePlaceHolderReadOnly: "సంతకం లేదు",
   chooseFileCaption: "ఫైల్ ఎంచుకోండి",
   takePhotoCaption: "ఫోటో తీసుకోండి",
-  photoPlaceholder: "కెమెరాను ఉపయోగించి ఫోటో తీయడానికి దిగువ బటన్ మీద క్లిక్ చేయండి.",
-  fileOrPhotoPlaceholder: "కెమెరాను ఉపయోగించి ఫోటోను అప్ లోడ్ చేయడానికి లేదా తీయడానికి ఫైల్ ను డ్రాగ్ మరియు డ్రాప్ చేయండి లేదా ఎంచుకోండి.",
+  photoPlaceholder:
+    "కెమెరాను ఉపయోగించి ఫోటో తీయడానికి దిగువ బటన్ మీద క్లిక్ చేయండి.",
+  fileOrPhotoPlaceholder:
+    "కెమెరాను ఉపయోగించి ఫోటోను అప్ లోడ్ చేయడానికి లేదా తీయడానికి ఫైల్ ను డ్రాగ్ మరియు డ్రాప్ చేయండి లేదా ఎంచుకోండి.",
   replaceFileCaption: "ఫైలు మార్చండి",
   removeFileCaption: "ఈ ఫైల్ తీసేయండి",
   booleanCheckedLabel: "అవును",
   booleanUncheckedLabel: "లేదు",
   confirmRemoveFile: " ఈ ఫైల్ని తీయించాలని మీరు ఖచ్చితంగా అనుకుంటున్నారా:{0} ?",
-  confirmRemoveAllFiles: "అన్ని ఫైళ్లను తీసేయాలని మీరు ఖచ్చితంగా అనుకుంటున్నారా",
+  confirmRemoveAllFiles:
+    "అన్ని ఫైళ్లను తీసేయాలని మీరు ఖచ్చితంగా అనుకుంటున్నారా",
   questionTitlePatternText: "ప్రశ్న శీర్షిక",
   modalCancelButtonText: "రద్దు",
   modalApplyButtonText: "సరిపడు",
   filterStringPlaceholder: "శోధించడానికి టైప్ చేయండి...",
   emptyMessage: "డిస్ ప్లే చేయడానికి డేటా లేదు",
-  noEntriesText: "ఇంకా ఎలాంటి ఎంట్రీలు లేవు.\nకొత్త ఎంట్రీని జోడించడం కొరకు దిగువ బటన్ మీద క్లిక్ చేయండి.",
+  noEntriesText:
+    "ఇంకా ఎలాంటి ఎంట్రీలు లేవు.\nకొత్త ఎంట్రీని జోడించడం కొరకు దిగువ బటన్ మీద క్లిక్ చేయండి.",
   noEntriesReadonlyText: "ఎలాంటి ఎంట్రీలు లేవు.",
   tabTitlePlaceholder: "కొత్త ప్యానెల్",
   more: "ఎక్కువ",
   tagboxDoneButtonCaption: "సరే",
   selectToRankEmptyRankedAreaText: "అన్ని ఎంపికలు ర్యాంక్ చేయబడతాయి",
-  selectToRankEmptyUnrankedAreaText: "వాటిని ర్యాంక్ చేయడం కొరకు ఎంపికలను ఇక్కడ డ్రాగ్ మరియు డ్రాప్ చేయండి",
+  selectToRankEmptyUnrankedAreaText:
+    "వాటిని ర్యాంక్ చేయడం కొరకు ఎంపికలను ఇక్కడ డ్రాగ్ మరియు డ్రాప్ చేయండి",
   ok: "సరే",
-  cancel: "రద్దు"
+  cancel: "రద్దు",
 };
 
-setupLocale({ localeCode: "tel", strings: teluguStrings, nativeName: "telugu", englishName: "Telugu" });
+setupLocale({
+  localeCode: "tel",
+  strings: teluguStrings,
+  nativeName: "telugu",
+  englishName: "Telugu",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

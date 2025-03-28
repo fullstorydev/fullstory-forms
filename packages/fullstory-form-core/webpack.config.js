@@ -14,7 +14,7 @@ const today = new Date();
 const year = today.getFullYear();
 
 const banner = [
-  "surveyjs - FullStory Forms Core is JavaScript library v" +
+  "surveyjs - FullStory Forms Core is a JavaScript library v" +
     packageJson.version,
   "Copyright (c) 2015-" + year + " Devsoft Baltic OÜ  - http://surveyjs.io/",
   "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
@@ -36,13 +36,13 @@ var buildPlatformJson = {
   homepage: "https://surveyjs.io/",
   license: "MIT",
   files: ["**/*"],
-  module: "fesm/survey-core.js",
-  main: "survey.core.js",
+  module: "fesm/fullstory-form-core.js",
+  main: "fullstory-form.core.js",
   exports: {
     ".": {
       types: "./typings/entries/index.d.ts",
-      import: "./fesm/survey-core.js",
-      require: "./survey.core.js",
+      import: "./fesm/fullstory-form-core.js",
+      require: "./fullstory-form.core.js",
     },
     "./*.css": "./*.css",
     "./survey.i18n": {
@@ -62,9 +62,13 @@ var buildPlatformJson = {
       import: "./fesm/themes/index.js",
       require: "./themes/index.js",
     },
+    "./themes/index": {
+      types: "./themes/index.d.ts",
+      import: "./fesm/themes/index.js",
+      require: "./themes/index.js",
+    },
     "./themes/*": {
       types: "./themes/*.d.ts",
-      import: "./fesm/themes/*.js",
       require: "./themes/*.js",
     },
     "./icons/*": {
@@ -111,12 +115,12 @@ module.exports = function (options) {
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey.core": path.resolve(__dirname, "./entries/index.ts"),
-      "survey-core": path.resolve(
+      "fullstory-form.core": path.resolve(__dirname, "./entries/index.ts"),
+      "fullstory-form-core": path.resolve(
         __dirname,
         "./src/default-theme/default.scss"
       ),
-      "survey-core.fontless": path.resolve(
+      "fullstory-form-core.fontless": path.resolve(
         __dirname,
         "./src/default-theme/default.fontless.scss"
       ),

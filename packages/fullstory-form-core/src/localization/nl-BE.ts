@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 import { dutchSurveyStrings } from "./dutch";
 
 /**
@@ -6,4 +6,9 @@ import { dutchSurveyStrings } from "./dutch";
  * - Copy the Dutch set once and move forward as if it are 2 totally different languages
  * - Override the relevant strings only
  */
-setupLocale({ localeCode: "nl-BE", strings: dutchSurveyStrings, nativeName: "vlaams", englishName: "Flemish" });
+setupLocale({
+  localeCode: "nl-BE",
+  strings: dutchSurveyStrings,
+  nativeName: "vlaams",
+  englishName: "Flemish",
+});

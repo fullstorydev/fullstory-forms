@@ -1,4 +1,4 @@
-import { setupLocale } from "survey-core";
+import { setupLocale } from "fullstory-form-core";
 
 export var ukrainianSurveyStrings = {
   pagePrevText: "Назад",
@@ -27,7 +27,8 @@ export var ukrainianSurveyStrings = {
   value: "значення",
   requiredError: "Будь ласка, дайте відповідь.",
   requiredErrorInPanel: "Будь ласка, дайте відповідь хоча б на одне питання.",
-  requiredInAllRowsError: "Будь ласка, дайте відповідь на питання в кожному рядку.",
+  requiredInAllRowsError:
+    "Будь ласка, дайте відповідь на питання в кожному рядку.",
   eachRowUniqueError: "Кожен рядок повинен мати унікальне значення.",
   numericError: "Відповідь повинна бути числом.",
   minError: "Значення не повинно бути менше {0}",
@@ -45,15 +46,19 @@ export var ukrainianSurveyStrings = {
   invalidEmail: "Будь ласка, введіть дійсну адресу електронної пошти.",
   invalidExpression: "Вираз {0} повинен повертати 'true'.",
   urlRequestError: "Запит повернув помилку '{0}'. {1}",
-  urlGetChoicesError: "Відповідь на запит повернулась порожньою або властивіть 'path' вказано невірно",
+  urlGetChoicesError:
+    "Відповідь на запит повернулась порожньою або властивіть 'path' вказано невірно",
   exceedMaxSize: "Розмір файлу не повинен перевищувати {0}.",
-  noUploadFilesHandler: "Файли не можна завантажити. Будь ласка, додайте обробник для події 'onUploadFiles'.",
+  noUploadFilesHandler:
+    "Файли не можна завантажити. Будь ласка, додайте обробник для події 'onUploadFiles'.",
   otherRequiredError: "Будь ласка, введіть дані в поле 'Інше'",
-  uploadingFile: "Ваш файл завантажується. Зачекайте декілька секунд і спробуйте знову.",
+  uploadingFile:
+    "Ваш файл завантажується. Зачекайте декілька секунд і спробуйте знову.",
   loadingFile: "Завантаження...",
   chooseFile: "Виберіть файл(и)...",
   noFileChosen: "Файл не вибрано",
-  filePlaceholder: "Перетягніть файл сюди або натисніть кнопку нижче та виберіть файл для завантаження.",
+  filePlaceholder:
+    "Перетягніть файл сюди або натисніть кнопку нижче та виберіть файл для завантаження.",
   confirmDelete: "Ви хочете видалити запис?",
   keyDuplicationError: "Це значення повинно бути унікальним.",
   addColumn: "Додати колонку",
@@ -71,14 +76,16 @@ export var ukrainianSurveyStrings = {
   savingData: "Результати зберігаються на сервер...",
   savingDataError: "Відбулася помилка, результат не був збережений.",
   savingDataSuccess: "Резвультат успішно збережений!",
-  savingExceedSize: "Ваша відповідь перевищує 64 КБ. Будь ласка, зменшіть розмір файлу (файлів) і повторіть спробу або зв'яжіться з власником опитування.",
+  savingExceedSize:
+    "Ваша відповідь перевищує 64 КБ. Будь ласка, зменшіть розмір файлу (файлів) і повторіть спробу або зв'яжіться з власником опитування.",
   saveAgainButton: "Спробувати знову",
   timerMin: "хв",
   timerSec: "сек",
   timerSpentAll: "Ви витратили {0} на цій сторінці і {1} загалом.",
   timerSpentPage: "Ви витратили {0} на цій сторінці.",
   timerSpentSurvey: "Ви витратили {0} протягом тесту.",
-  timerLimitAll: "Ви витратили {0} з {1} на цій сторінці і {2} з {3} для всього тесту.",
+  timerLimitAll:
+    "Ви витратили {0} з {1} на цій сторінці і {2} з {3} для всього тесту.",
   timerLimitPage: "Ви витратили {0} з {1} на цій сторінці.",
   timerLimitSurvey: "Ви витратили {0} з {1} для всього тесту.",
   clearCaption: "Очистити",
@@ -86,8 +93,10 @@ export var ukrainianSurveyStrings = {
   signaturePlaceHolderReadOnly: "Без підпису",
   chooseFileCaption: "Виберіть файл",
   takePhotoCaption: "Зробити фото",
-  photoPlaceholder: "Натисніть кнопку нижче, щоб зробити фото за допомогою камери.",
-  fileOrPhotoPlaceholder: "Перетягніть або виберіть файл, щоб завантажити або зробити фотографію за допомогою камери.",
+  photoPlaceholder:
+    "Натисніть кнопку нижче, щоб зробити фото за допомогою камери.",
+  fileOrPhotoPlaceholder:
+    "Перетягніть або виберіть файл, щоб завантажити або зробити фотографію за допомогою камери.",
   replaceFileCaption: "Замінити файл",
   removeFileCaption: "Видалити файл",
   booleanCheckedLabel: "Так",
@@ -99,7 +108,8 @@ export var ukrainianSurveyStrings = {
   modalApplyButtonText: "Застосовувати",
   filterStringPlaceholder: "Введіть для пошуку...",
   emptyMessage: "Немає даних для відображення",
-  noEntriesText: "Записів поки немає.\nНатисніть кнопку нижче, щоб додати новий запис.",
+  noEntriesText:
+    "Записів поки немає.\nНатисніть кнопку нижче, щоб додати новий запис.",
   noEntriesReadonlyText: "Записів немає.",
   tabTitlePlaceholder: "Нова панель",
   more: "Більше",
@@ -107,10 +117,15 @@ export var ukrainianSurveyStrings = {
   selectToRankEmptyRankedAreaText: "Всі варіанти ранжуються",
   selectToRankEmptyUnrankedAreaText: "Перетягніть варіанти тут, щоб оцінити їх",
   ok: "ГАРАЗД",
-  cancel: "Скасувати"
+  cancel: "Скасувати",
 };
 
-setupLocale({ localeCode: "ua", strings: ukrainianSurveyStrings, nativeName: "українська", englishName: "Ukrainian" });
+setupLocale({
+  localeCode: "ua",
+  strings: ukrainianSurveyStrings,
+  nativeName: "українська",
+  englishName: "Ukrainian",
+});
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
