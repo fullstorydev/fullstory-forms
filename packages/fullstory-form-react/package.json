@@ -1,5 +1,5 @@
 {
-  "name": "survey-react-ui",
+  "name": "fullstory-form-react",
   "version": "2.0.0",
   "description": "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
   "keywords": [
@@ -14,7 +14,7 @@
   "files": [
     "**/*"
   ],
-  "main": "survey-react-ui.js",
+  "main": "fullstory-form-react.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/surveyjs.git"

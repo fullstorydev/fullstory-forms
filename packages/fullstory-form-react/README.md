@@ -1,8 +1,6 @@
 # SurveyJS React Form Library
 
-
 <video src="https://github.com/surveyjs/survey-library/assets/22315929/b24a68bf-d703-4096-835b-752f5f610aa6"></video>
-
 
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Library?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=7&branchName=master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
@@ -48,29 +46,29 @@ To get started with SurveyJS React Form Library, refer to the following tutorial
 
 1. **Install SurveyJS React Form Library dependencies and build this library**
 
-    ```
-    cd ../survey-react-ui 
-    npm i
-    npm run build
-    ```
+   ```
+   cd ../fullstory-form-react
+   npm i
+   npm run build
+   ```
 
-    You can find the built scripts in folders under the `build` directory.
+   You can find the built scripts in folders under the `build` directory.
 
-2. **Run a test application**
+1. **Run a test application**
 
-    ```
-    npm run start
-    ```
+   ```
+   npm run start
+   ```
 
-    This command runs a local HTTP server at http://localhost:7777/.
+   This command runs a local HTTP server at http://localhost:7777/.
 
-3. **Run unit tests**
+1. **Run unit tests**
 
-    ```
-    npm run test
-    ```
+   ```
+   npm run test
+   ```
 
-    The unit tests use [Karma](https://karma-runner.github.io/6.3/index.html).
+   The unit tests use [Karma](https://karma-runner.github.io/6.3/index.html).
 
 ## Licensing
 

@@ -19,9 +19,9 @@ export default function (options) {
     "react-dom": "react-dom",
     "fullstory-form-core": "fullstory-form-core"
   };
-  const surveyReactUI = config.entry["survey-react-ui"];
+  const surveyReactUI = config.entry["fullstory-form-react"];
   config.entry = {
-    "survey-react-ui": surveyReactUI
+    "fullstory-form-react": surveyReactUI
   };
   return config;
 }

@@ -11,4 +11,4 @@ export {
   surveyStrings
 } from "fullstory-form-core";
 
-checkLibraryVersion(`${process.env.VERSION}`, "survey-react-ui");
+checkLibraryVersion(`${process.env.VERSION}`, "fullstory-form-react");
