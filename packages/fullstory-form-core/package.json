@@ -18,7 +18,7 @@
   "main": "fullstory-form.core.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/surveyjs/surveyjs.git"
+    "url": "git+https://github.com/bateman001/fullstory-forms.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
