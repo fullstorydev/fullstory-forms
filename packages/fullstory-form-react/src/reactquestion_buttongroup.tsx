@@ -3,7 +3,7 @@ import * as React from "react";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyElementBase } from "./reactquestion_element";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
-import { QuestionButtonGroupModel, ButtonGroupItemValue, ButtonGroupItemModel } from "fullstory-form-core";
+import { QuestionButtonGroupModel, ButtonGroupItemValue, ButtonGroupItemModel } from "@bateman001/fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 
 export class SurveyQuestionButtonGroup extends SurveyQuestionElementBase {

@@ -4,7 +4,7 @@ import {
   PageModel,
   ProgressButtonsResponsivityManager,
   IProgressButtonsViewModel
-} from "fullstory-form-core";
+} from "@bateman001/fullstory-form-core";
 import { SurveyNavigationBase } from "./reactSurveyNavigationBase";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyElementBase } from "./reactquestion_element";

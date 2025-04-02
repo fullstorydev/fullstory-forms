@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LocalizableString } from "fullstory-form-core";
+import { LocalizableString } from "@bateman001/fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 
 export class SurveyLocStringViewer extends React.Component<any, any> {

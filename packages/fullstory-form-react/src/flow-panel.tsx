@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FlowPanelModel, Question } from "fullstory-form-core";
+import { FlowPanelModel, Question } from "@bateman001/fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 import { SurveyPanel } from "./panel";
 import { SurveyQuestion } from "./reactquestion";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyQuestionMatrixDropdownBase } from "./reactquestion_matrixdropdownbase";
-import { QuestionMatrixDynamicModel } from "fullstory-form-core";
+import { QuestionMatrixDynamicModel } from "@bateman001/fullstory-form-core";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElement } from "./reactquestion_element";
 

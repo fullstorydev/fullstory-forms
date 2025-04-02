@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuestionFileModel } from "fullstory-form-core";
+import { QuestionFileModel } from "@bateman001/fullstory-form-core";
 import { SurveyActionBar } from "./components/action-bar/action-bar";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 import { SurveyQuestionElementBase } from "./reactquestion_element";

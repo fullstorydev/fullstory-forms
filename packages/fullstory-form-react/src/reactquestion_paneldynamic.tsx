@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { SurveyModel, QuestionPanelDynamicModel } from "fullstory-form-core";
+import { SurveyModel, QuestionPanelDynamicModel } from "@bateman001/fullstory-form-core";
 import { SurveyPanel } from "./panel";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyActionBar } from "./components/action-bar/action-bar";

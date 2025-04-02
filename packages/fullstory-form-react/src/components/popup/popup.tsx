@@ -6,7 +6,7 @@ import {
   PopupDropdownViewModel,
   createPopupViewModel,
   CssClassBuilder
-} from "fullstory-form-core";
+} from "@bateman001/fullstory-form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SurveyActionBar } from "../action-bar/action-bar";

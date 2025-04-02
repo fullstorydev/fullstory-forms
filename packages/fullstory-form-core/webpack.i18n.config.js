@@ -11,11 +11,11 @@ const config = {
     "survey.i18n": path.resolve(__dirname, "./entries/i18n.ts"),
   },
   externals: {
-    "fullstory-form-core": {
+    "form-core": {
       root: "Survey",
-      commonjs2: "fullstory-form-core",
-      commonjs: "fullstory-form-core",
-      amd: "fullstory-form-core",
+      commonjs2: "form-core",
+      commonjs: "form-core",
+      amd: "form-core",
     },
   },
 };

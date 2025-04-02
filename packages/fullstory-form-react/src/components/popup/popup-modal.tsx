@@ -2,7 +2,12 @@ import { createPortal } from "react-dom";
 import * as React from "react";
 import { PopupContainer } from "./popup";
 import { SurveyElementBase } from "../../reactquestion_element";
-import { createPopupModalViewModel, IDialogOptions, PopupBaseViewModel, settings } from "fullstory-form-core";
+import {
+  createPopupModalViewModel,
+  IDialogOptions,
+  PopupBaseViewModel,
+  settings
+} from "@bateman001/fullstory-form-core";
 
 interface IModalDescriptor {
   init: () => void;

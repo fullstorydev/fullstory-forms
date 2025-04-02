@@ -2,7 +2,7 @@ import { testQuestionMarkup } from "../../../tests/markup/helper";
 import { markupTests } from "../../../tests/markup/etalon";
 // eslint-disable-next-line surveyjs/no-imports-from-entries
 import { Survey as SurveyReact } from "../entries/index";
-import { Model } from "fullstory-form-core";
+import { Model } from "@bateman001/fullstory-form-core";
 import { act } from "react-dom/test-utils";
 import * as React from "react";
 import ReactDOM from "react-dom";

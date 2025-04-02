@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextAreaModel } from "fullstory-form-core";
+import { TextAreaModel } from "@bateman001/fullstory-form-core";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyElementBase } from "../reactquestion_element";
 

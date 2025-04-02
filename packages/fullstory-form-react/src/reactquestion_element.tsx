@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Base, ArrayChanges, SurveyModel, Helpers, PanelModel, LocalizableString, Question } from "fullstory-form-core";
+import {
+  Base,
+  ArrayChanges,
+  SurveyModel,
+  Helpers,
+  PanelModel,
+  LocalizableString,
+  Question
+} from "@bateman001/fullstory-form-core";
 import { ISurveyCreator } from "./reactquestion";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";

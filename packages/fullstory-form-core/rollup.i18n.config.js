@@ -25,6 +25,6 @@ module.exports = () => {
   const config = defaultConfig(options);
   patchEntries();
   config.input = input;
-  config.external = ["fullstory-form-core"];
+  config.external = ["form-core"];
   return config;
 };

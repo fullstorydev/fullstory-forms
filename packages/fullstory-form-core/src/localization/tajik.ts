@@ -1,6 +1,6 @@
 // This dictionary contains 25 untranslated or inherited localization strings.
 // These strings are commented out. Uncomment and edit them if you want to add your translations.
-import { setupLocale } from "fullstory-form-core";
+import { setupLocale } from "form-core";
 
 export var tajikSurveyStrings = {
   pagePrevText: "Бозгашт",

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SurveyElementCore, ITitleOwner } from "fullstory-form-core";
+import { SurveyElementCore, ITitleOwner } from "@bateman001/fullstory-form-core";
 import { SurveyElementBase } from "../../reactquestion_element";
 
 export class TitleContent extends React.Component<any, any> {

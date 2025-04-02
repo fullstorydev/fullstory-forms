@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Action, MatrixDropdownRowModelBase, QuestionMatrixDropdownModelBase } from "fullstory-form-core";
+import { Action, MatrixDropdownRowModelBase, QuestionMatrixDropdownModelBase } from "@bateman001/fullstory-form-core";
 import { ReactElementFactory } from "../../../element-factory";
 import { ReactSurveyElement } from "../../../reactquestion_element";
 import { SvgIcon } from "../../svg-icon/svg-icon";

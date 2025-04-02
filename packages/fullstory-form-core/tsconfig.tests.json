@@ -6,7 +6,7 @@
     "declaration": false,
     "declarationDir": null,
     "paths": {
-      "fullstory-form-core": ["./entries/index.ts"],
+      "form-core": ["./entries/index.ts"],
       "@legacy/*": ["../../src/*"]
     },
     "types": ["qunit"]

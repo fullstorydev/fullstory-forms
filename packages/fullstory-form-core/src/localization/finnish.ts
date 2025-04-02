@@ -1,4 +1,4 @@
-import { setupLocale } from "fullstory-form-core";
+import { setupLocale } from "form-core";
 
 export var finnishSurveyStrings = {
   pagePrevText: "Edellinen",

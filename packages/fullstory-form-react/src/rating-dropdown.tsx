@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuestionRatingModel, RendererFactory } from "fullstory-form-core";
+import { QuestionRatingModel, RendererFactory } from "@bateman001/fullstory-form-core";
 import { SurveyQuestionDropdownBase } from "./dropdown-base";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 

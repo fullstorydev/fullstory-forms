@@ -1,4 +1,4 @@
-import { HashTable } from "fullstory-form-core";
+import { HashTable } from "@bateman001/fullstory-form-core";
 
 export class ReactQuestionFactory {
   public static Instance: ReactQuestionFactory = new ReactQuestionFactory();

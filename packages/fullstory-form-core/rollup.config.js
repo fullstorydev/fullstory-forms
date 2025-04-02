@@ -5,7 +5,7 @@ const bannerPlugin = require("rollup-plugin-license");
 const path = require("path");
 const VERSION = require("./package.json").version;
 const input = {
-  "fullstory-form-core": path.resolve(__dirname, "./entries/index.ts"),
+  "form-core": path.resolve(__dirname, "./entries/index.ts"),
 };
 
 const banner = [

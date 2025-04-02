@@ -1,5 +1,5 @@
 // Uncomment the line below if you create a custom dictionary
-// import { setupLocale } from "fullstory-form-core";
+// import { setupLocale } from "form-core";
 
 export var englishStrings = {
   pagePrevText: "Previous",

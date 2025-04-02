@@ -1,4 +1,4 @@
-import { setupLocale } from "fullstory-form-core";
+import { setupLocale } from "form-core";
 /**
  * You don't need to translate strings that have the same value as Portuguese translation
  */

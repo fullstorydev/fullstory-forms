@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactSurveyElement, SurveyElementBase, SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionImagePickerModel, ImageItemValue, SurveyModel, ItemValue } from "fullstory-form-core";
+import { QuestionImagePickerModel, ImageItemValue, SurveyModel, ItemValue } from "@bateman001/fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
 import { SvgIcon } from "./components/svg-icon/svg-icon";

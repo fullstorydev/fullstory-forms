@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RendererFactory } from "fullstory-form-core";
+import { RendererFactory } from "@bateman001/fullstory-form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyQuestionBoolean } from "./boolean";
 import { TitleActions } from "./components/title/title-actions";

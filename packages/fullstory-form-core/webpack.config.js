@@ -36,13 +36,13 @@ var buildPlatformJson = {
   homepage: "https://surveyjs.io/",
   license: "MIT",
   files: ["**/*"],
-  module: "fesm/fullstory-form-core.js",
-  main: "fullstory-form.core.js",
+  module: "fesm/form-core.js",
+  main: "form.core.js",
   exports: {
     ".": {
       types: "./typings/entries/index.d.ts",
-      import: "./fesm/fullstory-form-core.js",
-      require: "./fullstory-form.core.js",
+      import: "./fesm/form-core.js",
+      require: "./form.core.js",
     },
     "./*.css": "./*.css",
     "./survey.i18n": {
@@ -77,10 +77,7 @@ var buildPlatformJson = {
       require: "./icons/*.js",
     },
   },
-  repository: {
-    type: "git",
-    url: "https://github.com/surveyjs/surveyjs.git",
-  },
+  repository: packageJson.repository,
   typings: "./typings/entries/index.d.ts",
 };
 
@@ -115,12 +112,9 @@ module.exports = function (options) {
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "fullstory-form.core": path.resolve(__dirname, "./entries/index.ts"),
-      "fullstory-form-core": path.resolve(
-        __dirname,
-        "./src/default-theme/default.scss"
-      ),
-      "fullstory-form-core.fontless": path.resolve(
+      "form.core": path.resolve(__dirname, "./entries/index.ts"),
+      "form-core": path.resolve(__dirname, "./src/default-theme/default.scss"),
+      "form-core.fontless": path.resolve(
         __dirname,
         "./src/default-theme/default.fontless.scss"
       ),
