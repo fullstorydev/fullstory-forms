@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createTOCListModel, getTocRootCss, TOCModel } from "@bateman001/fullstory-form-core";
+import { createTOCListModel, getTocRootCss, TOCModel } from "@bateman001/form-core";
 import { SurveyNavigationBase } from "./reactSurveyNavigationBase";
 import { ReactElementFactory } from "./element-factory";
 import { List } from "./components/list/list";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, SurveyTimerModel } from "@bateman001/fullstory-form-core";
+import { Base, SurveyTimerModel } from "@bateman001/form-core";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElement } from "./reactquestion_element";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SurveyElement, RendererFactory } from "@bateman001/fullstory-form-core";
+import { SurveyElement, RendererFactory } from "@bateman001/form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyActionBar } from "../action-bar/action-bar";
 import { TitleContent } from "./title-content";

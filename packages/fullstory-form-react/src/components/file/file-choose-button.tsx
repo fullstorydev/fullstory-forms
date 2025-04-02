@@ -1,7 +1,7 @@
 import * as React from "react";
 import { attachKey2click } from "../../reactSurvey";
 import { ReactSurveyElement } from "../../reactquestion_element";
-import { QuestionFileModel } from "@bateman001/fullstory-form-core";
+import { QuestionFileModel } from "@bateman001/form-core";
 import { SvgIcon } from "../svg-icon/svg-icon";
 import { ReactElementFactory } from "../../element-factory";
 

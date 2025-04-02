@@ -5,7 +5,7 @@ import {
   QuestionRowModel,
   ItemValue,
   QuestionSelectBase
-} from "@bateman001/fullstory-form-core";
+} from "@bateman001/form-core";
 import { ReactElementFactory } from "./element-factory";
 
 export class ReactSurveyElementsWrapper {

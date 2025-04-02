@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ActionDropdownViewModel, getActionDropdownButtonTarget } from "@bateman001/fullstory-form-core";
+import { ActionDropdownViewModel, getActionDropdownButtonTarget } from "@bateman001/form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { Popup } from "../popup/popup";
 import { SurveyActionBarItem } from "./action-bar-item";

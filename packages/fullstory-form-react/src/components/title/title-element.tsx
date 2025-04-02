@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SurveyElement, SurveyElementCore, doKey2ClickUp } from "@bateman001/fullstory-form-core";
+import { SurveyElement, SurveyElementCore, doKey2ClickUp } from "@bateman001/form-core";
 import { TitleActions } from "./title-actions";
 import { SvgIcon } from "../svg-icon/svg-icon";
 

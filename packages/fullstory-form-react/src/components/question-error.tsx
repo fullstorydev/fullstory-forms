@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SurveyError } from "@bateman001/fullstory-form-core";
+import { SurveyError } from "@bateman001/form-core";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyLocStringViewer } from "../string-viewer";
 

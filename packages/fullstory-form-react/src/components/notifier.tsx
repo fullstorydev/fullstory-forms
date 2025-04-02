@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, Notifier } from "@bateman001/fullstory-form-core";
+import { Base, Notifier } from "@bateman001/form-core";
 import { SurveyElementBase } from "../reactquestion_element";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyActionBar } from "./action-bar/action-bar";

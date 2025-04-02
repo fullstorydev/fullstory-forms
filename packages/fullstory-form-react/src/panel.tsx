@@ -4,7 +4,7 @@ import { SurveyElementBase } from "./reactquestion_element";
 import { ReactElementFactory } from "./element-factory";
 
 import { SurveyPanelBase } from "./panel-base";
-import { PanelModel, doKey2ClickUp, SurveyModel } from "@bateman001/fullstory-form-core";
+import { PanelModel, doKey2ClickUp, SurveyModel } from "@bateman001/form-core";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";
 import { SurveyActionBar } from "./components/action-bar/action-bar";
 import { TitleElement } from "./components/title/title-element";

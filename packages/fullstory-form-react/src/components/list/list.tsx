@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IAction, ListModel, settings } from "@bateman001/fullstory-form-core";
+import { IAction, ListModel, settings } from "@bateman001/form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SvgIcon } from "../svg-icon/svg-icon";

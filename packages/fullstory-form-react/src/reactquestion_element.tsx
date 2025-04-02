@@ -7,7 +7,7 @@ import {
   PanelModel,
   LocalizableString,
   Question
-} from "@bateman001/fullstory-form-core";
+} from "@bateman001/form-core";
 import { ISurveyCreator } from "./reactquestion";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";

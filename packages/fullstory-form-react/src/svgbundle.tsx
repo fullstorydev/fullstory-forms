@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SvgRegistry } from "@bateman001/fullstory-form-core";
+import { SvgRegistry } from "@bateman001/form-core";
 
 export class SvgBundleComponent extends React.Component {
   private containerRef: React.RefObject<SVGSVGElement>;

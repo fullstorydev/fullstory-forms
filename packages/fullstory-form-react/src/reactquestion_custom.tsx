@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SurveyQuestionUncontrolledElement } from "./reactquestion_element";
 import { SurveyQuestion } from "./reactquestion";
-import { Base, QuestionCustomModel, QuestionCompositeModel } from "@bateman001/fullstory-form-core";
+import { Base, QuestionCustomModel, QuestionCompositeModel } from "@bateman001/form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyPanel } from "./panel";
 

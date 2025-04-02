@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyElementBase } from "../../reactquestion_element";
-import { QuestionFileModel, QuestionFilePage } from "@bateman001/fullstory-form-core";
+import { QuestionFileModel, QuestionFilePage } from "@bateman001/form-core";
 import { SurveyFileItem } from "./file-item";
 
 export class SurveyFilePage extends SurveyElementBase<{ question: QuestionFileModel; page: QuestionFilePage }, {}> {

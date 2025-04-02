@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, SurveyModel, Cover, CoverCell } from "@bateman001/fullstory-form-core";
+import { Base, SurveyModel, Cover, CoverCell } from "@bateman001/form-core";
 import { SurveyElementBase } from "../reactquestion_element";
 import { ReactElementFactory } from "../element-factory";
 import { TitleElement } from "./title/title-element";

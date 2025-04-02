@@ -1,4 +1,4 @@
-import { checkLibraryVersion } from "@bateman001/fullstory-form-core";
+import { checkLibraryVersion } from "@bateman001/form-core";
 
 export * from "./react-ui-model";
 export {
@@ -9,6 +9,6 @@ export {
   ISurveyEnvironment,
   surveyLocalization,
   surveyStrings
-} from "@bateman001/fullstory-form-core";
+} from "@bateman001/form-core";
 
 checkLibraryVersion(`${process.env.VERSION}`, "fullstory-form-react");

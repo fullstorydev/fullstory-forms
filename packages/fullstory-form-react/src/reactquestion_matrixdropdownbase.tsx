@@ -9,7 +9,7 @@ import {
   AdaptiveActionContainer,
   Question,
   Base
-} from "@bateman001/fullstory-form-core";
+} from "@bateman001/form-core";
 import { SurveyQuestionCheckboxItem } from "./reactquestion_checkbox";
 import { SurveyQuestionRadioItem } from "./reactquestion_radiogroup";
 import { SurveyPanel } from "./panel";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, QuestionRatingModel, RenderedRatingItem } from "@bateman001/fullstory-form-core";
+import { Base, QuestionRatingModel, RenderedRatingItem } from "@bateman001/form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { attachKey2click } from "../../reactSurvey";
