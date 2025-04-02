@@ -67,7 +67,7 @@ module.exports = function (options) {
   const config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      [packageJson.name]: path.resolve(__dirname, "./entries/index.ts")
+      "form-react": path.resolve(__dirname, "./entries/index.ts")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"]
