@@ -24,14 +24,14 @@ const buildPlatformJson = {
   "homepage": "https://surveyjs.io/",
   "license": "MIT",
   "files": ["**/*"],
-  "main": "fullstory-form-react.js",
-  "module": "fesm/fullstory-form-react.js",
+  "main": "form-react.js",
+  "module": "fesm/form-react.js",
   typings: "./typings/entries/index.d.ts",
   "exports": {
     ".": {
       "types": "./typings/entries/index.d.ts",
-      "import": "./fesm/fullstory-form-react.js",
-      "require": "./fullstory-form-react.js"
+      "import": "./fesm/form-react.js",
+      "require": "./form-react.js"
     }
   },
   "peerDependencies": {

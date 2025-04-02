@@ -11,4 +11,4 @@ export {
   surveyStrings
 } from "@bateman001/form-core";
 
-checkLibraryVersion(`${process.env.VERSION}`, "fullstory-form-react");
+checkLibraryVersion(`${process.env.VERSION}`, "form-react");

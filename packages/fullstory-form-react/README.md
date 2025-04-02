@@ -47,7 +47,7 @@ To get started with SurveyJS React Form Library, refer to the following tutorial
 1. **Install SurveyJS React Form Library dependencies and build this library**
 
    ```
-   cd ../fullstory-form-react
+   cd ../form-react
    npm i
    npm run build
    ```

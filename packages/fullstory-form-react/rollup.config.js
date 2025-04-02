@@ -10,7 +10,7 @@ const banner = [
   "Copyright (c) 2015-" + new Date().getFullYear() + " Devsoft Baltic OÜ  - http://surveyjs.io/",
   "License: MIT (http://www.opensource.org/licenses/mit-license.php)"
 ].join("\n");
-const input = { "fullstory-form-react": path.resolve(__dirname, "./entries/index.ts") };
+const input = { "form-react": path.resolve(__dirname, "./entries/index.ts") };
 module.exports = options => {
   options = options ?? {};
   if (!options.tsconfig) {
