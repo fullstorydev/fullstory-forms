@@ -1436,7 +1436,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       const filedata = { "fs-file-name": name };
       keys.map((x) => {
         if (x === "name") {
-          filedata[`fs-file-filename`] = this.value[0][x];
+          filedata["fs-file-filename"] = this.value[0][x];
         } else {
           filedata[`fs-file-${x}`] = this.value[0][x];
         }
