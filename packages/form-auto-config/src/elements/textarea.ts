@@ -1,35 +1,40 @@
 import { setPropertySchema } from "../helpers";
 import { updateButton } from "./buttons";
 
-export const dressTextArea = (form) => {
-  const input = form.querySelector("textArea");
+export const dressTextAreas = (form: HTMLFormElement) => {
+  // get all dropdowns
+  const textareas = form.querySelectorAll("textarea");
 
-  // get input properties
-  const name = input.getAttribute("name");
-  const type = input.getAttribute("type");
-  const value = input.value;
+  // for each dropdown dress with data attributes
+  textareas.forEach((textarea) => {
+    // get input properties
+    const name = textarea.getAttribute("name");
+    const type = textarea.getAttribute("type");
+    const value = textarea.value;
 
-  // set properties on element
-  input.setAttribute("data-fs-element", "textarea");
-  name && input.setAttribute("data-fs-textarea-name", name.toLowerCase());
-  type && input.setAttribute("data-fs-textarea-type", type);
-  if (value) {
-    input.setAttribute("data-fs-textarea-value", value);
-    updateButton(form, name, value);
-  }
+    // set properties on element
+    textarea.setAttribute("data-fs-element", "textarea");
+    name && textarea.setAttribute("data-fs-textarea-name", name.toLowerCase());
+    type && textarea.setAttribute("data-fs-textarea-type", type);
+    if (value) {
+      textarea.setAttribute("data-fs-textarea-value", value);
+      updateButton(form, name, value);
+    }
 
-  // add event listener to update the dom with data values
-  input.addEventListener("input", () => {
-    // add input value property
-    input.setAttribute("data-fs-textarea-value", input.value);
+    console.log("adding listener");
+    // add event listener to update the dom with data values
+    textarea.addEventListener("input", () => {
+      // add input value property
+      textarea.setAttribute("data-fs-textarea-value", textarea.value);
 
-    // add value to button
-    updateButton(form, name, input.value);
+      // add value to button
+      updateButton(form, name, textarea.value);
 
-    // update property schema
-    setPropertySchema(input);
+      // update property schema
+      setPropertySchema(textarea);
+    });
+
+    // set the property schema
+    setPropertySchema(textarea);
   });
-
-  // set the property schema
-  setPropertySchema(input);
 };
