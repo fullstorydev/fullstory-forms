@@ -1,4 +1,4 @@
-import { FSForm } from "../src/index";
+import { FSForm } from "../src";
 
 describe("Form Element", () => {
   beforeAll(() => {

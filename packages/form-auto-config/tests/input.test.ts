@@ -27,6 +27,12 @@ describe("All Inputs", () => {
       expect(attribute).toEqual("firstname");
     });
 
+    it("has correct fs-input-type", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-input-type");
+      expect(attribute).toEqual("text");
+    });
+
     it("updates value on input", async () => {
       const input = document.body.querySelector("input");
 
@@ -59,6 +65,10 @@ describe("All Inputs", () => {
         "data-fs-input-value": {
           type: "str",
           name: "fs-input-value",
+        },
+        "data-fs-input-type": {
+          name: "fs-input-type",
+          type: "str",
         },
       };
       expect(parsed).toEqual(schema);
@@ -170,6 +180,12 @@ describe("All Inputs", () => {
       expect(attribute).toEqual("Testing Box");
     });
 
+    it("has correct fs-input-type", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-input-type");
+      expect(attribute).toEqual("checkbox");
+    });
+
     it("has selected set at false", async () => {
       const input = document.body.querySelector("input");
 
@@ -214,6 +230,100 @@ describe("All Inputs", () => {
           type: "bool",
           name: "fs-checkbox-item-selected",
         },
+        "data-fs-input-type": {
+          name: "fs-input-type",
+          type: "str",
+        },
+      };
+      expect(parsed).toEqual(schema);
+    });
+  });
+
+  describe("Radio", () => {
+    beforeAll(() => {
+      document.body.innerHTML = `
+      <form id="mktoForm_2608" data-component="marketo-form" data-analytics-id="2608" data-analytics-component="marketo-embedded-form">
+        <input type="radio" value="Testing Box" name="Testing Box" />
+        <button type="submit" class="mktoButton">SUBMIT</button>    
+      </form>
+      `;
+
+      const form = document.body.querySelector("form");
+      FSForm(form, "test-form");
+    });
+
+    it("has correct fs-element", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-element");
+      expect(attribute).toEqual("radio-item");
+    });
+
+    it("has correct fs-radio-item-name", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-radio-item-name");
+      expect(attribute).toEqual("testing box");
+    });
+
+    it("has correct fs-radio-item-value", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-radio-item-value");
+      expect(attribute).toEqual("Testing Box");
+    });
+
+    it("has correct fs-input-type", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-input-type");
+      expect(attribute).toEqual("radio");
+    });
+
+    it("has selected set at false", async () => {
+      const input = document.body.querySelector("input");
+
+      const attribute = input.getAttribute("data-fs-radio-item-selected");
+      expect(attribute).toEqual("false");
+    });
+
+    it("updates selected to true on click", async () => {
+      const input = document.body.querySelector("input");
+
+      const user = userEvent.setup();
+      await user.click(input);
+
+      const attribute = input.getAttribute("data-fs-radio-item-selected");
+      expect(attribute).toEqual("true");
+    });
+
+    it("button has selected value set", () => {
+      const button = document.body.querySelector("button");
+      const attribute = button.getAttribute("data-testing-box");
+      expect(attribute).toEqual("true");
+    });
+
+    it("has correct schema", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-properties-schema");
+      const parsed = JSON.parse(attribute);
+      const schema = {
+        "data-fs-element": {
+          type: "str",
+          name: "fs-element",
+        },
+        "data-fs-radio-item-name": {
+          type: "str",
+          name: "fs-radio-item-name",
+        },
+        "data-fs-radio-item-value": {
+          type: "str",
+          name: "fs-radio-item-value",
+        },
+        "data-fs-radio-item-selected": {
+          type: "bool",
+          name: "fs-radio-item-selected",
+        },
+        "data-fs-input-type": {
+          name: "fs-input-type",
+          type: "str",
+        },
       };
       expect(parsed).toEqual(schema);
     });
@@ -223,8 +333,14 @@ describe("All Inputs", () => {
     beforeAll(() => {
       document.body.innerHTML = `
       <form id="mktoForm_2608" data-component="marketo-form" data-analytics-id="2608" data-analytics-component="marketo-embedded-form">
-        <input type="text" name="firstname" />
-        <button type="submit" class="mktoButton">SUBMIT</button>    
+        <input
+          type="date"
+          id="start"
+          name="trip-start"
+          value="2018-07-22"
+          min="2018-01-01"
+          max="2018-12-31" />
+        <button type="submit" class="mktoButton">SUBMIT</button>
       </form>
       `;
 
@@ -241,23 +357,26 @@ describe("All Inputs", () => {
     it("has correct fs-input-name", () => {
       const input = document.body.querySelector("input");
       const attribute = input.getAttribute("data-fs-input-name");
-      expect(attribute).toEqual("firstname");
+      expect(attribute).toEqual("trip-start");
     });
 
-    it("updates value on input", async () => {
+    it("has correct fs-input-type", () => {
+      const input = document.body.querySelector("input");
+      const attribute = input.getAttribute("data-fs-input-type");
+      expect(attribute).toEqual("date");
+    });
+
+    it("has correct initial value on input", async () => {
       const input = document.body.querySelector("input");
 
-      const user = userEvent.setup();
-      await user.type(input, "John");
-
       const attribute = input.getAttribute("data-fs-input-value");
-      expect(attribute).toEqual("John");
+      expect(attribute).toEqual("2018-07-22");
     });
 
     it("button has option value set", () => {
       const button = document.body.querySelector("button");
-      const attribute = button.getAttribute("data-firstname");
-      expect(attribute).toEqual("John");
+      const attribute = button.getAttribute("data-trip-start");
+      expect(attribute).toEqual("2018-07-22");
     });
 
     it("has correct schema", () => {
@@ -265,6 +384,7 @@ describe("All Inputs", () => {
       const attribute = input.getAttribute("data-fs-properties-schema");
       const parsed = JSON.parse(attribute);
       const schema = {
+        id: "str",
         "data-fs-element": {
           type: "str",
           name: "fs-element",
@@ -274,8 +394,12 @@ describe("All Inputs", () => {
           name: "fs-input-name",
         },
         "data-fs-input-value": {
-          type: "str",
+          type: "date",
           name: "fs-input-value",
+        },
+        "data-fs-input-type": {
+          name: "fs-input-type",
+          type: "str",
         },
       };
       expect(parsed).toEqual(schema);
