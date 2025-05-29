@@ -27,6 +27,7 @@ interface IExpressionRunnerInfo {
   canRun?: (obj: Base) => boolean;
   runner?: ExpressionRunner;
 }
+
 export class Bindings {
   private properties: Array<JsonObjectProperty> = null;
   private values: any = null;
@@ -292,7 +293,7 @@ export class Base {
   }>;
   protected isLoadingFromJsonValue: boolean = false;
   public loadingOwner: Base = null;
-
+  public blocklist: any[] = [];
   protected jsonObj: any;
   /**
    * An event that is raised when a property of this SurveyJS object has changed.
@@ -363,7 +364,7 @@ export class Base {
         return typeMap[type];
       }
     } else {
-      throw Error(`Data type of object is not allowed`);
+      throw Error("Data type of object is not allowed");
     }
   }
 

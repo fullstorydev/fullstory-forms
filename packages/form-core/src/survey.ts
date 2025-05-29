@@ -88,6 +88,15 @@ import { TOCModel } from "./surveyToc";
 import { DomDocumentHelper, DomWindowHelper } from "./global_variables_utils";
 import { ConsoleWarnings } from "./console-warnings";
 
+declare global {
+  interface Window {
+    _fs_namespace?: string;
+    _fs_rec_settings_host?: string;
+    _fs_host: string;
+    _fs_org: string;
+  }
+}
+
 /**
  * The `SurveyModel` object contains properties and methods that allow you to control the survey and access its elements.
  *
@@ -1114,6 +1123,65 @@ export class SurveyModel extends SurveyElementCore
     });
 
   }
+
+   async createSurveyObject(jsonObj, renderedElement) {
+    const instance = new SurveyModel(jsonObj, renderedElement);
+    const res = await this.getAttributeBlockList();
+    if (!res) throw new Error("Failed to get privacy rules");
+
+    const blockList = await this.makeBlockedList(res);
+    instance.blockList = blockList;
+  }
+
+  private async getScriptJSONContent(src: string) {
+    const res = await fetch(src);
+    if (!res.ok) {
+      throw new Error(`Request failed with status ${res.status}`);
+    }
+    return res;
+  }
+
+  private async getAttributeBlockList() {
+    if (this.hasFs()) {
+      const host = window?._fs_host;
+      const settings = window._fs_rec_settings_host;
+      const org_id = window._fs_org;
+      const settingsHost = settings ?? "edge." + host;
+      const settingsURL = `https://${settingsHost}/s/settings/${org_id}/v1/web`;
+      const res = await this.getScriptJSONContent(settingsURL);
+      return await res.json();
+    }
+  }
+
+  private async makeBlockedList(json: any) {
+    const blockList: any[] = [];
+
+    json.ElementBlocks.forEach((x: any) => {
+      if (!x.Consent) {
+        blockList.push(x.Selector);
+      }
+    });
+
+    json.NamedElementBlocks.forEach((x: any) => {
+      if (!x.Consent) {
+        const selector = x.TargetedSelectorsForCapture[0].Selector;
+        blockList.push(selector);
+      }
+    });
+
+    return blockList;
+  }
+
+  private hasFs() {
+    if (typeof window._fs_namespace === "string") {
+      const fsNamespace = window._fs_namespace;
+      return (
+        typeof (window as any)[fsNamespace]?.getCurrentSessionURL === "function"
+      );
+    }
+    return false;
+  }
+
   private tocModelValue: TOCModel;
   private get tocModel(): TOCModel {
     if (!this.tocModelValue) {
@@ -3211,7 +3279,7 @@ export class SurveyModel extends SurveyElementCore
    * survey.getData({ includePages: true, includePanels: true });
    * ```
    */
-  public getData(options?: { includePages?: boolean, includePanels?: boolean }): any {
+  public getData(options?: { includePages?: boolean; includePanels?: boolean }): any {
     const opt = options || { includePages: false, includePanels: false };
     if(!opt.includePages && !opt.includePanels) return this.data;
     return this.getStructuredData(!!opt.includePages, !opt.includePanels ? (opt.includePages ? 1 : 0) : -1);
@@ -3380,7 +3448,7 @@ export class SurveyModel extends SurveyElementCore
     return values;
   }
   private addCalculatedValuesIntoFilteredValues(values: {
-    [index: string]: any,
+    [index: string]: any;
   }) {
     var caclValues = this.calculatedValues;
     for (var i = 0; i < caclValues.length; i++)
@@ -5385,10 +5453,10 @@ export class SurveyModel extends SurveyElementCore
     this.onShowingChoiceItem.fire(this, options);
     return options.visible;
   }
-  loadQuestionChoices(options: { question: Question, filter: string, skip: number, take: number, setItems: (items: Array<any>, totalCount: number) => void }): void {
+  loadQuestionChoices(options: { question: Question; filter: string; skip: number; take: number; setItems: (items: Array<any>, totalCount: number) => void }): void {
     this.onChoicesLazyLoad.fire(this, options);
   }
-  getChoiceDisplayValue(options: { question: Question, values: Array<any>, setItems: (displayValues: Array<string>, ...customValues: Array<IValueItemCustomPropValues>) => void }): void {
+  getChoiceDisplayValue(options: { question: Question; values: Array<any>; setItems: (displayValues: Array<string>, ...customValues: Array<IValueItemCustomPropValues>) => void }): void {
     if (this.onGetChoiceDisplayValue.isEmpty) {
       options.setItems(null);
     } else {
@@ -5687,7 +5755,7 @@ export class SurveyModel extends SurveyElementCore
   public chooseFiles(
     input: HTMLInputElement,
     callback: (files: File[]) => void,
-    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
+    context?: { element: Base; item?: any; elementType?: string; propertyName?: string }
   ): void {
     if (this.onOpenFileChooser.isEmpty) {
       chooseFiles(input, callback);
@@ -7596,10 +7664,10 @@ export class SurveyModel extends SurveyElementCore
   get isScaled(): boolean {
     return Math.abs(this.widthScale - 100) > 0.001;
   }
-  public get timerInfo(): { spent: number, limit?: number } {
+  public get timerInfo(): { spent: number; limit?: number } {
     return this.getTimerInfo();
   }
-  public get timerClock(): { majorText: string, minorText?: string } {
+  public get timerClock(): { majorText: string; minorText?: string } {
     let major: string;
     let minor: string;
     if (!!this.currentPage) {
@@ -7623,7 +7691,7 @@ export class SurveyModel extends SurveyElementCore
     loc.text = options.text;
     return loc.textOrHtml;
   }
-  private getTimerInfo(): { spent: number, limit?: number, minorSpent?: number, minorLimit?: number } {
+  private getTimerInfo(): { spent: number; limit?: number; minorSpent?: number; minorLimit?: number } {
     let page = this.currentPage;
     if (!page) return { spent: 0, limit: 0 };
     let pageSpent = page.timeSpent;
@@ -7910,7 +7978,7 @@ export class SurveyModel extends SurveyElementCore
   get isQuestionDragging(): boolean { return this.isMovingQuestion; }
   public needRenderIcons = true;
 
-  private skippedPages: Array<{ from: any, to: any }> = [];
+  private skippedPages: Array<{ from: any; to: any }> = [];
 
   /**
    * Focuses a question with a specified name. Switches the current page if needed.
