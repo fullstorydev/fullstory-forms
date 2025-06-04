@@ -451,6 +451,7 @@ export class Base {
 
   public getDataElementItem(
     elementName: string,
+    blocked: boolean,
     value?: any,
     selected?: boolean
   ) {
@@ -458,10 +459,10 @@ export class Base {
     const data = {};
 
     const dataSelected = `${elementName}-selected`;
-    data[dataSelected] = selected;
+    data[dataSelected] = blocked ? "blocked" : selected;
 
     const dataValue = `${elementName}-value`;
-    data[dataValue] = value;
+    data[dataValue] = blocked ? "blocked" : value;
 
     const schema = this.createElementData(data, elementName);
 
@@ -484,6 +485,38 @@ export class Base {
       }
     }
 
+    return false;
+  }
+
+  public traverseBlocked(root: HTMLElement, selectors: string[]): boolean {
+    // Helper to check if an element matches any selector
+    const matchesAnySelector = (el: Element): boolean => {
+      return selectors.some((selector) => {
+        try {
+          return el.matches(selector);
+        } catch (err) {
+          console.warn(`Invalid selector skipped: ${selector}`, err);
+          return false;
+        }
+      });
+    };
+
+    // Breadth-First Search
+    const queue: Element[] = [root];
+
+    while (queue.length > 0) {
+      const el = queue.shift();
+      if (!el) continue;
+
+      if (matchesAnySelector(el)) {
+        return true; // ✅ Found a match
+      }
+
+      // Push children to the queue
+      queue.push(...Array.from(el.children));
+    }
+
+    // No match found after full traversal
     return false;
   }
 

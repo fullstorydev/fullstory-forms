@@ -18,7 +18,6 @@ export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {
 
     return (
       <fieldset
-        {...this.question.elementData}
         className={this.question.getSelectBaseRootCss()}
         ref={fieldset => this.setControl(fieldset)}
         role={this.question.a11y_input_ariaRole}
@@ -126,9 +125,11 @@ export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {
 }
 export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
   private rootRef: React.RefObject<HTMLDivElement>;
+  private intputRef: React.RefObject<HTMLInputElement>;
   constructor(props: any) {
     super(props);
     this.rootRef = React.createRef();
+    this.intputRef = React.createRef();
   }
   protected getStateElement(): Base {
     return this.item;
@@ -161,6 +162,8 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
         prevProps.item.setRootElement(undefined);
       }
     }
+    const data = this.item.elementData(this.intputRef.current, "checkbox-item");
+    this.setDataElements(this.intputRef.current, data);
   }
   public shouldComponentUpdate(nextProps: any, nextState: any): boolean {
     if (!super.shouldComponentUpdate(nextProps, nextState)) return false;
@@ -192,12 +195,11 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
       <span className={this.cssClasses.controlLabel}>{this.renderLocString(this.item.locText, this.textStyle)}</span>
     ) : null;
 
-    const elementData = this.item.elementData("checkbox-item");
-
     return (
-      <div className={itemClass} role="presentation" ref={this.rootRef} {...elementData}>
+      <div className={itemClass} role="presentation" ref={this.rootRef}>
         <label className={labelClass}>
           <input
+            ref={this.intputRef}
             className={this.cssClasses.itemControl}
             type="checkbox"
             name={this.question.name + this.item.id}
@@ -230,6 +232,8 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
     if (!this.question.isDesignMode) {
       this.item.setRootElement(this.rootRef.current as HTMLElement);
     }
+    const data = this.item.elementData(this.intputRef.current, "checkbox-item");
+    this.setDataElements(this.intputRef.current, data);
   }
   componentWillUnmount(): void {
     super.componentWillUnmount();

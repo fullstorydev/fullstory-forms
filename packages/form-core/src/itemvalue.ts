@@ -269,13 +269,15 @@ export class ItemValue
     this._locOwner = value;
   }
 
-  public elementData(type: string): any {
+  public elementData(el: HTMLElement, type: string): any {
     let data = {};
     if (type === "column") {
       data["fs-column-name"] = this.title ? this.title : "";
       data["fs-column-index"] = this.value;
     } else {
-      data = this.getDataElementItem(type, this.text, this.selected);
+      const survey = this.getSurvey();
+      const blocked = this.isBlocked(el, survey.blocklist);
+      data = this.getDataElementItem(type, blocked, this.text, this.selected);
     }
 
     return data;

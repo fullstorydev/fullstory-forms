@@ -108,13 +108,17 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
     this.setPropertyValue("showSelectAllItem", val);
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
-
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
     let data;
     if (this.value && this.value.length > 0) {
       const values = this.value.join(", ");
-      data = this.getDataElement("checkbox", name, values);
+      data = this.getDataElement(
+        "checkbox",
+        name,
+        blocked ? "blocked" : values
+      );
     } else {
       data = this.getDataElement("checkbox", name);
     }

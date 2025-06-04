@@ -230,10 +230,12 @@ export class SurveyQuestionElementBase extends SurveyElementBase<any, any> {
   componentDidUpdate(prevProps: any, prevState: any) {
     super.componentDidUpdate(prevProps, prevState);
     this.updateDomElement();
+    this.dressElement();
   }
   componentDidMount() {
     super.componentDidMount();
     this.updateDomElement();
+    this.dressElement();
   }
   componentWillUnmount() {
     super.componentWillUnmount();
@@ -243,6 +245,13 @@ export class SurveyQuestionElementBase extends SurveyElementBase<any, any> {
       if (!!contentElement) {
         contentElement.removeAttribute("data-rendered");
       }
+    }
+  }
+
+  protected dressElement() {
+    if (this.control) {
+      const data = this.questionBase.elementData(this.control);
+      this.setDataElements(this.control, data);
     }
   }
   protected updateDomElement() {

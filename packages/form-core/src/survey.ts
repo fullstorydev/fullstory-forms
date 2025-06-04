@@ -1507,7 +1507,6 @@ export class SurveyModel
   }
 
   public isBlocked(el: HTMLElement): boolean {
-    console.log("blocklist", this.blocklist);
     if (!el || !this.blocklist || this.blocklist.length === 0) return false;
 
     for (const selector of this.blocklist) {
@@ -1536,7 +1535,6 @@ export class SurveyModel
 
   private async getAttributeBlockList(): Promise<any> {
     const hasfs = this.hasFs();
-    console.log("hasfs", hasfs);
     if (hasfs) {
       const host = window?._fs_host;
       const settings = window._fs_rec_settings_host;
@@ -1552,7 +1550,6 @@ export class SurveyModel
 
   private async makeBlockedList(res: any) {
     const json = await res.json();
-    console.log("json", json.ElementBlocks);
     const blockList: any[] = [];
 
     json.ElementBlocks.forEach((x: any) => {
@@ -1568,7 +1565,6 @@ export class SurveyModel
       }
     });
 
-    console.log("blocklist", blockList);
     return blockList;
   }
 

@@ -309,12 +309,13 @@ export class QuestionBooleanModel extends Question {
     return this.isIndeterminate && !this.isInputReadOnly;
   }
 
-  public get elementData(): any {
+  public elementData(element: HTMLElement): any {
     const name = this.name ? this.name : this.title;
+    const blocked = this.isBlocked(element, this.survey.blocklist);
     let data;
     if (!!this.labelFalse && !!this.labelTrue) {
       const val = this.value ? this.labelTrue : this.labelFalse;
-      data = this.getDataElement("boolean", name, val);
+      data = this.getDataElement("boolean", name, blocked ? "blocked" : val);
     } else {
       data = this.getDataElement("boolean", name);
     }
