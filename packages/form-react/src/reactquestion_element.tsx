@@ -203,6 +203,13 @@ export class SurveyElementBase<P, S> extends React.Component<P, S> {
 
     return defaultMask;
   }
+
+  public setDataElements(el: HTMLElement, data) {
+    Object.keys(data).forEach(x => {
+      const val = data[x];
+      el.setAttribute(x, val);
+    });
+  }
 }
 
 export class ReactSurveyElement extends SurveyElementBase<any, any> {

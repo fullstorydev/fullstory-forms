@@ -60,12 +60,17 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   currentPage: IPage;
   activePage: IPage;
   pages: Array<IPage>;
+  blocklist: any[];
   getCss(): any;
   isPageStarted(page: IPage): boolean;
   getQuestionByName(name: string): IQuestion;
   pageVisibilityChanged(page: IPage, newValue: boolean): any;
   panelVisibilityChanged(panel: IPanel, newValue: boolean): any;
-  questionVisibilityChanged(question: IQuestion, newValue: boolean, resetIndexes: boolean): any;
+  questionVisibilityChanged(
+    question: IQuestion,
+    newValue: boolean,
+    resetIndexes: boolean
+  ): any;
   isEditingSurveyElement: boolean;
   getQuestionClearIfInvisible(questionClearIf: string): string;
   questionOrder: string;
@@ -92,8 +97,16 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
     oldValueName: string
   ): any;
   focusQuestionByInstance(question: IQuestion, onError: boolean): boolean;
-  validateQuestion(question: IQuestion, errors: Array<SurveyError>, fireCallback: boolean): void;
-  validatePanel(panel: IPanel, errors: Array<SurveyError>, fireCallback: boolean): void;
+  validateQuestion(
+    question: IQuestion,
+    errors: Array<SurveyError>,
+    fireCallback: boolean
+  ): void;
+  validatePanel(
+    panel: IPanel,
+    errors: Array<SurveyError>,
+    fireCallback: boolean
+  ): void;
   hasVisibleQuestionByValueName(valueName: string): boolean;
   questionsByValueName(valueName: string): Array<IQuestion>;
   processHtml(html: string, reason: string): string;
@@ -173,7 +186,10 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
     name: string,
     files: File[],
     // uploadingCallback: (status: string | Array<any>, data: any) => any
-    uploadingCallback: (data: any | Array<any>, errors?: any | Array<any>) => any
+    uploadingCallback: (
+      data: any | Array<any>,
+      errors?: any | Array<any>
+    ) => any
   ): any;
   downloadFile(
     question: IQuestion,
@@ -209,19 +225,45 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
     index: number
   ): IQuestion;
   canChangeChoiceItemsVisibility(): boolean;
-  getChoiceItemVisibility(question: IQuestion, item: any, val: boolean): boolean;
-  loadQuestionChoices(options: { question: IQuestion, filter: string, skip: number, take: number, setItems: (items: Array<any>, totalCount: number) => void }): void;
-  getChoiceDisplayValue(options: { question: IQuestion, values: Array<any>, setItems: (displayValues: Array<string>, ...customValues: Array<IValueItemCustomPropValues>) => void }): void;
+  getChoiceItemVisibility(
+    question: IQuestion,
+    item: any,
+    val: boolean
+  ): boolean;
+  loadQuestionChoices(options: {
+    question: IQuestion;
+    filter: string;
+    skip: number;
+    take: number;
+    setItems: (items: Array<any>, totalCount: number) => void;
+  }): void;
+  getChoiceDisplayValue(options: {
+    question: IQuestion;
+    values: Array<any>;
+    setItems: (
+      displayValues: Array<string>,
+      ...customValues: Array<IValueItemCustomPropValues>
+    ) => void;
+  }): void;
   matrixRowAdded(question: IQuestion, row: any): any;
   matrixColumnAdded(question: IQuestion, column: any): void;
   matrixBeforeRowAdded(options: {
-    question: IQuestion,
-    canAddRow: boolean,
+    question: IQuestion;
+    canAddRow: boolean;
   }): any;
   matrixRowRemoved(question: IQuestion, rowIndex: number, row: any): any;
   matrixRowRemoving(question: IQuestion, rowIndex: number, row: any): boolean;
-  matrixAllowRemoveRow(question: IQuestion, rowIndex: number, row: any): boolean;
-  matrixDetailPanelVisibleChanged(question: IQuestion, rowIndex: number, row: any, visible: boolean): void;
+  matrixAllowRemoveRow(
+    question: IQuestion,
+    rowIndex: number,
+    row: any
+  ): boolean;
+  matrixDetailPanelVisibleChanged(
+    question: IQuestion,
+    rowIndex: number,
+    row: any,
+    visible: boolean
+  ): void;
   matrixCellCreating(question: IQuestion, options: any): any;
   matrixCellCreated(question: IQuestion, options: any): any;
   matrixAfterCellRender(question: IQuestion, options: any): any;
@@ -232,9 +274,21 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   getValidateVisitedEmptyFields(): boolean;
   multipleTextItemAdded(question: IQuestion, item: any): void;
   matrixCellValidate(question: IQuestion, options: any): SurveyError;
-  dynamicPanelAdded(question: IQuestion, panelIndex?: number, panel?: IPanel): void;
-  dynamicPanelRemoved(question: IQuestion, panelIndex: number, panel: IPanel): void;
-  dynamicPanelRemoving(question: IQuestion, panelIndex: number, panel: IPanel): boolean;
+  dynamicPanelAdded(
+    question: IQuestion,
+    panelIndex?: number,
+    panel?: IPanel
+  ): void;
+  dynamicPanelRemoved(
+    question: IQuestion,
+    panelIndex: number,
+    panel: IPanel
+  ): void;
+  dynamicPanelRemoving(
+    question: IQuestion,
+    panelIndex: number,
+    panel: IPanel
+  ): boolean;
   dynamicPanelItemValueChanged(question: IQuestion, options: any): void;
   dynamicPanelItemValueChanging(question: IQuestion, options: any): void;
   dynamicPanelGetTabTitle(question: IQuestion, options: any): any;
@@ -246,7 +300,8 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
     element: ISurveyElement,
     question: IQuestion,
     page: IPage,
-    id: string, scrollIfVisible?: boolean,
+    id: string,
+    scrollIfVisible?: boolean,
     scrollIntoViewOptions?: ScrollIntoViewOptions,
     passedRootElement?: HTMLElement,
     onScolledCallback?: () => void
@@ -257,9 +312,25 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
 
   elementContentVisibilityChanged(element: ISurveyElement): void;
   onCorrectQuestionAnswer(question: IQuestion, options: any): void;
-  processPopupVisiblityChanged(question: IQuestion, popupModel: PopupModel, visible: boolean): void;
-  processOpenDropdownMenu(question: IQuestion, options: IDropdownMenuOptions): void;
-  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void;
+  processPopupVisiblityChanged(
+    question: IQuestion,
+    popupModel: PopupModel,
+    visible: boolean
+  ): void;
+  processOpenDropdownMenu(
+    question: IQuestion,
+    options: IDropdownMenuOptions
+  ): void;
+  chooseFiles(
+    input: HTMLInputElement,
+    callback: (files: File[]) => void,
+    context?: {
+      element: Base;
+      item?: any;
+      elementType?: string;
+      propertyName?: string;
+    }
+  ): void;
 }
 export interface ISurveyImpl {
   getSurveyData(): ISurveyData;
@@ -307,8 +378,16 @@ export interface IElement extends IConditionRunner, ISurveyElement {
   rightIndent: number;
   startWithNewLine: boolean;
   colSpan?: number;
-  registerPropertyChangedHandlers(propertyNames: Array<string>, handler: any, key: string): void;
-  registerFunctionOnPropertyValueChanged(name: string, func: any, key: string): void;
+  registerPropertyChangedHandlers(
+    propertyNames: Array<string>,
+    handler: any,
+    key: string
+  ): void;
+  registerFunctionOnPropertyValueChanged(
+    name: string,
+    func: any,
+    key: string
+  ): void;
   unRegisterFunctionOnPropertyValueChanged(name: string, key: string): void;
   getPanel(): IPanel;
   getLayoutType(): string;
@@ -396,14 +475,21 @@ export interface IFindElement {
 }
 
 export type ISurveyEnvironment = {
-  root: Document | ShadowRoot,
-  rootElement: HTMLElement | ShadowRoot,
-  popupMountContainer: HTMLElement | string,
-  svgMountContainer: HTMLElement | string,
-  stylesSheetsMountContainer: HTMLElement,
-}
+  root: Document | ShadowRoot;
+  rootElement: HTMLElement | ShadowRoot;
+  popupMountContainer: HTMLElement | string;
+  svgMountContainer: HTMLElement | string;
+  stylesSheetsMountContainer: HTMLElement;
+};
 
-export type LayoutElementContainer = "header" | "footer" | "left" | "right" | "contentTop" | "contentBottom" | "center";
+export type LayoutElementContainer =
+  | "header"
+  | "footer"
+  | "left"
+  | "right"
+  | "contentTop"
+  | "contentBottom"
+  | "center";
 export type HorizontalAlignment = "left" | "center" | "right";
 export type VerticalAlignment = "top" | "middle" | "bottom";
 
@@ -422,7 +508,7 @@ export interface IPlainDataOptions {
   includeQuestionTypes?: boolean;
   includeValues?: boolean;
   calculations?: Array<{
-    propertyName: string,
+    propertyName: string;
   }>;
 }
 export interface ILoadFromJSONOptions {

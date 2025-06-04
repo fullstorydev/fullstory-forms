@@ -25,6 +25,14 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
     return this.question.isIndeterminate && !this.isDisplayMode;
   }
   */
+  componentDidMount(): void {
+    const data = this.questionBase.elementData(this.checkRef.current);
+    this.setDataElements(this.checkRef.current, data);
+  }
+  componentDidUpdate(): void {
+    const data = this.questionBase.elementData(this.checkRef.current);
+    this.setDataElements(this.checkRef.current, data);
+  }
   private doCheck(value: boolean) {
     this.question.booleanValue = value;
   }
@@ -58,10 +66,9 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
     const itemClass: string = this.question.getItemCss();
 
     return (
-      <div {...this.question.elementData} className={cssClasses.root} onKeyDown={this.handleOnKeyDown}>
+      <div className={cssClasses.root} onKeyDown={this.handleOnKeyDown}>
         <label className={itemClass} onClick={this.handleOnClick}>
           <input
-            // {...dataElement}
             ref={this.checkRef}
             type="checkbox"
             name={this.question.name}

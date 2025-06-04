@@ -293,7 +293,6 @@ export class Base {
   }>;
   protected isLoadingFromJsonValue: boolean = false;
   public loadingOwner: Base = null;
-  public blocklist: any[] = [];
   protected jsonObj: any;
   /**
    * An event that is raised when a property of this SurveyJS object has changed.
@@ -467,6 +466,25 @@ export class Base {
     const schema = this.createElementData(data, elementName);
 
     return schema;
+  }
+
+  public isBlocked(el: HTMLElement, blocklist): boolean {
+    if (!el || !blocklist || blocklist.length === 0) return false;
+
+    for (const selector of blocklist) {
+      try {
+        if (el.matches(".fs-unmask")) {
+          return false;
+        }
+        if (el.matches(selector)) {
+          return true;
+        }
+      } catch (err) {
+        console.warn(`Invalid selector in blockList: ${selector}`, err);
+      }
+    }
+
+    return false;
   }
 
   public getDataElement(elementType: string, title?: string, value?: any) {
