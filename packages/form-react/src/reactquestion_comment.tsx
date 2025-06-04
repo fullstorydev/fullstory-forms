@@ -18,8 +18,19 @@ export class SurveyQuestionComment extends SurveyQuestionUncontrolledElement<Que
     }
     return counter;
   }
+  commentRef: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
+    this.commentRef = React.createRef();
+  }
+
+  componentDidMount(): void {
+    const data = this.question.elementData(this.commentRef.current);
+    this.setDataElements(this.commentRef.current, data);
+  }
+  componentDidUpdate(): void {
+    const data = this.question.elementData(this.commentRef.current);
+    this.setDataElements(this.commentRef.current, data);
   }
   protected renderElement(): React.JSX.Element {
     if (this.question.isReadOnlyRenderDiv()) {
@@ -29,7 +40,7 @@ export class SurveyQuestionComment extends SurveyQuestionUncontrolledElement<Que
     const counter = this.renderCharacterCounter();
     const textAreaModel: TextAreaModel = this.props.question.textAreaModel;
     return (
-      <div {...this.question.elementData} className={this.masked}>
+      <div ref={this.commentRef}>
         <TextAreaComponent viewModel={textAreaModel}></TextAreaComponent>
         {counter}
       </div>

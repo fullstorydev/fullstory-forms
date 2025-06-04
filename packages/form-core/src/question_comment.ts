@@ -193,10 +193,15 @@ export class QuestionCommentModel extends QuestionTextBase {
     );
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    const data = this.getDataElement("textarea", name, this.value);
+    const data = this.getDataElement(
+      "textarea",
+      name,
+      blocked ? "blocked" : this.value
+    );
 
     return data;
   }
