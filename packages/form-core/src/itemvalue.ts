@@ -276,7 +276,7 @@ export class ItemValue
       data["fs-column-index"] = this.value;
     } else {
       const survey = this.getSurvey();
-      const blocked = this.isBlocked(el, survey.blocklist);
+      const blocked = this.traverseBlocked(el, survey.blocklist);
       data = this.getDataElementItem(type, blocked, this.text, this.selected);
     }
 
