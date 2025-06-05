@@ -100,7 +100,6 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
     };
     return (
       <div
-        {...this.question.elementData}
         id={this.question.inputId}
         className={css}
         tabIndex={dropdownListModel.noTabIndex ? undefined : 0}

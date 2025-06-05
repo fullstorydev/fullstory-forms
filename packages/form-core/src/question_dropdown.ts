@@ -320,10 +320,15 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     const item = this.selectedItem;
     return !!item ? item.text : "";
   }
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    const data = this.getDataElement("dropdown", name, this.selectedItemText);
+    const data = this.getDataElement(
+      "dropdown",
+      name,
+      blocked ? "blocked" : this.selectedItemText
+    );
 
     return data;
   }
