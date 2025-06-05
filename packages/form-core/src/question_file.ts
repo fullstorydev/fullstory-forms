@@ -1428,17 +1428,18 @@ export class QuestionFileModel extends QuestionFileModelBase {
     super.dispose();
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
+    const blocked = this.isBlocked(el, this.survey.blocklist);
 
     if (this.value && this.value.length > 0) {
       const keys = Object.keys(this.value[0]);
       const filedata = { "fs-file-name": name };
       keys.map((x) => {
         if (x === "name") {
-          filedata["fs-file-filename"] = this.value[0][x];
+          filedata["fs-file-filename"] = blocked ? "blocked" : this.value[0][x];
         } else {
-          filedata[`fs-file-${x}`] = this.value[0][x];
+          filedata[`fs-file-${x}`] = blocked ? "blocked" : this.value[0][x];
         }
       });
 
