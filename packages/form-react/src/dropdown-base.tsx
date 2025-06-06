@@ -92,7 +92,7 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
   protected renderInput(dropdownListModel: DropdownListModel): React.JSX.Element {
     let valueElement: React.JSX.Element | null = this.renderValueElement(dropdownListModel);
     const { root } = settings.environment;
-    const css = `${this.question.getControlClass()} ${this.masked}`;
+    const css = `${this.question.getControlClass()}`;
     const onInputChange = (e: any) => {
       if (e.target === root.activeElement) {
         dropdownListModel.inputStringRendered = e.target.value;

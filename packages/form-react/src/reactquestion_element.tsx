@@ -198,12 +198,6 @@ export class SurveyElementBase<P, S> extends React.Component<P, S> {
     });
   }
 
-  protected get masked(): "fs-mask" | "fs-exclude" | "fs-unmask" {
-    let defaultMask: "fs-mask" | "fs-exclude" | "fs-unmask" = "fs-unmask";
-
-    return defaultMask;
-  }
-
   public setDataElements(el: HTMLElement, data) {
     Object.keys(data).forEach(x => {
       const val = data[x];

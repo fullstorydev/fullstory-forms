@@ -74,7 +74,7 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
             name={this.question.name}
             value={this.question.booleanValue === null ? "" : this.question.booleanValue}
             id={this.question.inputId}
-            className={`${cssClasses.control} ${this.masked}`}
+            className={`${cssClasses.control}`}
             disabled={this.question.isDisabledAttr}
             readOnly={this.question.isReadOnlyAttr}
             checked={this.question.booleanValue || false}

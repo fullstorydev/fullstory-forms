@@ -152,7 +152,7 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
       const column = this.question.visibleColumns[i];
       const key = "value" + i;
 
-      let itemClass = `${this.question.getItemClass(row, column)} ${this.masked}`;
+      let itemClass = `${this.question.getItemClass(row, column)}`;
       if (this.question.hasCellText) {
         const getHandler = (column: any) => () => this.cellClick(row, column);
         td = (
@@ -175,7 +175,7 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
           <td
             key={key}
             data-responsive-title={column.locText.renderedHtml}
-            className={`${this.question.cssClasses.cell} ${this.masked}`}
+            className={`${this.question.cssClasses.cell}`}
           >
             {renderedCell}
           </td>
@@ -219,16 +219,16 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
     return this.props.columnIndex;
   }
   private get cellElementData(): any {
-    const data = { ...this.column.elementData("column"), ...this.row.elementData };
+    // const data = { ...this.column.elementData("column"), ...this.row.elementData };
     const index = this.question.rows.findIndex(x => x.id === this.row.name);
 
-    data["fs-element"] = "table-cell";
-    data["fs-table-row-index"] = index + 1;
-    data["fs-table-cell-selected"] = data["fs-column-index"] === data["fs-table-row-value"];
+    // data["fs-element"] = "table-cell";
+    // data["fs-table-row-index"] = index + 1;
+    // data["fs-table-cell-selected"] = data["fs-column-index"] === data["fs-table-row-value"];
 
-    delete data["fs-table-row-value"];
+    // delete data["fs-table-row-value"];
 
-    return this.question.createElementData(data);
+    return this.question.createElementData({});
   }
   protected canRender(): boolean {
     return !!this.question && !!this.row;

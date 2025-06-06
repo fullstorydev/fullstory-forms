@@ -189,7 +189,7 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
   }
   protected renderCheckbox(isChecked: boolean, otherItem: React.JSX.Element | null): React.JSX.Element {
     const id = this.question.getItemId(this.item);
-    const itemClass = `${this.question.getItemClass(this.item)} ${this.masked}`;
+    const itemClass = `${this.question.getItemClass(this.item)}`;
     const labelClass = this.question.getLabelClass(this.item);
     const itemLabel = !this.hideCaption ? (
       <span className={this.cssClasses.controlLabel}>{this.renderLocString(this.item.locText, this.textStyle)}</span>
