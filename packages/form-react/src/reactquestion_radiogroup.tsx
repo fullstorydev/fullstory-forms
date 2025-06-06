@@ -31,7 +31,6 @@ export class SurveyQuestionRadiogroup extends SurveyQuestionElementBase {
 
     return (
       <fieldset
-        {...this.question.elementData}
         className={this.question.getSelectBaseRootCss()}
         ref={fieldset => this.setControl(fieldset)}
         role={this.question.a11y_input_ariaRole}
@@ -131,9 +130,11 @@ export class SurveyQuestionRadiogroup extends SurveyQuestionElementBase {
 
 export class SurveyQuestionRadioItem extends ReactSurveyElement {
   private rootRef: React.RefObject<HTMLDivElement>;
+  private radioRef: React.RefObject<HTMLInputElement>;
   constructor(props: any) {
     super(props);
     this.rootRef = React.createRef();
+    this.radioRef = React.createRef();
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnMouseDown = this.handleOnMouseDown.bind(this);
   }
@@ -191,19 +192,20 @@ export class SurveyQuestionRadioItem extends ReactSurveyElement {
   }
 
   protected renderElement(): React.JSX.Element {
-    var itemClass = `${this.question.getItemClass(this.item)} ${this.masked}`;
+    var itemClass = `${this.question.getItemClass(this.item)}`;
     var labelClass = this.question.getLabelClass(this.item);
     var controlLabelClass = this.question.getControlLabelClass(this.item);
     const itemLabel = !this.hideCaption ? (
       <span className={controlLabelClass}>{this.renderLocString(this.item.locText, this.textStyle)}</span>
     ) : null;
 
-    const elementData = this.item.elementData("radio-item");
+    // const elementData = this.item.elementData("radio-item");
 
     return (
-      <div className={itemClass} role="presentation" ref={this.rootRef} {...elementData}>
+      <div className={itemClass} role="presentation" ref={this.rootRef}>
         <label onMouseDown={this.handleOnMouseDown} className={labelClass}>
           <input
+            ref={this.radioRef}
             aria-errormessage={this.question.ariaErrormessage}
             className={this.cssClasses.itemControl}
             id={this.question.getItemId(this.item)}
@@ -234,6 +236,8 @@ export class SurveyQuestionRadioItem extends ReactSurveyElement {
     if (!this.question.isDesignMode) {
       this.item.setRootElement(this.rootRef.current as HTMLElement);
     }
+    const data = this.item.elementData(this.radioRef.current, "radio-item");
+    this.setDataElements(this.radioRef.current, data);
   }
   public componentWillUnmount(): void {
     super.componentWillUnmount();
