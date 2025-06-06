@@ -420,14 +420,6 @@ export class MultipleTextItemModel
   getDataFilteredProperties(): any {
     return this.getFilteredProperties();
   }
-
-  public get elementData(): any {
-    const name = this.name ? this.name : this.title;
-
-    const data = this.getDataElement(this.getType(), name, this.value);
-
-    return data;
-  }
 }
 
 /**
@@ -924,7 +916,9 @@ export class QuestionMultipleTextModel
     return new CssClassBuilder().append(this.cssClasses.itemTitle).toString();
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+    console.log("multi text is bocked", blocked);
     const name = this.name ? this.name : this.title;
 
     // get input type and prepare it to be the element name
@@ -934,7 +928,7 @@ export class QuestionMultipleTextModel
     const data = {};
 
     // make fs element name the type
-    data[`fs-element`] = type;
+    data["fs-element"] = type;
 
     // make the element name with type and title
     data[`${type}-name`] = name;
@@ -947,7 +941,7 @@ export class QuestionMultipleTextModel
       // insert all flat values in data object with fs- appended
       Object.keys(flatValues).map((x) => {
         if (typeof flatValues[x] !== "undefined") {
-          data[`fs-${x}`] = flatValues[x];
+          data[`fs-${x}`] = blocked ? "blocked" : flatValues[x];
         }
       });
     }

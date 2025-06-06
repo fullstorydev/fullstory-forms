@@ -7,8 +7,20 @@ import { ReactSurveyElement } from "./reactquestion_element";
 import { TitleContent } from "./components/title/title-content";
 
 export class SurveyQuestionMultipleText extends SurveyQuestionElementBase {
+  multiTextRef;
   constructor(props: any) {
     super(props);
+    this.multiTextRef = React.createRef();
+  }
+  componentDidMount(): void {
+    const el = this.multiTextRef.current;
+    const data = this.question.elementData(el);
+    this.setDataElements(el, data);
+  }
+  componentDidUpdate(): void {
+    const el = this.multiTextRef.current;
+    const data = this.question.elementData(el);
+    this.setDataElements(el, data);
   }
   protected get question(): QuestionMultipleTextModel {
     return this.questionBase as QuestionMultipleTextModel;
@@ -24,7 +36,7 @@ export class SurveyQuestionMultipleText extends SurveyQuestionElementBase {
     }
 
     return (
-      <table {...this.question.elementData} className={this.question.getQuestionRootCss()}>
+      <table ref={this.multiTextRef} className={this.question.getQuestionRootCss()}>
         <tbody>{rows}</tbody>
       </table>
     );
@@ -95,7 +107,7 @@ export class SurveyMultipleTextItem extends ReactSurveyElement {
     }
 
     return (
-      <label {...item.elementData} className={this.question.getItemLabelCss(item)}>
+      <label className={this.question.getItemLabelCss(item)}>
         <span className={cssClasses.itemTitle} style={titleStyle}>
           <TitleContent element={item.editor} cssClasses={item.editor.cssClasses}></TitleContent>
         </span>
