@@ -1122,7 +1122,7 @@ export class QuestionMatrixDynamicModel
       .toString();
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
     const data = this.getDataElement("table", name);
     return data;
