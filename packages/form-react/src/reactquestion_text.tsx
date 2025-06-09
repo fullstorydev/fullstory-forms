@@ -5,17 +5,15 @@ import { ReactQuestionFactory } from "./reactquestion_factory";
 import { CharacterCounterComponent } from "./components/character-counter";
 
 export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<QuestionTextModel> {
-  //controlRef: React.RefObject<HTMLInputElement>;
   constructor(props: any) {
     super(props);
-
-    //this.controlRef = React.createRef();
   }
 
   protected renderInput() {
-    const inputClass = `${(this.question as QuestionTextModel).getControlClass()} ${this.masked}`;
+    const inputClass = `${(this.question as QuestionTextModel).getControlClass()}`;
 
     const placeholder = this.question.renderedPlaceholder;
+
     if (this.question.isReadOnlyRenderDiv()) {
       return <div>{this.question.inputValue}</div>;
     }
@@ -29,14 +27,13 @@ export class SurveyQuestionText extends SurveyQuestionUncontrolledElement<Questi
     return (
       <>
         <input
-          {...this.question.elementData}
           id={this.question.inputId}
           // disabled={this.isDisplayMode}
           disabled={this.question.isDisabledAttr}
           readOnly={this.question.isReadOnlyAttr}
           className={inputClass}
           type={this.question.inputType}
-          //ref={this.controlRef}
+          // ref={this.controlRef}
           ref={input => this.setControl(input)}
           style={this.question.inputStyle}
           maxLength={this.question.getMaxLength()}
