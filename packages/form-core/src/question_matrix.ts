@@ -100,16 +100,19 @@ export class MatrixRowModel extends Base {
       .toString();
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement, blocklist: any[]): any {
+    const blocked = this.traverseBlocked(el, blocklist);
+
     const data = {
       "fs-element": "table-row",
       "fs-table-row-name": this.name,
     };
 
     if (this.value) {
-      data["fs-table-row-value"] = this.value;
+      data["fs-table-row-value"] = blocked ? "blocked" : this.value;
     }
-    return data;
+
+    return this.createElementData(data);
   }
 }
 
@@ -888,7 +891,7 @@ export class QuestionMatrixModel
     );
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
     const data = this.getDataElement("table", name);
 

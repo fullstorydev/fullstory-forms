@@ -76,7 +76,7 @@ export class SurveyQuestionMatrix extends SurveyQuestionElementBase {
       <div className={cssClasses.tableWrapper} ref={root => this.setControl(root)}>
         <fieldset>
           <legend className="sv-hidden">{this.question.locTitle.renderedHtml}</legend>
-          <table {...this.question.elementData} className={this.question.getTableCss()}>
+          <table className={this.question.getTableCss()}>
             {header}
             <tbody>{rows}</tbody>
           </table>
@@ -87,8 +87,16 @@ export class SurveyQuestionMatrix extends SurveyQuestionElementBase {
 }
 
 export class SurveyQuestionMatrixRow extends ReactSurveyElement {
+  private rowRef: React.RefObject<HTMLTableRowElement>;
   constructor(props: any) {
     super(props);
+    this.rowRef = React.createRef();
+  }
+  componentDidMount(): void {
+    this.rowElementData();
+  }
+  componentDidUpdate(): void {
+    this.rowElementData();
   }
   protected getStateElement(): Base | null {
     if (!!this.row) return this.row.item;
@@ -114,6 +122,12 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
   protected canRender(): boolean {
     return !!this.row;
   }
+  protected rowElementData(): void {
+    const el = this.rowRef.current;
+    const blocklist = this.question.survey.blocklist;
+    const data = this.row.elementData(el, blocklist);
+    this.setDataElements(el, data);
+  }
   protected renderElement(): React.JSX.Element {
     var rowsTD: React.JSX.Element | null = null;
 
@@ -135,7 +149,7 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
     var tds = this.generateTds();
 
     return (
-      <tr {...this.row.elementData} className={this.row.rowClasses || undefined}>
+      <tr ref={this.rowRef} className={this.row.rowClasses || undefined}>
         {rowsTD}
         {tds}
       </tr>
@@ -193,10 +207,13 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
 }
 
 export class SurveyQuestionMatrixCell extends ReactSurveyElement {
+  private cellInputRef: React.RefObject<HTMLInputElement>;
+
   constructor(props: any) {
     super(props);
     this.handleOnMouseDown = this.handleOnMouseDown.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.cellInputRef = React.createRef();
   }
   handleOnChange(event: any): void {
     if (!!this.props.cellChanged) {
@@ -205,6 +222,13 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
   }
   handleOnMouseDown(event: any): void {
     this.question.onMouseDown();
+  }
+
+  componentDidMount(): void {
+    this.cellElementData();
+  }
+  componentDidUpdate(): void {
+    this.cellElementData();
   }
   private get question(): QuestionMatrixModel {
     return this.props.question;
@@ -218,17 +242,23 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
   private get columnIndex(): number {
     return this.props.columnIndex;
   }
-  private get cellElementData(): any {
-    // const data = { ...this.column.elementData("column"), ...this.row.elementData };
+  private cellElementData(): any {
+    const el = this.cellInputRef.current;
+    const blocklist = this.question.survey.blocklist;
+    const blocked = this.question.isBlocked(el, blocklist);
+    const columnData = this.column.elementData(el, "column");
+    const rowData = this.row.elementData(el, blocklist);
     const index = this.question.rows.findIndex(x => x.id === this.row.name);
 
-    // data["fs-element"] = "table-cell";
-    // data["fs-table-row-index"] = index + 1;
-    // data["fs-table-cell-selected"] = data["fs-column-index"] === data["fs-table-row-value"];
+    const data = {
+      ...columnData,
+      "fs-table-row-name": rowData["data-fs-table-row-name"],
+      "fs-element": "table-cell",
+      "fs-table-row-index": index + 1,
+      "fs-table-cell-selected": blocked ? "blocked" : this.row.value == this.column.value
+    };
 
-    // delete data["fs-table-row-value"];
-
-    return this.question.createElementData({});
+    return this.setDataElements(el, this.question.createElementData(data));
   }
   protected canRender(): boolean {
     return !!this.question && !!this.row;
@@ -258,6 +288,7 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
   protected renderInput(inputId: string, isChecked: boolean): React.JSX.Element {
     return (
       <input
+        ref={this.cellInputRef}
         id={inputId}
         type="radio"
         className={this.cssClasses.itemValue}

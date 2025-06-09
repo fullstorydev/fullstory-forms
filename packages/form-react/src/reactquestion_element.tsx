@@ -245,6 +245,7 @@ export class SurveyQuestionElementBase extends SurveyElementBase<any, any> {
   protected dressElement() {
     if (this.control) {
       const data = this.questionBase.elementData(this.control);
+
       this.setDataElements(this.control, data);
     }
   }
