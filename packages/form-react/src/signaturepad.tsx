@@ -27,7 +27,7 @@ export class SurveyQuestionSignaturePad extends SurveyQuestionElementBase {
         <div className={cssClasses.placeholder} style={{ display: this.question.needShowPlaceholder() ? "" : "none" }}>
           {this.renderLocString(this.question.locRenderedPlaceholder)}
         </div>
-        <div {...this.question.elementData}>
+        <div>
           {this.renderBackgroundImage()}
           <canvas
             tabIndex={-1}

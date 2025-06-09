@@ -302,10 +302,18 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     this.signaturePad = null;
   }
 
-  public get elementData(): any {
-    const name = this.name ? this.name : this.title;
+  public elementData(el: HTMLElement): any {
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    const data = this.getDataElement("signaturepad", name, this.inputValue);
+    const name = this.name ? this.name : this.title;
+    console.log("this.value", this.value);
+    let data: any = {
+      "fs-element": "signaturepad",
+      "fs-signaturepad-name": name,
+      "fs-signaturepad-signed": blocked ? "blocked" : !!this.value,
+    };
+
+    data = this.createElementData(data);
 
     return data;
   }
