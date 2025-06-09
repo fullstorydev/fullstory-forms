@@ -26,7 +26,6 @@ var json = {
     {
       type: "boolean",
       name: "bool",
-      capture: "unmask",
       title: "Age Choice",
       label: "Are you 21 or older?",
       isRequired: true
@@ -55,8 +54,7 @@ var json = {
     {
       type: "comment",
       name: "comment suggestion",
-      title: "Suggestion Comment",
-      capture: "unmask"
+      title: "Suggestion Comment"
     },
     {
       type: "dropdown",
@@ -64,7 +62,6 @@ var json = {
       title: "Car Dropdown",
       isRequired: true,
       showNoneItem: true,
-      capture: "unmask",
       colCount: 4,
       choices: [
         "Ford",
@@ -92,7 +89,6 @@ var json = {
       type: "imagepicker",
       name: "choosepicture",
       title: "Animal Picker",
-      capture: "unmask",
       imageHeight: "150px",
       imageWidth: "225px",
       choices: [
@@ -166,7 +162,6 @@ var json = {
       name: "car radiogroup",
       title: "Car Radiogroup",
       isRequired: true,
-      capture: "unmask",
       colCount: 4,
       choices: [
         "None",
@@ -206,7 +201,6 @@ var json = {
     {
       name: "signature",
       type: "signaturepad",
-      capture: "unmask",
       title: "Sign here",
       isRequired: true
     },
@@ -214,7 +208,6 @@ var json = {
       type: "tagbox",
       name: "cars tagbox",
       title: "Cars Tagbox",
-      capture: "unmask",
       showNoneItem: true,
       choices: [
         "Ford",
@@ -232,17 +225,14 @@ var json = {
     {
       name: "name input",
       type: "text",
-      capture: "unmask",
       title: "Name",
       placeHolder: "Jon Snow",
       isRequired: true
     },
-
     {
       type: "matrix",
       name: "Quality",
       title: "Matrix",
-      capture: "unmask",
       columns: [
         {
           value: 1,
@@ -284,7 +274,6 @@ var json = {
         }
       ]
     },
-
     {
       type: "matrixdynamic",
       name: "teachersRate",
@@ -294,7 +283,6 @@ var json = {
       columnMinWidth: "130px",
       columnColCount: 1,
       cellType: "radiogroup",
-      capture: "unmask",
       choices: [
         {
           value: 1,
@@ -315,7 +303,6 @@ var json = {
           cellType: "dropdown",
           title: "Select a subject",
           isRequired: true,
-          capture: "unmask",
           minWidth: "300px",
           choices: [
             "English: American Literature",
@@ -348,37 +335,31 @@ var json = {
         },
         {
           name: "explains",
-          capture: "unmask",
           title: "Clearly explains the objectives"
         },
         {
           name: "interesting",
-          capture: "unmask",
           title: "Makes class interesting"
         },
         {
           name: "effective",
-          capture: "unmask",
           title: "Uses class time effectively"
         },
         {
           name: "frusturation",
           cellType: "comment",
-          capture: "unmask",
           title: "Is there anything about this class that frustrates you?",
           minWidth: "250px"
         },
         {
           name: "likeTheBest",
           cellType: "comment",
-          capture: "unmask",
           title: "What do you like best about this class and/or teacher?",
           minWidth: "250px"
         },
         {
           name: "improvements",
           cellType: "comment",
-          capture: "unmask",
           title: "What do you wish this teacher would do differently that would improve this class?",
           minWidth: "250px"
         }
@@ -498,7 +479,7 @@ var json = {
     // {
     //     name: "birthdate",
     //     type: "text",
-    //     capture: "unmask",
+    //
     //     inputType: "date",
     //     title: "Text Date",
     //     isRequired: true
@@ -528,7 +509,7 @@ var json = {
     //   title: "Dropdown",
     //   isRequired: true,
     //   showNoneItem: true,
-    //   capture: "unmask",
+    //
     //   colCount: 4,
     //   choices: [
     //     "Ford",
@@ -547,7 +528,7 @@ var json = {
     //   type: "tagbox",
     //   name: "cars2",
     //   title: "Tagbox",
-    //   capture: "unmask",
+    //
     //   showNoneItem: true,
     //   choices: [
     //     "Ford",
@@ -588,7 +569,7 @@ var json = {
     //   name: "carss",
     //   title: "Radiogroup",
     //   isRequired: true,
-    //   capture: "unmask",
+    //
     //   colCount: 4,
     //   choices: [
     //     "None",
@@ -643,7 +624,7 @@ var json = {
     // {
     //   type: "boolean",
     //   name: "bool",
-    //   capture: "unmask",
+    //
     //   title: "Boolean",
     //   label: "Are you 21 or older?",
     //   isRequired: true
@@ -652,7 +633,7 @@ var json = {
     //   type: "comment",
     //   name: "suggestions",
     //   title: "Comment",
-    //   capture: "unmask"
+
     // },
     // {
     //   type: "file",
@@ -684,7 +665,7 @@ var json = {
     //     type: "matrixdynamic",
     //     name: "orderList",
     //     rowCount: 1,
-    //     capture: "unmask",
+    //
     //     minRowCount: 1,
     //     title: "Matrix Dynamic (totals)",
     //     addRowText: "Add new item",
@@ -888,7 +869,7 @@ var json = {
     //     type: "comment",
     //     name: "suggestions",
     //     title: "Comment",
-    //     capture: "unmask"
+
     // },
     // {
     //   type: "file",
@@ -1121,61 +1102,37 @@ var json = {
 
 var model = new Survey.Model(json);
 
-model.addNavigationItem({
-  id: "sv-nav-clear-page",
-  title: "Add Another Car",
-  action: () => {
-    console.log("model", model.currentPage.questions);
-    // model.currentPage.questions.forEach((question) => {
-    //     question.value = undefined;
-    // });
-  },
-  css: "nav-button",
-  innerCss: "sd-btn nav-input"
+model.createBlockList().then(() => {
+  model.addNavigationItem({
+    id: "sv-nav-clear-page",
+    title: "Add Another Car",
+    action: () => {
+      console.log("model", model.currentPage.questions);
+      // model.currentPage.questions.forEach((question) => {
+      //     question.value = undefined;
+      // });
+    },
+    css: "nav-button",
+    innerCss: "sd-btn nav-input"
+  });
+
+  window.survey = model;
+
+  model.onUploadFiles.add(function (survey, options) {
+    options.callback(
+      "success",
+      options.files.map(function (file) {
+        return {
+          file: file,
+          content: "https://surveyjs.io/Content/Images/design/Logo.svg"
+        };
+      })
+    );
+  });
+
+  model.onComplete.add((sender, options) => {
+    console.log(JSON.stringify(sender.data, null, 3));
+  });
+
+  ReactDOM.render(<SurveyReact.Survey model={model} />, document.getElementById("surveyElement"));
 });
-
-//model.setDesignMode(true);
-window.survey = model;
-
-// class CustomTOCItem extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//   render() {
-//     const survey = this.props.model.locOwner;
-//     const pageName = this.props.item.id;
-//     const page = survey.getPageByName(pageName);
-//     return (
-//       <div style={{ width: "100%", height: "50px", background: "red", color: "lime" }}>
-//         {page.title || page.name}
-//       </div>
-//     );
-//   }
-// }
-
-// SurveyReact.ReactElementFactory.Instance.registerElement(
-//   "sv-custom-toc-item",
-//   (props) => {
-//     return React.createElement(CustomTOCItem, props);
-//   }
-// );
-
-// model.findLayoutElement("toc-navigation").data.listModel.itemComponent = "sv-custom-toc-item";
-
-model.onUploadFiles.add(function (survey, options) {
-  options.callback(
-    "success",
-    options.files.map(function (file) {
-      return {
-        file: file,
-        content: "https://surveyjs.io/Content/Images/design/Logo.svg"
-      };
-    })
-  );
-});
-
-model.onComplete.add((sender, options) => {
-  console.log(JSON.stringify(sender.data, null, 3));
-});
-
-ReactDOM.render(<SurveyReact.Survey model={model} />, document.getElementById("surveyElement"));
