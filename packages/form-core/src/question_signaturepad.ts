@@ -306,7 +306,7 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
     const name = this.name ? this.name : this.title;
-    console.log("this.value", this.value);
+
     let data: any = {
       "fs-element": "signaturepad",
       "fs-signaturepad-name": name,
