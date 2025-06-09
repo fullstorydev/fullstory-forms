@@ -13,9 +13,12 @@ export interface IRatingItemProps {
   isDisplayMode: boolean;
 }
 export class RatingItemBase extends SurveyElementBase<IRatingItemProps, any> {
+  protected rateRef: React.RefObject<HTMLInputElement>;
+
   constructor(props: any) {
     super(props);
     this.handleOnMouseDown = this.handleOnMouseDown.bind(this);
+    this.rateRef = React.createRef();
   }
   get question(): QuestionRatingModel {
     return this.props.question;
@@ -26,25 +29,36 @@ export class RatingItemBase extends SurveyElementBase<IRatingItemProps, any> {
   get index(): any {
     return this.props.index;
   }
+  componentDidMount(): void {
+    this.setRatingDataElements();
+  }
+  componentDidUpdate(): void {
+    this.setRatingDataElements();
+  }
   getStateElement(): Base {
     return this.item;
   }
   handleOnMouseDown(event: any) {
     this.question.onMouseDown();
   }
+
+  setRatingDataElements(): void {
+    const el = this.rateRef.current;
+
+    const data = this.item.elementData(el, this.question.survey.blocklist);
+    this.setDataElements(el, data);
+  }
 }
 export class RatingItem extends RatingItemBase {
   render(): React.JSX.Element | null {
     var itemText = this.renderLocString(this.item.locText);
-
-    const elementData = this.item.elementData("rating-number");
     return (
       <label
-        {...elementData}
         onMouseDown={this.handleOnMouseDown}
         className={this.question.getItemClassByText(this.item.itemValue, this.item.text)}
       >
         <input
+          ref={this.rateRef}
           type="radio"
           className="sv-visuallyhidden"
           name={this.question.questionName}

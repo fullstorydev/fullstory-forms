@@ -1500,7 +1500,6 @@ export class SurveyModel
 
     if (res.ok) {
       this.blocklist = await this.makeBlockedList(res);
-      console.log("this.blocklist", this.blocklist);
     } else {
       this.blocklist = [];
     }

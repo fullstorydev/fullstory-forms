@@ -918,7 +918,6 @@ export class QuestionMultipleTextModel
 
   public elementData(el: HTMLElement): any {
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
-    console.log("multi text is bocked", blocked);
     const name = this.name ? this.name : this.title;
 
     // get input type and prepare it to be the element name

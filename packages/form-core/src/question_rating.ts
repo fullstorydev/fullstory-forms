@@ -42,9 +42,12 @@ export class RenderedRatingItem extends Base {
     this.onStringChangedCallback();
   }
 
-  public elementData(type: string): any {
+  public elementData(el: HTMLElement, blocklist): any {
+    const blocked = this.traverseBlocked(el, blocklist);
+
     const data = this.getDataElementItem(
-      type,
+      "rating-item",
+      blocked,
       this.text,
       this.itemValue.selected
     );
@@ -235,10 +238,16 @@ export class QuestionRatingModel extends Question {
     );
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
     const name = this.name ? this.name : this.title;
 
-    const data = this.getDataElement("rating", name, this.value);
+    const data = this.getDataElement(
+      "rating",
+      name,
+      blocked ? "blocked" : this.value
+    );
 
     return data;
   }

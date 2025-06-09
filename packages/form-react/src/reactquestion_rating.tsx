@@ -37,7 +37,7 @@ export class SurveyQuestionRating extends SurveyQuestionElementBase {
 
     return (
       <div className={this.question.ratingRootCss} ref={div => this.setControl(div)}>
-        <fieldset role="radiogroup" {...this.question.elementData}>
+        <fieldset role="radiogroup">
           <legend role="presentation" className={"sv-hidden"}></legend>
           {!!this.question.hasMinLabel ? <span className={cssClasses.minText}>{minText}</span> : null}
           {this.question.renderedRateItems.map((item, index) => this.renderItem(item, index))}
