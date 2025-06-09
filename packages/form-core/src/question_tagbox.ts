@@ -137,14 +137,16 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
 
   @property() textWrapEnabled: boolean;
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
     let data;
     const name = this.name ? this.name : this.title;
 
     if (!!this.selectedItems) {
       const values = this.selectedItems.map((x) => x.text).join(", ");
 
-      data = this.getDataElement("tagbox", name, values);
+      data = this.getDataElement("tagbox", name, blocked ? "blocked" : values);
     } else {
       data = this.getDataElement("tagbox", name);
     }

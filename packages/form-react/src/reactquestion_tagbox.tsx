@@ -24,7 +24,6 @@ export class SurveyQuestionTagbox extends SurveyQuestionDropdownBase<QuestionTag
 
     return (
       <div
-        {...this.question.elementData}
         id={this.question.inputId}
         className={css}
         tabIndex={dropdownListModel.noTabIndex ? undefined : 0}
