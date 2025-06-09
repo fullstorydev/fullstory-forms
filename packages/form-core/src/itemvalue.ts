@@ -271,12 +271,21 @@ export class ItemValue
 
   public elementData(el: HTMLElement, type: string): any {
     let data = {};
+    const survey = this.getSurvey();
+    const blocked = this.traverseBlocked(el, survey.blocklist);
+
     if (type === "column") {
       data["fs-column-name"] = this.title ? this.title : "";
       data["fs-column-index"] = this.value;
+    } else if (type === "ranking-item") {
+      const rank = el.getAttribute("data-sv-drop-target-ranking-item");
+      const text = el.querySelector("span.sv-string-viewer").textContent;
+
+      data["fs-rank-index"] = blocked ? "blocked" : parseInt(rank) + 1;
+      data["fs-rank-value"] = blocked ? "blocked" : text;
+
+      data = this.createElementData(data);
     } else {
-      const survey = this.getSurvey();
-      const blocked = this.traverseBlocked(el, survey.blocklist);
       data = this.getDataElementItem(type, blocked, this.text, this.selected);
     }
 

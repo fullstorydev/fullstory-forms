@@ -375,7 +375,9 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
     this.unRankingChoicesAnimation.sync(val);
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
     const name = this.name ? this.name : this.title;
     let data;
 
@@ -385,7 +387,9 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
       rankingData["fs-ranking-name"] = name;
 
       for (let i = 0; i < this.value.length; i++) {
-        rankingData[`fs-ranking-position-${i + 1}`] = this.value[i];
+        rankingData[`fs-ranking-position-${i + 1}`] = blocked
+          ? "blocked"
+          : this.value[i];
       }
 
       data = this.createElementData(rankingData);

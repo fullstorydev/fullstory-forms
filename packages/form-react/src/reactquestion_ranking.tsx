@@ -13,7 +13,7 @@ export class SurveyQuestionRanking extends SurveyQuestionElementBase {
   protected renderElement(): React.JSX.Element {
     if (!this.question.selectToRankEnabled) {
       return (
-        <div {...this.question.elementData} className={this.question.rootClass} ref={root => this.setControl(root)}>
+        <div className={this.question.rootClass} ref={root => this.setControl(root)}>
           {this.getItems()}
         </div>
       );
@@ -122,6 +122,12 @@ export class SurveyQuestionRanking extends SurveyQuestionElementBase {
 }
 
 export class SurveyQuestionRankingItem extends ReactSurveyElement {
+  private rankRef;
+
+  constructor(props) {
+    super(props);
+    this.rankRef = React.createRef();
+  }
   protected get text(): string {
     return this.props.text;
   }
@@ -159,6 +165,16 @@ export class SurveyQuestionRankingItem extends ReactSurveyElement {
     return this.props.item;
   }
 
+  componentDidMount(): void {
+    const el = this.rankRef.current;
+    const data = this.item.elementData(el, "ranking-item");
+    this.setDataElements(el, data);
+  }
+  componentDidUpdate(): void {
+    const el = this.rankRef.current;
+    const data = this.item.elementData(el, "ranking-item");
+    this.setDataElements(el, data);
+  }
   protected renderEmptyIcon(): React.JSX.Element {
     return (
       <svg>
@@ -174,6 +190,7 @@ export class SurveyQuestionRankingItem extends ReactSurveyElement {
     });
     return (
       <div
+        ref={this.rankRef}
         tabIndex={this.itemTabIndex}
         className={this.itemClass}
         onKeyDown={this.handleKeydown}
