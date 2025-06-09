@@ -374,10 +374,15 @@ export class QuestionTextModel extends QuestionTextBase {
     this.value = value;
   }
 
-  public get elementData(): any {
+  public elementData(el: HTMLElement): any {
     const name = this.name ? this.name : this.title;
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    const data = this.getDataElement("text", name, this.inputValue);
+    const data = this.getDataElement(
+      "text",
+      name,
+      !blocked ? this.inputValue : "blocked"
+    );
 
     return data;
   }
