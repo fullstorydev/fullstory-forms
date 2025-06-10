@@ -469,55 +469,78 @@ export class Base {
     return schema;
   }
 
-  public isBlocked(el: HTMLElement, blocklist): boolean {
+  public isBlocked(
+    el: Element,
+    blocklist: { Selector: string; Type: number }[]
+  ): boolean {
+    /**
+     * type 0: return 'Unset';
+     * type 1: return 'Exclude';
+     * type 2: return 'Mask';
+     * type 3: return 'Unmask'
+     */
     if (!el || !blocklist || blocklist.length === 0) return false;
+    // set blocked as false because if a match is not found in the loop we can assume this item is safe to be unmasked
+    let blocked = false;
 
-    for (const selector of blocklist) {
+    // loop through every item in blocklist
+    for (const item of blocklist) {
       try {
-        if (el.matches(".fs-unmask")) {
-          return false;
-        }
-        if (el.matches(selector)) {
-          return true;
+        // it element matches an item in the selector check it's type
+        if (el.matches(item.Selector)) {
+          console.log("matches on item", item);
+          if (item.Type === 3) {
+            // if type is unmask we return false and break the loop
+            // the element could potentially match multiple selectors but if there is an unmasked match
+            // we should prioritize that rule and not check any further
+            blocked = false;
+            break;
+          } else {
+            // if the type is not 3 blocked is set to true but we keep looping incase another match happens
+            blocked = true;
+          }
         }
       } catch (err) {
-        console.warn(`Invalid selector in blockList: ${selector}`, err);
+        console.warn(`Invalid selector in blockList: ${item.Selector}`, err);
       }
     }
 
-    return false;
+    return blocked;
   }
 
-  public traverseBlocked(root: HTMLElement, selectors: string[]): boolean {
-    // Helper to check if an element matches any selector
-    const matchesAnySelector = (el: Element): boolean => {
-      return selectors.some((selector) => {
-        try {
-          return el.matches(selector);
-        } catch (err) {
-          console.warn(`Invalid selector skipped: ${selector}`, err);
-          return false;
-        }
-      });
-    };
+  public traverseBlocked(root: HTMLElement, selectors: any[]): boolean {
+    /**
+     * type 0: return 'Unset';
+     * type 1: return 'Exclude';
+     * type 2: return 'Mask';
+     * type 3: return 'Unmask'
+     */
 
     // Breadth-First Search
     const queue: Element[] = [root];
 
+    // blocked is assumed false
+    let blocked = false;
+
+    // loop through every el in the queue
     while (queue.length > 0) {
       const el = queue.shift();
       if (!el) continue;
 
-      if (matchesAnySelector(el)) {
-        return true; // ✅ Found a match
+      // see if current child el is blocked
+      blocked = this.isBlocked(el, selectors);
+
+      // if block is true we break the loop
+      if (blocked) {
+        break;
       }
 
       // Push children to the queue
       queue.push(...Array.from(el.children));
     }
 
-    // No match found after full traversal
-    return false;
+    // return blocked after loop
+    return blocked;
   }
 
   public getDataElement(elementType: string, title?: string, value?: any) {

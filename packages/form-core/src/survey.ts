@@ -227,7 +227,7 @@ export class SurveyModel
   }
   public notifier: Notifier;
   public rootElement: HTMLElement;
-  public blocklist: any[] = [];
+  public blocklist: { Selector: string; Type: number }[] = [];
 
   /**
    * A suffix added to the name of the property that stores comments.
@@ -1500,28 +1500,10 @@ export class SurveyModel
 
     if (res.ok) {
       this.blocklist = await this.makeBlockedList(res);
+      console.log("blocklist", this.blocklist);
     } else {
       this.blocklist = [];
     }
-  }
-
-  public isBlocked(el: HTMLElement): boolean {
-    if (!el || !this.blocklist || this.blocklist.length === 0) return false;
-
-    for (const selector of this.blocklist) {
-      try {
-        if (el.matches(".fs-unmask")) {
-          return false;
-        }
-        if (el.matches(selector)) {
-          return true;
-        }
-      } catch (err) {
-        console.warn(`Invalid selector in blockList: ${selector}`, err);
-      }
-    }
-
-    return false;
   }
 
   private async getScriptJSONContent(src: string) {
@@ -1547,21 +1529,26 @@ export class SurveyModel
     }
   }
 
-  private async makeBlockedList(res: any) {
-    const json = await res.json();
-    const blockList: any[] = [];
-
-    json.ElementBlocks.forEach((x: any) => {
-      if (!x.Consent) {
-        blockList.push(x.Selector);
-      }
+  private ruleExists(rule, blockList) {
+    return blockList.some(function (x) {
+      return x.Selector === rule.Selector;
     });
+  }
+
+  private async makeBlockedList(
+    res: any
+  ): Promise<{ Selector: string; Type: number }[]> {
+    const json = await res.json();
+    console.log("json", json);
+    const blockList: { Selector: string; Type: number }[] = json.ElementBlocks;
 
     json.NamedElementBlocks.forEach((x: any) => {
-      if (!x.Consent) {
-        const selector = x.TargetedSelectorsForCapture[0].Selector;
-        blockList.push(selector);
-      }
+      const rule = {
+        Selector: x.TargetedSelectorsForCapture[0].Selector,
+        Type: x.BlockType,
+      };
+
+      blockList.push(rule);
     });
 
     return blockList;
