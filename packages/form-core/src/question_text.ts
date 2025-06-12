@@ -374,15 +374,10 @@ export class QuestionTextModel extends QuestionTextBase {
     this.value = value;
   }
 
-  public elementData(el: HTMLElement): any {
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    const data = this.getDataElement(
-      "text",
-      name,
-      !blocked ? this.inputValue : "blocked"
-    );
+    const data = this.getDataElement("text", name);
 
     return data;
   }
@@ -721,6 +716,14 @@ export class QuestionTextModel extends QuestionTextBase {
     } else {
       this.updateValueOnEvent(event);
     }
+
+    const blocked = this.traverseBlocked(event.target, this.survey.blocklist);
+    !blocked &&
+      this.survey.updateButtonValuesCallBack({
+        [this.name]: event.target.value,
+      });
+
+    this.updateDataValue(event.target, event.target.value, blocked);
     this.updateRemainingCharacterCounter(event.target.value);
   };
   protected onBlurCore(event: any): void {
