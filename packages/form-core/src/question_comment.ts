@@ -11,7 +11,6 @@ import { Helpers } from "./helpers";
  * [View Demo](https://surveyjs.io/form-library/examples/questiontype-comment/ (linkStyle))
  */
 export class QuestionCommentModel extends QuestionTextBase {
-  private element: HTMLElement;
   private textAreaModelValue: TextAreaModel;
 
   constructor(name: string) {
@@ -191,19 +190,6 @@ export class QuestionCommentModel extends QuestionTextBase {
       (this.cssClasses ? this.getControlClass() : "panel-comment-root") ||
       undefined
     );
-  }
-
-  public elementData(el: HTMLElement): any {
-    const name = this.name ? this.name : this.title;
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
-    const data = this.getDataElement(
-      "textarea",
-      name,
-      blocked ? "blocked" : this.value
-    );
-
-    return data;
   }
 }
 Serializer.addClass(

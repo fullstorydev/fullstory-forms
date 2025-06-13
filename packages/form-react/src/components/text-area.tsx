@@ -37,6 +37,7 @@ export class TextAreaComponent extends SurveyElementBase<ITextAreaProps, any> {
   protected renderElement(): React.JSX.Element {
     return (
       <textarea
+        {...this.viewModel.elementData}
         id={this.viewModel.id}
         className={this.viewModel.className}
         ref={this.textareaRef}

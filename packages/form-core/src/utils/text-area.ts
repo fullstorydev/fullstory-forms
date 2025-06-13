@@ -42,10 +42,14 @@ export class TextAreaModel {
       this.element.value = this.getTextValue();
       this.updateElement();
     }
-  }
+  };
 
   constructor(private options: ITextArea) {
-    this.question.registerFunctionOnPropertyValueChanged(this.options.propertyName, this.onPropertyChangedCallback, "__textarea");
+    this.question.registerFunctionOnPropertyValueChanged(
+      this.options.propertyName,
+      this.onPropertyChangedCallback,
+      "__textarea"
+    );
   }
 
   public setElement(element: HTMLTextAreaElement | null): void {
@@ -59,34 +63,29 @@ export class TextAreaModel {
   }
 
   public getTextValue(): string {
-    if (!!this.options.getTextValue)
-      return this.options.getTextValue() || "";
+    if (!!this.options.getTextValue) return this.options.getTextValue() || "";
     return "";
   }
   public onTextAreaChange(event: any): void {
-    if (!!this.options.onTextAreaChange)
-      this.options.onTextAreaChange(event);
+    if (!!this.options.onTextAreaChange) this.options.onTextAreaChange(event);
   }
   public onTextAreaInput(event: any): void {
-    if (!!this.options.onTextAreaInput)
-      this.options.onTextAreaInput(event);
+    if (!!this.options.onTextAreaInput) this.options.onTextAreaInput(event);
 
     if (this.element && this.autoGrow) {
       increaseHeightByContent(this.element);
     }
+    this.updateElementData(event.target);
   }
   public onTextAreaKeyDown(event: any): void {
-    if (!!this.options.onTextAreaKeyDown)
-      this.options.onTextAreaKeyDown(event);
+    if (!!this.options.onTextAreaKeyDown) this.options.onTextAreaKeyDown(event);
   }
   public onTextAreaBlur(event: any): void {
     this.onTextAreaChange(event);
-    if (!!this.options.onTextAreaBlur)
-      this.options.onTextAreaBlur(event);
+    if (!!this.options.onTextAreaBlur) this.options.onTextAreaBlur(event);
   }
   public onTextAreaFocus(event: any): void {
-    if (!!this.options.onTextAreaFocus)
-      this.options.onTextAreaFocus(event);
+    if (!!this.options.onTextAreaFocus) this.options.onTextAreaFocus(event);
   }
   get question(): Question {
     return this.options.question as Question;
@@ -101,56 +100,71 @@ export class TextAreaModel {
     return this.options.className();
   }
   get maxLength(): number {
-    if (this.options.maxLength)
-      return this.options.maxLength();
+    if (this.options.maxLength) return this.options.maxLength();
   }
   get autoGrow(): boolean {
-    if (this.options.autoGrow)
-      return this.options.autoGrow();
+    if (this.options.autoGrow) return this.options.autoGrow();
   }
   get rows(): number {
-    if (this.options.rows)
-      return this.options.rows();
+    if (this.options.rows) return this.options.rows();
   }
   get cols(): number | undefined {
-    if (this.options.cols)
-      return this.options.cols();
+    if (this.options.cols) return this.options.cols();
   }
   get isDisabledAttr(): boolean {
     return this.options.isDisabledAttr();
   }
   get isReadOnlyAttr(): boolean | undefined {
-    if (this.options.isReadOnlyAttr)
-      return this.options.isReadOnlyAttr();
+    if (this.options.isReadOnlyAttr) return this.options.isReadOnlyAttr();
   }
   get ariaRequired(): "true" | "false" {
-    if (this.options.ariaRequired)
-      return this.options.ariaRequired();
+    if (this.options.ariaRequired) return this.options.ariaRequired();
   }
   get ariaLabel(): string {
-    if (this.options.ariaLabel)
-      return this.options.ariaLabel();
+    if (this.options.ariaLabel) return this.options.ariaLabel();
   }
   get ariaInvalid(): "true" | "false" {
-    if (this.options.ariaInvalid)
-      return this.options.ariaInvalid();
+    if (this.options.ariaInvalid) return this.options.ariaInvalid();
   }
   get ariaLabelledBy(): string {
-    if (this.options.ariaLabelledBy)
-      return this.options.ariaLabelledBy();
+    if (this.options.ariaLabelledBy) return this.options.ariaLabelledBy();
   }
   get ariaDescribedBy(): string {
-    if (this.options.ariaDescribedBy)
-      return this.options.ariaDescribedBy();
+    if (this.options.ariaDescribedBy) return this.options.ariaDescribedBy();
   }
   get ariaErrormessage(): string {
-    if (this.options.ariaErrormessage)
-      return this.options.ariaErrormessage();
+    if (this.options.ariaErrormessage) return this.options.ariaErrormessage();
   }
   public dispose(): void {
     if (this.question) {
-      this.question.unRegisterFunctionOnPropertyValueChanged(this.options.propertyName, "__textarea");
+      this.question.unRegisterFunctionOnPropertyValueChanged(
+        this.options.propertyName,
+        "__textarea"
+      );
     }
     this.resetElement();
+  }
+
+  public get elementData(): any {
+    const name = this.question.getValueName();
+    const data = this.question.getDataElement("textarea", name);
+
+    return data;
+  }
+
+  public updateElementData(el: any): void {
+    const val = el.value;
+    const blocked = this.question.traverseBlocked(
+      el,
+      this.question.survey.blocklist
+    );
+
+    const name = el.getAttribute("data-fs-textarea-name");
+    !blocked &&
+      this.question.survey.updateButtonValuesCallBack({ [name]: val });
+
+    const key = "fs-textarea-value";
+    el.setAttribute(`data-${key}`, blocked ? "blocked" : val);
+    this.question.updatePropertySchema(el, key, blocked ? "blocked" : val);
   }
 }
