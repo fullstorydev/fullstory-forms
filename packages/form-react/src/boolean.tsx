@@ -25,16 +25,12 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
     return this.question.isIndeterminate && !this.isDisplayMode;
   }
   */
-  componentDidUpdate(): void {
-    const el = this.checkRef.current;
-
-    this.question.updateDataElements(el, el.value);
-  }
   private doCheck(value: boolean) {
     this.question.booleanValue = value;
   }
   handleOnChange(event: any) {
     this.doCheck(event.target.checked);
+    this.question.updateDataElements(event.target);
   }
   handleOnClick(event: any) {
     this.question.onLabelClick(event, true);
