@@ -317,18 +317,15 @@ export class QuestionBooleanModel extends Question {
     return data;
   }
 
-  public updateDataElements(el: HTMLElement) {
+  public updateDataElements(el: HTMLElement, val) {
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
-    const val = this.value;
+
     !blocked &&
       this.survey.updateButtonValuesCallBack({
         [this.name]: val,
       });
 
-    const elementName = el.getAttribute("data-fs-element");
-    const key = `fs-${elementName}-value`;
-    el.setAttribute(`data-${key}`, blocked ? "blocked" : val);
-    this.updatePropertySchema(el, key, blocked ? "blocked" : val);
+    this.updateDataValue(el, val, blocked);
   }
 
   public getCheckedLabel(): LocalizableString {

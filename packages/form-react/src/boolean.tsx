@@ -30,7 +30,6 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
   }
   handleOnChange(event: any) {
     this.doCheck(event.target.checked);
-    this.question.updateDataElements(event.target);
   }
   handleOnClick(event: any) {
     this.question.onLabelClick(event, true);
@@ -40,6 +39,7 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
   }
   handleOnLabelClick(event: any, value: boolean) {
     this.question.onLabelClick(event, value);
+    this.question.updateDataElements(this.checkRef.current, value);
   }
   handleOnKeyDown(event: any) {
     this.question.onKeyDownCore(event);
