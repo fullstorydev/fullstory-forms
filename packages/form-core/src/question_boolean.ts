@@ -309,18 +309,27 @@ export class QuestionBooleanModel extends Question {
     return this.isIndeterminate && !this.isInputReadOnly;
   }
 
-  public elementData(element: HTMLElement): any {
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
-    const blocked = this.isBlocked(element, this.survey.blocklist);
-    let data;
-    if (!!this.labelFalse && !!this.labelTrue) {
-      const val = this.value ? this.labelTrue : this.labelFalse;
-      data = this.getDataElement("boolean", name, blocked ? "blocked" : val);
-    } else {
-      data = this.getDataElement("boolean", name);
-    }
+
+    const data = this.getDataElement("boolean", name);
+
     return data;
   }
+
+  public updateDataElements(el: HTMLElement, val: string) {
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+    !blocked &&
+      this.survey.updateButtonValuesCallBack({
+        [this.name]: val,
+      });
+
+    const elementName = el.getAttribute("data-fs-element");
+    const key = `fs-${elementName}-selected`;
+    el.setAttribute(`data-${key}`, blocked ? "blocked" : val);
+    this.updatePropertySchema(el, key, blocked ? "blocked" : val);
+  }
+
   public getCheckedLabel(): LocalizableString {
     if (this.booleanValue === true) {
       return this.locLabelTrue;
