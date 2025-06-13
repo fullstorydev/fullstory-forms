@@ -18,6 +18,7 @@ export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {
 
     return (
       <fieldset
+        {...this.question.elementData}
         className={this.question.getSelectBaseRootCss()}
         ref={fieldset => this.setControl(fieldset)}
         role={this.question.a11y_input_ariaRole}
@@ -176,6 +177,7 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
   }
   handleOnChange = (event: any) => {
     this.question.clickItemHandler(this.item, event.target.checked);
+    this.question.updateElementDataByItem(event.target);
   };
   protected canRender(): boolean {
     return !!this.item && !!this.question;
