@@ -149,6 +149,8 @@ export class QuestionFileModelBase extends Question {
           this.stateChanged("loaded");
         }
       );
+
+      this.updateElementData();
     }
   }
   protected loadPreview(newValue: any): void {}
@@ -167,6 +169,52 @@ export class QuestionFileModelBase extends Question {
   protected set isFileLoading(val: boolean) {
     this.isFileLoadingValue = val;
     this.updateIsReady();
+  }
+
+  public updateElementData(): void {
+    const el = document.querySelector(`#${this.inputId}`) as HTMLInputElement;
+    const blocked = false;
+    // this.traverseBlocked(el, this.survey.blocklist);
+    const keys = Object.keys(this.value[0]);
+
+    keys.forEach((x) => {
+      const prop = x === "name" ? "filename" : x;
+      let key = `fs-file-${prop}`;
+      const value = blocked ? "blocked" : this.value[0][x];
+
+      el.setAttribute(`data-${key}`, value);
+      this.updatePropertySchema(el, key, value);
+      !blocked &&
+        this.survey.updateButtonValuesCallBack({
+          [`${this.name}-${prop}`]: value,
+        });
+    });
+  }
+
+  public deleteElementData(): void {
+    // get the input element by its ID
+    const el = document.querySelector(`#${this.inputId}`) as HTMLInputElement;
+    if (!el) return;
+
+    // get all attributes that start with "data-fs-file-"
+    const data = el
+      .getAttributeNames()
+      .filter((attr) => attr.startsWith("data-fs-file-"));
+
+    // remove each key from the element
+    data.forEach((x) => {
+      if (x !== "data-fs-file-name") {
+        // remove the attribute from the element
+        el.removeAttribute(x);
+
+        // remove the property from the schema
+        this.deleteFromPropertySchema(el, x);
+
+        const name = x.replace("data-fs-file-", "");
+        // remove property from button values
+        this.survey.deleteButtonValuesCallBack(`${this.name}-${name}`);
+      }
+    });
   }
 }
 
@@ -1374,6 +1422,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       return;
     }
     this.clearFilesCore();
+    this.deleteElementData();
   };
   private clearFilesCore(): void {
     if (this.rootElement) {
@@ -1428,27 +1477,11 @@ export class QuestionFileModel extends QuestionFileModelBase {
     super.dispose();
   }
 
-  public elementData(el: HTMLElement): any {
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
-    const blocked = this.isBlocked(el, this.survey.blocklist);
 
-    if (this.value && this.value.length > 0) {
-      const keys = Object.keys(this.value[0]);
-      const filedata = { "fs-file-name": name };
-      keys.map((x) => {
-        if (x === "name") {
-          filedata["fs-file-filename"] = blocked ? "blocked" : this.value[0][x];
-        } else {
-          filedata[`fs-file-${x}`] = blocked ? "blocked" : this.value[0][x];
-        }
-      });
-
-      const data = this.createElementData(filedata, "file");
-      return data;
-    } else {
-      const data = this.getDataElement("file", name);
-      return data;
-    }
+    const data = this.getDataElement("file", name);
+    return data;
   }
 }
 Serializer.addClass(

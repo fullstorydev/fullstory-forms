@@ -36,6 +36,7 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     if (this.question.isReadOnlyAttr) {
       fileInput = (
         <input
+          {...this.question.elementData}
           readOnly
           type="file"
           className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
@@ -50,6 +51,7 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     } else if (this.question.isDisabledAttr) {
       fileInput = (
         <input
+          {...this.question.elementData}
           disabled
           type="file"
           className={!this.isDisplayMode ? this.question.cssClasses.fileInput : this.question.getReadOnlyFileCss()}
@@ -64,6 +66,7 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     } else if (this.question.hasFileUI) {
       fileInput = (
         <input
+          {...this.question.elementData}
           type="file"
           disabled={this.isDisplayMode}
           tabIndex={-1}
@@ -84,6 +87,7 @@ export class SurveyQuestionFile extends SurveyQuestionElementBase {
     } else {
       fileInput = null;
     }
+
     return (
       <div className={this.question.fileRootCss} ref={el => this.setContent(el)}>
         {fileInput}
