@@ -288,18 +288,22 @@ export class QuestionImagePickerModel extends QuestionCheckboxBase {
   public set imageWidth(val: number) {
     this.setPropertyValue("imageWidth", val);
   }
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
-    const data = this.getDataElement(
-      "imagepicker",
-      name,
-      blocked ? "blocked" : this.value
-    );
+    const data = this.getDataElement("imagepicker", name);
 
     return data;
+  }
+  public updateElementDataFromItem(event): void {
+    const input = event.target as HTMLElement;
+    const el = this.getParentFieldSet(input);
+    if (!el) return;
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+    this.updateDataValue(el, this.value, blocked);
+
+    !blocked &&
+      this.survey.updateButtonValuesCallBack({ [this.name]: this.value });
   }
   @property({}) private responsiveImageWidth: number;
   public get renderedImageWidth(): number {

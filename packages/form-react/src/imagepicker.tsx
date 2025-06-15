@@ -16,7 +16,11 @@ export class SurveyQuestionImagePicker extends SurveyQuestionElementBase {
     var cssClasses = this.question.cssClasses;
 
     return (
-      <fieldset className={this.question.getSelectBaseRootCss()} ref={field => this.setControl(field)}>
+      <fieldset
+        {...this.question.elementData}
+        className={this.question.getSelectBaseRootCss()}
+        ref={field => this.setControl(field)}
+      >
         <legend className="sv-hidden">{this.question.locTitle.renderedHtml}</legend>
         {this.question.hasColumns ? this.getColumns(cssClasses) : this.getItems(cssClasses)}
       </fieldset>
@@ -90,6 +94,8 @@ export class SurveyQuestionImagePickerItem extends ReactSurveyElement {
   componentDidUpdate(prevProps: any, prevState: any) {
     super.componentDidUpdate(prevProps, prevState);
     this.reactOnStrChanged();
+    const data = this.item.elementData(this.imgRef.current, "imagepicker-item");
+    this.setDataElements(this.imgRef.current, data);
   }
   private reactOnStrChanged() {
     this.item.locImageLink.onChanged = () => {
@@ -123,6 +129,7 @@ export class SurveyQuestionImagePickerItem extends ReactSurveyElement {
     } else {
       this.question.value = event.target.value;
     }
+    this.question.updateElementDataFromItem(event);
     this.setState({ value: this.question.value });
   }
 
@@ -201,9 +208,10 @@ export class SurveyQuestionImagePickerItem extends ReactSurveyElement {
     const css = `${cssClasses.itemControl}`;
 
     const renderedItem = (
-      <div className={itemClass} ref={this.imgRef}>
+      <div className={itemClass}>
         <label className={cssClasses.label}>
           <input
+            ref={this.imgRef}
             className={css}
             id={this.question.getItemId(item)}
             type={this.question.inputType}
