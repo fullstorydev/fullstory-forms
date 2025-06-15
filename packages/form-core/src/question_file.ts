@@ -173,8 +173,7 @@ export class QuestionFileModelBase extends Question {
 
   public updateElementData(): void {
     const el = document.querySelector(`#${this.inputId}`) as HTMLInputElement;
-    const blocked = false;
-    // this.traverseBlocked(el, this.survey.blocklist);
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
     const keys = Object.keys(this.value[0]);
 
     keys.forEach((x) => {
@@ -195,6 +194,9 @@ export class QuestionFileModelBase extends Question {
     // get the input element by its ID
     const el = document.querySelector(`#${this.inputId}`) as HTMLInputElement;
     if (!el) return;
+    // check if the element is blocked
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+    if (blocked) return;
 
     // get all attributes that start with "data-fs-file-"
     const data = el
