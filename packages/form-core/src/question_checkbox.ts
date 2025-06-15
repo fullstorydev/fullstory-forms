@@ -115,19 +115,10 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
     return data;
   }
 
-  private getFieldSet(child: HTMLElement) {
-    let el = child;
-
-    while (!el.matches("fieldset")) {
-      el = el.parentElement;
-    }
-
-    return el;
-  }
   public updateElementDataByItem(el: HTMLElement): void {
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
     const name = this.name ? this.name : this.title;
-    const parent = this.getFieldSet(el);
+    const parent = this.getParentFieldSet(el);
 
     const values = this.value.join(", ");
     !blocked &&

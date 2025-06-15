@@ -13,14 +13,14 @@ export class SurveyQuestionRanking extends SurveyQuestionElementBase {
   protected renderElement(): React.JSX.Element {
     if (!this.question.selectToRankEnabled) {
       return (
-        <div className={this.question.rootClass} ref={root => this.setControl(root)}>
+        <div {...this.question.elementData} className={this.question.rootClass} ref={root => this.setControl(root)}>
           {this.getItems()}
         </div>
       );
     } else {
       const unrankedItem = true;
       return (
-        <div className={this.question.rootClass} ref={root => this.setControl(root)}>
+        <div {...this.question.elementData} className={this.question.rootClass} ref={root => this.setControl(root)}>
           <div className={this.question.getContainerClasses("from")} data-ranking="from-container">
             {this.getItems(this.question.renderedUnRankingChoices, unrankedItem)}
             {this.question.renderedUnRankingChoices.length === 0 ? (

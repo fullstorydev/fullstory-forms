@@ -375,29 +375,32 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
     this.unRankingChoicesAnimation.sync(val);
   }
 
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
-    let data;
-
-    if (this.value.length > 0) {
-      const rankingData = {};
-      rankingData["fs-element"] = "ranking";
-      rankingData["fs-ranking-name"] = name;
-
-      for (let i = 0; i < this.value.length; i++) {
-        rankingData[`fs-ranking-position-${i + 1}`] = blocked
-          ? "blocked"
-          : this.value[i];
-      }
-
-      data = this.createElementData(rankingData);
-    } else {
-      data = this.getDataElement("ranking", name);
-    }
+    let data = this.getDataElement("ranking", name);
 
     return data;
+  }
+
+  public updateElementData() {
+    const name = this.name ? this.name : this.title;
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-ranking-name='${name}']`
+    );
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
+    if (this.value.length > 0 && !blocked) {
+      for (let i = 0; i < this.value.length; i++) {
+        const suffix = `ranking-position-${i + 1}`;
+        const key = `fs-${suffix}`;
+        const value = this.value[i];
+        el.setAttribute(`data-${key}`, value);
+        this.updatePropertySchema(el, key, value);
+        this.survey.updateButtonValuesCallBack({
+          [`${name}-${suffix}`]: value,
+        });
+      }
+    }
   }
 
   private updateRenderedRankingChoices() {
@@ -668,7 +671,6 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
     event: KeyboardEvent
   ) {
     this.setValue();
-
     if (isNeedFocus) {
       setTimeout(() => {
         this.focusItem(index, container);
@@ -701,6 +703,8 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
     });
     this.value = value;
     this.isValueSetByUser = true;
+
+    this.updateElementData();
   };
   public getIconHoverCss(): string {
     return new CssClassBuilder()
