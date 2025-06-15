@@ -56,18 +56,23 @@ export class QuestionRadiogroupModel extends QuestionCheckboxBase {
   public get clearButtonCaption() {
     return this.getLocalizationString("clearCaption");
   }
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
-    const data = this.getDataElement(
-      "radiogroup",
-      name,
-      blocked ? "blocked" : this.value
-    );
+    const data = this.getDataElement("radiogroup", name);
 
     return data;
+  }
+
+  public updateElementDataByItem(event) {
+    const el = this.getParentFieldSet(event.target);
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
+    this.updateDataValue(el, this.value, blocked);
+    !blocked &&
+      this.survey.updateButtonValuesCallBack({
+        [this.name]: this.value,
+      });
   }
   supportAutoAdvance(): boolean {
     return this.isMouseDown === true && !this.isOtherSelected;

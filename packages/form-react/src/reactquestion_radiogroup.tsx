@@ -31,6 +31,7 @@ export class SurveyQuestionRadiogroup extends SurveyQuestionElementBase {
 
     return (
       <fieldset
+        {...this.question.elementData}
         className={this.question.getSelectBaseRootCss()}
         ref={fieldset => this.setControl(fieldset)}
         role={this.question.a11y_input_ariaRole}
@@ -171,6 +172,7 @@ export class SurveyQuestionRadioItem extends ReactSurveyElement {
   }
   handleOnChange(event: any) {
     this.question.clickItemHandler(this.item);
+    this.question.updateElementDataByItem(event);
   }
   handleOnMouseDown(event: any) {
     this.question.onMouseDown();
@@ -189,6 +191,8 @@ export class SurveyQuestionRadioItem extends ReactSurveyElement {
         prevProps.item.setRootElement(undefined);
       }
     }
+    const data = this.item.elementData(this.radioRef.current, "radio-item");
+    this.setDataElements(this.radioRef.current, data);
   }
 
   protected renderElement(): React.JSX.Element {
