@@ -238,18 +238,26 @@ export class QuestionRatingModel extends Question {
     );
   }
 
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
-    const data = this.getDataElement(
-      "rating",
-      name,
-      blocked ? "blocked" : this.value
-    );
+    const data = this.getDataElement("rating", name);
 
     return data;
+  }
+
+  public updateElementData(): void {
+    const name = this.name ? this.name : this.title;
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-rating-name="${name}"]`
+    );
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
+    this.updateDataValue(el, this.value, blocked);
+    !blocked &&
+      this.survey.updateButtonValuesCallBack({
+        [name]: this.value,
+      });
   }
 
   @property() autoGenerate: boolean;
@@ -838,6 +846,8 @@ export class QuestionRatingModel extends Question {
     for (let i: number = 0; i < this.renderedRateItems.length; i++) {
       this.renderedRateItems[i].highlight = "none";
     }
+
+    this.updateElementData();
   }
   public onItemMouseIn(item: RenderedRatingItem) {
     if (IsTouch) return;

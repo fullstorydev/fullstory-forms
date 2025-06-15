@@ -34,10 +34,9 @@ export class SurveyQuestionRating extends SurveyQuestionElementBase {
     var cssClasses = this.question.cssClasses;
     var minText = this.question.minRateDescription ? this.renderLocString(this.question.locMinRateDescription) : null;
     var maxText = this.question.maxRateDescription ? this.renderLocString(this.question.locMaxRateDescription) : null;
-
     return (
       <div className={this.question.ratingRootCss} ref={div => this.setControl(div)}>
-        <fieldset role="radiogroup">
+        <fieldset role="radiogroup" {...this.question.elementData}>
           <legend role="presentation" className={"sv-hidden"}></legend>
           {!!this.question.hasMinLabel ? <span className={cssClasses.minText}>{minText}</span> : null}
           {this.question.renderedRateItems.map((item, index) => this.renderItem(item, index))}
