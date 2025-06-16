@@ -48,6 +48,7 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
       // @ts-ignore
       selectElement = (
         <div
+          {...this.question.elementData}
           id={this.question.inputId}
           aria-label={this.question.a11y_input_ariaLabel}
           aria-labelledby={this.question.a11y_input_ariaLabelledBy}
@@ -68,7 +69,6 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
         </>
       );
     }
-
     return (
       <div className={cssClasses.selectWrapper} onClick={this.click}>
         {selectElement}
@@ -98,6 +98,7 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
         dropdownListModel.inputStringRendered = e.target.value;
       }
     };
+
     return (
       <div
         id={this.question.inputId}
@@ -136,6 +137,7 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
           ) : null}
           {valueElement}
           <input
+            {...this.question.elementData}
             type="text"
             autoComplete="off"
             id={this.question.getInputId()}
@@ -229,7 +231,10 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
     if (!!this.inputElement) {
       const control: any = this.inputElement;
       const newValue = this.question.dropdownListModel.inputStringRendered;
+
       if (!Helpers.isTwoValueEquals(newValue, control.value, false, true, false)) {
+        const val = newValue !== "" ? newValue : control.value;
+
         control.value = this.question.dropdownListModel.inputStringRendered;
       }
     }

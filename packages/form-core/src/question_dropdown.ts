@@ -43,6 +43,7 @@ export class QuestionDropdownModel extends QuestionSelectBase {
       () => {
         this.getSingleSelectedItem();
         this.resetReadOnlyText();
+        this.updateElementData();
       }
     );
   }
@@ -320,17 +321,43 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     const item = this.selectedItem;
     return !!item ? item.text : "";
   }
-  public elementData(el: HTMLElement): any {
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    const data = this.getDataElement(
-      "dropdown",
-      name,
-      blocked ? "blocked" : this.selectedItemText
-    );
+    const data = this.getDataElement("dropdown", name);
 
     return data;
+  }
+  public updateElementData(): void {
+    if (this.value === undefined || this.value === null) return;
+    const name = this.name ? this.name : this.title;
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-dropdown-name=${name.split(" ").join("-")}]`
+    );
+
+    const blocked = false;
+    // this.traverseBlocked(event.target, this.survey.blocklist);
+    !blocked &&
+      this.survey.updateButtonValuesCallBack({
+        [name]: this.value,
+      });
+
+    this.updateDataValue(el, this.value, blocked);
+  }
+  public deleteElementData() {
+    const name = this.name ? this.name : this.title;
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-dropdown-name=${name.split(" ").join("-")}]`
+    );
+    const blocked = false;
+    // this.traverseBlocked(el, this.survey.blocklist);
+
+    if (!blocked) {
+      el.removeAttribute("data-fs-dropdown-value");
+      this.deleteFromPropertySchema(el, "data-fs-dropdown-value");
+
+      this.survey.deleteButtonValuesCallBack(name);
+    }
   }
   private get useDropdownList(): boolean {
     return this.renderAs !== "select";
@@ -406,6 +433,7 @@ export class QuestionDropdownModel extends QuestionSelectBase {
     super.clearValue(keepComment);
     this.lastSelectedItemValue = null;
     this.dropdownListModelValue?.clear();
+    this.deleteElementData();
   }
 
   public afterRenderCore(el: any): void {
