@@ -76,6 +76,7 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
       this.valueIsUpdatingInternally = true;
       this.value = data;
       this.valueIsUpdatingInternally = false;
+      this.updateElementData();
     }
   }
 
@@ -302,20 +303,40 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     this.signaturePad = null;
   }
 
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
     let data: any = {
       "fs-element": "signaturepad",
       "fs-signaturepad-name": name,
-      "fs-signaturepad-signed": blocked ? "blocked" : !!this.value,
+      "fs-signaturepad-signed": false,
     };
 
     data = this.createElementData(data);
 
     return data;
+  }
+  public updateElementData() {
+    const el = document.querySelector(
+      `[data-fs-element="signaturepad"][data-fs-signaturepad-name="${this.name}"]`
+    ) as HTMLElement;
+
+    el.setAttribute("data-fs-signaturepad-signed", "true");
+
+    this.survey.updateButtonValuesCallBack({
+      [`${this.name}-signed`]: !!this.value,
+    });
+  }
+  public deleteElementData(): void {
+    const el = document.querySelector(
+      `[fs-element="signaturepad"][fs-signaturepad-name="${this.name}"]`
+    ) as HTMLElement;
+    if (!!el) {
+      el.removeAttribute("fs-signaturepad-signed");
+    }
+    this.survey.updateButtonValuesCallBack({
+      [`${this.name}-signed`]: false,
+    });
   }
   /**
    * Specifies the format in which to store the signature image.
@@ -525,6 +546,7 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     super.clearValue(keepComment);
     this._loadedData = undefined;
     this.loadPreview(this.value);
+    this.deleteElementData();
   }
   endLoadingFromJson(): void {
     super.endLoadingFromJson();

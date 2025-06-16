@@ -23,6 +23,7 @@ export class SurveyQuestionSignaturePad extends SurveyQuestionElementBase {
         className={cssClasses.root}
         ref={root => this.setControl(root)}
         style={{ width: this.question.renderedCanvasWidth }}
+        {...this.question.elementData}
       >
         <div className={cssClasses.placeholder} style={{ display: this.question.needShowPlaceholder() ? "" : "none" }}>
           {this.renderLocString(this.question.locRenderedPlaceholder)}
