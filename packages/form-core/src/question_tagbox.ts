@@ -44,6 +44,7 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
       ],
       () => {
         this.updateReadOnlyText();
+        this.updateElementData();
       }
     );
     this.updateReadOnlyText();
@@ -137,22 +138,41 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
 
   @property() textWrapEnabled: boolean;
 
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
-
-    let data;
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
-
-    if (!!this.selectedItems) {
-      const values = this.selectedItems.map((x) => x.text).join(", ");
-
-      data = this.getDataElement("tagbox", name, blocked ? "blocked" : values);
-    } else {
-      data = this.getDataElement("tagbox", name);
-    }
+    let data = this.getDataElement("tagbox", name);
 
     return data;
   }
+  public updateElementData(): void {
+    if (this.selectedItems.length > 0) {
+      const name = this.name ? this.name : this.title;
+      const el: HTMLElement = document.querySelector(
+        `[data-fs-tagbox-name='${name.split(" ").join("-")}']`
+      );
+
+      const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
+      const values = this.selectedItems.map((x) => x.text).join(", ");
+
+      this.updateDataValue(el, values, blocked);
+      !blocked && this.survey.updateButtonValuesCallBack({ [name]: values });
+    }
+  }
+  public deleteElementData(): void {
+    if (this.selectedItems.length > 0) return;
+    const name = this.name ? this.name : this.title;
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-tagbox-name='${name.split(" ").join("-")}']`
+    );
+    el.removeAttribute("data-fs-tagbox-value");
+    this.deleteFromPropertySchema(el, "data-fs-tagbox-value");
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+
+    !blocked &&
+      this.survey.deleteButtonValuesCallBack(name.split(" ").join("-"));
+  }
+
   /**
    * A text displayed in the input field when it doesn't have a value.
    */
@@ -347,6 +367,7 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   public clearValue(keepComment?: boolean): void {
     super.clearValue(keepComment);
     this.dropdownListModelValue?.clear();
+    this.deleteElementData();
   }
   public get showClearButton(): boolean {
     return this.allowClear && !this.isEmpty();

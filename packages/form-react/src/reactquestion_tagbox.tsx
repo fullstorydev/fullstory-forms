@@ -57,7 +57,7 @@ export class SurveyQuestionTagbox extends SurveyQuestionDropdownBase<QuestionTag
     const comment = this.question.isOtherSelected ? this.renderOther(cssClasses) : null;
     const select = this.renderSelect(cssClasses);
     return (
-      <div className={this.question.renderCssRoot}>
+      <div className={this.question.renderCssRoot} {...this.question.elementData}>
         {select}
         {comment}
       </div>
