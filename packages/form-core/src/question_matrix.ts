@@ -100,19 +100,24 @@ export class MatrixRowModel extends Base {
       .toString();
   }
 
-  public elementData(el: HTMLElement, blocklist: any[]): any {
-    const blocked = this.traverseBlocked(el, blocklist);
-
+  public get elementData(): any {
     const data = {
       "fs-element": "table-row",
       "fs-table-row-name": this.name,
     };
 
-    if (this.value) {
-      data["fs-table-row-value"] = blocked ? "blocked" : this.value;
-    }
-
     return this.createElementData(data);
+  }
+
+  public updateElementData(blocklist): void {
+    const el = document.querySelector(
+      `[data-fs-element="table-row"][data-fs-table-row-name="${this.name}"]`
+    ) as HTMLElement;
+    if (!el) return;
+
+    const blocked = this.traverseBlocked(el, blocklist);
+
+    this.value !== null && this.updateDataValue(el, this.value, blocked);
   }
 }
 

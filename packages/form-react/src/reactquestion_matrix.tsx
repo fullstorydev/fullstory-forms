@@ -87,16 +87,13 @@ export class SurveyQuestionMatrix extends SurveyQuestionElementBase {
 }
 
 export class SurveyQuestionMatrixRow extends ReactSurveyElement {
-  private rowRef: React.RefObject<HTMLTableRowElement>;
   constructor(props: any) {
     super(props);
-    this.rowRef = React.createRef();
   }
-  componentDidMount(): void {
-    this.rowElementData();
-  }
+
   componentDidUpdate(): void {
-    this.rowElementData();
+    const blocklist = this.question.survey.blocklist;
+    this.row.updateElementData(blocklist);
   }
   protected getStateElement(): Base | null {
     if (!!this.row) return this.row.item;
@@ -122,12 +119,7 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
   protected canRender(): boolean {
     return !!this.row;
   }
-  protected rowElementData(): void {
-    const el = this.rowRef.current;
-    const blocklist = this.question.survey.blocklist;
-    const data = this.row.elementData(el, blocklist);
-    this.setDataElements(el, data);
-  }
+
   protected renderElement(): React.JSX.Element {
     var rowsTD: React.JSX.Element | null = null;
 
@@ -149,7 +141,7 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
     var tds = this.generateTds();
 
     return (
-      <tr ref={this.rowRef} className={this.row.rowClasses || undefined}>
+      <tr className={this.row.rowClasses || undefined} {...this.row.elementData}>
         {rowsTD}
         {tds}
       </tr>
@@ -247,7 +239,7 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
     const blocklist = this.question.survey.blocklist;
     const blocked = this.question.isBlocked(el, blocklist);
     const columnData = this.column.elementData(el, "column");
-    const rowData = this.row.elementData(el, blocklist);
+    const rowData = this.row.elementData;
     const index = this.question.rows.findIndex(x => x.id === this.row.name);
 
     const data = {
@@ -258,6 +250,11 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
       "fs-table-cell-selected": blocked ? "blocked" : this.row.value == this.column.value
     };
 
+    !blocked &&
+      data["fs-table-cell-selected"] &&
+      this.question.survey.updateButtonValuesCallBack({
+        [rowData["data-fs-table-row-name"]]: columnData["fs-column-name"]
+      });
     return this.setDataElements(el, this.question.createElementData(data));
   }
   protected canRender(): boolean {
