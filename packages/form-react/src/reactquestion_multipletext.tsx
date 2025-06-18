@@ -12,15 +12,8 @@ export class SurveyQuestionMultipleText extends SurveyQuestionElementBase {
     super(props);
     this.multiTextRef = React.createRef();
   }
-  componentDidMount(): void {
-    const el = this.multiTextRef.current;
-    const data = this.question.elementData(el);
-    this.setDataElements(el, data);
-  }
   componentDidUpdate(): void {
-    const el = this.multiTextRef.current;
-    const data = this.question.elementData(el);
-    this.setDataElements(el, data);
+    this.question.updateElementData();
   }
   protected get question(): QuestionMultipleTextModel {
     return this.questionBase as QuestionMultipleTextModel;
@@ -36,7 +29,7 @@ export class SurveyQuestionMultipleText extends SurveyQuestionElementBase {
     }
 
     return (
-      <table ref={this.multiTextRef} className={this.question.getQuestionRootCss()}>
+      <table ref={this.multiTextRef} className={this.question.getQuestionRootCss()} {...this.question.elementData}>
         <tbody>{rows}</tbody>
       </table>
     );

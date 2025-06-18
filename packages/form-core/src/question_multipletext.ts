@@ -916,21 +916,33 @@ export class QuestionMultipleTextModel
     return new CssClassBuilder().append(this.cssClasses.itemTitle).toString();
   }
 
-  public elementData(el: HTMLElement): any {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+  public get elementData(): any {
     const name = this.name ? this.name : this.title;
 
     // get input type and prepare it to be the element name
     const type = this.getType();
 
     // create data object
-    const data = {};
+    const data = {
+      "fs-element": type,
+      [`fs-${type}-name`]: name,
+    };
 
-    // make fs element name the type
-    data["fs-element"] = type;
+    // create element data
+    const dataElement = this.createElementData(data);
 
-    // make the element name with type and title
-    data[`${type}-name`] = name;
+    return dataElement;
+  }
+
+  public updateElementData(): void {
+    const name = this.name ? this.name : this.title;
+
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-${this.getType()}-name="${name}"]`
+    );
+
+    if (!el) return;
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
     // if values we can flatten them
     if (!!this.value && !!Object.keys(this.value).length) {
@@ -940,15 +952,12 @@ export class QuestionMultipleTextModel
       // insert all flat values in data object with fs- appended
       Object.keys(flatValues).map((x) => {
         if (typeof flatValues[x] !== "undefined") {
-          data[`fs-${x}`] = blocked ? "blocked" : flatValues[x];
+          el.setAttribute(`data-fs-${x}`, blocked ? "blocked" : flatValues[x]);
+
+          this.updatePropertySchema(el, `fs-${x}`, flatValues[x]);
         }
       });
     }
-
-    // create element data
-    const dataElement = this.createElementData(data);
-
-    return dataElement;
   }
 }
 
