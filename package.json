@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "lint": "eslint ./functionalTests --quiet && eslint ./tests --quiet && eslint ./visualRegressionTests --quiet && eslint ./accessibilityTests --quiet",
-    "prepare": "husky install"
+    "lint": "eslint ./functionalTests --quiet && eslint ./tests --quiet && eslint ./visualRegressionTests --quiet && eslint ./accessibilityTests --quiet"
   },
   "version": "1.12.17",
   "name": "survey-library",
@@ -29,8 +28,5 @@
     "axe-testcafe": {
       "axe-core": "^4.8.2"
     }
-  },
-  "husky": {
-    "hooks": {}
   }
 }
