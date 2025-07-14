@@ -57,6 +57,8 @@ export interface IValueItemCustomPropValues {
 }
 export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   getSkeletonComponentName(element: ISurveyElement): string;
+  updateButtonValuesCallBack: (data: any) => any;
+  deleteButtonValuesCallBack: (name: string) => any;
   currentPage: IPage;
   activePage: IPage;
   pages: Array<IPage>;

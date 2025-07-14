@@ -383,7 +383,6 @@ export class Base {
 
       // grab data type
       const dataType = typeof data;
-
       // if these data types throw error
       if (
         dataType === "undefined" ||
@@ -488,7 +487,6 @@ export class Base {
       try {
         // it element matches an item in the selector check it's type
         if (el.matches(item.Selector)) {
-          console.log("matches on item", item);
           if (item.Type === 3) {
             // if type is unmask we return false and break the loop
             // the element could potentially match multiple selectors but if there is an unmasked match
@@ -561,6 +559,46 @@ export class Base {
     return element;
   }
 
+  public updateDataValue(element: HTMLElement, value: string, blocked) {
+    const elementName = element.getAttribute("data-fs-element");
+    const key = `fs-${elementName}-value`;
+    element.setAttribute(`data-${key}`, blocked ? "blocked" : value);
+    this.updatePropertySchema(element, key, blocked ? "blocked" : value);
+  }
+
+  public deleteFromPropertySchema = (element: Element, key: string) => {
+    console.log("element", element);
+    console.log("deleteFromPropertySchema", key);
+    // get current schema
+    const schema = JSON.parse(
+      element.getAttribute("data-fs-properties-schema")
+    );
+
+    // delete data from schema
+    if (schema[key]) {
+      delete schema[key];
+    }
+
+    // set schema on element
+    element.setAttribute("data-fs-properties-schema", JSON.stringify(schema));
+  };
+
+  public updatePropertySchema = (element, key, value) => {
+    // get current schema
+    const schema = JSON.parse(
+      element.getAttribute("data-fs-properties-schema")
+    );
+
+    // add data to schema
+    schema[`data-${key}`] = {
+      name: key,
+      type: this.getDataType(value),
+    };
+
+    // set schema on element
+    element.setAttribute("data-fs-properties-schema", JSON.stringify(schema));
+  };
+
   getPropertyValueCoreHandler: (propertiesHash: any, name: string) => any;
 
   setPropertyValueCoreHandler: (
@@ -571,6 +609,15 @@ export class Base {
   createArrayCoreHandler: (propertiesHash: any, name: string) => Array<any>;
   surveyChangedCallback: () => void;
 
+  public getParentFieldSet(child: HTMLElement) {
+    let el = child;
+
+    while (!el.matches("fieldset")) {
+      el = el.parentElement;
+    }
+
+    return el;
+  }
   private isCreating = true;
 
   public constructor() {

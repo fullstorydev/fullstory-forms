@@ -443,6 +443,8 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
   private locTitleValue: LocalizableString;
   public updateCallback: (isResetInitialized: boolean) => void;
   public innerItem: IAction;
+  public dataProperties: any = {};
+
   private raiseUpdate(isResetInitialized: boolean = false) {
     this.updateCallback && this.updateCallback(isResetInitialized);
   }
@@ -452,6 +454,7 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
       innerItemData instanceof Action ? innerItemData.innerItem : innerItemData;
     this.innerItem = innerItem;
     this.locTitle = !!innerItem ? innerItem["locTitle"] : null;
+
     //Object.assign(this, item) to support IE11
     if (!!innerItem) {
       for (var key in innerItem) {
@@ -490,6 +493,63 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     this.popupModel = popupModel;
   }
 
+  private setButtonProperties = (button) => {
+    // Get the input element inside the button
+    const input = button.querySelector("input");
+    // create a data object from the properties
+    const properties = this.createElementData(this.dataProperties);
+
+    // Set the properties on the input element
+    Object.keys(properties).forEach((x) => {
+      input.setAttribute(x, properties[x]);
+    });
+  };
+
+  public updateElementData = (data) => {
+    // get the keys of the data object
+    const keys = Object.keys(data);
+
+    // for each key, replace spaces with dashes and set the dataProperties
+    keys.forEach((x) => {
+      const key = x.split(" ").join("-");
+      this.dataProperties[key] = data[x];
+    });
+
+    // find the button element by id
+    const button = document.querySelector(`#${this.innerItem.id}`);
+
+    // if the button exists, set the properties
+    if (!!button) {
+      this.setButtonProperties(button);
+    }
+  };
+  public deleteElementData = (name: string) => {
+    const dataName = `data-${name.split(" ").join("-")}`;
+    // delete the property from the dataProperties object
+    if (this.dataProperties.hasOwnProperty(name)) {
+      delete this.dataProperties[name];
+    }
+
+    console.log("data properties", this.dataProperties);
+    // find the button element by id
+    const button = document
+      .querySelector(`#${this.innerItem.id}`)
+      .querySelector("input");
+
+    // if the button exists, remove the attribute
+    if (!!button) {
+      button.removeAttribute(dataName);
+      this.deleteFromPropertySchema(button, dataName);
+    }
+  };
+  public getElementData = () => {
+    const data = this.createElementData(this.dataProperties);
+    return data;
+  };
+
+  public get elementData() {
+    return this.getElementData();
+  }
   location?: string;
   @property() id: string;
   @property({
@@ -708,40 +768,6 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
         callback();
       }
     });
-  }
-
-  public get elementData(): any {
-    //@ts-ignore
-    const data = !!this.ownerValue.locOwner.data
-      ? //@ts-ignore
-        this.ownerValue.locOwner.data
-      : {};
-    //@ts-ignore
-    data["fs-survey-name"] = this.ownerValue.locOwner.jsonObj?.name;
-
-    data["fs-element"] = "button";
-    data["fs-button-name"] = this.title;
-    if (this.innerItem.id === "sv-nav-next") {
-      data["fs-button-type"] = "next";
-    }
-    if (this.innerItem.id === "sv-nav-complete") {
-      data["fs-button-type"] = "complete";
-    }
-
-    //@ts-ignore
-    if (!!this.owner.locOwner.activePage) {
-      //@ts-ignore
-      data["fs-page-num"] = this.owner.locOwner.activePage.num;
-      //@ts-ignore
-      data["fs-page-name"] = this.owner.locOwner.activePage.name;
-    }
-
-    let elementData = {};
-    if (Object.keys(data).length > 0) {
-      elementData = this.createElementData(this.flattenObject(data));
-    }
-
-    return elementData;
   }
 }
 

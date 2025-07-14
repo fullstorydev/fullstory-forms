@@ -1529,17 +1529,10 @@ export class SurveyModel
     }
   }
 
-  private ruleExists(rule, blockList) {
-    return blockList.some(function (x) {
-      return x.Selector === rule.Selector;
-    });
-  }
-
   private async makeBlockedList(
     res: any
   ): Promise<{ Selector: string; Type: number }[]> {
     const json = await res.json();
-    console.log("json", json);
     const blockList: { Selector: string; Type: number }[] = json.ElementBlocks;
 
     json.NamedElementBlocks.forEach((x: any) => {
@@ -1625,7 +1618,12 @@ export class SurveyModel
       this.onQuestionsOnPageModeChanged(oldValue);
     }
   }
+  public addValueToButton(key: string, value: string) {
+    const button = document.querySelector("sv-nav-complete");
+    button.setAttribute(key, value);
 
+    this.updatePropertySchema(button, key, value);
+  }
   /**
    * Returns an array of all pages in the survey.
    *
@@ -3149,6 +3147,7 @@ export class SurveyModel
     if (!val.innerCss) {
       val.innerCss = this.cssSurveyNavigationButton;
     }
+
     return this.navigationBar.addAction(val);
   }
   /**
@@ -7579,12 +7578,66 @@ export class SurveyModel
   }
 
   private updateNavigationItemCssCallback: (strName?: string) => void;
+  public updateButtonValuesCallBack: (data: any) => void;
+  public deleteButtonValuesCallBack: (name: string) => void;
 
   protected createNavigationBar(): ActionContainer {
     const res = new ActionContainer();
     res.setItems(this.createNavigationActions());
     res.locOwner = this;
     return res;
+  }
+
+  protected getButtonData(): any {
+    return {
+      surveyName: this.title ? this.title : "",
+      page: this.activePage ? this.activePage : {},
+      values: this.data ? this.data : {},
+    };
+  }
+
+  public buttonDataProperties(name: string, text: string): any {
+    const data = {};
+
+    data["fs-survey-name"] = this.jsonObj.name;
+
+    data["fs-element"] = "button";
+    data["fs-button-type"] = name;
+
+    data["fs-button-name"] = text;
+
+    // data["fs-button-type"] = item.id;
+    // if (item.id === "sv-nav-next") {
+    // }
+    // if (item.id === "sv-nav-complete") {
+    //   data["fs-button-type"] = "complete";
+    // }
+    // if (item.id === "sv-nav-start") {
+    //   data["fs-button-type"] = "start";
+    // }
+    // if (item.id === "sv-nav-prev") {
+    //   data["fs-button-type"] = "previous";
+    // }
+    // if (item.id === "sv-nav-preview") {
+    //   data["fs-button-type"] = "preview";
+    // }
+
+    // if (!!item.data) {
+    //   const survey = item.data.survey;
+
+    //   // if (!!item.data?.survey.page) {
+    //   //   console.log("activepage", item.item.data.survey.page);
+    //   //   // data["fs-page-num"] = survey.activePage.num;
+    //   //   // data["fs-page-name"] = survey.activePage.name;
+    //   // }
+    // }
+
+    // let elementData = {};
+    // if (Object.keys(data).length > 0) {
+    //   elementData = this.createElementData(this.flattenObject(data));
+    // }
+
+    return data;
   }
   protected createNavigationActions(): Array<IAction> {
     const defaultComponent = "sv-nav-btn";
@@ -7595,6 +7648,9 @@ export class SurveyModel
       locTitle: this.locStartSurveyText,
       action: () => this.start(),
       component: defaultComponent,
+      data: {
+        survey: this.getButtonData(),
+      },
     });
     const navPrev = new Action({
       id: "sv-nav-prev",
@@ -7602,6 +7658,7 @@ export class SurveyModel
       visibleIndex: 20,
       data: {
         mouseDown: () => this.navigationMouseDown(),
+        survey: this.getButtonData(),
       },
       locTitle: this.locPagePrevText,
       action: () => this.performPrevious(),
@@ -7613,6 +7670,7 @@ export class SurveyModel
       visibleIndex: 30,
       data: {
         mouseDown: () => this.nextPageMouseDown(),
+        survey: this.getButtonData(),
       },
       locTitle: this.locPageNextText,
       action: () => this.nextPageUIClick(),
@@ -7626,6 +7684,7 @@ export class SurveyModel
       visibleIndex: 40,
       data: {
         mouseDown: () => this.navigationMouseDown(),
+        survey: this.getButtonData(),
       },
       locTitle: this.locPreviewText,
       action: () => this.showPreview(),
@@ -7639,6 +7698,7 @@ export class SurveyModel
       visibleIndex: 50,
       data: {
         mouseDown: () => this.navigationMouseDown(),
+        survey: this.getButtonData(),
       },
       locTitle: this.locCompleteText,
       action: () => this.taskManager.waitAndExecute(() => this.tryComplete()),
@@ -7651,6 +7711,40 @@ export class SurveyModel
       navPreview.innerCss = this.cssNavigationPreview;
       navComplete.innerCss = this.cssNavigationComplete;
     };
+    navComplete.updateElementData(
+      this.buttonDataProperties("complete", this.locCompleteText.text)
+    );
+    // navComplete.elementData = this.buttonDataProperties(
+    //   "complete",
+    //   this.locCompleteText.text
+    // );
+    // navStart.elementData = this.buttonDataProperties(
+    //   "start",
+    //   this.locStartSurveyText.text
+    // );
+    // navPrev.elementData = this.buttonDataProperties(
+    //   "previous",
+    //   this.locPagePrevText.text
+    // );
+    // navNext.elementData = this.buttonDataProperties(
+    //   "next",
+    //   this.locPageNextText.text
+    // );
+    // navPreview.elementData = this.buttonDataProperties(
+    //   "preview",
+    //   this.locPreviewText.text
+    // );
+
+    this.updateButtonValuesCallBack = (data) => {
+      console.log("data", data);
+      navComplete.updateElementData(data);
+    };
+    this.deleteButtonValuesCallBack = (name) => {
+      console.log("deleting on button", name);
+      navComplete.deleteElementData(name);
+    };
+    // need to create a function that updates element data on buttons when called
+
     return [navStart, navPrev, navNext, navPreview, navComplete];
   }
   protected onBeforeRunConstructor() {}

@@ -272,7 +272,8 @@ export class ItemValue
   public elementData(el: HTMLElement, type: string): any {
     let data = {};
     const survey = this.getSurvey();
-    const blocked = this.traverseBlocked(el, survey.blocklist);
+    const blocked = false;
+    // this.traverseBlocked(el, survey.blocklist);
 
     if (type === "column") {
       data["fs-column-name"] = this.title ? this.title : "";
