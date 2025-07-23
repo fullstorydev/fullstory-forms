@@ -114,10 +114,16 @@ export class MatrixRowModel extends Base {
       `[data-fs-element="table-row"][data-fs-table-row-name="${this.name}"]`
     ) as HTMLElement;
     if (!el) return;
-
+    const survey = this.getSurvey();
     const blocked = this.traverseBlocked(el, blocklist);
 
-    this.value !== null && this.updateDataValue(el, this.value, blocked);
+    if (this.value !== null) {
+      !blocked &&
+        survey.updateButtonValuesCallBack({
+          [`table-row-${this.name}`]: this.value,
+        });
+      this.updateDataValue(el, this.value, blocked);
+    }
   }
 }
 

@@ -91,10 +91,6 @@ export class SurveyQuestionMatrixRow extends ReactSurveyElement {
     super(props);
   }
 
-  componentDidUpdate(): void {
-    const blocklist = this.question.survey.blocklist;
-    this.row.updateElementData(blocklist);
-  }
   protected getStateElement(): Base | null {
     if (!!this.row) return this.row.item;
     return super.getStateElement();
@@ -217,10 +213,10 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
   }
 
   componentDidMount(): void {
-    this.cellElementData();
+    this.initCellElementData();
   }
   componentDidUpdate(): void {
-    this.cellElementData();
+    this.updateCellElementData();
   }
   private get question(): QuestionMatrixModel {
     return this.props.question;
@@ -234,10 +230,25 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
   private get columnIndex(): number {
     return this.props.columnIndex;
   }
-  private cellElementData(): any {
+  private updateCellElementData(): any {
     const el = this.cellInputRef.current;
     const blocklist = this.question.survey.blocklist;
     const blocked = this.question.isBlocked(el, blocklist);
+    const columnData = this.column.elementData(el, "column");
+    const rowData = this.row.elementData;
+    const data = { "fs-table-cell-selected": blocked ? "blocked" : this.row.value == this.column.value };
+
+    if (!blocked && data["fs-table-cell-selected"]) {
+      const buttonData = { [rowData["data-fs-table-row-name"]]: columnData["fs-column-name"] };
+
+      this.question.survey.updateButtonValuesCallBack(buttonData);
+    }
+
+    return this.setDataElements(el, this.question.createElementData(data));
+  }
+
+  private initCellElementData(): any {
+    const el = this.cellInputRef.current;
     const columnData = this.column.elementData(el, "column");
     const rowData = this.row.elementData;
     const index = this.question.rows.findIndex(x => x.id === this.row.name);
@@ -246,15 +257,9 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
       ...columnData,
       "fs-table-row-name": rowData["data-fs-table-row-name"],
       "fs-element": "table-cell",
-      "fs-table-row-index": index + 1,
-      "fs-table-cell-selected": blocked ? "blocked" : this.row.value == this.column.value
+      "fs-table-row-index": index + 1
     };
 
-    !blocked &&
-      data["fs-table-cell-selected"] &&
-      this.question.survey.updateButtonValuesCallBack({
-        [rowData["data-fs-table-row-name"]]: columnData["fs-column-name"]
-      });
     return this.setDataElements(el, this.question.createElementData(data));
   }
   protected canRender(): boolean {
@@ -269,7 +274,7 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
     ) : undefined;
 
     return (
-      <label {...this.cellElementData} onMouseDown={this.handleOnMouseDown} className={itemClass}>
+      <label onMouseDown={this.handleOnMouseDown} className={itemClass}>
         {this.renderInput(inputId, isChecked)}
         <span className={this.question.cssClasses.materialDecorator}>
           {this.question.itemSvgIcon ? (

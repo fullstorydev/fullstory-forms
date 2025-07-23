@@ -7736,7 +7736,6 @@ export class SurveyModel
     // );
 
     this.updateButtonValuesCallBack = (data) => {
-      console.log("data", data);
       navComplete.updateElementData(data);
     };
     this.deleteButtonValuesCallBack = (name) => {

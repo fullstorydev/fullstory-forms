@@ -511,7 +511,12 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
 
     // for each key, replace spaces with dashes and set the dataProperties
     keys.forEach((x) => {
-      const key = x.split(" ").join("-");
+      const key = x
+        .replace(/[^a-zA-Z0-9\- ]/g, "")
+        .split(" ")
+        .join("-")
+        .toLowerCase();
+
       this.dataProperties[key] = data[x];
     });
 
@@ -524,13 +529,12 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     }
   };
   public deleteElementData = (name: string) => {
-    const dataName = `data-${name.split(" ").join("-")}`;
+    const dataName = `data-${name.split(" ").join("-").toLowerCase()}`;
     // delete the property from the dataProperties object
     if (this.dataProperties.hasOwnProperty(name)) {
       delete this.dataProperties[name];
     }
 
-    console.log("data properties", this.dataProperties);
     // find the button element by id
     const button = document
       .querySelector(`#${this.innerItem.id}`)
