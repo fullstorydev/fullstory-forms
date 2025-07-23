@@ -126,11 +126,11 @@ export class SurveyQuestionCheckbox extends SurveyQuestionElementBase {
 }
 export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
   private rootRef: React.RefObject<HTMLDivElement>;
-  private intputRef: React.RefObject<HTMLInputElement>;
+  private inputRef: React.RefObject<HTMLInputElement>;
   constructor(props: any) {
     super(props);
     this.rootRef = React.createRef();
-    this.intputRef = React.createRef();
+    this.inputRef = React.createRef();
   }
   protected getStateElement(): Base {
     return this.item;
@@ -163,8 +163,8 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
         prevProps.item.setRootElement(undefined);
       }
     }
-    const data = this.item.elementData(this.intputRef.current, "checkbox-item");
-    this.setDataElements(this.intputRef.current, data);
+    const data = this.item.elementData(this.inputRef.current, "checkbox-item");
+    this.setDataElements(this.inputRef.current, data);
   }
   public shouldComponentUpdate(nextProps: any, nextState: any): boolean {
     if (!super.shouldComponentUpdate(nextProps, nextState)) return false;
@@ -201,7 +201,7 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
       <div className={itemClass} role="presentation" ref={this.rootRef}>
         <label className={labelClass}>
           <input
-            ref={this.intputRef}
+            ref={this.inputRef}
             className={this.cssClasses.itemControl}
             type="checkbox"
             name={this.question.name + this.item.id}
@@ -234,8 +234,9 @@ export class SurveyQuestionCheckboxItem extends ReactSurveyElement {
     if (!this.question.isDesignMode) {
       this.item.setRootElement(this.rootRef.current as HTMLElement);
     }
-    const data = this.item.elementData(this.intputRef.current, "checkbox-item");
-    this.setDataElements(this.intputRef.current, data);
+    const data = this.item.elementData(this.inputRef.current, "checkbox-item");
+
+    this.setDataElements(this.inputRef.current, data);
   }
   componentWillUnmount(): void {
     super.componentWillUnmount();

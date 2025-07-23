@@ -335,8 +335,7 @@ export class QuestionDropdownModel extends QuestionSelectBase {
       `[data-fs-dropdown-name=${name.split(" ").join("-")}]`
     );
 
-    const blocked = false;
-    // this.traverseBlocked(event.target, this.survey.blocklist);
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
     !blocked &&
       this.survey.updateButtonValuesCallBack({
         [name]: this.value,

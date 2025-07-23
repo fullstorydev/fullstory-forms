@@ -272,8 +272,7 @@ export class ItemValue
   public elementData(el: HTMLElement, type: string): any {
     let data = {};
     const survey = this.getSurvey();
-    const blocked = false;
-    // this.traverseBlocked(el, survey.blocklist);
+    const blocked = this.traverseBlocked(el, survey.blocklist);
 
     if (type === "column") {
       data["fs-column-name"] = this.title ? this.title : "";
@@ -281,7 +280,7 @@ export class ItemValue
     } else if (type === "ranking-item") {
       const rank = el.getAttribute("data-sv-drop-target-ranking-item");
       const text = el.querySelector("span.sv-string-viewer").textContent;
-
+      data["fs-element"] = type;
       data["fs-rank-index"] = blocked ? "blocked" : parseInt(rank) + 1;
       data["fs-rank-value"] = blocked ? "blocked" : text;
 
@@ -289,7 +288,6 @@ export class ItemValue
     } else {
       data = this.getDataElementItem(type, blocked, this.text, this.selected);
     }
-
     return data;
   }
 

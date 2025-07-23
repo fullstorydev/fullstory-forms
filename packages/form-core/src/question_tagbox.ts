@@ -151,11 +151,11 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
         `[data-fs-tagbox-name='${name.split(" ").join("-")}']`
       );
 
-      const blocked = this.traverseBlocked(el, this.survey.blocklist);
+      const blocked = this.isBlocked(el, this.survey.blocklist);
 
       const values = this.selectedItems.map((x) => x.text).join(", ");
-
       this.updateDataValue(el, values, blocked);
+
       !blocked && this.survey.updateButtonValuesCallBack({ [name]: values });
     }
   }
