@@ -1,3 +1,14 @@
+# Fullstory Forms
+
+This project is a fork of [survey.js](https://github.com/surveyjs/survey-library.git), customized for compatibility with our internal tools.
+
+## Affected Packages
+
+These are the packages updated to integrate with Fullstor:
+
+- survey-core -> form-core
+- survey-react-ui -> form-react
+
 <div align="center">
     
 ![Library](https://github.com/surveyjs/survey-library/assets/102306951/d200bacb-b162-496c-a157-981e0623bae0)
@@ -20,7 +31,7 @@
 <a href="https://surveyjs.io/stay-updated/release-notes">
 <img alt="GitHub Release" src="https://img.shields.io/github/v/release/surveyjs/survey-library">
 </a>
-    
+
 # SurveyJS Form Library
 
 </div>
@@ -49,7 +60,6 @@ SurveyJS Form Library is a free to use MIT-licensed client-side component that a
 <br>
 
 https://github.com/surveyjs/survey-library/assets/102306951/844563b2-c7c3-400c-962f-bcdbe7274d55
-
 
 ## Features
 
@@ -93,8 +103,8 @@ https://github.com/surveyjs/survey-library/assets/102306951/844563b2-c7c3-400c-9
 
 - [**Form Library**](https://surveyjs.io/form-library/documentation/overview) - A free and open-source MIT-licensed JavaScript library that renders dynamic JSON-based forms in your web application, and collects responses.
 - [**Survey Creator**](https://surveyjs.io/survey-creator/documentation/overview) - A self-hosted drag-and-drop form builder that automatically generates JSON definition (schemas) of your forms in real time. Try out a [free full-featured demo](https://surveyjs.io/create-free-survey) to evaluate its capabilities.
--  [**Dashboard**](https://surveyjs.io/dashboard/documentation/overview) - Simplifies survey data visualization and analysis with interactive and customizable charts and tables.
--  [**PDF Generator**](https://surveyjs.io/pdf-generator/documentation/overview) - An open-source JavaScript library that renders SurveyJS surveys and forms as PDF files in a browser. With PDF Generator you can save an unlimited number of custom-built forms to PDF (both editable and read-only).
+- [**Dashboard**](https://surveyjs.io/dashboard/documentation/overview) - Simplifies survey data visualization and analysis with interactive and customizable charts and tables.
+- [**PDF Generator**](https://surveyjs.io/pdf-generator/documentation/overview) - An open-source JavaScript library that renders SurveyJS surveys and forms as PDF files in a browser. With PDF Generator you can save an unlimited number of custom-built forms to PDF (both editable and read-only).
 
 ## Build the SurveyJS Form Library from Sources
 
