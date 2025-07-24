@@ -121,10 +121,14 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
     const parent = this.getParentFieldSet(el);
 
     const values = this.value.join(", ");
-    !blocked &&
-      values !== "" &&
-      this.survey.updateButtonValuesCallBack({ [name]: values });
-    this.updateDataValue(parent, values, blocked);
+
+    if (values !== "") {
+      this.updateDataValue(parent, values, blocked);
+      !blocked && this.survey.updateButtonValuesCallBack({ [name]: values });
+    } else {
+      this.updateDataValue(parent, values, blocked);
+      this.survey.deleteButtonValuesCallBack(name);
+    }
   }
 
   public get hasSelectAll(): boolean {
