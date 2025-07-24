@@ -23,212 +23,212 @@ var json = {
   logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
   logoPosition: "left",
   questions: [
-    // {
-    //   type: "boolean",
-    //   name: "age choice",
-    //   title: "Age Choice",
-    //   label: "Are you 21 or older?",
-    //   isRequired: true
-    // },
-    // {
-    //   type: "checkbox",
-    //   name: "car checkbox",
-    //   title: "Car Checkbox",
-    //   isRequired: true,
-    //   showNoneItem: true,
-    //   colCount: 4,
-    //   showSelectAllItem: true,
-    //   choices: [
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   type: "comment",
-    //   name: "comment suggestion",
-    //   title: "Suggestion Comment"
-    // },
-    // {
-    //   type: "dropdown",
-    //   name: "car dropdown",
-    //   title: "Car Dropdown",
-    //   isRequired: true,
-    //   showNoneItem: true,
-    //   colCount: 4,
-    //   choices: [
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   type: "file",
-    //   title: "Image Picker",
-    //   name: "image",
-    //   storeDataAsText: false,
-    //   showPreview: true,
-    //   imageWidth: 150,
-    //   maxSize: 102400
-    // },
-    // {
-    //   type: "imagepicker",
-    //   name: "choosepicture",
-    //   title: "Animal Picker",
-    //   imageHeight: "150px",
-    //   imageWidth: "225px",
-    //   choices: [
-    //     {
-    //       value: "lion",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-    //     },
-    //     {
-    //       value: "giraffe",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-    //     },
-    //     {
-    //       value: "panda",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-    //     },
-    //     {
-    //       value: "camel",
-    //       imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "multipletext",
-    //   name: "pricelimit",
-    //   title: "Payment Suggestion",
-    //   colCount: 2,
-    //   items: [
-    //     {
-    //       name: "mostamount",
-    //       title: "Most amount you would every pay for a product like ours"
-    //     },
-    //     {
-    //       name: "leastamount",
-    //       title: "The least amount you would feel comfortable paying"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "panel",
-    //   title: "Checkbox Panel",
-    //   innerIndent: 1,
-    //   state: "expanded",
-    //   elements: [
-    //     {
-    //       type: "checkbox",
-    //       choices: [
-    //         {
-    //           value: "1",
-    //           text: "Customer relationship"
-    //         },
-    //         {
-    //           value: "2",
-    //           text: "Service quality"
-    //         },
-    //         {
-    //           value: "3",
-    //           text: "Support response time"
-    //         }
-    //       ],
-    //       name: "What should be improved?"
-    //     },
-    //     {
-    //       type: "comment",
-    //       name: "suggestions",
-    //       title: "What would make you more satisfied with the Product?"
-    //     }
-    //   ]
-    // },
-    // {
-    //   type: "radiogroup",
-    //   name: "car radiogroup",
-    //   title: "Car Radiogroup",
-    //   isRequired: true,
-    //   colCount: 4,
-    //   choices: [
-    //     "None",
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   type: "ranking",
-    //   name: "smartphone-features",
-    //   title: "Please rank the following smartphone features in order of importance:",
-    //   choices: [
-    //     "Battery life",
-    //     "Screen size",
-    //     "Storage space",
-    //     "Camera quality",
-    //     "Durability",
-    //     "Processor power",
-    //     "Price"
-    //   ]
-    // },
-    // {
-    //   type: "rating",
-    //   name: "satisfaction",
-    //   title: "Satisfaction Rating",
-    //   minRateDescription: "Not Satisfied",
-    //   maxRateDescription: "Completely satisfied"
-    // },
-    // {
-    //   name: "signature",
-    //   type: "signaturepad",
-    //   title: "Sign here",
-    //   isRequired: true
-    // },
-    // {
-    //   type: "tagbox",
-    //   name: "cars tagbox",
-    //   title: "Cars Tagbox",
-    //   showNoneItem: true,
-    //   choices: [
-    //     "Ford",
-    //     "Vauxhall",
-    //     "Volkswagen",
-    //     "Nissan",
-    //     "Audi",
-    //     "Mercedes-Benz",
-    //     "BMW",
-    //     "Peugeot",
-    //     "Toyota",
-    //     "Citroen"
-    //   ]
-    // },
-    // {
-    //   name: "name input",
-    //   type: "text",
-    //   title: "Name",
-    //   placeHolder: "Jon Snow",
-    //   isRequired: true
-    // },
+    {
+      type: "boolean",
+      name: "age choice",
+      title: "Age Choice",
+      label: "Are you 21 or older?",
+      isRequired: true
+    },
+    {
+      type: "checkbox",
+      name: "car checkbox",
+      title: "Car Checkbox",
+      isRequired: true,
+      showNoneItem: true,
+      colCount: 4,
+      showSelectAllItem: true,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "comment",
+      name: "comment suggestion",
+      title: "Suggestion Comment"
+    },
+    {
+      type: "dropdown",
+      name: "car dropdown",
+      title: "Car Dropdown",
+      isRequired: true,
+      showNoneItem: true,
+      colCount: 4,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "file",
+      title: "Image Picker",
+      name: "image",
+      storeDataAsText: false,
+      showPreview: true,
+      imageWidth: 150,
+      maxSize: 102400
+    },
+    {
+      type: "imagepicker",
+      name: "choosepicture",
+      title: "Animal Picker",
+      imageHeight: "150px",
+      imageWidth: "225px",
+      choices: [
+        {
+          value: "lion",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+        },
+        {
+          value: "giraffe",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+        },
+        {
+          value: "panda",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+        },
+        {
+          value: "camel",
+          imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+        }
+      ]
+    },
+    {
+      type: "multipletext",
+      name: "pricelimit",
+      title: "Payment Suggestion",
+      colCount: 2,
+      items: [
+        {
+          name: "mostamount",
+          title: "Most amount you would every pay for a product like ours"
+        },
+        {
+          name: "leastamount",
+          title: "The least amount you would feel comfortable paying"
+        }
+      ]
+    },
+    {
+      type: "panel",
+      title: "Checkbox Panel",
+      innerIndent: 1,
+      state: "expanded",
+      elements: [
+        {
+          type: "checkbox",
+          choices: [
+            {
+              value: "relationship",
+              text: "Customer relationship"
+            },
+            {
+              value: "quality",
+              text: "Service quality"
+            },
+            {
+              value: "time",
+              text: "Support response time"
+            }
+          ],
+          name: "What should be improved?"
+        },
+        {
+          type: "comment",
+          name: "suggestions",
+          title: "What would make you more satisfied with the Product?"
+        }
+      ]
+    },
+    {
+      type: "radiogroup",
+      name: "car radiogroup",
+      title: "Car Radiogroup",
+      isRequired: true,
+      colCount: 4,
+      choices: [
+        "None",
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      type: "ranking",
+      name: "smartphone-features",
+      title: "Please rank the following smartphone features in order of importance:",
+      choices: [
+        "Battery life",
+        "Screen size",
+        "Storage space",
+        "Camera quality",
+        "Durability",
+        "Processor power",
+        "Price"
+      ]
+    },
+    {
+      type: "rating",
+      name: "satisfaction",
+      title: "Satisfaction Rating",
+      minRateDescription: "Not Satisfied",
+      maxRateDescription: "Completely satisfied"
+    },
+    {
+      name: "signature",
+      type: "signaturepad",
+      title: "Sign here",
+      isRequired: true
+    },
+    {
+      type: "tagbox",
+      name: "cars tagbox",
+      title: "Cars Tagbox",
+      showNoneItem: true,
+      choices: [
+        "Ford",
+        "Vauxhall",
+        "Volkswagen",
+        "Nissan",
+        "Audi",
+        "Mercedes-Benz",
+        "BMW",
+        "Peugeot",
+        "Toyota",
+        "Citroen"
+      ]
+    },
+    {
+      name: "name input",
+      type: "text",
+      title: "Name",
+      placeHolder: "Jon Snow",
+      isRequired: true
+    },
     // {
     //   name: "email",
     //   type: "text",
@@ -241,52 +241,52 @@ var json = {
     //       type: "email"
     //     }
     //   ]
+    // },
+    // {
+    //   type: "matrix",
+    //   name: "Quality",
+    //   title: "Matrix",
+    //   columns: [
+    //     {
+    //       value: 1,
+    //       text: "Strongly Disagree"
+    //     },
+    //     {
+    //       value: 2,
+    //       text: "Disagree"
+    //     },
+    //     {
+    //       value: 3,
+    //       text: "Neutral"
+    //     },
+    //     {
+    //       value: 4,
+    //       text: "Agree"
+    //     },
+    //     {
+    //       value: 5,
+    //       text: "Strongly Agree"
+    //     }
+    //   ],
+    //   rows: [
+    //     {
+    //       value: "affordable",
+    //       text: "Product is affordable"
+    //     },
+    //     {
+    //       value: "does what it claims",
+    //       text: "Product does what it claims"
+    //     },
+    //     {
+    //       value: "better than others",
+    //       text: "Product is better than other products on the market"
+    //     },
+    //     {
+    //       value: "easy to use",
+    //       text: "Product is easy to use"
+    //     }
+    //   ]
     // }
-    {
-      type: "matrix",
-      name: "Quality",
-      title: "Matrix",
-      columns: [
-        {
-          value: 1,
-          text: "Strongly Disagree"
-        },
-        {
-          value: 2,
-          text: "Disagree"
-        },
-        {
-          value: 3,
-          text: "Neutral"
-        },
-        {
-          value: 4,
-          text: "Agree"
-        },
-        {
-          value: 5,
-          text: "Strongly Agree"
-        }
-      ],
-      rows: [
-        {
-          value: "affordable",
-          text: "Product is affordable"
-        },
-        {
-          value: "does what it claims",
-          text: "Product does what it claims"
-        },
-        {
-          value: "better than others",
-          text: "Product is better than other products on the market"
-        },
-        {
-          value: "easy to use",
-          text: "Product is easy to use"
-        }
-      ]
-    },
     {
       type: "matrixdynamic",
       name: "teachersRate",

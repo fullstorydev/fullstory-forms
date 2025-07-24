@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "webpack --env buildType=dev --env emitDeclarations --env emitNonSourceFiles && webpack --env buildType=prod && rollup -c",
-    "watch:dev": "concurrently \"webpack --env buildType=dev --watch --env emitDeclarations\" \"rollup -c -w\" ",
+    "watch:dev": "concurrently \"webpack-dev-server --env buildType=dev --open\" \"rollup -c -w\"",
     "start": "webpack-dev-server --env buildType=dev --open",
     "test": "karma start ./karma.conf.js --single-run",
     "test:watch": "karma start ./karma.conf.js",
