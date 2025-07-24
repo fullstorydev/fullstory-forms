@@ -493,7 +493,7 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     this.popupModel = popupModel;
   }
 
-  private setButtonProperties = (button) => {
+  private setButtonProperties = (button: HTMLElement) => {
     // Get the input element inside the button
     const input = button.querySelector("input");
     // create a data object from the properties
@@ -504,7 +504,7 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     });
   };
 
-  public updateElementData = (data) => {
+  public updateElementData = (data: any) => {
     // get the keys of the data object
     const keys = Object.keys(data);
 
@@ -525,7 +525,7 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     });
 
     // find the button element by id
-    const button = document.querySelector(`#${this.innerItem.id}`);
+    const button: HTMLElement = document.querySelector(`#${this.innerItem.id}`);
 
     // if the button exists, set the properties
     if (!!button) {

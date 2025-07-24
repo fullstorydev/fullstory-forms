@@ -317,7 +317,7 @@ export class QuestionBooleanModel extends Question {
     return data;
   }
 
-  public updateDataElements(val) {
+  public updateDataElements(val: any) {
     const name = this.name ? this.name : this.title;
 
     const el: HTMLElement = document.querySelector(
