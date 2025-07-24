@@ -498,7 +498,6 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     const input = button.querySelector("input");
     // create a data object from the properties
     const properties = this.createElementData(this.dataProperties);
-
     // Set the properties on the input element
     Object.keys(properties).forEach((x) => {
       input.setAttribute(x, properties[x]);
@@ -517,7 +516,12 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
         .join("-")
         .toLowerCase();
 
-      this.dataProperties[key] = data[x];
+      if (data[x] === "") {
+        delete this.dataProperties[key];
+        this.deleteElementData(key);
+      } else {
+        this.dataProperties[key] = data[x];
+      }
     });
 
     // find the button element by id
