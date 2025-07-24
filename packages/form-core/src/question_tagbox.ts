@@ -167,10 +167,8 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
     );
     el.removeAttribute("data-fs-tagbox-value");
     this.deleteFromPropertySchema(el, "data-fs-tagbox-value");
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    !blocked &&
-      this.survey.deleteButtonValuesCallBack(name.split(" ").join("-"));
+    this.survey.deleteButtonValuesCallBack(name);
   }
 
   /**
