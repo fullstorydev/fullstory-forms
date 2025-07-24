@@ -1,3 +1,57 @@
+# Fullstory Forms React Library
+
+This project is a fork of [survey.js](https://github.com/surveyjs/survey-library.git), customized for compatibility with our internal tools.
+
+## Purpose
+
+This form solution seemlessly integrates with the Fullstory by creating auto generated api defined elements on the form, fields, and buttons.
+
+## How it differs from SurveyJS
+
+### Elements
+
+This library adds additional functionality to the original SurveyJS library. Specific data properties are added to each React Question and buttons. The properties will differ depending on the property but every element will get at least these two data properties used for identification. Where the name of the element is mapped to the name property on the question model.
+
+`data-fs-element=<ELEMENT_TYPE>`  
+`data-fs-element-name=<ELEMENT_NAME>`
+
+### Implementation
+
+Due to Fullstory's privacy-first approach, we need to access the blocklist from the client. This async functionality causes a slight difference in how we instantiate the forms.
+
+**Before**
+
+```
+var model = new Survey.Model(json);
+
+window.survey = model;
+
+ReactDOM.render(
+  <SurveyReact.Survey model={model} />,
+  document.getElementById("surveyElement")
+);
+```
+
+**After**
+
+```
+var model = new Survey.Model(json);
+
+model.createBlockList().then(() => {
+  window.survey = model;
+
+  model.onComplete.add((sender, options) => {
+    console.log(JSON.stringify(sender.data, null, 3));
+  });
+
+  ReactDOM.render(<SurveyReact.Survey model={model} />, document.getElementById("surveyElement"));
+});
+```
+
+### Maintenance
+
+The current forked verson of the React SurveyJS is 2.2.6, we will be updating with every major version release.
+
 # SurveyJS React Form Library
 
 <video src="https://github.com/surveyjs/survey-library/assets/22315929/b24a68bf-d703-4096-835b-752f5f610aa6"></video>
