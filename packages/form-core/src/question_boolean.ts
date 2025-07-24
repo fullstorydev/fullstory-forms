@@ -317,9 +317,13 @@ export class QuestionBooleanModel extends Question {
     return data;
   }
 
-  public updateDataElements(el: HTMLElement, val) {
-    const blocked = this.traverseBlocked(el, this.survey.blocklist);
+  public updateDataElements(val) {
+    const name = this.name ? this.name : this.title;
 
+    const el: HTMLElement = document.querySelector(
+      `[data-fs-boolean-name=${name.split(" ").join("-")}]`
+    );
+    const blocked = this.traverseBlocked(el, this.survey.blocklist);
     !blocked &&
       this.survey.updateButtonValuesCallBack({
         [this.name]: val,
@@ -342,6 +346,8 @@ export class QuestionBooleanModel extends Question {
     if (newValue === "true" && this.valueTrue !== "true") newValue = true;
     if (newValue === "false" && this.valueFalse !== "false") newValue = false;
     if (newValue === "indeterminate" || newValue === null) newValue = undefined;
+
+    newValue !== undefined && this.updateDataElements(newValue);
     super.setQuestionValue(newValue, updateIsAnswered);
   }
   /* #region web-based methods */

@@ -39,7 +39,6 @@ export class SurveyQuestionBoolean extends SurveyQuestionElementBase {
   }
   handleOnLabelClick(event: any, value: boolean) {
     this.question.onLabelClick(event, value);
-    this.question.updateDataElements(this.checkRef.current, value);
   }
   handleOnKeyDown(event: any) {
     this.question.onKeyDownCore(event);
