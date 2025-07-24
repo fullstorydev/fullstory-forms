@@ -1500,7 +1500,6 @@ export class SurveyModel
 
     if (res.ok) {
       this.blocklist = await this.makeBlockedList(res);
-      console.log("blocklist", this.blocklist);
     } else {
       this.blocklist = [];
     }
@@ -7714,27 +7713,6 @@ export class SurveyModel
     navComplete.updateElementData(
       this.buttonDataProperties("complete", this.locCompleteText.text)
     );
-    // navComplete.elementData = this.buttonDataProperties(
-    //   "complete",
-    //   this.locCompleteText.text
-    // );
-    // navStart.elementData = this.buttonDataProperties(
-    //   "start",
-    //   this.locStartSurveyText.text
-    // );
-    // navPrev.elementData = this.buttonDataProperties(
-    //   "previous",
-    //   this.locPagePrevText.text
-    // );
-    // navNext.elementData = this.buttonDataProperties(
-    //   "next",
-    //   this.locPageNextText.text
-    // );
-    // navPreview.elementData = this.buttonDataProperties(
-    //   "preview",
-    //   this.locPreviewText.text
-    // );
-
     this.updateButtonValuesCallBack = (data) => {
       navComplete.updateElementData(data);
     };

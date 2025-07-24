@@ -1,16 +1,53 @@
 # Fullstory Forms React Library
 
-This project is a fork of [survey.js](https://github.com/surveyjs/survey-library.git), customized for compatibility with our internal tools.
+This project is a fork of [survey.js](https://github.com/surveyjs/survey-library.git) customized for compatibility with our internal tools and the form-core library.
 
 ## Purpose
 
 This form solution seemlessly integrates with the Fullstory by creating auto generated api defined elements on the form, fields, and buttons.
 
-## How it differs from SurveyJS
+## How it differs from SurveyJS survey-react-ui package.
 
-### Elements
+Updates to the survey class, individual question classes, and action classes have been created in order to maintain and update element data properties.
 
-This library adds additional functionality to the original SurveyJS library. Specific data properties are added to each React Question and buttons. The properties will differ depending on the property but every element will get at least these two data properties used for identification. Where the name of the element is mapped to the name property on the question model.
+### React Survey
+
+In `reactSurvey.tsx`
+
+- `getDataElementname`: called in `doRender`. It makes the survey into a watched element
+- `getSurveyName`: returns the survey name from the Model. Called on initialization.
+
+### React Elements
+
+Select questions are appended with `elementData` sourced from the form-core library. These are the classes where that property can be found.
+
+- SurveyQuestionBoolean
+- SurveyQuestionDropdownBase (in `renderSelect` and `renderInput`)
+- SurveyQuestionImagePicker
+- SurveyQuestionImagePickerItem (updates within class)
+- SurveyPage
+- SurveyPanel
+- SurveyQuestionCheckboxItem
+- SurveyQuestionCheckbox (updates within class)
+- TextAreaComponent
+- SurveyQuestionFile
+- SurveyQuestionMatrixCell (updates and inits within class)
+- SurveyQuestionMatrixRow (updates and inits within class)
+- SurveyQuestionMatrixTable
+- SurveyQuestionMultipleText (updates within class)
+- SurveyQuestionPanelDynamic
+- SurveyQuestionRadiogroup
+- SurveyQuestionRadioItem (updates and inits within class)
+- SurveyQuestionRanking (updates and inits within class)
+- SurveyQuestionRating
+- SurveyQuestionTagbox
+- SurveyQuestionText
+- SurveyQuestionAndErrorsCell (inits within class)
+- SurveyQuestionSignaturePad
+
+### Data Property Model
+
+Specific data properties are added to each question, page, panel, and button. The properties will differ depending on the element but every element will get at least these two data properties used for identification. Where the name of the element is mapped to the name property on the question model.
 
 `data-fs-element=<ELEMENT_TYPE>`  
 `data-fs-element-name=<ELEMENT_NAME>`
