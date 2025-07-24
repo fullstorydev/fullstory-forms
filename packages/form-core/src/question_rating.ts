@@ -253,11 +253,15 @@ export class QuestionRatingModel extends Question {
     );
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
-    this.updateDataValue(el, this.value, blocked);
-    !blocked &&
-      this.survey.updateButtonValuesCallBack({
-        [name]: this.value,
-      });
+    if (!!this.value) {
+      this.updateDataValue(el, this.value, blocked);
+      !blocked &&
+        this.survey.updateButtonValuesCallBack({
+          [name]: this.value,
+        });
+    } else {
+      this.survey.deleteButtonValuesCallBack(name);
+    }
   }
 
   @property() autoGenerate: boolean;
