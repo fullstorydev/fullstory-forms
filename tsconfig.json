@@ -13,13 +13,13 @@
     "baseUrl": ".",
     "paths": {
       "fullstory-form-core": ["./src/entries/core.ts"],
-      "@coreIconsV1": ["packages/fullstory-form-core/src/iconsV1"],
-      "@coreIconsV2": ["packages/fullstory-form-core/src/iconsV2"]
+      "@coreIconsV1": ["packages/form-core/src/iconsV1"],
+      "@coreIconsV2": ["packages/form-core/src/iconsV2"]
     }
   },
   "exclude": ["src/entries/**/*.ts"],
   "include": [
     "src/**/*.ts",
-    "packages/fullstory-form-core/entries/chunks/core-wo-model.ts"
+    "packages/form-core/entries/chunks/core-wo-model.ts"
   ]
 }

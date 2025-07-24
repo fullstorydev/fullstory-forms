@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "declaration": false,
+    "declarationDir": null,
+    "paths": {
+      "form-core": ["./entries/index.ts"],
+      "@legacy/*": ["../../src/*"]
+    },
+    "types": ["qunit"]
+  },
+  "include": ["./tests/entries/test.ts", "../src/*.ts"]
+}

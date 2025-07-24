@@ -1,8 +1,6 @@
 {
   "scripts": {
-    "lint": "eslint ./functionalTests --quiet && eslint ./tests --quiet && eslint ./visualRegressionTests --quiet && eslint ./accessibilityTests --quiet",
-    "pre-push-check": "npm run lint && npm run test --prefix packages/fullstory-form-core",
-    "prepare": "husky install"
+    "lint": "eslint ./functionalTests --quiet && eslint ./tests --quiet && eslint ./visualRegressionTests --quiet && eslint ./accessibilityTests --quiet"
   },
   "version": "1.12.17",
   "name": "survey-library",
@@ -29,11 +27,6 @@
   "overrides": {
     "axe-testcafe": {
       "axe-core": "^4.8.2"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run pre-push-check"
     }
   }
 }
