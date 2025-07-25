@@ -1,5 +1,5 @@
 {
-  "name": "@bateman001/form-core",
+  "name": "@fullstory/form-core",
   "version": "0.0.1",
   "scripts": {
     "build": "webpack --env buildType=dev --env emitDeclarations --env emitNonSourceFiles && webpack --env buildType=prod && rollup -c",
