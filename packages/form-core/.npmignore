@@ -1,0 +1,69 @@
+# major directories
+/.circleci
+/doc_generator
+/docs
+/entries
+/node_modules
+/src
+/tests
+/tmp
+/dist
+
+CHANGELOG.md
+README.md
+
+# tests
+karma.conf.js
+
+# Rollup configuration files
+rollup.config.json
+rollup.config.js
+rollup.i18n.config.js
+rollup.icons.config.js
+rollup.themes.config.js
+
+# themes and icons
+themes-import.js
+themes.json
+
+# TypeScript configuration files
+tsconfig.json
+tsconfig.fesm.json
+tsconfig.i18n.json
+tsconfig.icons.json
+tsconfig.tests.json
+tsconfig.themes.json
+
+
+# webpack configuration files
+webpack.config.js
+webpack.i18n.config.js
+webpack.icons.config.js
+webpack.themes.config.js
+
+
+*.log
+npm-debug.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output
+
+# Dependency directories
+node_modules
+
+# npm package lock
+package-lock.json
+yarn.lock
+
+# project files
+src
+test
+examples
+CHANGELOG.md
+.travis.yml
+.editorconfig
+.eslintignore
+.eslintrc
+.babelrc
+.gitignore
