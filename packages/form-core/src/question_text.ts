@@ -717,13 +717,15 @@ export class QuestionTextModel extends QuestionTextBase {
       this.updateValueOnEvent(event);
     }
 
-    const blocked = this.traverseBlocked(event.target, this.survey.blocklist);
-    !blocked &&
-      this.survey.updateButtonValuesCallBack({
-        [this.name]: event.target.value,
-      });
+    if (this.survey) {
+      const blocked = this.traverseBlocked(event.target, this.survey.blocklist);
+      !blocked &&
+        this.survey.updateButtonValuesCallBack({
+          [this.name]: event.target.value,
+        });
 
-    this.updateDataValue(event.target, event.target.value, blocked);
+      this.updateDataValue(event.target, event.target.value, blocked);
+    }
     this.updateRemainingCharacterCounter(event.target.value);
   };
   protected onBlurCore(event: any): void {

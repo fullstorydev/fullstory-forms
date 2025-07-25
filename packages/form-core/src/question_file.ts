@@ -172,7 +172,16 @@ export class QuestionFileModelBase extends Question {
   }
 
   public updateElementData(): void {
-    const el = document.querySelector(`#${this.inputId}`) as HTMLInputElement;
+    if (!this.survey) return; // Survey not available, likely in test environment
+    if (!this.value || !Array.isArray(this.value) || this.value.length === 0)
+      return; // No file data
+
+    // Escape CSS selector special characters (dots, etc.) in ID
+    const escapedInputId = this.inputId.replace(/[.]/g, "\\.");
+    const el = document.querySelector(`#${escapedInputId}`) as HTMLInputElement;
+
+    if (!el) return; // Element not found, likely in test environment
+
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
     const keys = Object.keys(this.value[0]);
 
@@ -191,8 +200,11 @@ export class QuestionFileModelBase extends Question {
   }
 
   public deleteElementData(): void {
-    // get the input element by its ID
-    const el = document.querySelector(`#${this.inputId}`) as HTMLInputElement;
+    if (!this.survey) return; // Survey not available, likely in test environment
+
+    // Escape CSS selector special characters (dots, etc.) in ID
+    const escapedInputId = this.inputId.replace(/[.]/g, "\\.");
+    const el = document.querySelector(`#${escapedInputId}`) as HTMLInputElement;
     if (!el) return;
     // check if the element is blocked
     const blocked = this.traverseBlocked(el, this.survey.blocklist);

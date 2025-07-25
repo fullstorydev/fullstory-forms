@@ -560,19 +560,21 @@ export class Base {
   }
 
   public updateDataValue(element: HTMLElement, value: string, blocked) {
+    if (!element) return;
     const elementName = element.getAttribute("data-fs-element");
+    if (!elementName) return;
     const key = `fs-${elementName}-value`;
     element.setAttribute(`data-${key}`, blocked ? "blocked" : value);
     this.updatePropertySchema(element, key, blocked ? "blocked" : value);
   }
 
   public deleteFromPropertySchema = (element: Element, key: string) => {
+    if (!element) return;
     console.log("element", element);
     console.log("deleteFromPropertySchema", key);
     // get current schema
-    const schema = JSON.parse(
-      element.getAttribute("data-fs-properties-schema")
-    );
+    const schemaAttr = element.getAttribute("data-fs-properties-schema");
+    const schema = schemaAttr ? JSON.parse(schemaAttr) : {};
 
     // delete data from schema
     if (schema[key]) {
@@ -584,10 +586,10 @@ export class Base {
   };
 
   public updatePropertySchema = (element, key, value) => {
+    if (!element) return;
     // get current schema
-    const schema = JSON.parse(
-      element.getAttribute("data-fs-properties-schema")
-    );
+    const schemaAttr = element.getAttribute("data-fs-properties-schema");
+    const schema = schemaAttr ? JSON.parse(schemaAttr) : {};
 
     // add data to schema
     schema[`data-${key}`] = {

@@ -247,10 +247,17 @@ export class QuestionRatingModel extends Question {
   }
 
   public updateElementData(): void {
+    if (!this.survey) return; // Survey not available, likely in test environment
+
     const name = this.name ? this.name : this.title;
+    // Escape CSS selector special characters (dots, spaces, etc.)
+    const escapedName = name.replace(/[.]/g, "\\.").split(" ").join("-");
     const el: HTMLElement = document.querySelector(
-      `[data-fs-rating-name="${name}"]`
+      `[data-fs-rating-name="${escapedName}"]`
     );
+
+    if (!el) return; // Element not found, likely in test environment
+
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
     if (!!this.value) {
@@ -260,6 +267,7 @@ export class QuestionRatingModel extends Question {
           [name]: this.value,
         });
     } else {
+      this.updateDataValue(el, "", blocked);
       this.survey.deleteButtonValuesCallBack(name);
     }
   }

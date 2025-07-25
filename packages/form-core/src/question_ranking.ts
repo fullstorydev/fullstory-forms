@@ -383,10 +383,13 @@ export class QuestionRankingModel extends QuestionCheckboxModel {
   }
 
   public updateElementData() {
+    if (!this.survey) return; // Exit if no survey is available
     const name = this.name ? this.name : this.title;
+    if (!name) return; // Exit if no name is available
     const el: HTMLElement = document.querySelector(
       `[data-fs-ranking-name='${name}']`
     );
+    if (!el) return; // Exit if element is not found
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
 
     if (this.value.length > 0 && !blocked) {

@@ -317,26 +317,34 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     return data;
   }
   public updateElementData() {
+    if (!this.survey) return; // Exit if no survey is available
     const el = document.querySelector(
       `[data-fs-element="signaturepad"][data-fs-signaturepad-name="${this.name}"]`
     ) as HTMLElement;
 
+    if (!el) return; // Exit if element is not found
+
     el.setAttribute("data-fs-signaturepad-signed", "true");
 
-    this.survey.updateButtonValuesCallBack({
-      [`${this.name}-signed`]: !!this.value,
-    });
+    if (this.survey.updateButtonValuesCallBack) {
+      this.survey.updateButtonValuesCallBack({
+        [`${this.name}-signed`]: !!this.value,
+      });
+    }
   }
   public deleteElementData(): void {
+    if (!this.survey) return; // Exit if no survey is available
     const el = document.querySelector(
-      `[fs-element="signaturepad"][fs-signaturepad-name="${this.name}"]`
+      `[data-fs-element="signaturepad"][data-fs-signaturepad-name="${this.name}"]`
     ) as HTMLElement;
     if (!!el) {
-      el.removeAttribute("fs-signaturepad-signed");
+      el.removeAttribute("data-fs-signaturepad-signed");
     }
-    this.survey.updateButtonValuesCallBack({
-      [`${this.name}-signed`]: false,
-    });
+    if (this.survey.updateButtonValuesCallBack) {
+      this.survey.updateButtonValuesCallBack({
+        [`${this.name}-signed`]: false,
+      });
+    }
   }
   /**
    * Specifies the format in which to store the signature image.

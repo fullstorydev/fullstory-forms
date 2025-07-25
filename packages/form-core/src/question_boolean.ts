@@ -319,10 +319,15 @@ export class QuestionBooleanModel extends Question {
 
   public updateDataElements(val: any) {
     const name = this.name ? this.name : this.title;
+    // Escape CSS selector special characters (dots, spaces, etc.)
+    const escapedName = name.replace(/[.]/g, "\\.").split(" ").join("-");
 
     const el: HTMLElement = document.querySelector(
-      `[data-fs-boolean-name=${name.split(" ").join("-")}]`
+      `[data-fs-boolean-name=${escapedName}]`
     );
+
+    if (!el) return; // Element not found, likely in test environment
+
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
     !blocked &&
       this.survey.updateButtonValuesCallBack({

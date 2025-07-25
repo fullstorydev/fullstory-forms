@@ -331,9 +331,14 @@ export class QuestionDropdownModel extends QuestionSelectBase {
   public updateElementData(): void {
     if (this.value === undefined || this.value === null) return;
     const name = this.name ? this.name : this.title;
+    if (!name) return; // No name available, skip DOM operations
+    // Escape CSS selector special characters (dots, spaces, etc.)
+    const escapedName = name.replace(/[.]/g, "\\.").split(" ").join("-");
     const el: HTMLElement = document.querySelector(
-      `[data-fs-dropdown-name=${name.split(" ").join("-")}]`
+      `[data-fs-dropdown-name=${escapedName}]`
     );
+
+    if (!el) return; // Element not found, likely in test environment
 
     const blocked = this.traverseBlocked(el, this.survey.blocklist);
     !blocked &&
@@ -345,9 +350,15 @@ export class QuestionDropdownModel extends QuestionSelectBase {
   }
   public deleteElementData() {
     const name = this.name ? this.name : this.title;
+    if (!name) return; // No name available, skip DOM operations
+    // Escape CSS selector special characters (dots, spaces, etc.)
+    const escapedName = name.replace(/[.]/g, "\\.").split(" ").join("-");
     const el: HTMLElement = document.querySelector(
-      `[data-fs-dropdown-name=${name.split(" ").join("-")}]`
+      `[data-fs-dropdown-name=${escapedName}]`
     );
+
+    if (!el) return; // Element not found, likely in test environment
+
     const blocked = false;
     // this.traverseBlocked(el, this.survey.blocklist);
 

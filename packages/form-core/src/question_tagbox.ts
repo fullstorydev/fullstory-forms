@@ -146,10 +146,16 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   }
   public updateElementData(): void {
     if (this.selectedItems.length > 0) {
+      if (!this.survey) return; // Survey not available, likely in test environment
+
       const name = this.name ? this.name : this.title;
+      // Escape CSS selector special characters (dots, spaces, etc.)
+      const escapedName = name.replace(/[.]/g, "\\.").split(" ").join("-");
       const el: HTMLElement = document.querySelector(
-        `[data-fs-tagbox-name='${name.split(" ").join("-")}']`
+        `[data-fs-tagbox-name='${escapedName}']`
       );
+
+      if (!el) return; // Element not found, likely in test environment
 
       const blocked = this.isBlocked(el, this.survey.blocklist);
 
@@ -161,10 +167,17 @@ export class QuestionTagboxModel extends QuestionCheckboxModel {
   }
   public deleteElementData(): void {
     if (this.selectedItems.length > 0) return;
+    if (!this.survey) return; // Survey not available, likely in test environment
+
     const name = this.name ? this.name : this.title;
+    // Escape CSS selector special characters (dots, spaces, etc.)
+    const escapedName = name.replace(/[.]/g, "\\.").split(" ").join("-");
     const el: HTMLElement = document.querySelector(
-      `[data-fs-tagbox-name='${name.split(" ").join("-")}']`
+      `[data-fs-tagbox-name='${escapedName}']`
     );
+
+    if (!el) return; // Element not found, likely in test environment
+
     el.removeAttribute("data-fs-tagbox-value");
     this.deleteFromPropertySchema(el, "data-fs-tagbox-value");
 

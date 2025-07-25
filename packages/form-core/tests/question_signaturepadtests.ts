@@ -4,12 +4,13 @@ import { SurveyModel } from "../src/survey";
 
 export default QUnit.module("question signaturepad");
 
-QUnit.test("QuestionSignaturePadModel dataFormat default value", function (
-  assert
-) {
-  var question = new QuestionSignaturePadModel("q");
-  assert.equal(question.dataFormat, "png", "default value");
-});
+QUnit.test(
+  "QuestionSignaturePadModel dataFormat default value",
+  function (assert) {
+    var question = new QuestionSignaturePadModel("q");
+    assert.equal(question.dataFormat, "png", "default value");
+  }
+);
 
 QUnit.test("QuestionSignaturePadModel dataFormat values", function (assert) {
   var question = new QuestionSignaturePadModel("q");
@@ -55,31 +56,36 @@ QUnit.test("QuestionSignaturePadModel dataFormat values", function (assert) {
 
   el.remove();
 });
-QUnit.test("QuestionSignaturePadModel dataFormat converters", function (assert) {
-  var question = new QuestionSignaturePadModel("q");
-  assert.equal(question.dataFormat, "png", "#1");
-  question.fromJSON({ name: "q", dataFormat: "jpeg" });
-  assert.equal(question.dataFormat, "jpeg", "#2");
-  question.fromJSON({ name: "q", dataFormat: "svg" });
-  assert.equal(question.dataFormat, "svg", "#3");
-  question.fromJSON({ name: "q", dataFormat: "dffd" });
-  assert.equal(question.dataFormat, "png", "#4");
-  question.fromJSON({ name: "q", dataFormat: "image/jpeg" });
-  assert.equal(question.dataFormat, "jpeg", "#5");
-  question.fromJSON({ name: "q", dataFormat: "image/svg+xml" });
-  assert.equal(question.dataFormat, "svg", "#6");
-});
+QUnit.test(
+  "QuestionSignaturePadModel dataFormat converters",
+  function (assert) {
+    var question = new QuestionSignaturePadModel("q");
+    assert.equal(question.dataFormat, "png", "#1");
+    question.fromJSON({ name: "q", dataFormat: "jpeg" });
+    assert.equal(question.dataFormat, "jpeg", "#2");
+    question.fromJSON({ name: "q", dataFormat: "svg" });
+    assert.equal(question.dataFormat, "svg", "#3");
+    question.fromJSON({ name: "q", dataFormat: "dffd" });
+    assert.equal(question.dataFormat, "png", "#4");
+    question.fromJSON({ name: "q", dataFormat: "image/jpeg" });
+    assert.equal(question.dataFormat, "jpeg", "#5");
+    question.fromJSON({ name: "q", dataFormat: "image/svg+xml" });
+    assert.equal(question.dataFormat, "svg", "#6");
+  }
+);
 QUnit.test("check allowClear", (assert) => {
   var json = {
     questions: [
       {
         type: "signaturepad",
-        name: "q1"
+        name: "q1",
       },
     ],
   };
   const survey = new SurveyModel(json);
-  const signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+  const signaturepad = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("q1")
+  );
   assert.equal(signaturepad.allowClear, true, "allowClear");
   assert.equal(signaturepad.readOnly, false, "readOnly");
   assert.equal(signaturepad.canShowClearButton, false, "canShowClearButton");
@@ -89,7 +95,8 @@ QUnit.test("check allowClear", (assert) => {
   signaturepad.valueWasChangedFromLastUpload = false;
   assert.equal(signaturepad.canShowClearButton, false, "canShowClearButton");
 
-  signaturepad.value = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100' width='100'%3E%3Ccircle cx='50' cy='50' r='40' /%3E%3C/svg%3E";
+  signaturepad.value =
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100' width='100'%3E%3Ccircle cx='50' cy='50' r='40' /%3E%3C/svg%3E";
   assert.equal(signaturepad.canShowClearButton, true, "canShowClearButton");
 
   signaturepad.allowClear = false;
@@ -111,7 +118,9 @@ QUnit.test("Check signaturepad signauteWidth/Height properties", (assert) => {
   const containerEl = document.createElement("div");
   const canvas = document.createElement("canvas");
   containerEl.appendChild(canvas);
-  const signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+  const signaturepad = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("q1")
+  );
   const ratio = 1;
   signaturepad.initSignaturePad(containerEl);
   assert.equal(signaturepad.signatureWidth, 300);
@@ -127,66 +136,71 @@ QUnit.test("Check signaturepad signauteWidth/Height properties", (assert) => {
   containerEl.remove();
 });
 //todo: need to remove this test after code modification
-QUnit.test("Check width/height influence on signageWidth/Height properties", (assert) => {
-  let json: any = {
-    questions: [
-      {
-        type: "signaturepad",
-        name: "q1",
-        width: 400,
-        height: 300
-      },
-    ],
-  };
-  const containerEl = document.createElement("div");
-  const canvas = document.createElement("canvas");
-  containerEl.appendChild(canvas);
-  let survey = new SurveyModel(json);
-  let signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
-  signaturepad.initSignaturePad(containerEl);
-  assert.equal(signaturepad.signatureWidth, 400);
-  assert.equal(signaturepad.signatureHeight, 300);
-  assert.equal(canvas.width, 400);
-  assert.equal(canvas.height, 300);
+QUnit.test(
+  "Check width/height influence on signageWidth/Height properties",
+  (assert) => {
+    let json: any = {
+      questions: [
+        {
+          type: "signaturepad",
+          name: "q1",
+          width: 400,
+          height: 300,
+        },
+      ],
+    };
+    const containerEl = document.createElement("div");
+    const canvas = document.createElement("canvas");
+    containerEl.appendChild(canvas);
+    let survey = new SurveyModel(json);
+    let signaturepad = <QuestionSignaturePadModel>(
+      survey.getQuestionByName("q1")
+    );
+    signaturepad.initSignaturePad(containerEl);
+    assert.equal(signaturepad.signatureWidth, 400);
+    assert.equal(signaturepad.signatureHeight, 300);
+    assert.equal(canvas.width, 400);
+    assert.equal(canvas.height, 300);
 
-  json = {
-    questions: [
-      {
-        type: "signaturepad",
-        name: "q1",
-        width: "400",
-      },
-    ],
-  };
-  survey = new SurveyModel(json);
-  signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
-  signaturepad.initSignaturePad(containerEl);
-  assert.equal(signaturepad.signatureWidth, 300);
-  assert.equal(canvas.width, 300);
+    json = {
+      questions: [
+        {
+          type: "signaturepad",
+          name: "q1",
+          width: "400",
+        },
+      ],
+    };
+    survey = new SurveyModel(json);
+    signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+    signaturepad.initSignaturePad(containerEl);
+    assert.equal(signaturepad.signatureWidth, 300);
+    assert.equal(canvas.width, 300);
 
-  json = {
-    questions: [
-      {
-        type: "signaturepad",
-        name: "q1",
-        signatureWidth: 400,
-        signatureHeight: 300,
-        width: 600,
-        height: 600
-      },
-    ],
-  };
-  survey = new SurveyModel(json);
-  signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
-  signaturepad.initSignaturePad(containerEl);
-  assert.equal(signaturepad.signatureWidth, 400);
-  assert.equal(canvas.width, 400);
-  assert.equal(signaturepad.signatureHeight, 300);
-  assert.equal(canvas.height, 300);
+    json = {
+      questions: [
+        {
+          type: "signaturepad",
+          name: "q1",
+          signatureWidth: 400,
+          signatureHeight: 300,
+          width: 600,
+          height: 600,
+        },
+      ],
+    };
+    survey = new SurveyModel(json);
+    signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+    signaturepad.initSignaturePad(containerEl);
+    assert.equal(signaturepad.signatureWidth, 400);
+    assert.equal(canvas.width, 400);
+    assert.equal(signaturepad.signatureHeight, 300);
+    assert.equal(canvas.height, 300);
 
-  canvas.remove();
-  containerEl.remove();
-});
+    canvas.remove();
+    containerEl.remove();
+  }
+);
 
 QUnit.test("check penColor & background color from json", (assert) => {
   const json = {
@@ -195,7 +209,7 @@ QUnit.test("check penColor & background color from json", (assert) => {
         type: "signaturepad",
         name: "q1",
         penColor: "#e92525",
-        backgroundColor: "#dde6db"
+        backgroundColor: "#dde6db",
       },
     ],
   };
@@ -203,25 +217,65 @@ QUnit.test("check penColor & background color from json", (assert) => {
   const canvas = document.createElement("canvas");
   containerEl.appendChild(canvas);
   let survey = new SurveyModel(json);
-  let signaturepadQuestion = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+  let signaturepadQuestion = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("q1")
+  );
   signaturepadQuestion.initSignaturePad(containerEl);
 
   assert.equal(signaturepadQuestion.penColor, "#e92525", "penColor init");
-  assert.equal(signaturepadQuestion.backgroundColor, "#dde6db", "backgroundColor init");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#e92525", "signaturePad.penColor init");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "#dde6db", "signaturePad.backgroundColor init");
+  assert.equal(
+    signaturepadQuestion.backgroundColor,
+    "#dde6db",
+    "backgroundColor init"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.penColor,
+    "#e92525",
+    "signaturePad.penColor init"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.backgroundColor,
+    "#dde6db",
+    "signaturePad.backgroundColor init"
+  );
 
-  survey.applyTheme({ "cssVariables": { "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)" } });
+  survey.applyTheme({
+    cssVariables: { "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)" },
+  });
   assert.equal(signaturepadQuestion.penColor, "#e92525", "penColor init");
-  assert.equal(signaturepadQuestion.backgroundColor, "#dde6db", "backgroundColor init");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#e92525", "signaturePad.penColor init");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "#dde6db", "signaturePad.backgroundColor init");
+  assert.equal(
+    signaturepadQuestion.backgroundColor,
+    "#dde6db",
+    "backgroundColor init"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.penColor,
+    "#e92525",
+    "signaturePad.penColor init"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.backgroundColor,
+    "#dde6db",
+    "signaturePad.backgroundColor init"
+  );
 
-  survey.applyTheme({ "cssVariables": {} });
+  survey.applyTheme({ cssVariables: {} });
   assert.equal(signaturepadQuestion.penColor, "#e92525", "penColor init");
-  assert.equal(signaturepadQuestion.backgroundColor, "#dde6db", "backgroundColor init");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#e92525", "signaturePad.penColor init");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "#dde6db", "signaturePad.backgroundColor init");
+  assert.equal(
+    signaturepadQuestion.backgroundColor,
+    "#dde6db",
+    "backgroundColor init"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.penColor,
+    "#e92525",
+    "signaturePad.penColor init"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.backgroundColor,
+    "#dde6db",
+    "signaturePad.backgroundColor init"
+  );
 });
 
 QUnit.test("check penColor & background color from theme", (assert) => {
@@ -237,67 +291,178 @@ QUnit.test("check penColor & background color from theme", (assert) => {
   const canvas = document.createElement("canvas");
   containerEl.appendChild(canvas);
   let survey = new SurveyModel(json);
-  let signaturepadQuestion = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+  let signaturepadQuestion = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("q1")
+  );
   signaturepadQuestion.initSignaturePad(containerEl);
 
   assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, undefined, "backgroundColor undefined");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#1ab394", "signaturePad.penColor default");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "#ffffff", "signaturePad.backgroundColor default");
+  assert.equal(
+    signaturepadQuestion.backgroundColor,
+    undefined,
+    "backgroundColor undefined"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.penColor,
+    "#1ab394",
+    "signaturePad.penColor default"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.backgroundColor,
+    "#ffffff",
+    "signaturePad.backgroundColor default"
+  );
 
-  survey.applyTheme({ "cssVariables": { "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)" } });
+  survey.applyTheme({
+    cssVariables: { "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)" },
+  });
   assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, undefined, "backgroundColor undefined");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "rgba(103, 58, 176, 1)", "signaturePad.penColor from theme");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "transparent", "signaturePad.backgroundColor from theme");
+  assert.equal(
+    signaturepadQuestion.backgroundColor,
+    undefined,
+    "backgroundColor undefined"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.penColor,
+    "rgba(103, 58, 176, 1)",
+    "signaturePad.penColor from theme"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.backgroundColor,
+    "transparent",
+    "signaturePad.backgroundColor from theme"
+  );
 
-  survey.applyTheme({ "cssVariables": {} });
+  survey.applyTheme({ cssVariables: {} });
   assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, undefined, "backgroundColor undefined");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#1ab394", "signaturePad.penColor default");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "#ffffff", "signaturePad.backgroundColor default");
+  assert.equal(
+    signaturepadQuestion.backgroundColor,
+    undefined,
+    "backgroundColor undefined"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.penColor,
+    "#1ab394",
+    "signaturePad.penColor default"
+  );
+  assert.equal(
+    signaturepadQuestion.signaturePad.backgroundColor,
+    "#ffffff",
+    "signaturePad.backgroundColor default"
+  );
 });
 
-QUnit.test("check penColor & background color if background image", (assert) => {
-  const json = {
-    questions: [
-      {
-        type: "signaturepad",
-        backgroundImage: "someUrl",
-        name: "q1",
-      },
-    ],
-  };
-  const containerEl = document.createElement("div");
-  const canvas = document.createElement("canvas");
-  containerEl.appendChild(canvas);
-  let survey = new SurveyModel(json);
-  let signaturepadQuestion = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
-  signaturepadQuestion.initSignaturePad(containerEl);
+QUnit.test(
+  "check penColor & background color if background image",
+  (assert) => {
+    const json = {
+      questions: [
+        {
+          type: "signaturepad",
+          backgroundImage: "someUrl",
+          name: "q1",
+        },
+      ],
+    };
+    const containerEl = document.createElement("div");
+    const canvas = document.createElement("canvas");
+    containerEl.appendChild(canvas);
+    let survey = new SurveyModel(json);
+    let signaturepadQuestion = <QuestionSignaturePadModel>(
+      survey.getQuestionByName("q1")
+    );
+    signaturepadQuestion.initSignaturePad(containerEl);
 
-  assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, undefined, "backgroundColor undefined");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#1ab394", "signaturePad.penColor #1ab394");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "transparent", "signaturePad.backgroundColor transparent");
+    assert.equal(
+      signaturepadQuestion.penColor,
+      undefined,
+      "penColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.backgroundColor,
+      undefined,
+      "backgroundColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.penColor,
+      "#1ab394",
+      "signaturePad.penColor #1ab394"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.backgroundColor,
+      "transparent",
+      "signaturePad.backgroundColor transparent"
+    );
 
-  survey.applyTheme({ "cssVariables": { "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)" } });
-  assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, undefined, "backgroundColor undefined");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "rgba(103, 58, 176, 1)", "signaturePad.penColor from theme");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "transparent", "signaturePad.backgroundColor from theme");
+    survey.applyTheme({
+      cssVariables: { "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)" },
+    });
+    assert.equal(
+      signaturepadQuestion.penColor,
+      undefined,
+      "penColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.backgroundColor,
+      undefined,
+      "backgroundColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.penColor,
+      "rgba(103, 58, 176, 1)",
+      "signaturePad.penColor from theme"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.backgroundColor,
+      "transparent",
+      "signaturePad.backgroundColor from theme"
+    );
 
-  survey.applyTheme({ "cssVariables": {} });
-  assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, undefined, "backgroundColor undefined");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#1ab394", "signaturePad.penColor #1ab394");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "transparent", "signaturePad.backgroundColor transparent");
+    survey.applyTheme({ cssVariables: {} });
+    assert.equal(
+      signaturepadQuestion.penColor,
+      undefined,
+      "penColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.backgroundColor,
+      undefined,
+      "backgroundColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.penColor,
+      "#1ab394",
+      "signaturePad.penColor #1ab394"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.backgroundColor,
+      "transparent",
+      "signaturePad.backgroundColor transparent"
+    );
 
-  signaturepadQuestion.backgroundColor = "#dde6db";
-  assert.equal(signaturepadQuestion.penColor, undefined, "penColor undefined");
-  assert.equal(signaturepadQuestion.backgroundColor, "#dde6db", "backgroundColor #dde6db");
-  assert.equal(signaturepadQuestion.signaturePad.penColor, "#1ab394", "signaturePad.penColor #1ab394");
-  assert.equal(signaturepadQuestion.signaturePad.backgroundColor, "transparent", "signaturePad.backgroundColor transparent");
-});
+    signaturepadQuestion.backgroundColor = "#dde6db";
+    assert.equal(
+      signaturepadQuestion.penColor,
+      undefined,
+      "penColor undefined"
+    );
+    assert.equal(
+      signaturepadQuestion.backgroundColor,
+      "#dde6db",
+      "backgroundColor #dde6db"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.penColor,
+      "#1ab394",
+      "signaturePad.penColor #1ab394"
+    );
+    assert.equal(
+      signaturepadQuestion.signaturePad.backgroundColor,
+      "transparent",
+      "signaturePad.backgroundColor transparent"
+    );
+  }
+);
 
 QUnit.test("check showPlaceholder & placeholder properties", (assert) => {
   let json: any = {
@@ -320,7 +485,8 @@ QUnit.test("check showPlaceholder & placeholder properties", (assert) => {
   question.valueWasChangedFromLastUpload = false;
   assert.equal(question.needShowPlaceholder(), true), "#2";
 
-  question.value = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100' width='100'%3E%3Ccircle cx='50' cy='50' r='40' /%3E%3C/svg%3E";
+  question.value =
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100' width='100'%3E%3Ccircle cx='50' cy='50' r='40' /%3E%3C/svg%3E";
   assert.equal(question.needShowPlaceholder(), false, "#3");
 
   question.showPlaceholder = false;
@@ -341,7 +507,7 @@ QUnit.test("check showPlaceholder & placeholder properties", (assert) => {
         backgroundImage: "someUrl",
         name: "q1",
         showPlaceholder: false,
-        placeHolder: "test sign"
+        placeHolder: "test sign",
       },
     ],
   };
@@ -355,7 +521,13 @@ QUnit.test("check showPlaceholder & placeholder properties", (assert) => {
 QUnit.test("check placeholder property visibility", (assert) => {
   const prop1 = Serializer.getProperty("signaturepad", "placeholder");
   const prop2 = Serializer.getProperty("signaturepad", "placeholderReadOnly");
-  assert.deepEqual(Serializer.getProperty("signaturepad", "showPlaceholder").getDependedProperties(), [prop1.name, prop2.name]);
+  assert.deepEqual(
+    Serializer.getProperty(
+      "signaturepad",
+      "showPlaceholder"
+    ).getDependedProperties(),
+    [prop1.name, prop2.name]
+  );
   const q1 = new QuestionSignaturePadModel("q1");
   q1.showPlaceholder = true;
   assert.equal(prop1.isVisible(undefined, q1), true);
@@ -369,7 +541,7 @@ QUnit.test("check rendered size properties", (assert) => {
       {
         type: "signaturepad",
         name: "q1",
-        "penColor": "#ff0000"
+        penColor: "#ff0000",
       },
     ],
   };
@@ -377,7 +549,9 @@ QUnit.test("check rendered size properties", (assert) => {
   const canvas = document.createElement("canvas");
   containerEl.appendChild(canvas);
   let survey = new SurveyModel(json);
-  let signaturepadQuestion = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+  let signaturepadQuestion = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("q1")
+  );
   signaturepadQuestion.initSignaturePad(containerEl);
 
   assert.equal(signaturepadQuestion.renderedCanvasWidth, "300px");
@@ -403,7 +577,10 @@ QUnit.test("Question Signature upload files", function (assert) {
   };
 
   var survey = new SurveyModel(json);
-  var q1: QuestionSignaturePadModel = <any>survey.getQuestionByName("signature");
+  survey.updateButtonValuesCallBack = () => {}; // Add the missing callback
+  var q1: QuestionSignaturePadModel = <any>(
+    survey.getQuestionByName("signature")
+  );
   var done = assert.async();
 
   var eventFired;
@@ -437,7 +614,26 @@ QUnit.test("Question Signature upload files", function (assert) {
   const el = document.createElement("div");
   el.append(document.createElement("canvas"));
   q1.afterRenderQuestionElement(el);
-  q1["signaturePad"].fromData([{ "penColor": "rgba(25, 179, 148, 1)", "dotSize": 0, "minWidth": 0.5, "maxWidth": 2.5, "velocityFilterWeight": 0.7, "compositeOperation": "source-over", "points": [{ "time": 1701152337021, "x": 9, "y": 11, "pressure": 0.5 }] }, { "penColor": "rgba(25, 179, 148, 1)", "dotSize": 0, "minWidth": 0.5, "maxWidth": 2.5, "velocityFilterWeight": 0.7, "compositeOperation": "source-over", "points": [{ "time": 1701152337856, "x": 15, "y": 18, "pressure": 0.5 }] }]);
+  q1["signaturePad"].fromData([
+    {
+      penColor: "rgba(25, 179, 148, 1)",
+      dotSize: 0,
+      minWidth: 0.5,
+      maxWidth: 2.5,
+      velocityFilterWeight: 0.7,
+      compositeOperation: "source-over",
+      points: [{ time: 1701152337021, x: 9, y: 11, pressure: 0.5 }],
+    },
+    {
+      penColor: "rgba(25, 179, 148, 1)",
+      dotSize: 0,
+      minWidth: 0.5,
+      maxWidth: 2.5,
+      velocityFilterWeight: 0.7,
+      compositeOperation: "source-over",
+      points: [{ time: 1701152337856, x: 15, y: 18, pressure: 0.5 }],
+    },
+  ]);
   q1.valueWasChangedFromLastUpload = true;
   q1.onBlur({ target: null } as any);
 
@@ -451,7 +647,21 @@ QUnit.test("Question Signature upload files", function (assert) {
 
     assert.equal(fileType, "image/svg+xml");
     assert.equal(fileName, "signature.svg");
-    assert.equal(fileContent, "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ' + width + " " + height + '" width="' + width + '" height="' + height + '"><circle r="1.5" cx="9" cy="11" fill="rgba(25, 179, 148, 1)"></circle><circle r="1.5" cx="15" cy="18" fill="rgba(25, 179, 148, 1)"></circle></svg>'));
+    assert.equal(
+      fileContent,
+      "data:image/svg+xml;base64," +
+        btoa(
+          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ' +
+            width +
+            " " +
+            height +
+            '" width="' +
+            width +
+            '" height="' +
+            height +
+            '"><circle r="1.5" cx="9" cy="11" fill="rgba(25, 179, 148, 1)"></circle><circle r="1.5" cx="15" cy="18" fill="rgba(25, 179, 148, 1)"></circle></svg>'
+        )
+    );
     done();
   });
 });
@@ -468,22 +678,22 @@ QUnit.test("Question Signature upload files - and complete", function (assert) {
   };
 
   var survey = new SurveyModel(json);
-  var q1: QuestionSignaturePadModel = <any>survey.getQuestionByName("signature");
+  survey.updateButtonValuesCallBack = () => {}; // Add the missing callback
+  var q1: QuestionSignaturePadModel = <any>(
+    survey.getQuestionByName("signature")
+  );
   var done = assert.async();
   var filesLoaded = false;
   survey.onUploadFiles.add((survey, options) => {
-    setTimeout(
-      () => {
-        filesLoaded = true;
-        options.callback(
-          "success",
-          options.files.map((file) => {
-            return { file: file, content: file.name + "_url" };
-          })
-        );
-      },
-      2
-    );
+    setTimeout(() => {
+      filesLoaded = true;
+      options.callback(
+        "success",
+        options.files.map((file) => {
+          return { file: file, content: file.name + "_url" };
+        })
+      );
+    }, 2);
   });
 
   const el = document.createElement("div");
@@ -497,7 +707,6 @@ QUnit.test("Question Signature upload files - and complete", function (assert) {
 
   q1.onBlur({ target: null } as any);
   survey.navigationBar.getActionById("sv-nav-complete").action();
-
 });
 
 QUnit.test("Question Signature pad invisible - on complete", function (assert) {
@@ -505,17 +714,18 @@ QUnit.test("Question Signature pad invisible - on complete", function (assert) {
     questions: [
       {
         type: "text",
-        name: "text"
+        name: "text",
       },
       {
         type: "signaturepad",
         name: "signature",
-        visibleIf: "{text} = 'cba'"
+        visibleIf: "{text} = 'cba'",
       },
     ],
   };
 
   var survey = new SurveyModel(json);
+  survey.updateButtonValuesCallBack = () => {}; // Add the missing callback
   survey.getQuestionByName("text").value = "abc";
   survey.doComplete();
   assert.deepEqual(survey.data, { text: "abc" });
@@ -530,30 +740,33 @@ QUnit.test("Check signature download file event", (assert) => {
       {
         type: "signaturepad",
         name: "signature",
-        "signatureWidth": 100,
-        "signatureHeight": 100,
-        "dataFormat": "svg",
-        storeDataAsText: false
-      }
+        signatureWidth: 100,
+        signatureHeight: 100,
+        dataFormat: "svg",
+        storeDataAsText: false,
+      },
     ],
   });
-  var q: QuestionSignaturePadModel = <QuestionSignaturePadModel>survey.getQuestionByName("signature");
+  var q: QuestionSignaturePadModel = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("signature")
+  );
   q.initSignaturePad(el);
   let log = "";
   survey.onDownloadFile.add((survey, options) => {
     log += "->" + options.fileValue;
-    options.callback(
-      "success",
-      ""
-    );
+    options.callback("success", "");
   });
 
   assert.equal(q.currentState, "empty", "Initial state is empty");
   survey.data = {
-    "signature": "file1.png"
+    signature: "file1.png",
   };
   assert.equal(log, "->file1.png", "file should be loaded only once");
-  assert.equal(q.currentState, "loaded", "The loaded state after data assigned");
+  assert.equal(
+    q.currentState,
+    "loaded",
+    "The loaded state after data assigned"
+  );
 
   canv.remove();
   el.remove();
@@ -569,7 +782,7 @@ QUnit.test("Check isReady flag with onDownloadFile callback", (assert) => {
         type: "signaturepad",
         name: "signature",
         storeDataAsText: false,
-      }
+      },
     ],
   });
   const question = <QuestionSignaturePadModel>survey.getAllQuestions()[0];
@@ -581,7 +794,12 @@ QUnit.test("Check isReady flag with onDownloadFile callback", (assert) => {
   const contents = new Array<string>();
   survey.onDownloadFile.add((survey, options) => {
     assert.equal(options.question.isReady, false);
-    contents.push("data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>'));
+    contents.push(
+      "data:image/svg+xml;base64," +
+        btoa(
+          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>'
+        )
+    );
     callbacks.push(options.callback);
     log += "->" + options.fileValue;
   });
@@ -589,9 +807,13 @@ QUnit.test("Check isReady flag with onDownloadFile callback", (assert) => {
   question.onReadyChanged.add(() => {
     readyLogs.push(question.isReady);
   });
-  assert.equal(question.isReady, true, "question is ready before data assignment");
+  assert.equal(
+    question.isReady,
+    true,
+    "question is ready before data assignment"
+  );
   survey.data = {
-    "signature": "file1.svg"
+    signature: "file1.svg",
   };
   assert.equal(question.isReady, false, "question is not ready");
   assert.equal(log, "->file1.svg");
@@ -615,7 +837,7 @@ QUnit.test("Check storeDataAsText: false and base64 data", (assert) => {
         type: "signaturepad",
         name: "signature",
         storeDataAsText: false,
-      }
+      },
     ],
   });
   const question = <QuestionSignaturePadModel>survey.getAllQuestions()[0];
@@ -624,142 +846,209 @@ QUnit.test("Check storeDataAsText: false and base64 data", (assert) => {
   question.onReadyChanged.add((_, opt) => {
     log += `->${opt.isReady}`;
   });
-  const base64Url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII";
+  const base64Url =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII";
   survey.data = {
-    signature: base64Url
+    signature: base64Url,
   };
   assert.equal(question.loadedData, base64Url);
   assert.equal(log, "->false->true", "isReady changed only one time");
 });
 
-QUnit.test("Check storeDataAsText: false and no download file callback and incorrect link passed", (assert) => {
-  const done = assert.async();
-  const survey = new SurveyModel({
-    questions: [
-      {
-        type: "signaturepad",
-        name: "signature",
-        storeDataAsText: false,
-      }
-    ],
-  });
-  const question = <QuestionSignaturePadModel>survey.getAllQuestions()[0];
-  assert.equal(question.isReady, true, "question is ready before data");
-  let log = "";
-  question.onReadyChanged.add((_, opt) => {
-    log += `->${opt.isReady}`;
-  });
-  const url = "http://localhost:7777/image.jpg";
-  survey.data = {
-    signature: url
-  };
-  setTimeout(() => {
+QUnit.test(
+  "Check storeDataAsText: false and no download file callback and incorrect link passed",
+  (assert) => {
+    const done = assert.async();
+    const survey = new SurveyModel({
+      questions: [
+        {
+          type: "signaturepad",
+          name: "signature",
+          storeDataAsText: false,
+        },
+      ],
+    });
+    const question = <QuestionSignaturePadModel>survey.getAllQuestions()[0];
+    assert.equal(question.isReady, true, "question is ready before data");
+    let log = "";
+    question.onReadyChanged.add((_, opt) => {
+      log += `->${opt.isReady}`;
+    });
+    const url = "http://localhost:7777/image.jpg";
+    survey.data = {
+      signature: url,
+    };
+    setTimeout(() => {
+      assert.equal(question.loadedData, undefined);
+      assert.equal(question.value, url);
+      assert.equal(log, "->false->true", "isReady changed only one time");
+      done();
+    }, 2500);
+  }
+);
+
+QUnit.test(
+  "Check signature image cached in loadedData and loaded only once until value changed",
+  (assert) => {
+    var el = document.createElement("div");
+    var canv = document.createElement("canvas");
+    el.appendChild(canv);
+    const survey = new SurveyModel({
+      questions: [
+        {
+          type: "signaturepad",
+          name: "signature",
+          storeDataAsText: false,
+        },
+      ],
+    });
+    const loadedData = {
+      "file1.svg":
+        "data:image/svg+xml;base64," +
+        btoa(
+          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="1"></svg>'
+        ),
+      "file2.svg":
+        "data:image/svg+xml;base64," +
+        btoa(
+          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="2"></svg>'
+        ),
+    };
+    const question = <QuestionSignaturePadModel>survey.getAllQuestions()[0];
+
+    let log = "";
+    const callbacks = new Array<any>();
+    const contents = new Array<string>();
+    survey.onDownloadFile.add((survey, options) => {
+      assert.equal(options.question.isReady, false);
+      contents.push(loadedData[options.question.value]);
+      callbacks.push(options.callback);
+      log += "->" + options.fileValue;
+    });
+
+    assert.equal(log, "");
+    assert.equal(callbacks.length, 0, "No callbacks");
+    assert.equal(question.value, undefined);
     assert.equal(question.loadedData, undefined);
-    assert.equal(question.value, url);
-    assert.equal(log, "->false->true", "isReady changed only one time");
-    done();
-  }, 2500);
-});
+    assert.equal(
+      question.isReady,
+      true,
+      "question is ready before data assignment"
+    );
 
-QUnit.test("Check signature image cached in loadedData and loaded only once until value changed", (assert) => {
-  var el = document.createElement("div");
-  var canv = document.createElement("canvas");
-  el.appendChild(canv);
-  const survey = new SurveyModel({
-    questions: [
-      {
-        type: "signaturepad",
-        name: "signature",
-        storeDataAsText: false,
-      }
-    ],
-  });
-  const loadedData = {
-    "file1.svg": "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="1"></svg>'),
-    "file2.svg": "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="2"></svg>')
-  };
-  const question = <QuestionSignaturePadModel>survey.getAllQuestions()[0];
+    survey.data = {
+      signature: "file1.svg",
+    };
+    assert.equal(log, "->file1.svg");
+    assert.equal(callbacks.length, 1, "One callback");
+    assert.equal(question.value, "file1.svg");
+    assert.equal(question.loadedData, undefined);
+    assert.equal(
+      question.isReady,
+      false,
+      "question is not ready after data assignment"
+    );
+    for (let i = 0; i < callbacks.length; i++) {
+      callbacks[i]("success", contents[i]);
+    }
+    callbacks.length = 0;
+    contents.length = 0;
 
-  let log = "";
-  const callbacks = new Array<any>();
-  const contents = new Array<string>();
-  survey.onDownloadFile.add((survey, options) => {
-    assert.equal(options.question.isReady, false);
-    contents.push(loadedData[options.question.value]);
-    callbacks.push(options.callback);
-    log += "->" + options.fileValue;
-  });
+    let dataFromUrlLog = "";
+    // question.initSignaturePad(el);
+    question.signaturePad = {
+      fromDataURL: (data: string) => (dataFromUrlLog += "->" + data),
+    };
+    question["canvas"] = canv;
+    question["loadPreview"](question.value);
 
-  assert.equal(log, "");
-  assert.equal(callbacks.length, 0, "No callbacks");
-  assert.equal(question.value, undefined);
-  assert.equal(question.loadedData, undefined);
-  assert.equal(question.isReady, true, "question is ready before data assignment");
+    assert.equal(log, "->file1.svg");
+    assert.equal(callbacks.length, 0, "No callbacks");
+    assert.equal(question.value, "file1.svg");
+    assert.equal(
+      question.loadedData,
+      loadedData["file1.svg"],
+      "loadedData after widget initialized"
+    );
+    assert.equal(
+      dataFromUrlLog,
+      "->" + loadedData["file1.svg"],
+      "signaturepad.fromDataURL after widget initialized"
+    );
+    assert.equal(
+      question.isReady,
+      true,
+      "question ready after widget initialized"
+    );
 
-  survey.data = {
-    "signature": "file1.svg"
-  };
-  assert.equal(log, "->file1.svg");
-  assert.equal(callbacks.length, 1, "One callback");
-  assert.equal(question.value, "file1.svg");
-  assert.equal(question.loadedData, undefined);
-  assert.equal(question.isReady, false, "question is not ready after data assignment");
-  for (let i = 0; i < callbacks.length; i++) {
-    callbacks[i]("success", contents[i]);
+    question.signatureWidth = 1000;
+
+    assert.equal(log, "->file1.svg");
+    assert.equal(callbacks.length, 0, "No callbacks");
+    assert.equal(question.value, "file1.svg");
+    assert.equal(
+      question.loadedData,
+      loadedData["file1.svg"],
+      "loadedData after resize"
+    );
+    assert.equal(
+      dataFromUrlLog,
+      "->" + loadedData["file1.svg"],
+      "signaturepad.fromDataURL after resize"
+    );
+    assert.equal(question.isReady, true, "question ready after resize");
+
+    question.value = "file2.svg";
+    // survey.data = {
+    //   "signature": "file2.svg"
+    // };
+
+    assert.equal(log, "->file1.svg->file2.svg");
+    assert.equal(callbacks.length, 1, "One callback");
+    assert.equal(question.value, "file2.svg");
+    assert.equal(
+      question.loadedData,
+      undefined,
+      "No data available for a while after value changed"
+    );
+    assert.equal(
+      dataFromUrlLog,
+      "->" + loadedData["file1.svg"],
+      "signaturepad.fromDataURL after resize"
+    );
+    assert.equal(
+      question.isReady,
+      false,
+      "question is not ready after data assignment"
+    );
+    for (let i = 0; i < callbacks.length; i++) {
+      callbacks[i]("success", contents[i]);
+    }
+    callbacks.length = 0;
+
+    assert.equal(log, "->file1.svg->file2.svg");
+    assert.equal(callbacks.length, 0, "No callbacks");
+    assert.equal(question.value, "file2.svg");
+    assert.equal(
+      question.loadedData,
+      loadedData["file2.svg"],
+      "Another data loaded"
+    );
+    assert.equal(
+      dataFromUrlLog,
+      "->" + loadedData["file1.svg"] + "->" + loadedData["file2.svg"],
+      "signaturepad.fromDataURL after value changed"
+    );
+    assert.equal(
+      question.isReady,
+      true,
+      "question ready after loading data after value changedt"
+    );
+
+    canv.remove();
+    el.remove();
   }
-  callbacks.length = 0;
-  contents.length = 0;
-
-  let dataFromUrlLog = "";
-  // question.initSignaturePad(el);
-  question.signaturePad = {
-    fromDataURL: (data: string) => (dataFromUrlLog += "->" + data)
-  };
-  question["canvas"] = canv;
-  question["loadPreview"](question.value);
-
-  assert.equal(log, "->file1.svg");
-  assert.equal(callbacks.length, 0, "No callbacks");
-  assert.equal(question.value, "file1.svg");
-  assert.equal(question.loadedData, loadedData["file1.svg"], "loadedData after widget initialized");
-  assert.equal(dataFromUrlLog, "->" + loadedData["file1.svg"], "signaturepad.fromDataURL after widget initialized");
-  assert.equal(question.isReady, true, "question ready after widget initialized");
-
-  question.signatureWidth = 1000;
-
-  assert.equal(log, "->file1.svg");
-  assert.equal(callbacks.length, 0, "No callbacks");
-  assert.equal(question.value, "file1.svg");
-  assert.equal(question.loadedData, loadedData["file1.svg"], "loadedData after resize");
-  assert.equal(dataFromUrlLog, "->" + loadedData["file1.svg"], "signaturepad.fromDataURL after resize");
-  assert.equal(question.isReady, true, "question ready after resize");
-
-  question.value = "file2.svg";
-  // survey.data = {
-  //   "signature": "file2.svg"
-  // };
-
-  assert.equal(log, "->file1.svg->file2.svg");
-  assert.equal(callbacks.length, 1, "One callback");
-  assert.equal(question.value, "file2.svg");
-  assert.equal(question.loadedData, undefined, "No data available for a while after value changed");
-  assert.equal(dataFromUrlLog, "->" + loadedData["file1.svg"], "signaturepad.fromDataURL after resize");
-  assert.equal(question.isReady, false, "question is not ready after data assignment");
-  for (let i = 0; i < callbacks.length; i++) {
-    callbacks[i]("success", contents[i]);
-  }
-  callbacks.length = 0;
-
-  assert.equal(log, "->file1.svg->file2.svg");
-  assert.equal(callbacks.length, 0, "No callbacks");
-  assert.equal(question.value, "file2.svg");
-  assert.equal(question.loadedData, loadedData["file2.svg"], "Another data loaded");
-  assert.equal(dataFromUrlLog, "->" + loadedData["file1.svg"] + "->" + loadedData["file2.svg"], "signaturepad.fromDataURL after value changed");
-  assert.equal(question.isReady, true, "question ready after loading data after value changedt");
-
-  canv.remove();
-  el.remove();
-});
+);
 
 QUnit.test("do not init in design mode", (assert) => {
   var el = document.createElement("div");
@@ -767,13 +1056,15 @@ QUnit.test("do not init in design mode", (assert) => {
     questions: [
       {
         type: "signaturepad",
-        name: "q1"
+        name: "q1",
       },
     ],
   };
   const survey = new SurveyModel(json);
   survey.setDesignMode(true);
-  const signaturepad = <QuestionSignaturePadModel>survey.getQuestionByName("q1");
+  const signaturepad = <QuestionSignaturePadModel>(
+    survey.getQuestionByName("q1")
+  );
   signaturepad.afterRenderQuestionElement(el);
 
   assert.notOk(signaturepad["signaturePad"]);
