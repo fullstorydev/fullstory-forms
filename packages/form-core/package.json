@@ -18,7 +18,7 @@
   "main": "form.core.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bateman001/fullstory-forms.git"
+    "url": "git+https://github.com/fullstorydev/fullstory-forms.git"
   },
   "files": [
     "build/**/*"
