@@ -44,9 +44,10 @@ export class RatingItemBase extends SurveyElementBase<IRatingItemProps, any> {
 
   setRatingDataElements(): void {
     const el = this.rateRef.current;
-
-    const data = this.item.elementData(el, this.question.survey.blocklist);
-    this.setDataElements(el, data);
+    if (el) {
+      const data = this.item.elementData(el, this.question.survey.blocklist);
+      this.setDataElements(el, data);
+    }
   }
 }
 export class RatingItem extends RatingItemBase {

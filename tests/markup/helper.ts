@@ -87,6 +87,7 @@ function sortAttributes(elements: Array<HTMLElement>) {
 
 function addFullstorysnippet() {
   console.log("adding fs snippet");
+
   const script = document.createElement("script");
   script.innerHTML = `window['_fs_host'] = 'staging.fullstory.com';
     window['_fs_script'] = 'edge.staging.fullstory.com/s/fs.js';
@@ -166,17 +167,6 @@ async function waitForFullStory(timeout = 10000): Promise<any> {
 function getFullStorySessionUrl(fs: any): string {
   const sessionUrl = fs("getSession");
   return sessionUrl;
-}
-
-function startFS(): any {
-  const fs = getFullStoryInstance();
-  fs("observe", {
-    type: "start",
-    callback: () => {
-      console.log("starting fs");
-      // Do stuff with session URL...
-    },
-  });
 }
 
 export async function testQuestionMarkup(
@@ -381,6 +371,41 @@ const removeExtraElementsConditions: Array<
     htmlElement.classList.contains("sv-vue-title-additional-div"),
   (HTMLElement: HTMLElement) =>
     HTMLElement.tagName.toLowerCase().search(/^sv-/) > -1,
+  // Remove FullStory wrapper divs - divs that contain only form elements and have no meaningful content
+  (htmlElement: HTMLElement) => {
+    if (htmlElement.tagName.toLowerCase() !== "div") return false;
+
+    // Check if the div has any FullStory attributes
+    const hasFullStoryAttrs = Array.from(htmlElement.attributes).some(
+      (attr) =>
+        attr.name.startsWith("data-fs-") ||
+        attr.name.startsWith("data-checkbox-item-") ||
+        attr.name.startsWith("data-imagepicker-item-") ||
+        attr.name.startsWith("data-radio-item-") ||
+        attr.name.startsWith("data-rating-item-")
+    );
+
+    // If no FullStory attributes, check if it's a simple wrapper with no classes/ids
+    const isSimpleWrapper =
+      !htmlElement.className &&
+      !htmlElement.id &&
+      htmlElement.attributes.length === 0;
+
+    // Check if div contains only form elements (textarea, input, select, etc.)
+    const children = Array.from(htmlElement.children);
+    const hasOnlyFormElements =
+      children.length > 0 &&
+      children.every((child) => {
+        const tagName = child.tagName.toLowerCase();
+        return (
+          ["textarea", "input", "select", "button"].includes(tagName) ||
+          child.classList.contains("sv-") || // SurveyJS components
+          child.classList.contains("sd-")
+        ); // SurveyJS components
+      });
+
+    return (hasFullStoryAttrs || isSimpleWrapper) && hasOnlyFormElements;
+  },
 ];
 
 function clearExtraElements(innerHTML: string): string {
@@ -446,7 +471,8 @@ function removeFullStoryAttributes(el: Element) {
       name.startsWith("data-fs-") ||
       name.startsWith("data-checkbox-item-") ||
       name.startsWith("data-radio-item-") ||
-      name.startsWith("data-imagepicker-item-")
+      name.startsWith("data-imagepicker-item-") ||
+      name.startsWith("data-rating-item-")
     ) {
       attributesToRemove.push(name);
     }
