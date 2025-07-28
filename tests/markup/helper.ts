@@ -437,6 +437,12 @@ function clearAttributes(el: Element, removeIds = false) {
   el.removeAttribute("data-bind");
   el.removeAttribute("data-key");
   el.removeAttribute("data-rendered");
+
+  // Remove FullStory data attributes
+  el.removeAttribute("data-fs-element");
+  el.removeAttribute("data-fs-properties-schema");
+  el.removeAttribute("data-fs-text-name");
+
   if (!!removeIds) {
     el.removeAttribute("id");
   }
