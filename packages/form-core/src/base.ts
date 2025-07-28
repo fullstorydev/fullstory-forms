@@ -412,40 +412,44 @@ export class Base {
     obj: any,
     element: string = ""
   ): { "data-fs-properties-schema": string; [v: string]: string } {
-    // Find all keys
-    const keys = Object.keys(obj);
+    if (element) {
+      // Find all keys
+      const keys = Object.keys(obj);
 
-    // create store for schema
-    const schema = {};
+      // create store for schema
+      const schema = {};
 
-    // create store for element data
-    const elementData: { [v: string]: string } = element
-      ? { "data-fs-element": element }
-      : {};
+      // create store for element data
+      const elementData: { [v: string]: string } = element
+        ? { "data-fs-element": element }
+        : {};
 
-    // loop over all keys
-    for (const key of keys) {
-      // find the data type of the keys vaue
-      const type = this.getDataType(obj[key]);
+      // loop over all keys
+      for (const key of keys) {
+        // find the data type of the keys vaue
+        const type = this.getDataType(obj[key]);
 
-      // create a fs approved schema name
-      let k = `data-${key}`;
+        // create a fs approved schema name
+        let k = `data-${key}`;
 
-      // insert data into schema
-      schema[k] = {
-        name: key,
-        type: type,
+        // insert data into schema
+        schema[k] = {
+          name: key,
+          type: type,
+        };
+
+        // add to data element store
+        elementData[k] = Array.isArray(obj[key])
+          ? obj[key]
+          : obj[key].toString();
+      }
+
+      // return schema and element data
+      return {
+        ...elementData,
+        "data-fs-properties-schema": JSON.stringify(schema),
       };
-
-      // add to data element store
-      elementData[k] = Array.isArray(obj[key]) ? obj[key] : obj[key].toString();
     }
-
-    // return schema and element data
-    return {
-      ...elementData,
-      "data-fs-properties-schema": JSON.stringify(schema),
-    };
   }
 
   public getDataElementItem(
@@ -570,8 +574,6 @@ export class Base {
 
   public deleteFromPropertySchema = (element: Element, key: string) => {
     if (!element) return;
-    console.log("element", element);
-    console.log("deleteFromPropertySchema", key);
     // get current schema
     const schemaAttr = element.getAttribute("data-fs-properties-schema");
     const schema = schemaAttr ? JSON.parse(schemaAttr) : {};

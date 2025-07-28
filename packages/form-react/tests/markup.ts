@@ -5,7 +5,7 @@ import { Survey as SurveyReact } from "../entries/index";
 import { Model } from "@fullstory/form-core";
 import { act } from "react-dom/test-utils";
 import * as React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom";
 
 var platformDescriptor = {
   name: "React",
@@ -19,6 +19,7 @@ var platformDescriptor = {
   },
   getStrFromHtml: snapshot => {
     return require("../../../tests/markup/snapshots/" + snapshot + ".snap.html");
+    // return require("../../../tests/markup/snapshots/boolean-checkbox-custom-icon.snap.html");
   },
   finish: element => {
     ReactDOM.unmountComponentAtNode(element);
@@ -27,8 +28,10 @@ var platformDescriptor = {
 
 export default QUnit.module("Base");
 
-markupTests.forEach(markupTest => {
-  QUnit.test(markupTest.name, function (assert) {
-    testQuestionMarkup(assert, markupTest, platformDescriptor);
-  });
-});
+(async () => {
+  for (const test of markupTests) {
+    QUnit.test(test.name, async function (assert) {
+      await testQuestionMarkup(assert, test, platformDescriptor);
+    });
+  }
+})();
