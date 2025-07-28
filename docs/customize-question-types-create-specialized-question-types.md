@@ -29,7 +29,7 @@ If you [add this question to the Toolbox](/Documentation/Survey-Creator?id=toolb
 To avoid these drawbacks, use a different approach: add your [custom question type](https://surveyjs.io/form-library/documentation/api-reference/icustomquestiontypeconfiguration) to the survey's `ComponentCollection`:
 
 ```js
-import { ComponentCollection } from "fullstory-form-core";
+import { ComponentCollection } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   // A unique name; must use lowercase
@@ -71,7 +71,7 @@ This approach gives you the following advantages:
 You can localize specialized questions by following the same technique used to [localize survey contents](https://surveyjs.io/form-library/documentation/survey-localization#localize-survey-contents). The following code shows how to translate texts within a specialized question to French and German while using English as the default language:
 
 ```js
-import { ComponentCollection } from "fullstory-form-core";
+import { ComponentCollection } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   name: "country",

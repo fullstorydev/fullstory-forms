@@ -1,4 +1,4 @@
-import { _setIsTouch, Question, settings } from "fullstory-form-core";
+import { _setIsTouch, Question, settings } from "@fullstory/form-core";
 import { registerMarkupTests } from "./helper";
 
 registerMarkupTests([

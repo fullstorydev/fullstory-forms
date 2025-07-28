@@ -1,4 +1,4 @@
-import { surveyLocalization } from "fullstory-form-core";
+import { surveyLocalization } from "@fullstory/form-core";
 import { registerMarkupTests } from "./helper";
 
 registerMarkupTests([

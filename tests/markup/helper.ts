@@ -1,4 +1,4 @@
-import { Model, SurveyModel, PanelModel, settings } from "fullstory-form-core";
+import { Model, SurveyModel, PanelModel, settings } from "@fullstory/form-core";
 export interface MarkupTestDescriptor {
   name: string;
   json: any;

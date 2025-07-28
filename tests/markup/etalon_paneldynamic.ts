@@ -1,4 +1,4 @@
-import { AdaptiveActionContainer } from "fullstory-form-core";
+import { AdaptiveActionContainer } from "@fullstory/form-core";
 import { registerMarkupTests } from "./helper";
 
 registerMarkupTests([

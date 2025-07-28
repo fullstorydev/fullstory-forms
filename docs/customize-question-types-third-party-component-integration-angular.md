@@ -48,7 +48,7 @@ The following live example illustrates Survey Creator with an integrated Angular
 To integrate a third-party component, you need to configure a custom question type for it. All question types in SurveyJS demand a model. To create it, add a custom class (`QuestionColorPickerModel` in the code below) that extends the [`Question`](https://surveyjs.io/Documentation/Library?id=question) class and inherits all its properties and methods. Override the [`getType()`](https://surveyjs.io/Documentation/Library?id=question#getType) method with an implementation that returns the name of your custom question type. If the model requires custom properties, declare them as getter + setter pairs. In the following code, the model includes two such properties: `colorPickerType` and `disableAlpha`.
 
 ```js
-import { Question } from "fullstory-form-core";
+import { Question } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -75,7 +75,7 @@ export class QuestionColorPickerModel extends Question {
 Register the created model in the `ElementFactory` under the name returned by the `getType()` method:
 
 ```js
-import { ElementFactory } from "fullstory-form-core";
+import { ElementFactory } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -101,7 +101,7 @@ Our model exists only in JavaScript code, but SurveyJS works with JSON objects. 
   The name of a class that the custom class extends (`"question"`).
 
 ```js
-import { ..., Serializer } from "fullstory-form-core";
+import { ..., Serializer } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -209,7 +209,7 @@ export class AppComponent {
 // color-picker.component.ts
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
-import { ElementFactory, Question, Serializer } from "fullstory-form-core";
+import { ElementFactory, Question, Serializer } from "@fullstory/form-core";
 import { ColorEvent } from "ngx-color";
 
 const CUSTOM_TYPE = "color-picker";
@@ -343,7 +343,7 @@ locale.pe.disableAlpha = "Disable alpha channel";
 // color-picker.component.ts
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
-import { ElementFactory, Question, Serializer } from "fullstory-form-core";
+import { ElementFactory, Question, Serializer } from "@fullstory/form-core";
 import { editorLocalization } from "survey-creator-core";
 import { ColorEvent } from "ngx-color";
 
@@ -466,7 +466,7 @@ export class AppComponent {
 Each question type has an icon that is displayed next to the type name in the [Toolbox](/Documentation/Survey-Creator?id=toolbox) and the Add Question menu. The following code shows how to register an SVG icon for your custom question type:
 
 ```js
-import { ..., SvgRegistry } from "fullstory-form-core"
+import { ..., SvgRegistry } from "@fullstory/form-core"
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -479,7 +479,7 @@ SvgRegistry.registerIconFromSvg(
 Alternatively, you can use one of [built-in SurveyJS icons](https://surveyjs.io/form-library/documentation/icons#built-in-icons). The code below shows how to use the Text icon:
 
 ```js
-import { ..., settings } from "fullstory-form-core";
+import { ..., settings } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -498,7 +498,7 @@ import {
   Question,
   Serializer,
   SvgRegistry,
-} from "fullstory-form-core";
+} from "@fullstory/form-core";
 import { editorLocalization } from "survey-creator-core";
 import { ColorEvent } from "ngx-color";
 
@@ -652,7 +652,7 @@ To try the functionality, you can add a custom property of the `"color"` type to
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
-import { Serializer, SurveyModel } from "fullstory-form-core";
+import { Serializer, SurveyModel } from "@fullstory/form-core";
 
 function applyBackground(color) {
   setTimeout(() => {
@@ -704,7 +704,7 @@ export class SurveyCreatorComponent implements OnInit {
 You might want to use a third-party component only as a property editor, without allowing survey editors to use it in questions. In this case, you need to hide the component from the Toolbox and the Add Question menu. To do this, pass `false` as a third argument to the `ElementFactory.Instance.registerElement` method when you register a [freshly created model](#create-a-model):
 
 ```js
-import { ElementFactory } from "fullstory-form-core";
+import { ElementFactory } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -729,7 +729,7 @@ import {
   Question,
   Serializer,
   SvgRegistry,
-} from "fullstory-form-core";
+} from "@fullstory/form-core";
 import {
   PropertyGridEditorCollection,
   editorLocalization,
@@ -857,7 +857,7 @@ PropertyGridEditorCollection.register({
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
-import { Serializer, SurveyModel } from "fullstory-form-core";
+import { Serializer, SurveyModel } from "@fullstory/form-core";
 
 function applyBackground(color) {
   setTimeout(() => {

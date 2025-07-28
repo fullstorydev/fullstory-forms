@@ -34,7 +34,7 @@ npm install react-color --save
 To integrate a third-party component, you need to configure a custom question type for it. All question types in SurveyJS demand a model. To create it, add a custom class (`QuestionColorPickerModel` in the code below) that extends the [`Question`](https://surveyjs.io/Documentation/Library?id=question) class and inherits all its properties and methods. Override the [`getType()`](https://surveyjs.io/Documentation/Library?id=question#getType) method with an implementation that returns the name of your custom question type. If the model requires custom properties, declare them as getter + setter pairs. In the following code, the model includes two such properties: `colorPickerType` and `disableAlpha`.
 
 ```js
-import { Question } from "fullstory-form-core";
+import { Question } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -61,7 +61,7 @@ export class QuestionColorPickerModel extends Question {
 Implement a function that registers the created model in the `ElementFactory` under the name returned by the `getType()` method:
 
 ```js
-import { ElementFactory } from "fullstory-form-core";
+import { ElementFactory } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -77,7 +77,7 @@ Call the implemented function in the component that renders the Survey Creator t
 ```js
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import { registerColorPicker } from "./ColorPicker";
-import "fullstory-form-core/defaultV2.css";
+import "@fullstory/form-core/defaultV2.css";
 import "survey-creator-core/survey-creator-core.css";
 
 registerColorPicker();
@@ -105,7 +105,7 @@ Our model exists only in JavaScript code, but SurveyJS works with JSON objects. 
   The name of a class that the custom class extends (`"question"`).
 
 ```js
-import { ..., Serializer } from "fullstory-form-core";
+import { ..., Serializer } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -237,7 +237,7 @@ Each question type has an icon that is displayed next to the type name in the [T
 ```js
 import { ReactComponent as ColorPickerIcon } from "../color-picker.svg";
 import ReactDOMServer from "react-dom/server";
-import { SvgRegistry } from "fullstory-form-core";
+import { SvgRegistry } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -248,7 +248,7 @@ SvgRegistry.registerIconFromSvg(CUSTOM_TYPE, svg);
 Alternatively, you can use one of [built-in SurveyJS icons](https://surveyjs.io/form-library/documentation/icons#built-in-icons). The code below shows how to use the Text icon:
 
 ```js
-import { ..., settings } from "fullstory-form-core";
+import { ..., settings } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -281,7 +281,7 @@ To try the functionality, you can add a custom property of the `"color"` type to
 
 ```js
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 import { registerColorPicker } from "./ColorPicker";
 import "survey-core/defaultV2.css";
 import "survey-creator-core/survey-creator-core.css";
@@ -328,7 +328,7 @@ function handleActiveTabChange(sender, options) {
 You might want to use a third-party component only as a property editor, without allowing survey editors to use it in questions. In this case, you need to hide the component from the Toolbox and the Add Question menu. To do this, pass `false` as a third argument to the `ElementFactory.Instance.registerElement` method when you register a [freshly created model](#create-a-model):
 
 ```js
-import { ElementFactory } from "fullstory-form-core";
+import { ElementFactory } from "@fullstory/form-core";
 
 const CUSTOM_TYPE = "color-picker";
 

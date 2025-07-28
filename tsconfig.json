@@ -12,7 +12,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "fullstory-form-core": ["./src/entries/core.ts"],
+      "@fullstory/form-core": ["./src/entries/core.ts"],
       "@coreIconsV1": ["packages/form-core/src/iconsV1"],
       "@coreIconsV2": ["packages/form-core/src/iconsV2"]
     }

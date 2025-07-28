@@ -22,7 +22,7 @@ jobs:
 
       - name: Build Core
         run: |
-          cd ./packages/fullstory-form-core
+          cd ./packages/@fullstory/form-core
           npm install
           export NODE_OPTIONS=--openssl-legacy-provider && npm run build:all
 

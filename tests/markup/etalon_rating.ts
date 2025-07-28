@@ -1,4 +1,4 @@
-import { DropdownListModel, settings } from "fullstory-form-core";
+import { DropdownListModel, settings } from "@fullstory/form-core";
 import { registerMarkupTests } from "./helper";
 
 registerMarkupTests([

@@ -123,10 +123,10 @@ steps:
   - task: Npm@1
     inputs:
       command: "publish"
-      workingDir: "build/fullstory-form-core"
+      workingDir: "build/@fullstory/form-core"
       publishEndpoint: "NPM Registry"
       verbose: true
-    displayName: "npm publish fullstory-form-core"
+    displayName: "npm publish @fullstory/form-core"
 
   - script: |
       npm run doc_update

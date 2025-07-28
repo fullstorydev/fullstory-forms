@@ -3,7 +3,7 @@ import {
   Question,
   Action,
   createDropdownActionModel,
-} from "fullstory-form-core";
+} from "@fullstory/form-core";
 
 registerMarkupTests([
   {

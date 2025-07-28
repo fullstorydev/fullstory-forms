@@ -24,7 +24,7 @@ To add a custom property to an existing class, call the `addProperty(className, 
 If you add a property to a base class, all its derived classes will also have this property. For instance, the following code adds a custom property to the base Question class and to all questions as a result:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "customNumericProperty",
@@ -42,7 +42,7 @@ Serializer.addProperty("question", {
 This approach is suitable if you create a new class. Each custom property should be defined by a getter/setter pair that returns and sets the property value. For instance, the following code shows how to implement `MyCustomClass` based on the `Question` class and define one custom property.
 
 ```js
-import { Question, ElementFactory } from "fullstory-form-core";
+import { Question, ElementFactory } from "@fullstory/form-core";
 
 export class MyCustomClass extends Question {
   getType() {
@@ -80,7 +80,7 @@ To finish creating a new class, you need to configure how it should be serialize
 The following code shows how to call the `addClass()` method for the custom class declared previously:
 
 ```js
-import { ..., Serializer } from "fullstory-form-core";
+import { ..., Serializer } from "@fullstory/form-core";
 
 // ...
 
@@ -105,7 +105,7 @@ Serializer.addClass(
 In addition to a getter/setter pair, a custom item collection property needs the `this.createItemValues(name)` method to be called in the class constructor. This method adds reactivity and localization support to the item collection.
 
 ```js
-import { Question, ElementFactory } from "fullstory-form-core";
+import { Question, ElementFactory } from "@fullstory/form-core";
 
 export class MyCustomClass extends Question {
   constructor() {
@@ -153,7 +153,7 @@ Follow the steps below to add a custom localizable property to a new class:
 3. In serialization settings, set the `serializationProperty` setting to the name of the getter that returns the `LocalizableString` instance.
 
 ```js
-import { Question, ElementFactory, Serializer } from "fullstory-form-core";
+import { Question, ElementFactory, Serializer } from "@fullstory/form-core";
 
 export class MyCustomClass extends Question {
   constructor() {
@@ -209,7 +209,7 @@ You can specify a different default value for a property. To do this, call `Seri
 
 ```js
 // Override the default value of the `isAllRowRequired` property for Single-Select Matrix questions
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
 ```
 
@@ -247,7 +247,7 @@ A string value that specifies the property type. Accepts one of the values descr
 
 ```js
 import { PropertyGridEditorCollection } from "survey-creator-core";
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 PropertyGridEditorCollection.register({
   // Use this editor for properties with `type: "shorttext"`
@@ -276,7 +276,7 @@ Serializer.addProperty("question", {
 You can add the type to the `name` property after a colon character as a shortcut:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question",
   { name: "myBooleanProperty", type: "boolean" }
@@ -290,7 +290,7 @@ Serializer.addProperty("question",
 A default value for the property. If not specified, `default` equals `""` for string values, 0 for numbers, and `false` for Boolean values. The default value is not serialized into a survey JSON schema.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("dropdown", {
   name: "myStringProperty",
@@ -313,7 +313,7 @@ Serializer.addProperty("question", {
 If you are creating a [localizable property](#islocalizable) and want to display different default values for different locales, use localization capabilities to specify these default values. You can assign them at runtime, as shown below:
 
 ```js
-import { surveyLocalization } from "fullstory-form-core";
+import { surveyLocalization } from "@fullstory/form-core";
 
 surveyLocalization.getLocaleStrings("en")["myStringProperty"] =
   "Default value for English";
@@ -344,7 +344,7 @@ export var frenchSurveyStrings = {
 A string value that specifies a property caption. If not specified, the [`name`](#name) value is used instead.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("dropdown", {
   name: "myStringProperty",
@@ -357,7 +357,7 @@ Serializer.addProperty("dropdown", {
 An array of selection choices or a function that loads the choices from a web service. Applies only to text and numeric properties. If `choices` are specified, Survey Creator renders a drop-down menu as the property editor.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 // Define `choices` locally
 Serializer.addProperty("question", {
@@ -404,7 +404,7 @@ Serializer.addProperty("survey", {
 A Boolean value that specifies whether the property must have a value. Defaults to `false`. You can add an exclamation mark before `name` as a shortcut for this setting:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question",
   { name: "myBooleanProperty", type: "boolean", isRequired: true }
@@ -422,7 +422,7 @@ A Boolean value that specifies whether to include the property in the survey JSO
 A Boolean value that specifies whether users can translate the property value to different languages in the Translation tab. Applies only to text properties. Defaults to `false`.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "myTextProperty",
@@ -448,7 +448,7 @@ If the property visibility depends on another property, use the [`dependsOn`](#d
 In the following code, the `dateFormat` property depends on the `inputType` property and is visible only if `inputType` is set to one of the date types:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("text", {
   name: "dateFormat",
@@ -472,7 +472,7 @@ Serializer.addProperty("text", {
 A number that specifies the property position within its [`category`](#category). Defaults to -1 (the last position).
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty(
   "question",
@@ -486,7 +486,7 @@ Serializer.addProperty(
 A Boolean value that specifies whether the property value is read-only. Defaults to `false`.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "myStringProperty",
@@ -501,7 +501,7 @@ A function that specifies a condition based on which the property is switched to
 In the following code, the `dateFormat` property is enabled only if an `inputType` property is set to one of the date types:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("text", {
   name: "dateFormat",
@@ -557,7 +557,7 @@ The following table describes predefined categories:
 A number that specifies a category position. If `categoryIndex` is not set, the category is added to the end. No category can be placed above General.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty(
   "question",
@@ -575,7 +575,7 @@ If you enable this setting, the property will be added to the same [category](#c
 A matrix column's [`cellType`](https://surveyjs.io/form-library/documentation/api-reference/multi-select-matrix-column-values#cellType) must match the class name to which you add the property. For example, the following code adds a property to [Rating Scale](https://surveyjs.io/form-library/documentation/api-reference/rating-scale-question-model) questions and matrix columns of the `"rating"` `cellType`.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("rating", {
   name: "myStringProperty",
@@ -588,7 +588,7 @@ Serializer.addProperty("rating", {
 A numeric value that specifies the maximum number of characters users can enter into the text input.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "myTextProperty",
@@ -602,7 +602,7 @@ Serializer.addProperty("question", {
 Numeric values that specify the minimum and maximum numbers users can enter into the editor.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "myNumericProperty",
@@ -619,7 +619,7 @@ An array of property names upon which the current property depends. When one of 
 The following code declares two custom properties. `dependent-property` fills `choices` depending on the `myCustomProperty` value:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "myCustomProperty",
@@ -648,7 +648,7 @@ Serializer.addProperty("question", {
 The following example shows how to load `choices` for the `country` property from a web service. They are reloaded each time a user changes the `region` value:
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("survey", {
   name: "region",
@@ -693,7 +693,7 @@ Serializer.addProperty("survey", {
 The name of a property that overrides the current property.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question",
   { name: "myMasterProperty", type: "condition" }
@@ -710,7 +710,7 @@ If you specify `overridingProperty`, the Property Grid disables the current prop
 A function that you can use to adjust the property value or exclude it from the survey JSON schema.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "calculated-property",
@@ -728,7 +728,7 @@ A function that you can use to perform actions when the property value is set (f
 > Do not assign a value directly to an object property because this will trigger the `onSetValue` function again. Use the object's `setPropertyValue(propertyName, newValue)` method instead.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("question", {
   name: "myStringProperty",
@@ -750,7 +750,7 @@ A function that is called when an expression is evaluated.
 Define this function for custom properties of the `"condition"` or `"expression"` [`type`](#type). Within it, you can handle the expression evaluation result. For example, the following code adds a custom `showHeaderIf` property to the [Single-Select Matrix](https://surveyjs.io/form-library/examples/single-selection-matrix-table-question/) question type. This property shows or hides the matrix header based on a condition: the result of the condition evaluation is assigned to the question's [`showHeader`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#showHeader) property.
 
 ```js
-import { Serializer } from "fullstory-form-core";
+import { Serializer } from "@fullstory/form-core";
 
 Serializer.addProperty("matrix", {
   name: "showHeaderIf",
@@ -777,7 +777,7 @@ const surveyJson = {
 The `onExecuteExpression` function applies only if you [add a custom property to an existing class](#add-custom-properties-to-an-existing-class). If you are adding a custom expression or condition property to a [new class](#define-custom-properties-in-a-new-class), call the `this.addExpressionProperty(name, onExecuteExpression)` method in the class constructor instead:
 
 ```js
-import { Question, ElementFactory, Serializer } from "fullstory-form-core";
+import { Question, ElementFactory, Serializer } from "@fullstory/form-core";
 
 export class MyCustomClass extends Question {
   constructor() {

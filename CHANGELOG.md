@@ -173,7 +173,7 @@ All notable changes to this project will be documented in this file. See [commit
 
 ### Bug Fixes
 
-- should be one instance of fullstory-form-core in example ([cd30e10](https://github.com/surveyjs/survey-library/commit/cd30e10887cc1d1b24dad0a7455df0b560045258))
+- should be one instance of @fullstory/form-core in example ([cd30e10](https://github.com/surveyjs/survey-library/commit/cd30e10887cc1d1b24dad0a7455df0b560045258))
 
 ## [1.9.98](https://github.com/surveyjs/survey-library/compare/v1.9.97...v1.9.98) (2023-07-18)
 

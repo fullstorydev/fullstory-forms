@@ -18,7 +18,7 @@ To access an individual question value, use the question's [`value`](/Documentat
 The following code configures an `nps_score` question and uses the API members described above to access the question's value:
 
 ```js
-import { Model } from "fullstory-form-core";
+import { Model } from "@fullstory/form-core";
 
 const surveyJson = {
   elements: [
@@ -92,7 +92,7 @@ Depending on the question type, question values can also be nested objects or ar
 The following code outputs the `data` property into the browser's console:
 
 ```js
-import { Model } from "fullstory-form-core";
+import { Model } from "@fullstory/form-core";
 
 const surveyJson = { ... };
 const survey = new Model(surveyJson);

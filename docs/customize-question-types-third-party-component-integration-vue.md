@@ -36,7 +36,7 @@ To integrate a third-party component, you need to configure a custom question ty
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-  import { Question } from "fullstory-form-core";
+  import { Question } from "@fullstory/form-core";
 
   const CUSTOM_TYPE = "color-picker";
 
@@ -76,7 +76,7 @@ Register the created model in the `ElementFactory` under the name returned by th
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-  import { ..., ElementFactory } from "fullstory-form-core";
+  import { ..., ElementFactory } from "@fullstory/form-core";
 
   // ...
 
@@ -108,7 +108,7 @@ Our model exists only in JavaScript code, but SurveyJS works with JSON objects. 
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-  import { ..., Serializer } from "fullstory-form-core";
+  import { ..., Serializer } from "@fullstory/form-core";
 
   // ...
 
@@ -218,7 +218,7 @@ Each question type has an icon that is displayed next to the type name in the [T
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-  import { ..., SvgRegistry } from "fullstory-form-core"
+  import { ..., SvgRegistry } from "@fullstory/form-core"
 
   const CUSTOM_TYPE = "color-picker";
   // ...
@@ -235,7 +235,7 @@ Alternatively, you can use one of [built-in SurveyJS icons](https://surveyjs.io/
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-  import { ..., settings } from "fullstory-form-core";
+  import { ..., settings } from "@fullstory/form-core";
 
   const CUSTOM_TYPE = "color-picker";
   // ...
@@ -278,9 +278,9 @@ To try the functionality, you can add a custom property of the `"color"` type to
   import "survey-core/defaultV2.min.css";
   import "survey-creator-core/survey-creator-core.min.css";
 
-  import { Serializer } from "fullstory-form-core";
+  import { Serializer } from "@fullstory/form-core";
   import { SurveyCreatorModel } from "survey-creator-core";
-  import type { SurveyModel } from "fullstory-form-core";
+  import type { SurveyModel } from "@fullstory/form-core";
   import type { CreatorBase } from "survey-creator-core";
 
   Serializer.addProperty("survey", {
@@ -341,7 +341,7 @@ You might want to use a third-party component only as a property editor, without
 ```html
 <!-- src/components/ColorPicker.vue -->
 <script lang="ts">
-  import { ..., ElementFactory } from "fullstory-form-core";
+  import { ..., ElementFactory } from "@fullstory/form-core";
 
   // ...
 

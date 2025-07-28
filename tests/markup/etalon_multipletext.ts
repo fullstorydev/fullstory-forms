@@ -1,5 +1,5 @@
 import { registerMarkupTests } from "./helper";
-import { settings } from "fullstory-form-core";
+import { settings } from "@fullstory/form-core";
 
 registerMarkupTests([
   {

@@ -19,7 +19,7 @@ Composite questions are containers for other questions. They are useful when a g
 The following code configures a Full Name composite question that contains the First Name and Last Name [Text](/Documentation/Library?id=questiontextmodel) questions:
 
 ```js
-import { ComponentCollection } from "fullstory-form-core";
+import { ComponentCollection } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   // A unique name; must use lowercase
@@ -71,7 +71,7 @@ If you need to control nested questions, add a custom property to their composit
 For example, the Full Name composite question from the previous topic may include an optional Middle Name question. The following code adds a custom `showMiddleName` property that controls the Middle Name question visibility:
 
 ```js
-import { ComponentCollection, Serializer } from "fullstory-form-core";
+import { ComponentCollection, Serializer } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   name: "fullname",
@@ -198,7 +198,7 @@ The following code shows how you can use expressions and triggers to implement t
 Survey Creator users can implement the same UI and logic, but this requires time and basic understanding of expressions and triggers. To help the users with this task, you can create a custom composite question type that already implements this UI and logic. The code below demonstrates this composite question type configuration. Note that the [`enableIf`](/Documentation/Library?id=questioncommentmodel#enableIf) expression uses the `composite` prefix to access a nested question. Instead of triggers, composite questions use the [`onValueChanged`](https://surveyjs.io/form-library/documentation/api-reference/icustomquestiontypeconfiguration#onValueChanged) function to implement the trigger logic.
 
 ```js
-import { ComponentCollection } from "fullstory-form-core";
+import { ComponentCollection } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   name: "shippingaddress",
@@ -269,7 +269,7 @@ Composite questions inherit properties from their base question type ([`Question
 The following code shows how to override base question properties. This code hides the properties from the Property Grid (`visible: false`) and excludes them from serialization to JSON. The [`titleLocation`](/Documentation/Library?id=Question#titleLocation) property also gets a new default value.
 
 ```js
-import { ComponentCollection, Serializer } from "fullstory-form-core";
+import { ComponentCollection, Serializer } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   name: "shippingaddress",
@@ -324,7 +324,7 @@ ComponentCollection.Instance.add({
 You can localize composite questions by following the same technique used to [localize survey contents](https://surveyjs.io/form-library/documentation/survey-localization#localize-survey-contents). The following code shows how to translate texts within a composite question to French and German while using English as the default language:
 
 ```js
-import { ComponentCollection } from "fullstory-form-core";
+import { ComponentCollection } from "@fullstory/form-core";
 
 ComponentCollection.Instance.add({
   name: "fullname",
