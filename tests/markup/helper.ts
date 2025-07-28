@@ -382,7 +382,8 @@ const removeExtraElementsConditions: Array<
         attr.name.startsWith("data-checkbox-item-") ||
         attr.name.startsWith("data-imagepicker-item-") ||
         attr.name.startsWith("data-radio-item-") ||
-        attr.name.startsWith("data-rating-item-")
+        attr.name.startsWith("data-rating-item-") ||
+        attr.name.startsWith("data-sv-drop-target-")
     );
 
     // If no FullStory attributes, check if it's a simple wrapper with no classes/ids
@@ -467,12 +468,14 @@ function removeFullStoryAttributes(el: Element) {
     // - data-fs-* (general FullStory attributes)
     // - data-checkbox-item-* (checkbox specific attributes)
     // - data-imagepicker-item-* (imagepicker specific attributes)
+    // - data-sv-drop-target-* (matrix row drag/drop attributes)
     if (
       name.startsWith("data-fs-") ||
       name.startsWith("data-checkbox-item-") ||
       name.startsWith("data-radio-item-") ||
       name.startsWith("data-imagepicker-item-") ||
-      name.startsWith("data-rating-item-")
+      name.startsWith("data-rating-item-") ||
+      name.startsWith("data-sv-drop-target-")
     ) {
       attributesToRemove.push(name);
     }

@@ -243,8 +243,8 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
 
       this.question.survey.updateButtonValuesCallBack(buttonData);
     }
-
-    return this.setDataElements(el, this.question.createElementData(data));
+    const eldata = this.question.createElementData(data);
+    return this.setDataElements(el, eldata);
   }
 
   private initCellElementData(): any {
@@ -255,12 +255,13 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
 
     const data = {
       ...columnData,
-      "fs-table-row-name": rowData["data-fs-table-row-name"],
+      "fs-table-row-name": !!rowData ? rowData["data-fs-table-row-name"] : "",
       "fs-element": "table-cell",
       "fs-table-row-index": index + 1
     };
-
-    return this.setDataElements(el, this.question.createElementData(data));
+    const eldata = this.question.createElementData(data);
+    console.log("eldata", eldata);
+    !!eldata && this.setDataElements(el, eldata);
   }
   protected canRender(): boolean {
     return !!this.question && !!this.row;

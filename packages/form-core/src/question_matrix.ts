@@ -103,7 +103,7 @@ export class MatrixRowModel extends Base {
   public get elementData(): any {
     const data = {
       "fs-element": "table-row",
-      "fs-table-row-name": this.name,
+      "fs-table-row-name": this.name ?? "",
     };
 
     return this.createElementData(data);

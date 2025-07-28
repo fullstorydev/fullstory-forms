@@ -59,6 +59,7 @@ export class MatrixRow extends SurveyElementBase<IMatrixRowProps, any> {
   render() {
     const model = this.model;
     if (!model.visible) return null;
+    if (this.model.elementData === undefined) return null;
 
     let elementData = {};
     if (!this.model.elementData["fs-table-row-index"]) {
