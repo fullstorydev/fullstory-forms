@@ -442,6 +442,9 @@ function clearAttributes(el: Element, removeIds = false) {
   el.removeAttribute("data-fs-element");
   el.removeAttribute("data-fs-properties-schema");
   el.removeAttribute("data-fs-text-name");
+  el.removeAttribute("data-fs-dropdown-name");
+  el.removeAttribute("data-fs-textarea-name");
+  el.removeAttribute("data-fs-tagbox-name");
 
   if (!!removeIds) {
     el.removeAttribute("id");
