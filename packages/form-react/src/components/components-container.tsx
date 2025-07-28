@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ISurveyLayoutElement } from "@bateman001/form-core";
+import { ISurveyLayoutElement } from "@fullstory/form-core";
 import { ReactElementFactory } from "../element-factory";
 
 export class ComponentsContainer extends React.Component<any, any> {

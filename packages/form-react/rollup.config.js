@@ -48,7 +48,7 @@ module.exports = options => {
         }
       })
     ],
-    external: ["react", "react-dom", "@bateman001/form-core"],
+    external: ["react", "react-dom", "@fullstory/form-core"],
     output: [
       {
         dir: options.dir,

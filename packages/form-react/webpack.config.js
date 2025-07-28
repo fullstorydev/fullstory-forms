@@ -35,7 +35,7 @@ const buildPlatformJson = {
     }
   },
   "peerDependencies": {
-    "@bateman001/form-core": packageJson.version,
+    "@fullstory/form-core": packageJson.version,
     "react": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
     "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0"
   },
@@ -137,11 +137,11 @@ module.exports = function (options) {
         commonjs: "react-dom",
         amd: "react-dom"
       },
-      "@bateman001/form-core": {
+      "@fullstory/form-core": {
         root: "Survey",
-        commonjs2: "@bateman001/form-core",
-        commonjs: "@bateman001/form-core",
-        amd: "@bateman001/form-core"
+        commonjs2: "@fullstory/form-core",
+        commonjs: "@fullstory/form-core",
+        amd: "@fullstory/form-core"
       }
     },
     plugins: [

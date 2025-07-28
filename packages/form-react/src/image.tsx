@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionImageModel } from "@bateman001/form-core";
+import { QuestionImageModel } from "@fullstory/form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 

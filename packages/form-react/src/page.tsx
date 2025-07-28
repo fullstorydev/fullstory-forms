@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PageModel, PanelModelBase } from "@bateman001/form-core";
+import { PageModel, PanelModelBase } from "@fullstory/form-core";
 import { SurveyElementBase } from "./reactquestion_element";
 import { SurveyPanelBase } from "./panel-base";
 import { TitleElement } from "./components/title/title-element";

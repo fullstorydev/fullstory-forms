@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyElementBase } from "../../reactquestion_element";
-import { QuestionFileModel } from "@bateman001/form-core";
+import { QuestionFileModel } from "@fullstory/form-core";
 import { SvgIcon } from "../svg-icon/svg-icon";
 
 export class SurveyFileItem extends SurveyElementBase<{ question: QuestionFileModel; item: any }, {}> {

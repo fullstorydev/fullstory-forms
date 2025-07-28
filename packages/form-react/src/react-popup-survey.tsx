@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, PopupSurveyModel } from "@bateman001/form-core";
+import { Base, PopupSurveyModel } from "@fullstory/form-core";
 import { Survey } from "./reactSurvey";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 

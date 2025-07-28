@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuestionMatrixDropdownModelBase } from "@bateman001/form-core";
+import { QuestionMatrixDropdownModelBase } from "@fullstory/form-core";
 import { ReactElementFactory } from "../../../element-factory";
 import { ReactSurveyElement } from "../../../reactquestion_element";
 

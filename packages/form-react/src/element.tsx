@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ISurveyCreator } from "./reactquestion";
-import { SurveyModel, Question, QuestionRowModel, IElement, Base, PanelModel } from "@bateman001/form-core";
+import { SurveyModel, Question, QuestionRowModel, IElement, Base, PanelModel } from "@fullstory/form-core";
 import { SurveyElementBase } from "./reactquestion_element";
 import { ReactElementFactory } from "./element-factory";
 import { ReactSurveyElementsWrapper } from "./reactsurveymodel";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyElementBase } from "../../reactquestion_element";
-import { QuestionFileModel } from "@bateman001/form-core";
+import { QuestionFileModel } from "@fullstory/form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyFileItem } from "./file-item";
 import { SurveyFilePage } from "./file-page";

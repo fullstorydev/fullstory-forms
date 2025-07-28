@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, CharacterCounter } from "@bateman001/form-core";
+import { Base, CharacterCounter } from "@fullstory/form-core";
 import { ReactElementFactory } from "../element-factory";
 import { SurveyElementBase } from "../reactquestion_element";
 

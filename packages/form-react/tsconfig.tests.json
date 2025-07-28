@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@bateman001/form-core": ["./node_modules/fullstory-form-core"]
+      "@fullstory/form-core": ["./node_modules/fullstory-form-core"]
     },
     "declaration": false,
     "declarationDir": null

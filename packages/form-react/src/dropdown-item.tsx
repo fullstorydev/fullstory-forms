@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactSurveyElement } from "./reactquestion_element";
-import { Base, ItemValue } from "@bateman001/form-core";
+import { Base, ItemValue } from "@fullstory/form-core";
 
 export class SurveyQuestionOptionItem extends ReactSurveyElement {
   constructor(props: any) {

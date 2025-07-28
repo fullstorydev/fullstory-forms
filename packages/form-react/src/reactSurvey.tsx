@@ -12,7 +12,7 @@ import {
   IAttachKey2clickOptions,
   SvgRegistry,
   addIconsToThemeSet
-} from "@bateman001/form-core";
+} from "@fullstory/form-core";
 import { SurveyPage } from "./page";
 import { ISurveyCreator } from "./reactquestion";
 import { SurveyElementBase } from "./reactquestion_element";
@@ -25,8 +25,8 @@ import { ComponentsContainer } from "./components/components-container";
 import { SvgBundleComponent } from "./svgbundle";
 import { PopupModal } from "./components/popup/popup-modal";
 
-import { icons as iconsV1 } from "@bateman001/form-core/icons/iconsV1";
-import { icons as iconsV2 } from "@bateman001/form-core/icons/iconsV2";
+import { icons as iconsV1 } from "@fullstory/form-core/icons/iconsV1";
+import { icons as iconsV2 } from "@fullstory/form-core/icons/iconsV2";
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
 SvgRegistry.registerIcons(iconsV1);

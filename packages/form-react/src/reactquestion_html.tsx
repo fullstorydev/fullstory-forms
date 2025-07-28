@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SurveyQuestionElementBase } from "./reactquestion_element";
-import { QuestionHtmlModel } from "@bateman001/form-core";
+import { QuestionHtmlModel } from "@fullstory/form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 
 export class SurveyQuestionHtml extends SurveyQuestionElementBase {

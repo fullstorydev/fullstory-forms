@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuestionTagboxModel, DropdownListModel, DropdownMultiSelectListModel } from "@bateman001/form-core";
+import { QuestionTagboxModel, DropdownListModel, DropdownMultiSelectListModel } from "@fullstory/form-core";
 import { ReactQuestionFactory } from "./reactquestion_factory";
 import { SurveyQuestionDropdownBase } from "./dropdown-base";
 import { SurveyQuestionTagboxItem } from "./tagbox-item";

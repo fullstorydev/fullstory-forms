@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactElementFactory } from "../../element-factory";
-import { createSvg } from "@bateman001/form-core";
+import { createSvg } from "@fullstory/form-core";
 
 export class SvgIcon extends React.Component<any, any> {
   private svgIconRef: any;

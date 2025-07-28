@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactSurveyElement } from "./reactquestion_element";
-import { Base, QuestionTagboxModel, ItemValue } from "@bateman001/form-core";
+import { Base, QuestionTagboxModel, ItemValue } from "@fullstory/form-core";
 import { SvgIcon } from "./components/svg-icon/svg-icon";
 
 export class SurveyQuestionTagboxItem extends ReactSurveyElement {

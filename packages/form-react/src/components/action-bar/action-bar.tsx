@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, Action, ActionContainer } from "@bateman001/form-core";
+import { Base, Action, ActionContainer } from "@fullstory/form-core";
 import { ReactElementFactory } from "../../element-factory";
 import { SurveyElementBase } from "../../reactquestion_element";
 import { SurveyAction } from "./action-bar-item";
