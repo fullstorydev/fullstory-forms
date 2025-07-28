@@ -431,6 +431,33 @@ function clearClasses(el: Element) {
   }
 }
 
+function removeFullStoryAttributes(el: Element) {
+  // Remove all FullStory data attributes by pattern matching
+  const attributesToRemove = [];
+  for (let i = 0; i < el.attributes.length; i++) {
+    const attr = el.attributes[i];
+    const name = attr.name;
+
+    // Match FullStory patterns:
+    // - data-fs-* (general FullStory attributes)
+    // - data-checkbox-item-* (checkbox specific attributes)
+    // - data-imagepicker-item-* (imagepicker specific attributes)
+    if (
+      name.startsWith("data-fs-") ||
+      name.startsWith("data-checkbox-item-") ||
+      name.startsWith("data-radio-item-") ||
+      name.startsWith("data-imagepicker-item-")
+    ) {
+      attributesToRemove.push(name);
+    }
+  }
+
+  // Remove all matched attributes
+  attributesToRemove.forEach((attr) => {
+    el.removeAttribute(attr);
+  });
+}
+
 function clearAttributes(el: Element, removeIds = false) {
   //el.removeAttribute("aria-labelledby");
   el.removeAttribute("survey");
@@ -438,13 +465,8 @@ function clearAttributes(el: Element, removeIds = false) {
   el.removeAttribute("data-key");
   el.removeAttribute("data-rendered");
 
-  // Remove FullStory data attributes
-  el.removeAttribute("data-fs-element");
-  el.removeAttribute("data-fs-properties-schema");
-  el.removeAttribute("data-fs-text-name");
-  el.removeAttribute("data-fs-dropdown-name");
-  el.removeAttribute("data-fs-textarea-name");
-  el.removeAttribute("data-fs-tagbox-name");
+  // Remove all FullStory data attributes
+  removeFullStoryAttributes(el);
 
   if (!!removeIds) {
     el.removeAttribute("id");
