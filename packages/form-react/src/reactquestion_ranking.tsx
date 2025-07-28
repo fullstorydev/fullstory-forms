@@ -167,13 +167,20 @@ export class SurveyQuestionRankingItem extends ReactSurveyElement {
 
   componentDidMount(): void {
     const el = this.rankRef.current;
-    const data = this.item.elementData(el, "ranking-item");
-    this.setDataElements(el, data);
+
+    if (el) {
+      const data = this.item.elementData(el, "ranking-item");
+
+      data && this.setDataElements(el, data);
+    }
   }
   componentDidUpdate(): void {
     const el = this.rankRef.current;
-    const data = this.item.elementData(el, "ranking-item");
-    this.setDataElements(el, data);
+
+    if (el) {
+      const data = this.item.elementData(el, "ranking-item");
+      data && this.setDataElements(el, data);
+    }
   }
   protected renderEmptyIcon(): React.JSX.Element {
     return (
