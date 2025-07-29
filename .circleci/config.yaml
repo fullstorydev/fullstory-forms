@@ -9,7 +9,7 @@ jobs:
       name: node/default
       tag: "18.20.0"
     steps:
-        - checkout
+      - checkout
   #     - restore_cache:
   #         keys:
   #           - v1-dependencies-{{ checksum "package.json" }}
@@ -73,7 +73,7 @@ jobs:
   #             fi
 
 workflows:
-  build-deploy:
+  build-deploy-core:
     jobs:
       - build-and-test:
           filters:
@@ -96,3 +96,4 @@ workflows:
       #         only: /^v.*/
       #       branches:
       #         ignore: /.*/
+  build-deploy-react:
