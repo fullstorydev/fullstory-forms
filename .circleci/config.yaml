@@ -4,7 +4,13 @@ orbs:
   node: circleci/node@7.0.0
 
 jobs:
-  build-and-test:
+  build-and-test-react:
+    executor:
+      name: node/default
+      tag: "18.20.0"
+    steps:
+      - checkout
+  build-and-test-core:
     executor:
       name: node/default
       tag: "18.20.0"
@@ -75,7 +81,7 @@ jobs:
 workflows:
   build-deploy-core:
     jobs:
-      - build-and-test:
+      - build-and-test-core:
           filters:
             tags:
               only: /.*/
@@ -97,7 +103,7 @@ workflows:
       #       branches:
       #         ignore: /.*/
   build-deploy-react:
-    - build-and-test:
+    - build-and-test-react:
         filters:
           tags:
             only: /.*/
