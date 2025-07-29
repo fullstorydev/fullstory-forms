@@ -382,8 +382,7 @@ const removeExtraElementsConditions: Array<
         attr.name.startsWith("data-checkbox-item-") ||
         attr.name.startsWith("data-imagepicker-item-") ||
         attr.name.startsWith("data-radio-item-") ||
-        attr.name.startsWith("data-rating-item-") ||
-        attr.name.startsWith("data-sv-drop-target-")
+        attr.name.startsWith("data-rating-item-")
     );
 
     // If no FullStory attributes, check if it's a simple wrapper with no classes/ids
@@ -399,7 +398,7 @@ const removeExtraElementsConditions: Array<
       children.every((child) => {
         const tagName = child.tagName.toLowerCase();
         return (
-          ["textarea", "input", "select", "button"].includes(tagName) ||
+          ["textarea", "input", "select", "button"].indexOf(tagName) !== -1 ||
           child.classList.contains("sv-") || // SurveyJS components
           child.classList.contains("sd-")
         ); // SurveyJS components
@@ -464,18 +463,19 @@ function removeFullStoryAttributes(el: Element) {
     const attr = el.attributes[i];
     const name = attr.name;
 
-    // Match FullStory patterns:
+    // Match FullStory patterns but preserve essential SurveyJS attributes:
     // - data-fs-* (general FullStory attributes)
     // - data-checkbox-item-* (checkbox specific attributes)
     // - data-imagepicker-item-* (imagepicker specific attributes)
-    // - data-sv-drop-target-* (matrix row drag/drop attributes)
+    // - data-rating-item-* (rating specific attributes)
+    // - data-radio-item-* (radio specific attributes)
+    // Note: data-sv-drop-target-* are essential SurveyJS attributes, not FullStory
     if (
       name.startsWith("data-fs-") ||
       name.startsWith("data-checkbox-item-") ||
       name.startsWith("data-radio-item-") ||
       name.startsWith("data-imagepicker-item-") ||
-      name.startsWith("data-rating-item-") ||
-      name.startsWith("data-sv-drop-target-")
+      name.startsWith("data-rating-item-")
     ) {
       attributesToRemove.push(name);
     }
