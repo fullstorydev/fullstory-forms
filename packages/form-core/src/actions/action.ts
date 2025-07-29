@@ -526,7 +526,6 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
 
     // find the button element by id
     const button: HTMLElement = document.querySelector(`#${this.innerItem.id}`);
-
     // if the button exists, set the properties
     if (!!button) {
       this.setButtonProperties(button);
@@ -540,9 +539,11 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
     }
 
     // find the button element by id
-    const button = document
-      .querySelector(`#${this.innerItem.id}`)
-      .querySelector("input");
+    const div = document.querySelector(`#${this.innerItem.id}`);
+    if (!div) {
+      return;
+    }
+    const button = div.querySelector("input");
 
     // if the button exists, remove the attribute
     if (!!button) {
@@ -550,8 +551,10 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
       this.deleteFromPropertySchema(button, dataName);
     }
   };
+
   public getElementData = () => {
     const data = this.createElementData(this.dataProperties);
+
     return data;
   };
 

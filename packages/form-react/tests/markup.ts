@@ -4,7 +4,7 @@ import { markupTests } from "../../../tests/markup/etalon";
 import { Survey as SurveyReact } from "../entries/index";
 import { Model } from "@fullstory/form-core";
 import { act } from "react-dom/test-utils";
-import * as React from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 var platformDescriptor = {
@@ -14,6 +14,7 @@ var platformDescriptor = {
   render: (survey, element) => {
     var component = React.createElement(SurveyReact, { model: survey }, null);
     act(() => {
+      // eslint-disable-next-line react/no-deprecated
       ReactDOM.render(component, element);
     });
   },
@@ -21,14 +22,17 @@ var platformDescriptor = {
     return require("../../../tests/markup/snapshots/" + snapshot + ".snap.html");
   },
   finish: element => {
+    // eslint-disable-next-line react/no-deprecated
     ReactDOM.unmountComponentAtNode(element);
   }
 };
 
 export default QUnit.module("Base");
 
-markupTests.forEach(markupTest => {
-  QUnit.test(markupTest.name, function (assert) {
-    testQuestionMarkup(assert, markupTest, platformDescriptor);
-  });
-});
+(async () => {
+  for (const test of markupTests) {
+    QUnit.test(test.name, async function (assert) {
+      await testQuestionMarkup(assert, test, platformDescriptor);
+    });
+  }
+})();

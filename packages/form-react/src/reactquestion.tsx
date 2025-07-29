@@ -318,13 +318,13 @@ export class SurveyQuestionAndErrorsCell extends SurveyQuestionAndErrorsWrapped 
     };
     const columnData = this.props.cell.column.elementData;
     const rowData = this.props.cell.row.elementData;
-
     const cellData = {
       "fs-element": "table-cell",
-      "fs-table-row-index": columnData["data-fs-table-row-index"],
-      "fs-table-row-name": !!columnData["data-fs-table-row-name"]
-        ? columnData["data-fs-table-row-name"]
-        : rowData["fs-tabe-row-name"],
+      "fs-table-row-index": !!columnData ? columnData["data-fs-table-row-index"] : "",
+      "fs-table-row-name":
+        !!columnData && !!columnData["data-fs-table-row-name"]
+          ? columnData["data-fs-table-row-name"]
+          : rowData["fs-tabe-row-name"],
       "fs-table-column-index": rowData["fs-table-row-index"]
     };
 

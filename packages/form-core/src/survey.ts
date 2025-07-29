@@ -7598,7 +7598,7 @@ export class SurveyModel
   public buttonDataProperties(name: string, text: string): any {
     const data = {};
 
-    data["fs-survey-name"] = this.jsonObj.name;
+    data["fs-survey-name"] = this.jsonObj.name ?? "";
 
     data["fs-element"] = "button";
     data["fs-button-type"] = name;

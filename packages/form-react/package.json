@@ -17,7 +17,7 @@
   "main": "form-react.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bateman001/fullstory-forms.git"
+    "url": "git+https://github.com/fullstory/fullstory-forms.git"
   },
   "scripts": {
     "build": "webpack --env buildType=dev --env emitDeclarations --env emitNonSourceFiles && webpack --env buildType=prod && rollup -c",

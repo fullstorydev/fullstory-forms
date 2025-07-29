@@ -279,11 +279,17 @@ export class ItemValue
       data["fs-column-index"] = this.value;
     } else if (type === "ranking-item") {
       const rank = el.getAttribute("data-sv-drop-target-ranking-item");
-      const text = el.querySelector("span.sv-string-viewer").textContent;
+
+      let text = "";
+      try {
+        text = el.querySelector("span.sv-string-viewer").textContent ?? "";
+      } catch (e) {
+        console.log("could not find text content");
+      }
+
+      data["fs-rank-value"] = blocked ? "blocked" : text;
       data["fs-element"] = type;
       data["fs-rank-index"] = blocked ? "blocked" : parseInt(rank) + 1;
-      data["fs-rank-value"] = blocked ? "blocked" : text;
-
       data = this.createElementData(data);
     } else {
       data = this.getDataElementItem(type, blocked, this.text, this.selected);

@@ -1,131 +1,101 @@
 import { registerMarkupTests } from "./helper";
 
-registerMarkupTests(
-  [
-    {
-      name: "Test ranking markup",
-      json: {
-        questions: [
-          {
-            "type": "ranking",
-            "name": "name",
-            "title": "Question title",
-            "choices": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            titleLocation: "hidden"
-          }
-        ]
-      },
-      snapshot: "ranking",
+registerMarkupTests([
+  {
+    name: "Test ranking markup",
+    json: {
+      questions: [
+        {
+          type: "ranking",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
-    {
-      name: "Test ranking with values markup",
-      json: {
-        questions: [
-          {
-            "type": "ranking",
-            "name": "name",
-            "title": "Question title",
-            "choices": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            "defaultValue": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            titleLocation: "hidden"
-          }
-        ]
-      },
-      snapshot: "ranking-values",
+    snapshot: "ranking",
+  },
+  {
+    name: "Test ranking with values markup",
+    json: {
+      questions: [
+        {
+          type: "ranking",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          defaultValue: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
-    {
-      name: "Test ranking markup design mode",
-      json: {
-        questions: [
-          {
-            "type": "ranking",
-            "name": "name",
-            "title": "Question title",
-            "choices": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            titleLocation: "hidden"
-          }
-        ]
-      },
-      initSurvey: survey => survey.setDesignMode(true),
-      snapshot: "ranking-design",
+    snapshot: "ranking-values",
+  },
+  {
+    name: "Test ranking markup design mode",
+    json: {
+      questions: [
+        {
+          type: "ranking",
+          name: "name",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
-    {
-      name: "Ranking selectToRankEnabled empty",
-      json: {
-        questions: [
-          {
-            "type": "ranking",
-            "name": "name",
-            "selectToRankEnabled": true,
-            "title": "Question title",
-            "choices": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            titleLocation: "hidden"
-          }
-        ]
-      },
-      snapshot: "ranking-selectToRankEnabled-empty",
+    initSurvey: (survey) => survey.setDesignMode(true),
+    snapshot: "ranking-design",
+  },
+  {
+    name: "Ranking selectToRankEnabled empty",
+    json: {
+      questions: [
+        {
+          type: "ranking",
+          name: "name",
+          selectToRankEnabled: true,
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
-    {
-      name: "Ranking selectToRankEnabled selectToRankAreasLayout Vertical",
-      json: {
-        questions: [
-          {
-            "type": "ranking",
-            "name": "name",
-            "selectToRankEnabled": true,
-            "selectToRankAreasLayout": "vertical",
-            "title": "Question title",
-            "choices": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            titleLocation: "hidden"
-          }
-        ]
-      },
-      snapshot: "ranking-selectToRankEnabled-vertical",
+    snapshot: "ranking-selectToRankEnabled-empty",
+  },
+  {
+    name: "Ranking selectToRankEnabled selectToRankAreasLayout Vertical",
+    json: {
+      questions: [
+        {
+          type: "ranking",
+          name: "name",
+          selectToRankEnabled: true,
+          selectToRankAreasLayout: "vertical",
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
-    {
-      name: "Ranking selectToRankEnabled selectToRankSwapAreas",
-      json: {
-        questions: [
-          {
-            "type": "ranking",
-            "name": "name",
-            "selectToRankEnabled": true,
-            "selectToRankSwapAreas": true,
-            "title": "Question title",
-            "choices": [
-              "item1",
-              "item2",
-              "item3"
-            ],
-            titleLocation: "hidden"
-          }
-        ]
-      },
-      snapshot: "ranking-selectToRankEnabled-SwapAreas",
+    snapshot: "ranking-selectToRankEnabled-vertical",
+  },
+  {
+    name: "Ranking selectToRankEnabled selectToRankSwapAreas",
+    json: {
+      questions: [
+        {
+          type: "ranking",
+          name: "name",
+          selectToRankEnabled: true,
+          selectToRankSwapAreas: true,
+          title: "Question title",
+          choices: ["item1", "item2", "item3"],
+          titleLocation: "hidden",
+        },
+      ],
     },
-  ]
-);
+    snapshot: "ranking-selectToRankEnabled-SwapAreas",
+  },
+]);

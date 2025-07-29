@@ -85,14 +85,109 @@ function sortAttributes(elements: Array<HTMLElement>) {
   }
 }
 
-export function testQuestionMarkup(
+function addFullstorysnippet() {
+  console.log("adding fs snippet");
+
+  const script = document.createElement("script");
+  script.innerHTML = `window['_fs_host'] = 'staging.fullstory.com';
+    window['_fs_script'] = 'edge.staging.fullstory.com/s/fs.js';
+    window['_fs_org'] = 'o-7TFN-na1';
+    window['_fs_namespace'] = 'FS';
+    !function(m,n,e,t,l,o,g,y){var s,f,a=function(h){
+    return!(h in m)||(m.console&&m.console.log&&m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'),!1)}(e)
+    ;function p(b){var h,d=[];function j(){h&&(d.forEach((function(b){var d;try{d=b[h[0]]&&b[h[0]](h[1])}catch(h){return void(b[3]&&b[3](h))}
+    d&&d.then?d.then(b[2],b[3]):b[2]&&b[2](d)})),d.length=0)}function r(b){return function(d){h||(h=[b,d],j())}}return b(r(0),r(1)),{
+    then:function(b,h){return p((function(r,i){d.push([b,h,r,i]),j()}))}}}a&&(g=m[e]=function(){var b=function(b,d,j,r){function i(i,c){
+    h(b,d,j,i,c,r)}r=r||2;var c,u=/Async$/;return u.test(b)?(b=b.replace(u,""),"function"==typeof Promise?new Promise(i):p(i)):h(b,d,j,c,c,r)}
+    ;function h(h,d,j,r,i,c){return b._api?b._api(h,d,j,r,i,c):(b.q&&b.q.push([h,d,j,r,i,c]),null)}return b.q=[],b}(),y=function(b){function h(h){
+    "function"==typeof h[4]&&h[4](new Error(b))}var d=g.q;if(d){for(var j=0;j<d.length;j++)h(d[j]);d.length=0,d.push=h}},function(){
+    (o=n.createElement(t)).async=!0,o.crossOrigin="anonymous",o.src="https://"+l,o.onerror=function(){y("Error loading "+l)}
+    ;var b=n.getElementsByTagName(t)[0];b&&b.parentNode?b.parentNode.insertBefore(o,b):n.head.appendChild(o)}(),function(){function b(){}
+    function h(b,h,d){g(b,h,d,1)}function d(b,d,j){h("setProperties",{type:b,properties:d},j)}function j(b,h){d("user",b,h)}function r(b,h,d){j({
+    uid:b},d),h&&j(h,d)}g.identify=r,g.setUserVars=j,g.identifyAccount=b,g.clearUserCookie=b,g.setVars=d,g.event=function(b,d,j){h("trackEvent",{
+    name:b,properties:d},j)},g.anonymize=function(){r(!1)},g.shutdown=function(){h("shutdown")},g.restart=function(){h("restart")},
+    g.log=function(b,d){h("log",{level:b,msg:d})},g.consent=function(b){h("setIdentity",{consent:!arguments.length||b})}}(),s="fetch",
+    f="XMLHttpRequest",g._w={},g._w[f]=m[f],g._w[s]=m[s],m[s]&&(m[s]=function(){return g._w[s].apply(this,arguments)}),g._v="2.0.0")
+    }(window,document,window._fs_namespace,"script",window._fs_script);`;
+
+  script.onload = () => {
+    console.log("FS script loaded and executed!");
+  };
+  document.head.appendChild(script);
+}
+
+function getFullStoryNs() {
+  const namespace = window["_fs_namespace"];
+  return namespace;
+}
+
+function getFullStoryInstance() {
+  const namespace = getFullStoryNs();
+  if (!namespace) {
+    console.warn("FullStory namespace not found");
+    return null;
+  }
+
+  const fs = window[namespace];
+  if (!fs) {
+    console.warn(`FullStory instance not found for namespace: ${namespace}`);
+    return null;
+  }
+
+  return fs;
+}
+
+async function waitForFullStory(timeout = 10000): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const startTime = Date.now();
+
+    const checkFullStory = () => {
+      const fs = getFullStoryInstance();
+      const session = getFullStorySessionUrl(fs);
+      if (typeof fs === "function" && session !== null) {
+        resolve(fs);
+        return;
+      }
+
+      if (Date.now() - startTime > timeout) {
+        console.log("FullStory could not find fs in time!");
+        reject(new Error("FullStory failed to load within timeout"));
+        return;
+      }
+
+      setTimeout(checkFullStory, 100);
+    };
+
+    checkFullStory();
+  });
+}
+
+function getFullStorySessionUrl(fs: any): string {
+  const sessionUrl = fs("getSession");
+  return sessionUrl;
+}
+
+export async function testQuestionMarkup(
   assert: any,
   test: MarkupTestDescriptor,
   platform: any
-): void {
+): Promise<void> {
+  console.log("TEST: ", test.name);
+  console.log("SNAP: ", test.snapshot);
   var id = "surveyElement" + platform.name;
   var surveyElement = document.getElementById(id);
   var reportElement = document.getElementById(id + "_report");
+
+  const ns = getFullStoryNs();
+  if (!ns) {
+    addFullstorysnippet();
+  }
+
+  try {
+    await waitForFullStory();
+  } catch (e) {
+    console.log("cant get fullstory");
+  }
   if (surveyElement) {
     surveyElement.innerHTML = "";
   } else {
@@ -276,6 +371,41 @@ const removeExtraElementsConditions: Array<
     htmlElement.classList.contains("sv-vue-title-additional-div"),
   (HTMLElement: HTMLElement) =>
     HTMLElement.tagName.toLowerCase().search(/^sv-/) > -1,
+  // Remove FullStory wrapper divs - divs that contain only form elements and have no meaningful content
+  (htmlElement: HTMLElement) => {
+    if (htmlElement.tagName.toLowerCase() !== "div") return false;
+
+    // Check if the div has any FullStory attributes
+    const hasFullStoryAttrs = Array.from(htmlElement.attributes).some(
+      (attr) =>
+        attr.name.startsWith("data-fs-") ||
+        attr.name.startsWith("data-checkbox-item-") ||
+        attr.name.startsWith("data-imagepicker-item-") ||
+        attr.name.startsWith("data-radio-item-") ||
+        attr.name.startsWith("data-rating-item-")
+    );
+
+    // If no FullStory attributes, check if it's a simple wrapper with no classes/ids
+    const isSimpleWrapper =
+      !htmlElement.className &&
+      !htmlElement.id &&
+      htmlElement.attributes.length === 0;
+
+    // Check if div contains only form elements (textarea, input, select, etc.)
+    const children = Array.from(htmlElement.children);
+    const hasOnlyFormElements =
+      children.length > 0 &&
+      children.every((child) => {
+        const tagName = child.tagName.toLowerCase();
+        return (
+          ["textarea", "input", "select", "button"].indexOf(tagName) !== -1 ||
+          child.classList.contains("sv-") || // SurveyJS components
+          child.classList.contains("sd-")
+        ); // SurveyJS components
+      });
+
+    return (hasFullStoryAttrs || isSimpleWrapper) && hasOnlyFormElements;
+  },
 ];
 
 function clearExtraElements(innerHTML: string): string {
@@ -326,12 +456,47 @@ function clearClasses(el: Element) {
   }
 }
 
+function removeFullStoryAttributes(el: Element) {
+  // Remove all FullStory data attributes by pattern matching
+  const attributesToRemove = [];
+  for (let i = 0; i < el.attributes.length; i++) {
+    const attr = el.attributes[i];
+    const name = attr.name;
+
+    // Match FullStory patterns but preserve essential SurveyJS attributes:
+    // - data-fs-* (general FullStory attributes)
+    // - data-checkbox-item-* (checkbox specific attributes)
+    // - data-imagepicker-item-* (imagepicker specific attributes)
+    // - data-rating-item-* (rating specific attributes)
+    // - data-radio-item-* (radio specific attributes)
+    // Note: data-sv-drop-target-* are essential SurveyJS attributes, not FullStory
+    if (
+      name.startsWith("data-fs-") ||
+      name.startsWith("data-checkbox-item-") ||
+      name.startsWith("data-radio-item-") ||
+      name.startsWith("data-imagepicker-item-") ||
+      name.startsWith("data-rating-item-")
+    ) {
+      attributesToRemove.push(name);
+    }
+  }
+
+  // Remove all matched attributes
+  attributesToRemove.forEach((attr) => {
+    el.removeAttribute(attr);
+  });
+}
+
 function clearAttributes(el: Element, removeIds = false) {
   //el.removeAttribute("aria-labelledby");
   el.removeAttribute("survey");
   el.removeAttribute("data-bind");
   el.removeAttribute("data-key");
   el.removeAttribute("data-rendered");
+
+  // Remove all FullStory data attributes
+  removeFullStoryAttributes(el);
+
   if (!!removeIds) {
     el.removeAttribute("id");
   }
