@@ -260,7 +260,6 @@ export class SurveyQuestionMatrixCell extends ReactSurveyElement {
       "fs-table-row-index": index + 1
     };
     const eldata = this.question.createElementData(data);
-    console.log("eldata", eldata);
     !!eldata && this.setDataElements(el, eldata);
   }
   protected canRender(): boolean {

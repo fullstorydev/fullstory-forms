@@ -143,10 +143,8 @@ async function waitForFullStory(timeout = 10000): Promise<any> {
 
     const checkFullStory = () => {
       const fs = getFullStoryInstance();
-      console.log("fs in waitForFullStory", fs);
       const session = getFullStorySessionUrl(fs);
       if (typeof fs === "function" && session !== null) {
-        console.log("FullStory is ready!");
         resolve(fs);
         return;
       }
@@ -174,6 +172,8 @@ export async function testQuestionMarkup(
   test: MarkupTestDescriptor,
   platform: any
 ): Promise<void> {
+  console.log("TEST: ", test.name);
+  console.log("SNAP: ", test.snapshot);
   var id = "surveyElement" + platform.name;
   var surveyElement = document.getElementById(id);
   var reportElement = document.getElementById(id + "_report");
