@@ -13,33 +13,33 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
-      - restore_cache:
-          keys:
-            - v1-dependencies-form-react-{{ checksum "package.json" }}
-            - v1-dependencies-form-react-
-      - run:
-          name: Install Dependencies
-          command: npm ci
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-form-react-{{ checksum "package.json" }}
-      - run:
-          name: Audit Dependencies
-          command: npm audit --audit-level=moderate
-      - run:
-          name: Run Tests
-          command: npm run test
-      - run:
-          name: Build Package
-          command: npm run build
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - packages/form-react/build
-            - packages/form-react/package.json
+      # - browser-tools/install-chrome
+      # - browser-tools/install-chromedriver
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-form-react-{{ checksum "package.json" }}
+      #       - v1-dependencies-form-react-
+      # - run:
+      #     name: Install Dependencies
+      #     command: npm ci
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-form-react-{{ checksum "package.json" }}
+      # - run:
+      #     name: Audit Dependencies
+      #     command: npm audit --audit-level=moderate
+      # - run:
+      #     name: Run Tests
+      #     command: npm run test
+      # - run:
+      #     name: Build Package
+      #     command: npm run build
+      # - persist_to_workspace:
+      #     root: ~/project
+      #     paths:
+      #       - packages/form-react/build
+      # - packages/form-react/package.json
   build-and-test-core:
     executor:
       name: node/default
@@ -75,45 +75,50 @@ jobs:
           paths:
             - packages/form-core/build
             - packages/form-core/package.json
-  # deploy-package:
-  #   executor:
-  #     name: node/default
-  #     tag: "18.20.0"
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run:
-  #         name: Authenticate with registry
-  #         command: |
-  #           echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-  #     - run:
-  #         name: List all files
-  #         command: ls -al
-  #     - run:
-  #         name: Publish package
-  #         command: |
-  #           PACKAGE_VERSION=$(cat ./package.json \
-  #               | grep '"version":' \
-  #               | head -1 \
-  #               | awk -F: '{ print $2 }' \
-  #               | sed 's/[",]//g' \
-  #               | tr -d '[:space:]')
-  #             IS_BETA="false"
-  #             IS_ALPHA="false"
+  deploy-core-package:
+    executor:
+      name: node/default
+      tag: "18.20.0"
+    working_directory: ~/project/packages/form-core
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Authenticate with registry
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+      - run:
+          name: Verify build files exist
+          command: |
+            echo "Contents of current directory:"
+            ls -la
+            echo "Contents of build directory:"
+            ls -la build/
+      - run:
+          name: Publish package
+          command: |
+            PACKAGE_VERSION=$(cat ./package.json \
+                | grep '"version":' \
+                | head -1 \
+                | awk -F: '{ print $2 }' \
+                | sed 's/[",]//g' \
+                | tr -d '[:space:]')
+              IS_BETA="false"
+              IS_ALPHA="false"
 
-  #             if [[ $PACKAGE_VERSION == *"-beta"* ]]; then
-  #               IS_BETA="true"
-  #             elif [[ $PACKAGE_VERSION == *"-alpha"* ]]; then
-  #               IS_ALPHA="true"
-  #             fi
+              if [[ $PACKAGE_VERSION == *"-beta"* ]]; then
+                IS_BETA="true"
+              elif [[ $PACKAGE_VERSION == *"-alpha"* ]]; then
+                IS_ALPHA="true"
+              fi
 
-  #             if [ $IS_BETA == "true" ]; then
-  #               npm publish --access public --tag beta
-  #             elif [ $IS_ALPHA == "true" ]; then
-  #               npm publish --access public --tag alpha
-  #             else
-  #               npm publish --access public
-  #             fi
+              if [ $IS_BETA == "true" ]; then
+                npm publish --access public --tag beta
+              elif [ $IS_ALPHA == "true" ]; then
+                npm publish --access public --tag alpha
+              else
+                npm publish --access public
+              fi
 
 workflows:
   build-deploy-core:
@@ -122,23 +127,14 @@ workflows:
           filters:
             tags:
               only: /.*/
-      # - hold:
-      #       type: approval
-      #       requires:
-      #           - build-and-test
-      #       filters:
-      #           tags:
-      #               only: /^v.*/
-      #           branches:
-      #               ignore: /.*/
-      # - deploy-package:
-      #     requires:
-      #       - build-and-test
-      #     filters:
-      #       tags:
-      #         only: /^v.*/
-      #       branches:
-      #         ignore: /.*/
+      - deploy-core-package:
+          requires:
+            - build-and-test-core
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
   build-deploy-react:
     jobs:
       - build-and-test-react:
