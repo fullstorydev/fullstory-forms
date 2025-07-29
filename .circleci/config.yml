@@ -14,39 +14,32 @@ jobs:
     executor:
       name: node/default
       tag: "18.20.0"
-    working_directory: ~/project
+    working_directory: ~/project/packages/form-core
     steps:
-      - checkout
+      - checkout:
+          path: ~/project
       - restore_cache:
           keys:
-            - v1-dependencies-form-core-{{ checksum "packages/form-core/package.json" }}
+            - v1-dependencies-form-core-{{ checksum "package.json" }}
             - v1-dependencies-form-core-
       - run:
           name: Install Dependencies
-          command: |
-            cd packages/form-core
-            npm ci
+          command: npm ci
       - save_cache:
           paths:
-            - packages/form-core/node_modules
-          key: v1-dependencies-form-core-{{ checksum "packages/form-core/package.json" }}
+            - node_modules
+          key: v1-dependencies-form-core-{{ checksum "package.json" }}
       - run:
           name: Audit Dependencies
-          command: |
-            cd packages/form-core
-            npm audit --audit-level=moderate
+          command: npm audit --audit-level=moderate
       - run:
           name: Run Tests
-          command: |
-            cd packages/form-core
-            npm run test
+          command: npm run test
       - run:
           name: Build Package
-          command: |
-            cd packages/form-core
-            npm run build:all
+          command: npm run build:all
       - persist_to_workspace:
-          root: .
+          root: ~/project
           paths:
             - packages/form-core/build
             - packages/form-core/package.json
