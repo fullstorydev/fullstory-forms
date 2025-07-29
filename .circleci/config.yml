@@ -103,7 +103,8 @@ workflows:
       #       branches:
       #         ignore: /.*/
   build-deploy-react:
-    - build-and-test-react:
-        filters:
-          tags:
-            only: /.*/
+    jobs:
+      - build-and-test-react:
+          filters:
+            tags:
+              only: /.*/
