@@ -74,12 +74,11 @@ jobs:
           root: ~/project
           paths:
             - packages/form-core/build
-            - packages/form-core/package.json
   deploy-core-package:
     executor:
       name: node/default
       tag: "18.20.0"
-    working_directory: ~/project/packages/form-core
+    working_directory: ~/project/packages/form-core/build
     steps:
       - attach_workspace:
           at: ~/project
