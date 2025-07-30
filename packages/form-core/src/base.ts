@@ -542,7 +542,6 @@ export class Base {
   }
 
   public getDataElement(elementType: string, title?: string, value?: any) {
-    console.log("elementType", elementType);
     const data = {};
 
     data[`fs-${elementType}-name`] = title
