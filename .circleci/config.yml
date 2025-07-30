@@ -13,33 +13,32 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      # - browser-tools/install-chrome
-      # - browser-tools/install-chromedriver
-      # - restore_cache:
-      #     keys:
-      #       - v1-dependencies-form-react-{{ checksum "package.json" }}
-      #       - v1-dependencies-form-react-
-      # - run:
-      #     name: Install Dependencies
-      #     command: npm ci
-      # - save_cache:
-      #     paths:
-      #       - node_modules
-      #     key: v1-dependencies-form-react-{{ checksum "package.json" }}
-      # - run:
-      #     name: Audit Dependencies
-      #     command: npm audit --audit-level=moderate
-      # - run:
-      #     name: Run Tests
-      #     command: npm run test
-      # - run:
-      #     name: Build Package
-      #     command: npm run build
-      # - persist_to_workspace:
-      #     root: ~/project
-      #     paths:
-      #       - packages/form-react/build
-      # - packages/form-react/package.json
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - restore_cache:
+          keys:
+            - v1-dependencies-form-react-{{ checksum "package.json" }}
+            - v1-dependencies-form-react-
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-form-react-{{ checksum "package.json" }}
+      - run:
+          name: Audit Dependencies
+          command: npm audit --audit-level=moderate
+      - run:
+          name: Run Tests
+          command: npm run test
+      - run:
+          name: Build Package
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - packages/form-react/build
   build-and-test-core:
     executor:
       name: node/default
