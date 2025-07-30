@@ -10,7 +10,6 @@
 /dist
 
 CHANGELOG.md
-README.md
 
 # tests
 karma.conf.js
