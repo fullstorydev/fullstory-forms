@@ -412,44 +412,40 @@ export class Base {
     obj: any,
     element: string = ""
   ): { "data-fs-properties-schema": string; [v: string]: string } {
-    if (element) {
-      // Find all keys
-      const keys = Object.keys(obj);
+    // Find all keys
+    const keys = Object.keys(obj);
 
-      // create store for schema
-      const schema = {};
+    // create store for schema
+    const schema = {};
 
-      // create store for element data
-      const elementData: { [v: string]: string } = element
-        ? { "data-fs-element": element }
-        : {};
+    // create store for element data
+    const elementData: { [v: string]: string } = element
+      ? { "data-fs-element": element }
+      : {};
 
-      // loop over all keys
-      for (const key of keys) {
-        // find the data type of the keys vaue
-        const type = this.getDataType(obj[key]);
+    // loop over all keys
+    for (const key of keys) {
+      // find the data type of the keys vaue
+      const type = this.getDataType(obj[key]);
 
-        // create a fs approved schema name
-        let k = `data-${key}`;
+      // create a fs approved schema name
+      let k = `data-${key}`;
 
-        // insert data into schema
-        schema[k] = {
-          name: key,
-          type: type,
-        };
-
-        // add to data element store
-        elementData[k] = Array.isArray(obj[key])
-          ? obj[key]
-          : obj[key].toString();
-      }
-
-      // return schema and element data
-      return {
-        ...elementData,
-        "data-fs-properties-schema": JSON.stringify(schema),
+      // insert data into schema
+      schema[k] = {
+        name: key,
+        type: type,
       };
+
+      // add to data element store
+      elementData[k] = Array.isArray(obj[key]) ? obj[key] : obj[key].toString();
     }
+
+    // return schema and element data
+    return {
+      ...elementData,
+      "data-fs-properties-schema": JSON.stringify(schema),
+    };
   }
 
   public getDataElementItem(
@@ -546,6 +542,7 @@ export class Base {
   }
 
   public getDataElement(elementType: string, title?: string, value?: any) {
+    console.log("elementType", elementType);
     const data = {};
 
     data[`fs-${elementType}-name`] = title
