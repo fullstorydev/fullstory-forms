@@ -88,13 +88,6 @@ jobs:
           command: |
             echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
       - run:
-          name: Verify build files exist
-          command: |
-            echo "Contents of current directory:"
-            ls -la
-            echo "Contents of build directory:"
-            ls -la build/
-      - run:
           name: Publish package
           command: |
             PACKAGE_VERSION=$(cat ./package.json \
