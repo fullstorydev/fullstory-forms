@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "lint": "eslint ./functionalTests --quiet && eslint ./tests --quiet && eslint ./visualRegressionTests --quiet && eslint ./accessibilityTests --quiet"
+    "lint": "eslint ./functionalTests --quiet && eslint ./tests --quiet && eslint ./visualRegressionTests --quiet && eslint ./accessibilityTests --quiet",
+    "deploy": "sh release.sh"
   },
   "version": "1.12.17",
   "name": "survey-library",
