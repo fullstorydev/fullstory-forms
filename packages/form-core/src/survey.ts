@@ -7713,11 +7713,14 @@ export class SurveyModel
     navComplete.updateElementData(
       this.buttonDataProperties("complete", this.locCompleteText.text)
     );
+    navNext.updateElementData(
+      this.buttonDataProperties("next", this.locCompleteText.text)
+    );
     this.updateButtonValuesCallBack = (data) => {
       navComplete.updateElementData(data);
+      navNext.updateElementData(data);
     };
     this.deleteButtonValuesCallBack = (name) => {
-      console.log("deleting on button", name);
       navComplete.deleteElementData(name);
     };
     // need to create a function that updates element data on buttons when called

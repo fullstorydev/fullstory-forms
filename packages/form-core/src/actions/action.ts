@@ -496,6 +496,7 @@ export class Action extends BaseAction implements IAction, ILocalizableOwner {
   private setButtonProperties = (button: HTMLElement) => {
     // Get the input element inside the button
     const input = button.querySelector("input");
+    if (!input) return;
     // create a data object from the properties
     const properties = this.createElementData(this.dataProperties);
     // Set the properties on the input element

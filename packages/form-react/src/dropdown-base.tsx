@@ -231,7 +231,7 @@ export class SurveyQuestionDropdownBase<T extends Question> extends SurveyQuesti
     if (!!this.inputElement) {
       const control: any = this.inputElement;
       const newValue = this.question.dropdownListModel.inputStringRendered;
-
+      this.question.updateElementData();
       if (!Helpers.isTwoValueEquals(newValue, control.value, false, true, false)) {
         const val = newValue !== "" ? newValue : control.value;
 
