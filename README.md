@@ -4,7 +4,7 @@ This project is a fork of [survey.js](https://github.com/surveyjs/survey-library
 
 ## Affected Packages
 
-These are the packages updated to integrate with Fullstor:
+These are the packages updated to integrate with Fullstory:
 
 - survey-core -> form-core
 - survey-react-ui -> form-react
