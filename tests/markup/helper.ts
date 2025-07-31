@@ -204,6 +204,7 @@ export async function testQuestionMarkup(
   if (test.before) test.before();
   platform.survey = platform.surveyFactory(test.json);
   platform.survey.textUpdateMode = "onTyping";
+  platform.survey.updateButtonValuesCallBack = () => {};
   platform.survey[test.event || "onAfterRenderQuestion"].add(function (
     survey: SurveyModel,
     options: any
